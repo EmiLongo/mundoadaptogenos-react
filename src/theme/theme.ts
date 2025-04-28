@@ -1,4 +1,5 @@
-import { createTheme } from "@mui/material";
+// src/theme.ts
+import { createTheme, Theme } from "@mui/material";
 
 // hechas con https://m2.material.io/inline-tools/color/
 // el que dice elegido determinó la paleta
@@ -98,20 +99,12 @@ export const theme = createTheme({
       secondary: grayColor[950],
       disabled: grayColor[400],
     },
+    error: {
+      main: errorColor[600],
+    },
   },
   typography: {
-    fontFamily: [
-      'Noto Sans',
-      'Homenaje',
-      'sans-serif',
-    ].join(','),
-    h1: {
-      fontFamily: 'Homenaje, sans-serif',
-    },
-    h2: {
-      fontFamily: 'Homenaje, sans-serif',
-    },
-    
+    htmlFontSize: 16, // base 1rem = 16px
   },
 });
 
@@ -127,25 +120,29 @@ export const customFonts = {
   },
 };
 
-export const defaultParagraph = {
+export const defaultParagraph = (theme: Theme) => ({
   fontFamily: customFonts.family.catamaran,
   fontWeight: "normal",
-  fontSize: "0.875rem", // 14px
   letterSpacing: customFonts.letter.normal,
   color: theme.palette.text.secondary,
-};
+});
 
-export const defaultCTA = {
+export const defaultCTA = (theme: Theme) => ({
   fontFamily: customFonts.family.catamaran,
   fontWeight: "normal",
   letterSpacing: customFonts.letter.wide,
   color: theme.palette.text.secondary,
-  textTransform: "uppercase",
-};
+});
 
-export const defaultTitle = {
+export const defaultTitle = (theme: Theme) => ({
   fontFamily: customFonts.family.oswald,
   letterSpacing: customFonts.letter.normal,
   fontWeight: 600,
   color: theme.palette.text.secondary,
-};
+});
+
+export const inputAdvice = (theme: Theme) => ({
+  fontFamily: customFonts.family.catamaran,
+  fontSize: "0.75rem", // 12px
+  color: theme.palette.background.paper,
+});

@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Talleres Montreal",
+          title: "Mundo Adaptógenos",
           url: window.location.href,
         })
         .catch(console.error);
@@ -156,7 +156,7 @@ export const Footer: React.FC = () => {
               <Box
                 component={"img"}
                 src={logoContraste}
-                alt="Talleres Montreal Blanco y Negro"
+                alt="Mundo Adaptógenos Blanco y Negro"
                 decoding="async"
                 loading="lazy"
                 sx={{

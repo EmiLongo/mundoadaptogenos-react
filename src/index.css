@@ -1,6 +1,25 @@
 #root {
   margin: 0;
   padding: 0;
-  width: 100dvw;
+  width: 100vw;
+  min-height: 100vh;
   overflow-x: hidden;
+  background-color: "#FFFFFF";
+  display: flex;
+  flex-direction: column;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  background-color: "#FFFFFF";
+}
+a, a:active, a:visited{
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }

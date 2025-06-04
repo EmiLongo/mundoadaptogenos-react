@@ -5,78 +5,137 @@ import {
   Toolbar, 
   Typography, 
   Box, 
-  Button, 
   IconButton, 
   Drawer, 
   List, 
-  ListItem, 
-  ListItemText, 
-  Badge,
   Container,
   useMediaQuery,
-  useTheme
+  useTheme,
+  Badge
 } from '@mui/material';
-import logoText from '@img/mundo_adaptogenos.svg';
-import { Menu as MenuIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
-import { Link as RouterLink } from 'react-router-dom';
+import logoTextHorizontal from '@img/mundo_adaptogenos.svg';
+import logoTextVertical from '@img/logo_img.svg';
+import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 
-// Importar contexto del carrito (deberás crearlo)
-// import { useCart } from '../contexts/CartContext';
+import { Menu as MenuIcon, Close as CloseIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
+import { Text3, Title2 } from '@theme/textStyles';
+import { useNavigate } from 'react-router-dom';
+
+export const menuItems = [
+  { text: 'Melena de León', path: '/melena' },
+  { text: 'Cordyceps Militaris', path: '/cordyceps' },
+  { text: 'Reishi', path: '/reishi' },
+  { text: 'Cola de Pavo', path: '/cola-pavo' },
+];
+
+export const infoItems = [
+  // { text: 'Inicio', path: '#home' },
+  { text: 'Que hacemos', path: '#whatwedo' },
+  { text: 'Servicios', path: '#services' },
+  { text: 'Equipamiento', path: '#equipment' },
+  { text: 'Contacto', path: '#contact' },
+];
 
 export const Header: React.FC = () => {
   const theme = useTheme();
+  const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
-  // const { cartItems } = useCart();
-  // Asume que tienes un contexto para el carrito
-  
+  const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   
-  const menuItems = [
-    { text: 'Melena de León', path: '/melena' },
-    { text: 'Cordyceps Militaris', path: '/cordyceps' },
-    { text: 'Reishi', path: '/reishi' },
-    { text: 'Cola de Pavo', path: '/cola-pavo' },
-  ];
-  
-  const infoItems = [
-    { text: 'Preguntas Frecuentes', path: '/preguntas-frecuentes' },
-    { text: 'Contacto', path: '/contacto' },
-  ];
+  const handleLogoClick = () => {
+    window.location.href = '#hero';
+  };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Box sx={{ p: 2 }}>
-        <img src={logoText} alt="Logo Mundo Adaptógenos" height="40" />
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "3rem", mb: "2rem" }}>
+        <Box 
+          component={"img"} 
+          src={logoTextVertical} 
+          alt="Logo Mundo Adaptógenos" 
+          height="100px" 
+          onClick={handleLogoClick}
+          decoding="async"
+          loading="lazy"
+        />
       </Box>
-      <List>
-        <ListItem component={RouterLink} to="/">
-          <ListItemText primary="Home / Productos" />
-        </ListItem>
+      <Box
+        sx={{ position: 'absolute', top: "1rem", right: "1rem" }}
+        onClick={handleDrawerToggle}
+      >
+        <CloseIcon />
+      </Box>
+      <Box
+        sx={{ position: 'absolute', top: "1rem", left: "1rem" }}
+        onClick={handleDrawerToggle}
+      />
+      <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
         {menuItems.map((item) => (
-          <ListItem key={item.text} component={RouterLink} to={item.path} sx={{ pl: 4 }}>
-            <ListItemText primary={item.text} />
-          </ListItem>
+          <Box key={item.text} component={"a"} href={item.path}>
+            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+          </Box>
         ))}
         {infoItems.map((item) => (
-          <ListItem key={item.text} component={RouterLink} to={item.path}>
-            <ListItemText primary={item.text} />
-          </ListItem>
+          <Box key={item.text} component={"a"} href={item.path}>
+            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+          </Box>
         ))}
       </List>
+      <Box
+        component={"a"}
+        href="https://inpulse.com.ar"
+        target="_blank"
+        rel="noopener noreferrer"
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "0.25rem",
+          position: 'absolute', bottom: "1rem" 
+        }}
+      >
+        <Box
+          component={"img"}
+          src={inpulseLogo}
+          alt="Logo Inpulse Design"
+          width={100}
+          decoding="async"
+          loading="lazy"
+        />
+        <Text3 sx={{ color: "inherit",textAlign: "center" }}>
+          Desarrollado por
+        </Text3>
+      </Box>
     </Box>
   );
 
   return (
     <>
-      <AppBar position="static" color="default" elevation={1} sx={{ backgroundColor:"primary.light" }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+      {/* <Box sx={{ height: "70px" }} id="home"/> */}
+      <AppBar 
+      id="navbar"
+      position="fixed" 
+      color="default" 
+      elevation={1} 
+      sx={{
+        height: "70px",
+        backgroundColor: "#f3f6fc82",
+        backdropFilter: "blur(10px) saturate(180%)",
+        WebkitBackdropFilter: "blur(10px) saturate(180%)",
+
+      }}
+      >
+        <Container maxWidth="xl" sx={{ height: '100%' }}>
+          <Toolbar disableGutters sx={{ height: '100%' }}>
             {isMobile ? (
+              // versión móvil
               <>
-                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center',  paddingX: { xs: '1rem',} }}>
                   <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -86,58 +145,78 @@ export const Header: React.FC = () => {
                   >
                     <MenuIcon />
                   </IconButton>
-                  <RouterLink to="/">
-                    <img src={logoText} alt="Logo Mundo Adaptógenos" height="40" />
-                  </RouterLink>
+                  <Box 
+                  component={"img"}
+                  src={logoTextHorizontal}
+                  alt="Logo Mundo Adaptógenos"
+                  height="40px"
+                  onClick={handleLogoClick}
+                  />
+                  <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
+                    {/* <Badge badgeContent={cartItems.length} color="primary"> */}
+                    <Badge badgeContent={"1"} color="primary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </IconButton>
                 </Box>
-                <IconButton component={RouterLink} to="/cart" color="inherit">
-                  {/* <Badge badgeContent={cartItems.length} color="primary"> */}
-                  <Badge badgeContent={"1"} color="primary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
               </>
             ) : (
-              <>
-                <RouterLink to="/" style={{ flexGrow: 0, marginRight: '24px' }}>
-                  <img src={logoText} alt="Logo Mundo Adaptógenos" height="60" />
-                </RouterLink>
-                <Box sx={{ flexGrow: 1, display: 'flex' }}>
+              // versión escritorio
+              <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingX: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '8rem'} }}>
+                <Box 
+                  component={"img"}
+                  src={logoTextHorizontal}
+                  alt="Logo Mundo Adaptógenos"
+                  height="40px"
+                  onClick={handleLogoClick}
+                />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: {xs: '3rem', lg: '4rem', xl: '5rem'} }}>
                   {menuItems.map((item) => (
-                    <Button
+                    <Box
                       key={item.text}
-                      component={RouterLink}
-                      to={item.path}
-                      sx={{ color: 'text.primary', mx: 1 }}
+                      component={"a"}
+                      href={item.path}
                     >
-                      {item.text}
-                    </Button>
+                      <Title2 sx={{
+                        fontWeight: 500,
+                        color: 'text.primary',
+                        '&:hover': {
+                          color: palette.primary[600],
+                        },
+                        textTransform: 'none',
+                      }}>{item.text}</Title2>
+                    </Box>
                   ))}
-                </Box>
-                <IconButton component={RouterLink} to="/cart" sx={{ mx: 2 }}>
-                  {/* <Badge badgeContent={cartItems.length} color="primary"> */}
-                  <Badge badgeContent={"1"} color="primary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
-                <Box sx={{ display: 'flex' }}>
+                  <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
+                    {/* <Badge badgeContent={cartItems.length} color="primary"> */}
+                    <Badge badgeContent={"1"} color="primary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </IconButton>
                   {infoItems.map((item) => (
-                    <Button
+                    <Box
                       key={item.text}
-                      component={RouterLink}
-                      to={item.path}
-                      sx={{ color: 'text.primary', mx: 1 }}
+                      component={"a"}
+                      href={item.path}
                     >
-                      {item.text}
-                    </Button>
+                      <Title2 sx={{
+                        fontWeight: 500,
+                        color: 'text.primary',
+                        '&:hover': {
+                          color: palette.primary[600],
+                        },
+                        textTransform: 'none',
+                      }}>{item.text}</Title2>
+                    </Box>
                   ))}
                 </Box>
-              </>
+              </Box>
             )}
           </Toolbar>
         </Container>
       </AppBar>
       <Box component="nav">
+        {/* Menú lateral en versión móvil */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -153,6 +232,7 @@ export const Header: React.FC = () => {
           {drawer}
         </Drawer>
       </Box>
+      {/* titulo para el SEO, no se muestra */}
       <Typography 
         variant="h1" 
         component="h1" 

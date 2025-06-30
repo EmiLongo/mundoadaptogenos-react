@@ -9,62 +9,17 @@ import {
   Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import WhatsApp from "@mui/icons-material/WhatsApp";
-import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 
-import FmdGoodOutlined from '@mui/icons-material/FmdGoodOutlined';
-import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import inpulseLogo from "@img/inpulse_design_logo_blanco.svg";
 import logoContraste from "@img/mundo_adaptogenos.svg";
-import { infoItems } from "./Header";
+import { menuItems } from "../utils/info";
 import {
   Text2,
   Title2,
 } from "@/theme/textStyles";
 import { toast } from "react-toastify";
 
-export interface IContactInfo {
-  icon: React.ReactNode;
-  title: string;
-  text: string;
-  type: string;
-  url: string;
-}
-
-export const contactInfo : IContactInfo[] = [
-  { icon: <WhatsApp sx={{ fontSize: "1.5rem", color: "secondary.main" }}/>, 
-    title: "Dpto Técnico:", 
-    text: "341 338-9977", 
-    type: "phone",
-    url: "https://wa.me/5493413389977?text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Talleres%20Montreal."
-  },
-  { icon: <WhatsApp sx={{ fontSize: "1.5rem", color: "secondary.main" }}/>, 
-    title: "Administración:", 
-    text: "3476 619-576", 
-    type: "phone",
-    url: "https://wa.me/5493476619576?text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Talleres%20Montreal.",
-  },
-  { icon: <LocalPhoneOutlined sx={{ fontSize: "1.5rem", color: "secondary.main" }}/>, 
-    title: "Teléfono Fijo:", 
-    text: "3476 224-447", 
-    type: "phone",
-    url: "",
-  },
-  { icon: <MailOutlineOutlinedIcon sx={{ fontSize: "1.5rem", color: "secondary.main" }}/>, 
-    title: "", 
-    text: "talleresmontrealsrl@gmail.com", 
-    type: "Email",
-    url: "",
-  },
-  {
-    icon: <FmdGoodOutlined sx={{ fontSize: "1.5rem", color: "secondary.main" }}/>,
-    title: "",
-    text: " Av José Márquez 856, San Lorenzo, Santa Fe",
-    type: "Dirección",
-    url: "",
-  },
-];
 export const Footer: React.FC = () => {
   const theme = useTheme();
   const { palette } = theme;
@@ -193,7 +148,7 @@ export const Footer: React.FC = () => {
                       <Text2 sx={{ color: "inherit" }}>Home</Text2>
                     </FooterLink>
                   </FooterListItem>
-                  {infoItems.map((item) => (
+                  {menuItems.map((item) => (
                     <FooterListItem
                       key={item.text}
                       id={`footerListItem-${item.text}`}

@@ -1,5 +1,6 @@
 // src/theme.ts
-import { createTheme, Theme } from "@mui/material";
+import { createTheme } from "@mui/material";
+import { defaultFonts } from "./textStyles";
 
 // hechas con https://m2.material.io/inline-tools/color/
 // el que dice elegido determinó la paleta
@@ -137,6 +138,7 @@ export const theme = createTheme({
   },
   typography: {
     htmlFontSize: 16, // base 1rem = 16px
+    fontFamily: defaultFonts.family.textos,
   },
   components: {
     MuiButton: {
@@ -152,7 +154,7 @@ export const theme = createTheme({
           borderRadius: '4px',
           letterSpacing: customFonts.letter.wide,
           width: "fit-content",
-          fontFamily: customFonts.family.hindMadurai,
+          fontFamily: defaultFonts.family.textos,
           fontWeight: 500,
           textTransform: "uppercase",
         },
@@ -166,7 +168,7 @@ export const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          fontFamily: customFonts.family.hindMadurai,
+          fontFamily: defaultFonts.family.textos,
           color: greyColor[950],
           borderRadius: "4px",
           "& .MuiOutlinedInput-notchedOutline": {
@@ -187,7 +189,7 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontFamily: customFonts.family.hindMadurai,
+          fontFamily: defaultFonts.family.textos,
           color: greyColor[800],
           "&.Mui-focused": {
             color: primaryColor[600],
@@ -199,35 +201,4 @@ export const theme = createTheme({
       },
     },
   }
-});
-
-
-
-export const defaultParagraph = (theme: Theme) => ({
-  fontFamily: customFonts.family.hindMadurai,
-  fontWeight: "normal",
-  letterSpacing: customFonts.letter.normal,
-  color: theme.palette.text.primary,
-  lineHeight: 1.3,
-});
-
-export const defaultCTA = (theme: Theme) => ({
-  fontFamily: customFonts.family.hindMadurai,
-  fontWeight: "normal",
-  letterSpacing: customFonts.letter.wide,
-  color: theme.palette.text.primary,
-});
-
-export const defaultTitle = (theme: Theme) => ({
-  fontFamily: customFonts.family.alata,
-  letterSpacing: customFonts.letter.normal,
-  fontWeight: 500,
-  color: theme.palette.text.primary,
-  // lineHeight: 1.2,
-});
-
-export const inputAdvice = (theme: Theme) => ({
-  fontFamily: customFonts.family.hindMadurai,
-  fontSize: "0.75rem", // 12px
-  color: theme.palette.background.paper,
 });

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { 
   AppBar, 
   Toolbar, 
-  Typography, 
   Box, 
   IconButton, 
   Drawer, 
@@ -232,19 +231,6 @@ export const Header: React.FC = () => {
           {drawer}
         </Drawer>
       </Box>
-      {/* titulo para el SEO, no se muestra */}
-      <Typography 
-        variant="h1" 
-        component="h1" 
-        sx={{ 
-          fontSize: '0.5rem',
-          position: 'absolute',
-          top: '-100%',
-          left: '-100%',
-        }}
-      >
-        Venta de Extracción Hongos Adaptógenos, Melena de León, Cordyceps Militaris, Reishi, Cola de Pavo, Màxima Pureza
-      </Typography>
     </>
   );
 };

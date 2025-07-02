@@ -6,8 +6,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 export const navBarLines: number = 2;   //  1
-export const isNavBarTransparent: boolean = true; // o false
-export const navBarHeight: number = 100; // 64
+export const isNavBarTransparent: boolean = false;
+export const navBarHeight: string = "150px";
 
 
 

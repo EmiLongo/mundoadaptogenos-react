@@ -160,9 +160,30 @@ export const theme = createTheme({
         },
       },
     },
-        MuiTextField: {
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.5rem",
+          height: "40px",
+          width: "40px",
+          border: `1px solid ${greyColor[600]}`,
+          borderRadius: "30px",
+          color: greyColor[600],
+          "&:hover": {
+            borderColor: greyColor[700],
+            color: greyColor[700],
+          },
+        },
+      },
+    },
+     
+    MuiTextField: {
       defaultProps: {
-        variant: "filled",
+        // variant: "filled",
+        variant: "outlined",
       },
     },
     MuiOutlinedInput: {

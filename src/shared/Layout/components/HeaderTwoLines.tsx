@@ -6,8 +6,7 @@ import {
   Box, 
   IconButton, 
   Drawer, 
-  List, 
-  Container,
+  List,
   useMediaQuery,
   useTheme,
   Badge
@@ -15,18 +14,26 @@ import {
 import logoTextHorizontal from '@img/mundo_adaptogenos.svg';
 import logoTextVertical from '@img/logo_img.svg';
 import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-import { Menu as MenuIcon, Close as CloseIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
-import { Text3, Title2 } from '@theme/textStyles';
+import { Text3, Title2, TextBox } from '@theme/textStyles';
 import { useNavigate } from 'react-router-dom';
 import { isNavBarTransparent, menuItems, navBarHeight, productsItems } from '../utils/info';
+import { SearchField } from './SearchField';
+import { greyColor } from '@/theme/theme';
+import { LoginButton } from './LoginButton';
+
 
 export const HeaderTwoLines: React.FC = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navigate = useNavigate();
+  
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -108,14 +115,14 @@ export const HeaderTwoLines: React.FC = () => {
       color="default" 
       elevation={1} 
       sx={{
-        height: "70px",
+        width: "100%",
+        height: isMobile ? '70px' : navBarHeight, 
         backgroundColor: "#f3f6fc82",
         backdropFilter: "blur(10px) saturate(180%)",
         WebkitBackdropFilter: "blur(10px) saturate(180%)",
-
       }}
       >
-        <Container maxWidth="xl" sx={{ height: '100%' }}>
+        <Box sx={{ height: '100%', width: "100%" }}>
             {isMobile ? (
               // versión móvil
               <Toolbar disableGutters sx={{ height: '100%' }}>
@@ -139,7 +146,7 @@ export const HeaderTwoLines: React.FC = () => {
                   <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
                     {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                     <Badge badgeContent={"1"} color="primary">
-                      <ShoppingCartIcon />
+                      <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>
                 </Box>
@@ -147,8 +154,17 @@ export const HeaderTwoLines: React.FC = () => {
             ) : (
               // versión escritorio
               <>
-              <Toolbar disableGutters sx={{ height: '100%' }}>
-                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingX: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '8rem'} }}>
+              <Toolbar disableGutters sx={{ height: '100px', borderBottom: `1px solid ${greyColor[500]}`, width: "100%", justifyContent: "center" }}>
+                <Box sx={{ 
+                  flexGrow: 1, 
+                  maxWidth: "1280px",
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'space-between', 
+                  paddingX: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '8rem'},
+                  gap: {xs: '1rem', sm: '2rem', md: '3rem', lg: '4rem', xl: '5rem'}
+                }}>
+                  <SearchField />
                   <Box 
                     component={"img"}
                     src={logoTextHorizontal}
@@ -156,14 +172,22 @@ export const HeaderTwoLines: React.FC = () => {
                     height="40px"
                     onClick={handleLogoClick}
                   />
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: {xs: '3rem', lg: '4rem', xl: '5rem'} }}>
-                    <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    // gap: {xs: '1rem', lg: '2rem', xl: '3rem'} 
+                    gap: '1rem',
+                  }}>
+                    <LoginButton />
+                    <IconButton onClick={() => navigate("/cart")} sx={{ width: "100px" }}>
                       {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                       <Badge badgeContent={"1"} color="primary">
-                        <ShoppingCartIcon />
+                        <ShoppingCartOutlinedIcon />
                       </Badge>
+                      <TextBox sx={{ color: greyColor[600] }}>Carrito</TextBox>
                     </IconButton>
-                    {menuItems.map((item) => (
+
+                    {/* {menuItems.map((item) => (
                       <Box
                         key={item.text}
                         component={"a"}
@@ -178,12 +202,19 @@ export const HeaderTwoLines: React.FC = () => {
                           textTransform: 'none',
                         }}>{item.text}</Title2>
                       </Box>
-                    ))}
+                    ))} */}
                   </Box>
                 </Box>
               </Toolbar>
-              <Toolbar disableGutters sx={{ height: '100%' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: {xs: '3rem', lg: '4rem', xl: '5rem'} }}>
+              <Toolbar disableGutters sx={{ height: '50px', minHeight: {xs: '50px', md: '50px', lg: '50px', xl: '50px'}, justifyContent: "center" }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  width: '100%',
+                  maxWidth: "1280px",
+                  gap: {xs: '3rem', lg: '4rem', xl: '5rem'} 
+              }}>
                 {productsItems.map((item) => (
                       <Box
                         key={item.text}
@@ -204,7 +235,7 @@ export const HeaderTwoLines: React.FC = () => {
               </Toolbar>
             </>
             )}
-        </Container>
+        </Box>
       </AppBar>
       <Box component="nav">
         {/* Menú lateral en versión móvil */}

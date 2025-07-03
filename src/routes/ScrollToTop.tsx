@@ -1,8 +1,8 @@
 // src/routes/ScrollTotop.jsx
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const ScrollToTop = () => {
+export const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {

@@ -11,10 +11,18 @@ const Loading = () => {
         width: "100%",
 				gap: "2rem",
 				backgroundColor: "#FFFFFF",
+        position: "relative",
       }}
     >
-			<CircularProgress />
-      <img src={logo} alt="Logo Mundo Adaptogenos" width={200} />
+			<CircularProgress size={150} />
+      <Box component="img" src={logo} alt="Logo Mundo Adaptogenos" width={100}
+        sx={{ 
+          position: "absolute", 
+          top: "50%", 
+          left: "50%", 
+          transform: "translate(-50%, -50%)" 
+        }}
+      />
     </Box>
   );
 };

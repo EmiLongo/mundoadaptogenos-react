@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
   confirmPassword: Yup.string().required('Requerido').oneOf([Yup.ref('password')], 'Las contraseñas no coinciden'),
 });
 
-export const Register: React.FC = () => {
+export const RegisterPage: React.FC = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
 

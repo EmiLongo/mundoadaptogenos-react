@@ -20,7 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Text3, Title2, TextBox } from '@theme/textStyles';
 import { useNavigate } from 'react-router-dom';
-import { isNavBarTransparent, menuItems, navBarHeight, productsItems } from '../utils/info';
+import { isNavBarTransparent, menuItems, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info';
 import { SearchField } from './SearchField';
 import { greyColor } from '@/theme/theme';
 import { LoginButton } from './LoginButton';
@@ -108,7 +108,7 @@ export const HeaderTwoLines: React.FC = () => {
 
   return (
     <>
-      {!isNavBarTransparent && <Box sx={{ height: navBarHeight }} />}
+      {!isNavBarTransparent && <Box sx={{ height: isMobile ? navBarMobileHeight : navBarDesktopHeight }} />}
       <AppBar 
       id="navbar"
       position="fixed" 
@@ -116,7 +116,7 @@ export const HeaderTwoLines: React.FC = () => {
       elevation={1} 
       sx={{
         width: "100%",
-        height: isMobile ? '70px' : navBarHeight, 
+        height: isMobile ? navBarMobileHeight : navBarDesktopHeight, 
         backgroundColor: "#f3f6fc82",
         backdropFilter: "blur(10px) saturate(180%)",
         WebkitBackdropFilter: "blur(10px) saturate(180%)",
@@ -126,13 +126,13 @@ export const HeaderTwoLines: React.FC = () => {
             {isMobile ? (
               // versión móvil
               <Toolbar disableGutters sx={{ height: '100%' }}>
-                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center',  paddingX: { xs: '1rem',} }}>
+                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: "space-between", paddingX: { xs: '1rem',} }}>
                   <IconButton
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerToggle}
-                    sx={{ mr: 2 }}
+                    sx={{ mr: 2, border: "none" }}
                   >
                     <MenuIcon />
                   </IconButton>
@@ -178,7 +178,7 @@ export const HeaderTwoLines: React.FC = () => {
                     // gap: {xs: '1rem', lg: '2rem', xl: '3rem'} 
                     gap: '1rem',
                   }}>
-                    <LoginButton />
+                    {/* TODO: refactorizar boton de carrito */}
                     <IconButton onClick={() => navigate("/cart")} sx={{ width: "100px" }}>
                       {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                       <Badge badgeContent={"1"} color="primary">
@@ -186,6 +186,7 @@ export const HeaderTwoLines: React.FC = () => {
                       </Badge>
                       <TextBox sx={{ color: greyColor[600] }}>Carrito</TextBox>
                     </IconButton>
+                    <LoginButton />
 
                     {/* {menuItems.map((item) => (
                       <Box

@@ -19,7 +19,7 @@ import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import { Menu as MenuIcon, Close as CloseIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
 import { Text3, Title2 } from '@theme/textStyles';
 import { useNavigate } from 'react-router-dom';
-import { isNavBarTransparent, menuItems, navBarHeight, productsItems } from '../utils/info';
+import { isNavBarTransparent, menuItems, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info';
 
 export const HeaderOneLine: React.FC = () => {
   const theme = useTheme();
@@ -101,14 +101,14 @@ export const HeaderOneLine: React.FC = () => {
 
   return (
     <>
-      {!isNavBarTransparent && <Box sx={{ height: navBarHeight }} />}
+      {!isNavBarTransparent && <Box sx={{ height: isMobile ? navBarMobileHeight : navBarDesktopHeight }} />}
       <AppBar 
       id="navbar"
       position="fixed" 
       color="default" 
       elevation={1} 
       sx={{
-        height: "70px",
+        height: isMobile ? navBarMobileHeight : navBarDesktopHeight,
         backgroundColor: "#f3f6fc82",
         backdropFilter: "blur(10px) saturate(180%)",
         WebkitBackdropFilter: "blur(10px) saturate(180%)",

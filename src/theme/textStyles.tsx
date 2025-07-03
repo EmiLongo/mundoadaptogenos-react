@@ -136,8 +136,6 @@ export const Subtitle = styled((props: TypographyProps) => <Typography {...props
 // BUTTON MINI
 export const ButtonMini = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultParagraph(),
-  textTransform: "uppercase",
-  color: theme.palette.secondary.main,
   ...responsiveFontSize({ xl: '0.687rem', lg: '0.625rem', md: '0.5625rem', sm: '0.5rem' })(theme), // 10px
 }));
 

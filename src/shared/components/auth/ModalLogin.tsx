@@ -1,15 +1,25 @@
 
-import { Box, Modal } from "@mui/material";
+import { Box, IconButton, Modal } from "@mui/material";
 import { Login } from "./Login";
 import { Title3 } from "@/theme/textStyles";
+import { ForgetPass } from "./ForgetPass";
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 type ModalLoginProps = {
   isOpenLogin: boolean;
   handleClose: () => void;
   setIsOpenDrawer?: (isOpen: boolean) => void;
+  isOpenForgetPass?: boolean;
+  setIsOpenForgetPass?: (isOpen: boolean) => void;
 }
 
-export const ModalLogin: React.FC<ModalLoginProps> = ({ isOpenLogin = false, handleClose = () => {}, setIsOpenDrawer = () => {} }) => {
+export const ModalLogin: React.FC<ModalLoginProps> = ({ 
+  isOpenLogin = false, 
+  handleClose = () => {}, 
+  setIsOpenDrawer = () => {},
+  isOpenForgetPass = false,
+  setIsOpenForgetPass = () => {}
+}) => {
   return (
     <Modal
     open={isOpenLogin}
@@ -24,14 +34,21 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({ isOpenLogin = false, han
         width: {xs: "97dvw", sm: "unset"},
         transform: {sm: "translate(50%, 50%)", md: "unset"},
       }}>
+        {isOpenForgetPass && 
+          <IconButton onClick={() => setIsOpenForgetPass(false)} sx={{ border: "none", position: "absolute", top: "0.6rem", left: "1rem"}}>
+            <ArrowBackOutlinedIcon />
+          </IconButton>
+        }
         <Title3 sx={{
           margin: "1rem auto 0",
           textAlign: "center",
 
         }}>
-          Iniciar sesión
+          {isOpenForgetPass ? "Recuperar contraseña" : "Iniciar sesión"}
         </Title3>  
-        <Login handleClose={handleClose} isModal={true} setIsOpenDrawer={setIsOpenDrawer}/>
+        {!isOpenForgetPass
+        ? <Login handleClose={handleClose} isModal={true} setIsOpenDrawer={setIsOpenDrawer} setIsOpenForgetPass={setIsOpenForgetPass} />
+        : <ForgetPass handleClose={handleClose} isModal={isOpenForgetPass} setIsOpenDrawer={setIsOpenDrawer} />}
       </Box>
    </Modal>
   );

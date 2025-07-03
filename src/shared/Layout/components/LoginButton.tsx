@@ -9,8 +9,14 @@ import { ModalLogin } from "@/shared/components/auth/ModalLogin";
 export const LoginButton: React.FC = () => {
   const navigate = useNavigate();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
+  const [isOpenForgetPass, setIsOpenForgetPass] = useState(false);
   // TODO: hacer la logica para verificar si el usuario esta logueado
   const isUserLoggedIn = false;
+
+  const handleCloseLogin = () => {
+    setIsOpenLogin(false);
+    setIsOpenForgetPass(false);
+  }
 
   return (
     isUserLoggedIn ? 
@@ -22,7 +28,12 @@ export const LoginButton: React.FC = () => {
     <IconButton onClick={() => setIsOpenLogin(true)} sx={{ width: "100px" }}>
       <TextBox sx={{ color: greyColor[600] }}>Iniciar sesión</TextBox>
     </IconButton>
-    <ModalLogin isOpenLogin={isOpenLogin} handleClose={() => setIsOpenLogin(false)} />
+    <ModalLogin 
+      isOpenLogin={isOpenLogin} 
+      handleClose={() => handleCloseLogin()} 
+      setIsOpenForgetPass={setIsOpenForgetPass}
+      isOpenForgetPass={isOpenForgetPass}
+    />
     </>
   );
 };

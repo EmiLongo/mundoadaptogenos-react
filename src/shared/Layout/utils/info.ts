@@ -1,3 +1,4 @@
+// src/shared/Layout/utils/info.ts
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
@@ -7,7 +8,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 export const navBarLines: number = 2;   //  1
 export const isNavBarTransparent: boolean = false;
-export const navBarHeight: string = "150px";
+export const navBarDesktopHeight: string = "150px";
+export const navBarMobileHeight: string = "70px";
 
 
 

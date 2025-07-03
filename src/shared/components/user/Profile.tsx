@@ -1,3 +1,4 @@
+// src/shared/components/user/Profile.tsx
 import { Title1, InputError, Title2 } from "@/theme/textStyles";
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { useFormik } from "formik";

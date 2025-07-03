@@ -7,6 +7,7 @@ import { errorColor } from "@/theme/theme";
 import { InputError } from "@/theme/textStyles";
 import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema: Yup.ObjectSchema<{email: string, password: string}> = Yup.object({
   email: Yup.string().email('Correo inválido').required('Requerido'),
@@ -17,18 +18,24 @@ type LoginProps = {
   isModal?: boolean;
   handleClose?: () => void;
   setIsOpenDrawer?: (isOpen: boolean) => void;
+  setIsOpenForgetPass?: (isOpen: boolean) => void;
 }
 
 
-export const Login: React.FC<LoginProps> = ({ isModal = false, handleClose = () => {}, setIsOpenDrawer = () => {} }) => {
+export const Login: React.FC<LoginProps> = ({
+  isModal = false, 
+  handleClose = () => {}, 
+  setIsOpenDrawer = () => {}, 
+  setIsOpenForgetPass = () => {} 
+}) => {
   // const [showPassword, setShowPassword] = useState(false);
-  
+  const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleGoToRegister = () => {
     handleClose();
     setIsOpenDrawer(false);
-    // navigate("/register");
+    navigate("/register");
   };
 
   const formik = useFormik({
@@ -114,7 +121,7 @@ export const Login: React.FC<LoginProps> = ({ isModal = false, handleClose = () 
           marginX: "auto",
           "& p" : {fontSize: "0.80rem"}, 
         }}
-        onClick={() => console.log("abrir modal recuperar contraseña")}
+        onClick={() => setIsOpenForgetPass(true)}
       />
       <ColorButton
         type="blueButton"

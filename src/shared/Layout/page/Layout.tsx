@@ -1,13 +1,14 @@
 // src/shared/Layout/page/Layout.tsx
 import { Outlet } from "react-router-dom";
-import { Footer } from "../components/Footer";
+import React, { lazy } from "react";
+const Footer = lazy(() => import("../components/Footer").then(module => ({ default: module.Footer })));
 import { HeaderOneLine } from "../components/HeaderOneLine";
 import { HeaderTwoLines } from "../components/HeaderTwoLines";
-import React from "react";
 import { Box } from "@mui/material";
 import { WhatsApp } from "../components/WhatsApp";
 import { Bounce, ToastContainer } from "react-toastify";
 import { navBarLines } from "../utils/info";
+import { ScrollToTop } from "@/routes/ScrollToTop";
 
 export const Layout: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ export const Layout: React.FC = () => {
         theme="light"
         transition={Bounce}
       />
+      <ScrollToTop />
     </>
   );
 };

@@ -13,6 +13,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@modules': path.resolve(__dirname, './src/modules'),
       '@shared': path.resolve(__dirname, './src/shared'),
+      '@store': path.resolve(__dirname, './src/store'),
       '@theme': path.resolve(__dirname, './src/theme'),
     },
   },

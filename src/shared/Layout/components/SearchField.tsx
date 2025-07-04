@@ -1,10 +1,14 @@
 import { Box, InputAdornment, OutlinedInput } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-export const SearchField: React.FC = () => {
+interface ISearchFieldProps {
+  sx?: object;
+}
+
+export const SearchField: React.FC<ISearchFieldProps> = ({sx}) => {
   // TODO: hacer la logica para el search y agregar la info en un tipo de modal
   return (
-    <Box>
+    <Box sx={sx}>
       <OutlinedInput
         placeholder="Buscar"
         endAdornment={

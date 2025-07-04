@@ -13,6 +13,7 @@ import { MenuOptionsBottom, MenuOptionsTop } from "../utils/info";
 import { greyColor, primaryColor } from "@/theme/theme";
 // import { useUserStore } from "@/store/useUserStore";
 import { MenuListItem } from "./MenuListItem";
+import { navBarDesktopHeight, navBarMobileHeight } from "@/shared/Layout/utils/info";
 
 
 export const MenuAdmin = () => {
@@ -38,8 +39,17 @@ export const MenuAdmin = () => {
   };
 
   return (
+    <>
+    <Box sx={{ height: {xs: navBarMobileHeight, md: 0}, width: {xs: "100%", md: 0}}} />
     <Box
-      sx={{ display: "flex",}}
+      sx={{ 
+        display: "flex", 
+        position: "fixed", 
+        left: 0, 
+        top: {xs: navBarMobileHeight, md: navBarDesktopHeight}, 
+        height: {xs: "unset", md: `calc(100vh - ${navBarDesktopHeight})`},
+        zIndex: 1000,
+      }}
     >
       {/* Sidebar */}
       <Box sx={{
@@ -86,5 +96,6 @@ export const MenuAdmin = () => {
         </List>
       </Box>
     </Box>
+    </>
   );
 };

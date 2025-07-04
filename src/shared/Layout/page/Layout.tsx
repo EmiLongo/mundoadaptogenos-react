@@ -1,5 +1,5 @@
 // src/shared/Layout/page/Layout.tsx
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import React, { lazy } from "react";
 const Footer = lazy(() => import("../components/Footer").then(module => ({ default: module.Footer })));
 import { HeaderOneLine } from "../components/HeaderOneLine";
@@ -11,6 +11,8 @@ import { navBarLines } from "../utils/info";
 import { ScrollToTop } from "@/routes/ScrollToTop";
 
 export const Layout: React.FC = () => {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.includes("/admin/");
   return (
     <>
       {navBarLines === 2 && <HeaderTwoLines />}
@@ -21,8 +23,8 @@ export const Layout: React.FC = () => {
       >
         <Outlet />
       </Box>
-      <Footer />
-      <WhatsApp />
+      {!isAdmin && <Footer />}
+      {!isAdmin && <WhatsApp />}
       <ToastContainer
         position="bottom-right"
         autoClose={4000}

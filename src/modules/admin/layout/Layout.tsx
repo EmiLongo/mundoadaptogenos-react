@@ -19,7 +19,7 @@ export const AdminLayout: React.FC = () => {
     >
       <MenuAdmin />
       {/* La cuestion es si dejar el main aca o en los componentes de cada pagina */}
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1}}>
         <Outlet />
       </Box>
     </Box>

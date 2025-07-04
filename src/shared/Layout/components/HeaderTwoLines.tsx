@@ -164,19 +164,22 @@ export const HeaderTwoLines: React.FC = () => {
                   paddingX: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '8rem'},
                   gap: {xs: '1rem', sm: '2rem', md: '3rem', lg: '4rem', xl: '5rem'}
                 }}>
-                  <SearchField />
+                  <SearchField sx={{flex: 1}}/>
                   <Box 
                     component={"img"}
                     src={logoTextHorizontal}
                     alt="Logo Mundo Adaptógenos"
                     height="40px"
                     onClick={handleLogoClick}
+                    sx={{flex: 1}}
                   />
                   <Box sx={{ 
                     display: 'flex', 
-                    alignItems: 'center', 
+                    alignItems: 'center',
+                    justifyContent: 'end',
                     // gap: {xs: '1rem', lg: '2rem', xl: '3rem'} 
                     gap: '1rem',
+                    flex: 1,
                   }}>
                     {/* TODO: refactorizar boton de carrito */}
                     <IconButton onClick={() => navigate("/cart")} sx={{ width: "100px" }}>

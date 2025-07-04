@@ -5,7 +5,7 @@ import { greyColor } from "@/theme/theme";
 
 interface IWhiteButtonProps {
   onClick: () => void;
-  text: string;
+  text?: string;
   fetchingText?: string;
   isFetching: boolean;
   disabled: boolean;
@@ -34,6 +34,7 @@ export const WhiteButton: React.FC<IWhiteButtonProps> = ({
 				display: "flex",
 				alignItems: "center",
         color: greyColor[900],
+        backgroundColor: greyColor[50],
 				border: `1px solid ${greyColor[900]}`,
         borderRadius: "4px",
 				boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",

@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 
 // import inpulseLogo from "@img/inpulse_design_logo_blanco.svg";
-import logoContraste from "@img/logo_nombre_vertical.svg";
+import logoContraste from "@img/logo-nombre-vertical.svg";
 import { menuItems, productsItems } from "../utils/info";
 import {
   BodyS,

@@ -21,7 +21,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
   };
   return (
     <Card 
-    elevation={4}
+    elevation={3}
     sx={{
       width: '250px',
       height: '500px',
@@ -39,26 +39,20 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
         width: '62px',
         height: '32px',
         padding: '0.5rem',
-        backgroundColor: greenColor[800],
+        backgroundColor: greenColor[500],
+        border: `1px ${greyColor[600]} solid`,
         borderRadius: '8px',
       }}>
-        <Caption sx={{color: greyColor[50], width: "100%", textAlign: "center"}}>-{product.discount}%</Caption>
+        <Caption sx={{color: greyColor[950], width: "100%", textAlign: "center"}}>-{product.discount}%</Caption>
       </Box>
       <Box sx={{ width: "100%", height: "50%", display: "flex", justifyContent: "center", alignItems: "center", overflow: 'hidden',}}>
-        <Box component="picture" display="block" sx={{ minWidth: '100%', minHeight: '100%' }}>
-          <source srcSet={product.urlPhoto} type="image/webp" />
-          <Box
-            component="img"
-            src={product.urlPhoto}
-            alt="Foto descriptiva"
-            loading="lazy"
-            sx={{
-              minWidth: '100%',
-              minHeight: '100%',
-              display: 'block',
-            }}
-          />
-        </Box>
+        <Box 
+        component="img" 
+        src={product.urlPhoto} 
+        width='250px'
+        sx={{ width: '100%', height: '100%' }}
+        alt={`Foto descriptiva de ${product.title}`}
+        />
       </Box>
       <Box sx={{
         width: "100%",
@@ -68,7 +62,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
         justifyContent: "space-between",
         padding: "1rem"
       }}>
-        <Heading5 sx={{height: "2.5em"}}>{product.title}</Heading5>
+        <Heading5 sx={{height: "4.5em"}}>{product.title}</Heading5>
         <Box sx={{display: "flex", alignItems: "center", gap: "16px"}}>
           <Heading3>{numberToPrice(product.priceDiscount)}</Heading3>
           <BodyS sx={{color: greyColor[700], textDecoration: "line-through"}}>{numberToPrice(product.price)}</BodyS>

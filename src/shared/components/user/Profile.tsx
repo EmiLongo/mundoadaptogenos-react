@@ -1,5 +1,5 @@
 // src/shared/components/user/Profile.tsx
-import { Title1, InputError, Title2 } from "@/theme/textStyles";
+import { Heading1, InputError, Heading2 } from "@/theme/textStyles";
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useRef, useState } from "react";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from 'yup';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import { errorColor } from "@theme/theme";
+import { redColor } from "@theme/theme";
 import { ColorButton } from "../buttons/ColorButton";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
@@ -76,13 +76,13 @@ export const Profile: React.FC = () => {
         justifyContent: "center" 
 
       }}>
-        <Title1 sx={{ 
+        <Heading1 sx={{ 
           marginTop: "2rem",
           marginBottom: "1rem",
           textAlign: "center",
         }}>
           PERFIL
-        </Title1>
+        </Heading1>
         {/* Nombre y Apellido */}
         <TextField
           fullWidth
@@ -96,7 +96,7 @@ export const Profile: React.FC = () => {
           // helperText={formik.touched.name && formik.errors.name}
           sx={inputSx}
         />
-        <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+        <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
           {formik.touched.name && formik.errors.name}
         </InputError>
         {/* Correo Electrónico */}
@@ -112,7 +112,7 @@ export const Profile: React.FC = () => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           sx={inputSx}
         />
-        <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+        <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
           {formik.touched.email && formik.errors.email}
         </InputError>
 
@@ -125,6 +125,7 @@ export const Profile: React.FC = () => {
               No coinciden */}
 
         <ColorButton
+          id="bt-profile-changes"
           type="blueButton"
           onClick={() => formik.handleSubmit()}
           text="GUARDAR CAMBIOS"
@@ -141,7 +142,7 @@ export const Profile: React.FC = () => {
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        <Title2>Cambiar la contraseña</Title2>
+        <Heading2>Cambiar la contraseña</Heading2>
       </AccordionSummary>
       <AccordionDetails sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         {/* Contraseña */}
@@ -168,7 +169,7 @@ export const Profile: React.FC = () => {
             }
           }}
         />
-        <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+        <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
           {formik.touched.password && formik.errors.password}
         </InputError>
         {/* Confirme contraseña */}
@@ -195,7 +196,7 @@ export const Profile: React.FC = () => {
             }
           }}
         />
-        <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+        <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
           {formik.touched.confirmPassword && formik.errors.confirmPassword}
         </InputError>
       </AccordionDetails>

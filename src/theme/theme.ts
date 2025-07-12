@@ -5,95 +5,69 @@ import { defaultFonts } from "./textStyles";
 // hechas con https://m2.material.io/inline-tools/color/
 // el que dice elegido determinó la paleta
 export const greyColor = {
-  // contraste con texto negro  
-  50: "#F9F9F9",
-  100: "#F3F3F3",
-  200: "#EBEBEB",
-  300: "#DBDBDB",
-  400: "#B8B8B8",
+  50: "#FAFAF9",
+  100: "#F0F0EE",
+  200: "#DFDFD8",
+  300: "#C2C1B7",
+  // hasta acá contraste con texto negro  
+  400: "#A1A08F",
+  500: "#858372",
+  600: "#6D6C5C",
+  700: "#59584B",
   // a partir de aca contraste con texto blanco
-  500: "#989898",
-  600: "#707070",
-  700: "#5C5C5C",
-  800: "#3D3D3D",
-  900: "#1D1D1D",
-  950: "#080808",
+  800: "#4C4B40",
+  900: "#414139",
+  950: "#2B2B26",
 };
 
-export const primaryColor = {
-  // 50: "#f3f6fc",
-  100: "#DEE4F2",
-  200: "#C2D5FF",
-  // 300: "#93b9e6",
-  400: "#6695FF",
-  // hasta aca contraste con texto negro
-  // 500: "#3478c3",
-  // a partir de aca contraste con texto blanco
-  600: "#0033A5",
-  // 700: "#1e4b86",
-  800: "#051242",
-  900: "#09041B",
-  // 950: "#13243e",
-  // elegido
-};
-
-export const secondaryColor = {
-	// contraste con texto negro
-	// 50: "#e6f2ec",
-	// 100: "#c4dfcf",
-	// 200: "#a2cab2",
-	// 300: "#84b597",
-	400: "#FD7F16",
-	// a partir de aca contraste con texto blanco
-	// 500: "#689575",
-	600: "#8E4101",
-	// 700: "#57785e",
-	// 800: "#4e6853",
-	// 900: "#3e4c3e",
-};
-
-export const accentColor = {
-	// contraste con texto negro
-  50: "#faf3e1",
-  100: "#f3dfb4", // elegido
-  200: "#edca80",
-  300: "#e8b54a",
-  400: "#e4a61c",
-  500: "#e29700",
-	// a partir de aca contraste con texto blanco
-  600: "#df8c00",
-  700: "#da7d00",
-  800: "#d56e00",
-  900: "#cc5600",
-};
-
-export const errorColor = {
+export const redColor = {   // Mexican Red: errorColor
   50: "#FEF2F3",
   100: "#FDE3E4",
   200: "#FDCBCE",
   300: "#FAA7AB",
   400: "#F57F85",
-	// a partir de aca contraste con texto blanco
+  // hasta aca contraste con texto negro
   500: "#EB4850",
-  600: "#D72B34", // elegido
+  600: "#D72B34",
+	// a partir de aca contraste con texto blanco
   700: "#A91E25",
   800: "#961E24",
   900: "#961E24",
   950: "#430C0F",
-  // 50: "#FFE2EB",
-  // 100: "#FFB7CD",
-  // 200: "#FF86AB",
-	// // contraste con texto negro
-  // 300: "#FF4E89",
-  // 400: "#FF006F",
-  // 500: "#FD0054",
-  // 600: "#EC0053",
-  // 700: "#D70050",
-  // 800: "#C3004E",
-  // // a partir de aca contraste con texto blanco
-  // 900: "#9D004B",
-  // 950: "#700036",
 };
+
+export const brownColor = {  // Desert Brown: primaryColor
+  50: "#FCEED8",
+  100: "#F6D4A6",
+  200: "#EFC07B",
+  // hasta aca contraste con texto negro
+  300: "#E6A14A",
+  400: "#DD872C",
+  500: "#C86C22",
+  600: "#B05E27",
+  700: "#904A1D",
+  // a partir de aca contraste con texto blanco
+  800: "#693E29",
+  900: "#43271A",
+  950: "#291711",
+};
+
+export const greenColor = {   // Lime Green: secondaryColor
+  50: "#F6FFE4",
+	100: "#EAFFC5",
+	200: "#D4FF92",
+	300: "#B6FF53",
+	400: "#97FB20",
+	500: "#84FA00",
+	// hasta aca contraste con texto negro
+	600: "#5AB500",
+	700: "#458902",
+	800: "#386C08",
+	// a partir de aca contraste con texto blanco
+	900: "#315B0C",
+  950: "#163300"
+};
+
 
 export const customFonts = {
   letter: {
@@ -109,28 +83,31 @@ export const customFonts = {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: primaryColor[900],
-      light: primaryColor[200],
-      ...primaryColor,
+      main: brownColor[600],
+      dark: brownColor[900],
+      light: brownColor[200],
+      ...brownColor,
     },
     secondary: {
-      main: secondaryColor[400], // Color naranja
-      dark: secondaryColor[600],
-      ...secondaryColor,
+      main: greenColor[500], // Color naranja
+      dark: greenColor[800],
+      light: greenColor[200],
+      ...greenColor,
     },
     background: {
-      // default: "#18222986",
+      default: greyColor[50],
       paper: greyColor[50],
     },
     text: {
-      primary: primaryColor[800],
+      primary: brownColor[800],
       secondary: greyColor[950],
       disabled: greyColor[400],
     },
     error: {
-      main: errorColor[800],
-      light: errorColor[400],
-      ...errorColor,
+      main: redColor[400],
+      dark: redColor[800],
+      light: redColor[200],
+      ...redColor,
     },
     grey: {
       ...greyColor,
@@ -169,12 +146,13 @@ export const theme = createTheme({
           gap: "0.5rem",
           height: "40px",
           width: "40px",
-          border: `1px solid ${greyColor[600]}`,
+          border: `1px solid ${greyColor[950]}`,
           borderRadius: "30px",
-          color: greyColor[600],
+          color: greyColor[950],
           "&:hover": {
             borderColor: greyColor[700],
-            color: greyColor[700],
+            backgroundColor: greyColor[300],
+            color: "primary.main",
           },
         },
       },
@@ -191,18 +169,19 @@ export const theme = createTheme({
         root: {
           fontFamily: defaultFonts.family.textos,
           color: greyColor[950],
-          borderRadius: "4px",
+          height: "40px",
+          borderRadius: "40px",
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: greyColor[600],
+            borderColor: greyColor[950],
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: greyColor[700],
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: primaryColor[600],
+            borderColor: brownColor[600],
           },
           "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-            borderColor: errorColor[700],
+            borderColor: redColor[700],
           },
         },
       },
@@ -211,12 +190,14 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: defaultFonts.family.textos,
+          transform: "translate(14px, 9px) scale(1)",
           color: greyColor[800],
           "&.Mui-focused": {
-            color: primaryColor[600],
+            transform: "translate(16px, -9px) scale(0.7)",
+            color: brownColor[600],
           },
           "&.Mui-error": {
-            color: errorColor[700],
+            color: redColor[700],
           },
         },
       },

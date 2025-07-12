@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 import { MenuOptionsBottom, MenuOptionsTop } from "../utils/info";
-import { greyColor, primaryColor } from "@/theme/theme";
+import { greyColor, brownColor } from "@/theme/theme";
 // import { useUserStore } from "@/store/useUserStore";
 import { MenuListItem } from "./MenuListItem";
 import { navBarDesktopHeight, navBarMobileHeight } from "@/shared/Layout/utils/info";
@@ -57,7 +57,7 @@ export const MenuAdmin = () => {
         width: {xs: "100vw", md: open ? drawerWidthOpen : drawerWidthClosed},
         transition: "all 0.3s ease-in-out",
         overflowX: "hidden",
-        backgroundColor: primaryColor[200],
+        backgroundColor: brownColor[200],
         color: greyColor[950],
         display: "flex",
         flexDirection: {xs: "row", md: "column"},

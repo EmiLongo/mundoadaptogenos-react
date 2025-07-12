@@ -12,12 +12,14 @@ import {
   useTheme,
   Badge
 } from '@mui/material';
-import logoTextHorizontal from '@img/mundo_adaptogenos.svg';
+import logoTextHorizontal from '@img/logo_nombre.svg';
 import logoTextVertical from '@img/logo_img.svg';
 import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 
-import { Menu as MenuIcon, Close as CloseIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
-import { Text3, Title2 } from '@theme/textStyles';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { BodyS, Heading2 } from '@theme/textStyles';
 import { useNavigate } from 'react-router-dom';
 import { isNavBarTransparent, menuItems, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info';
 
@@ -41,7 +43,7 @@ export const HeaderOneLine: React.FC = () => {
         <Box 
           component={"img"} 
           src={logoTextVertical} 
-          alt="Logo Mundo Adaptógenos" 
+          alt="Logo Óptica Villagra" 
           height="100px" 
           onClick={handleLogoClick}
           decoding="async"
@@ -61,12 +63,12 @@ export const HeaderOneLine: React.FC = () => {
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
         {productsItems.map((item) => (
           <Box key={item.text} component={"a"} href={item.path}>
-            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+            <Heading2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Heading2>
           </Box>
         ))}
         {menuItems.map((item) => (
           <Box key={item.text} component={"a"} href={item.path}>
-            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+            <Heading2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Heading2>
           </Box>
         ))}
       </List>
@@ -92,9 +94,9 @@ export const HeaderOneLine: React.FC = () => {
           decoding="async"
           loading="lazy"
         />
-        <Text3 sx={{ color: "inherit",textAlign: "center" }}>
+        <BodyS sx={{ color: "inherit",textAlign: "center" }}>
           Desarrollado por
-        </Text3>
+        </BodyS>
       </Box>
     </Box>
   );
@@ -133,14 +135,14 @@ export const HeaderOneLine: React.FC = () => {
                   <Box 
                   component={"img"}
                   src={logoTextHorizontal}
-                  alt="Logo Mundo Adaptógenos"
-                  height="40px"
+                  alt="Logo Óptica Villagra"
+                  height="60px"
                   onClick={handleLogoClick}
                   />
                   <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
                     {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                     <Badge badgeContent={"1"} color="primary">
-                      <ShoppingCartIcon />
+                      <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>
                 </Box>
@@ -151,8 +153,8 @@ export const HeaderOneLine: React.FC = () => {
                 <Box 
                   component={"img"}
                   src={logoTextHorizontal}
-                  alt="Logo Mundo Adaptógenos"
-                  height="40px"
+                  alt="Logo Óptica Villagra"
+                  height="60px"
                   onClick={handleLogoClick}
                 />
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: {xs: '3rem', lg: '4rem', xl: '5rem'} }}>
@@ -162,20 +164,20 @@ export const HeaderOneLine: React.FC = () => {
                       component={"a"}
                       href={item.path}
                     >
-                      <Title2 sx={{
+                      <Heading2 sx={{
                         fontWeight: 500,
                         color: 'text.primary',
                         '&:hover': {
                           color: palette.primary[600],
                         },
                         textTransform: 'none',
-                      }}>{item.text}</Title2>
+                      }}>{item.text}</Heading2>
                     </Box>
                   ))}
                   <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
                     {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                     <Badge badgeContent={"1"} color="primary">
-                      <ShoppingCartIcon />
+                      <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>
                   {menuItems.map((item) => (
@@ -184,14 +186,14 @@ export const HeaderOneLine: React.FC = () => {
                       component={"a"}
                       href={item.path}
                     >
-                      <Title2 sx={{
+                      <Heading2 sx={{
                         fontWeight: 500,
                         color: 'text.primary',
                         '&:hover': {
                           color: palette.primary[600],
                         },
                         textTransform: 'none',
-                      }}>{item.text}</Title2>
+                      }}>{item.text}</Heading2>
                     </Box>
                   ))}
                 </Box>

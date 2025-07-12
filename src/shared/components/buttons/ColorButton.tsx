@@ -1,10 +1,11 @@
 // src/shared/components/ColorButton.jsx
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
-import { greyColor, primaryColor, secondaryColor } from "@/theme/theme";
+import { greyColor, brownColor, greenColor, redColor } from "@theme/theme";
 
 type ColorButtonProps = {
-  type: "greenButton" | "blueButton";
+  id: string
+  type: "greenButton" | "blueButton" | "redButton";
   onClick: () => void;
   text: string;
   fetchingText?: string;
@@ -14,6 +15,7 @@ type ColorButtonProps = {
 };
 
 export const ColorButton: React.FC<ColorButtonProps> = ({
+  id,
   type = "blueButton", //lightGreenButton, greenButton, yellowButton, brownButton
   onClick = () => {},
   text = "",
@@ -23,7 +25,7 @@ export const ColorButton: React.FC<ColorButtonProps> = ({
   sx = {},
 }) => {
   return (
-    <Button
+    <Button id={id}
     onClick={onClick}
     disabled={disabled || isFetching}
     sx={{
@@ -33,12 +35,12 @@ export const ColorButton: React.FC<ColorButtonProps> = ({
       height: "40px",
       minWidth: "120px",
       borderRadius: "40px",
-      backgroundColor: type === "blueButton" ? primaryColor[600] : secondaryColor[400],
+      backgroundColor: type === "blueButton" ? brownColor[600] : type === "redButton" ? redColor[400] : greenColor[400],
 
       ...sx,
     }}
   >
-      <span>{isFetching && fetchingText ? fetchingText : text }</span>
+      <span>{isFetching && !!fetchingText ? fetchingText : text }</span>
       {isFetching && <CircularProgress size={20} sx={{ color: greyColor[950] }} />}
     </Button>
   );

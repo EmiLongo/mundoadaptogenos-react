@@ -15,7 +15,7 @@ const Loading = () => {
       }}
     >
 			<CircularProgress size={150} />
-      <Box component="img" src={logo} alt="Logo Mundo Adaptogenos" width={100}
+      <Box component="img" src={logo} alt="Logo Óptica Villagra" width={100}
         sx={{ 
           position: "absolute", 
           top: "50%", 

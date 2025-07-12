@@ -3,12 +3,14 @@ import {
   Box,
   Button,
   CircularProgress,
-  Typography,
 } from "@mui/material";
-import { greyColor, primaryColor, secondaryColor } from "@/theme/theme";
+import { greyColor, brownColor } from "@theme/theme";
+import { ButtonL, ButtonM, ButtonS } from "@theme/textStyles";
 
 type OnlyTextButtonProps = {
-  type: "greenButton" | "blueButton";
+  id: string;
+  type?: "greyButton" | "blueButton";
+  size?: "S" | "M" | "L";
   onClick: () => void;
   text: string;
   fetchingText?: string;
@@ -19,8 +21,10 @@ type OnlyTextButtonProps = {
 };
 
 export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
+  id,
   onClick = () => {},
 	type = "blueButton",
+  size = "S",
   text = "",
   fetchingText = "",
   isFetching = false,
@@ -32,6 +36,7 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
 
   return (
     <Button
+      id={id}
       variant="contained"
       size="small"
       onClick={onClick}
@@ -41,12 +46,13 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
         alignItems: "center",
         gap: "0.5rem",
         boxShadow: "none",
-        color: greyColor[900],
+        color: type === "blueButton" ? brownColor[950] : greyColor[950],
         backgroundColor: "transparent",
         padding: 0,
         "&:hover": {
           boxShadow: "none",
-          color: type === "blueButton" ? primaryColor[600] : secondaryColor[400],
+          color: type === "blueButton" ? brownColor[950] : brownColor[700],
+          fontWeight: 800,
         },
         ...sx,
       }}
@@ -60,11 +66,22 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
           {icon}
         </Box>
       )}
-      <Typography
-        sx={{ fontSize: { xs: "0.8rem", sm: "0.9rem" }, margin: 0, padding: 0 }}
-      >
-        {isFetching && fetchingText ? fetchingText : text}
-      </Typography>
+
+      {size === "S" && 
+        <ButtonS sx={{color: "inherit", fontWeight: "inherit"}}>
+          {isFetching && fetchingText ? fetchingText : text}
+        </ButtonS>
+      }
+      {size === "M" && 
+        <ButtonM>
+          {isFetching && fetchingText ? fetchingText : text}
+        </ButtonM>
+      }
+      {size === "L" && 
+        <ButtonL>
+          {isFetching && fetchingText ? fetchingText : text}
+        </ButtonL>
+      }
       {isFetching && <CircularProgress size={20} sx={{ color: "inherit" }} />}
     </Button>
   );

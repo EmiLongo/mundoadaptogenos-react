@@ -1,7 +1,7 @@
 
 import { Box, IconButton, Modal } from "@mui/material";
 import { Login } from "./Login";
-import { Title3 } from "@/theme/textStyles";
+import { Heading3 } from "@/theme/textStyles";
 import { ForgetPass } from "./ForgetPass";
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
@@ -39,13 +39,13 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
             <ArrowBackOutlinedIcon />
           </IconButton>
         }
-        <Title3 sx={{
+        <Heading3 sx={{
           margin: "1rem auto 0",
           textAlign: "center",
 
         }}>
           {isOpenForgetPass ? "Recuperar contraseña" : "Iniciar sesión"}
-        </Title3>  
+        </Heading3>  
         {!isOpenForgetPass
         ? <Login handleClose={handleClose} isModal={true} setIsOpenDrawer={setIsOpenDrawer} setIsOpenForgetPass={setIsOpenForgetPass} />
         : <ForgetPass handleClose={handleClose} isModal={isOpenForgetPass} setIsOpenDrawer={setIsOpenDrawer} />}

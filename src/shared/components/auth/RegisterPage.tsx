@@ -3,8 +3,8 @@ import imageReg from "@img/register/register-side.webp"
 import { useFormik } from "formik";
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { Title1, InputError } from "@/theme/textStyles";
-import { errorColor } from "@theme/theme";
+import { Heading1, InputError } from "@/theme/textStyles";
+import { redColor } from "@theme/theme";
 import * as Yup from 'yup';
 import { ColorButton } from "@shared/components/buttons/ColorButton";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
@@ -91,13 +91,13 @@ export const RegisterPage: React.FC = () => {
             justifyContent: "center" 
 
           }}>
-            <Title1 sx={{ 
+            <Heading1 sx={{ 
               marginTop: {xs: "2rem", md:"4rem" },
               marginBottom: "1rem",
               textAlign: "center",
             }}>
               REGISTRO
-            </Title1>
+            </Heading1>
             {/* Nombre y Apellido */}
             <TextField
               fullWidth
@@ -111,7 +111,7 @@ export const RegisterPage: React.FC = () => {
               // helperText={formik.touched.name && formik.errors.name}
               sx={inputSx}
             />
-            <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+            <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
               {formik.touched.name && formik.errors.name}
             </InputError>
             {/* Correo Electrónico */}
@@ -127,7 +127,7 @@ export const RegisterPage: React.FC = () => {
               error={formik.touched.email && Boolean(formik.errors.email)}
               sx={inputSx}
             />
-            <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+            <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
               {formik.touched.email && formik.errors.email}
             </InputError>
 
@@ -155,7 +155,7 @@ export const RegisterPage: React.FC = () => {
                 }
               }}
             />
-            <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+            <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
               {formik.touched.password && formik.errors.password}
             </InputError>
             {/* Confirme contraseña */}
@@ -182,7 +182,7 @@ export const RegisterPage: React.FC = () => {
                 }
               }}
             />
-            <InputError sx={{ mb: 2, color: errorColor[400], paddingLeft: "12px" }}>
+            <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
               {formik.touched.confirmPassword && formik.errors.confirmPassword}
             </InputError>
 
@@ -193,6 +193,7 @@ export const RegisterPage: React.FC = () => {
                   No coinciden */}
 
             <ColorButton
+              id="bt-register-page"
               type="blueButton"
               onClick={() => formik.handleSubmit()}
               text="REGISTRARME"

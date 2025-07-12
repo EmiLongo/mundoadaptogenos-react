@@ -14,6 +14,7 @@ const ManageProductsPage = lazy(() => import("@/modules/admin/page/ManageProduct
 const ManageDiscountsPage = lazy(() => import("@/modules/admin/page/ManageDiscountsPage").then(module => ({ default: module.ManageDiscountsPage })));
 const ManageHistoryPage = lazy(() => import("@/modules/admin/page/ManageHistoryPage").then(module => ({ default: module.ManageHistoryPage })));
 const ManageAdminsPage = lazy(() => import("@/modules/admin/page/ManageAdminsPage").then(module => ({ default: module.ManageAdminsPage })));
+const CartPage = lazy(() => import("@/modules/cart/page/CartPage").then(module => ({ default: module.CartPage })));
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/cart", element: <CartPage /> },
       {
         path: "/admin",
         element: <AdminLayout />,

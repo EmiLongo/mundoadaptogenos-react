@@ -8,24 +8,25 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 export const navBarLines: number = 2;   //  1
 export const isNavBarTransparent: boolean = false;
-export const navBarDesktopHeight: string = "150px";
-export const navBarMobileHeight: string = "70px";
+export const navBarDesktopHeight: string = "150px"; // tiene que ser la suma de las 2 de abajo
+export const navBar1DesktopHeight: string = "100px";
+export const navBar2DesktopHeight: string = "50px";
+export const navBarMobileHeight: string = "60px";
 
 
 
 export const productsItems = [
-  { text: 'Melena de León', path: '/melena' },
-  { text: 'Cordyceps Militaris', path: '/cordyceps' },
-  { text: 'Reishi', path: '/reishi' },
-  { text: 'Cola de Pavo', path: '/cola-pavo' },
+  { text: 'Anteojos de Sol', path: '/anteojos-de-sol' },
+  { text: 'Armazones de Receta', path: '/armazones-receta' },
+  { text: 'Clip-On', path: '/clip-on' },
+  { text: 'Indestructibles', path: '/indestructibles' },
 ];
 
 export const menuItems = [
   // { text: 'Inicio', path: '#home' },
-  { text: 'Que hacemos', path: '#whatwedo' },
-  { text: 'Servicios', path: '#services' },
-  { text: 'Equipamiento', path: '#equipment' },
-  { text: 'Contacto', path: '#contact' },
+  { text: 'Nosotros', path: '/about-us' },
+  { text: 'Libro de quejas', path: '/complaints-book' },
+  
 ];
 
 export interface IContactInfo {

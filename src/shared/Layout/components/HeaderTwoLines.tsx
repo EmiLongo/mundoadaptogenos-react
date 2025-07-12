@@ -1,5 +1,5 @@
 // components/Header.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   AppBar, 
   Toolbar, 
@@ -9,46 +9,66 @@ import {
   List,
   useMediaQuery,
   useTheme,
-  Badge
 } from '@mui/material';
-import logoTextHorizontal from '@img/mundo_adaptogenos.svg';
-import logoTextVertical from '@img/logo_img.svg';
-import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import logoTextHorizontal from '@img/logo_nombre.svg';
+import logoTextVertical from '@img/logo_nombre_vertical.svg';
+// import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Text3, Title2, TextBox } from '@theme/textStyles';
-import { useNavigate } from 'react-router-dom';
-import { isNavBarTransparent, menuItems, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info';
+import { Heading5 } from '@theme/textStyles';
 import { SearchField } from './SearchField';
-import { greyColor } from '@/theme/theme';
+import { greyColor } from '@theme/theme';
 import { LoginButton } from './LoginButton';
+import { CartButton } from '@shared/cart/CartButton';
+import { ProductConfirm } from '@shared/cart/ProductConfirm';
+import { useCart } from '@store/useCartStore';
+import { 
+  isNavBarTransparent, 
+  menuItems, 
+  navBar1DesktopHeight, 
+  navBar2DesktopHeight, 
+  navBarDesktopHeight, 
+  navBarMobileHeight, 
+  productsItems 
+} from '../utils/info';
 
 
 export const HeaderTwoLines: React.FC = () => {
-  const navigate = useNavigate();
+  const { initializeCart } = useCart();
+  const { lastAddedProduct, lastAddedAt } = useCart();
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
   const [mobileOpen, setMobileOpen] = useState(false);
-  
+  const [openCartDrawer, setOpenCartDrawer] = useState<boolean>(false)
+
+  const closeCartDrawer = () => {
+    setOpenCartDrawer(false)
+  }
+  const handleCartButton = () => {
+    setOpenCartDrawer(!openCartDrawer)
+  }
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   
   const handleLogoClick = () => {
-    window.location.href = '#hero';
+    window.location.href = './';
   };
 
+ 
+
+  // menu lateral en mobile
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "3rem", mb: "2rem" }}>
         <Box 
           component={"img"} 
           src={logoTextVertical} 
-          alt="Logo Mundo Adaptógenos" 
+          alt="Logo Óptica Villagra" 
           height="100px" 
           onClick={handleLogoClick}
           decoding="async"
@@ -68,16 +88,20 @@ export const HeaderTwoLines: React.FC = () => {
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
         {productsItems.map((item) => (
           <Box key={item.text} component={"a"} href={item.path}>
-            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+            <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+              {item.text}
+            </Heading5>
           </Box>
         ))}
         {menuItems.map((item) => (
           <Box key={item.text} component={"a"} href={item.path}>
-            <Title2 sx={{ fontSize: '1.2rem', color: palette.text.primary, textTransform: 'none', }}>{item.text}</Title2>
+            <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+              {item.text}
+            </Heading5>
           </Box>
         ))}
       </List>
-      <Box
+      {/* <Box
         component={"a"}
         href="https://inpulse.com.ar"
         target="_blank"
@@ -99,12 +123,25 @@ export const HeaderTwoLines: React.FC = () => {
           decoding="async"
           loading="lazy"
         />
-        <Text3 sx={{ color: "inherit",textAlign: "center" }}>
+        <BodyS sx={{ color: "inherit",textAlign: "center" }}>
           Desarrollado por
-        </Text3>
-      </Box>
+        </BodyS>
+      </Box> */}
     </Box>
   );
+
+  // se inicializa el carrito
+  useEffect(() => {
+    // Inicializar con sessionId único para usuarios no logueados
+    const sessionId = localStorage.getItem('sessionId') || 
+                     `session_${Date.now()}_${Math.random()}`;
+    
+    if (!localStorage.getItem('sessionId')) {
+      localStorage.setItem('sessionId', sessionId);
+    }
+    
+    initializeCart(undefined, sessionId);
+  }, []);
 
   return (
     <>
@@ -117,9 +154,9 @@ export const HeaderTwoLines: React.FC = () => {
       sx={{
         width: "100%",
         height: isMobile ? navBarMobileHeight : navBarDesktopHeight, 
-        backgroundColor: "#f3f6fc82",
-        backdropFilter: "blur(10px) saturate(180%)",
-        WebkitBackdropFilter: "blur(10px) saturate(180%)",
+        backgroundColor: "backcground.default",
+        // backdropFilter: "blur(10px) saturate(180%)",
+        // WebkitBackdropFilter: "blur(10px) saturate(180%)",
       }}
       >
         <Box sx={{ height: '100%', width: "100%" }}>
@@ -127,49 +164,45 @@ export const HeaderTwoLines: React.FC = () => {
               // versión móvil
               <Toolbar disableGutters sx={{ height: '100%' }}>
                 <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: "space-between", paddingX: { xs: '1rem',} }}>
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ mr: 2, border: "none" }}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Box 
-                  component={"img"}
-                  src={logoTextHorizontal}
-                  alt="Logo Mundo Adaptógenos"
-                  height="40px"
-                  onClick={handleLogoClick}
-                  />
-                  <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
-                    {/* <Badge badgeContent={cartItems.length} color="primary"> */}
-                    <Badge badgeContent={"1"} color="primary">
-                      <ShoppingCartOutlinedIcon />
-                    </Badge>
-                  </IconButton>
+                  <Box sx={{display: "flex", gap: "20px"}}>
+                    <IconButton
+                      color="inherit"
+                      aria-label="open drawer"
+                      edge="start"
+                      onClick={handleDrawerToggle}
+                      sx={{ border: "none" }}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    <Box 
+                    component={"img"}
+                    src={logoTextHorizontal}
+                    alt="Logo Óptica Villagra"
+                    height="40px"
+                    onClick={handleLogoClick}
+                    />
+                  </Box>
+                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={closeCartDrawer} handleCartButton={handleCartButton} />
                 </Box>
               </Toolbar>
             ) : (
               // versión escritorio
               <>
-              <Toolbar disableGutters sx={{ height: '100px', borderBottom: `1px solid ${greyColor[500]}`, width: "100%", justifyContent: "center" }}>
+              <Toolbar disableGutters sx={{ height: navBar1DesktopHeight, borderBottom: `1px solid ${greyColor[500]}`, width: "100%", justifyContent: "center" }}>
                 <Box sx={{ 
                   flexGrow: 1, 
-                  maxWidth: "1280px",
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'space-between', 
-                  paddingX: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem', xl: '8rem'},
-                  gap: {xs: '1rem', sm: '2rem', md: '3rem', lg: '4rem', xl: '5rem'}
+                  paddingX: { md: '4rem', lg: '5rem', xl: '8rem'},
+                  // gap: {md: '3rem', lg: '4rem', xl: '5rem'}
                 }}>
                   <SearchField sx={{flex: 1}}/>
                   <Box 
                     component={"img"}
                     src={logoTextHorizontal}
-                    alt="Logo Mundo Adaptógenos"
-                    height="40px"
+                    alt="Logo Óptica Villagra"
+                    height="60px"
                     onClick={handleLogoClick}
                     sx={{flex: 1}}
                   />
@@ -177,19 +210,11 @@ export const HeaderTwoLines: React.FC = () => {
                     display: 'flex', 
                     alignItems: 'center',
                     justifyContent: 'end',
-                    // gap: {xs: '1rem', lg: '2rem', xl: '3rem'} 
                     gap: '1rem',
                     flex: 1,
                   }}>
-                    {/* TODO: refactorizar boton de carrito */}
-                    <IconButton onClick={() => navigate("/cart")} sx={{ width: "100px" }}>
-                      {/* <Badge badgeContent={cartItems.length} color="primary"> */}
-                      <Badge badgeContent={"1"} color="primary">
-                        <ShoppingCartOutlinedIcon />
-                      </Badge>
-                      <TextBox sx={{ color: greyColor[600] }}>Carrito</TextBox>
-                    </IconButton>
-                    <LoginButton />
+                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={closeCartDrawer} handleCartButton={handleCartButton} />
+                  <LoginButton />
 
                     {/* {menuItems.map((item) => (
                       <Box
@@ -197,20 +222,20 @@ export const HeaderTwoLines: React.FC = () => {
                         component={"a"}
                         href={item.path}
                       >
-                        <Title2 sx={{
+                        <Heading5 sx={{
                           fontWeight: 500,
                           color: 'text.primary',
                           '&:hover': {
                             color: palette.primary[600],
                           },
                           textTransform: 'none',
-                        }}>{item.text}</Title2>
+                        }}>{item.text}</Heading5>
                       </Box>
                     ))} */}
                   </Box>
                 </Box>
               </Toolbar>
-              <Toolbar disableGutters sx={{ height: '50px', minHeight: {xs: '50px', md: '50px', lg: '50px', xl: '50px'}, justifyContent: "center" }}>
+              <Toolbar disableGutters sx={{ height: navBar2DesktopHeight, minHeight: {xs: '50px', md: '50px', lg: '50px', xl: '50px'}, justifyContent: "center" }}>
                 <Box sx={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -218,23 +243,29 @@ export const HeaderTwoLines: React.FC = () => {
                   width: '100%',
                   maxWidth: "1280px",
                   gap: {xs: '3rem', lg: '4rem', xl: '5rem'} 
-              }}>
-                {productsItems.map((item) => (
-                      <Box
-                        key={item.text}
-                        component={"a"}
-                        href={item.path}
-                      >
-                        <Title2 sx={{
-                          fontWeight: 500,
-                          color: 'text.primary',
-                          '&:hover': {
-                            color: palette.primary[600],
-                          },
-                          textTransform: 'none',
-                        }}>{item.text}</Title2>
-                      </Box>
-                    ))}
+                }}>
+                  {productsItems.map((item) => (
+                    <Box
+                      key={item.text}
+                      component={"a"}
+                      href={item.path}
+                    >
+                      <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+                        {item.text}
+                      </Heading5>
+                    </Box>
+                  ))}
+                  {menuItems.map((item) => (
+                    <Box
+                      key={item.text}
+                      component={"a"}
+                      href={item.path}
+                    >
+                      <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+                        {item.text}
+                      </Heading5>
+                    </Box>
+                  ))}
                 </Box>
               </Toolbar>
             </>
@@ -257,6 +288,11 @@ export const HeaderTwoLines: React.FC = () => {
         >
           {drawer}
         </Drawer>
+        {lastAddedProduct && <ProductConfirm 
+          handleCartOpen={handleCartButton}
+          lastAddedProduct={lastAddedProduct}
+          lastAddedAt={lastAddedAt}
+        />}
       </Box>
     </>
   );

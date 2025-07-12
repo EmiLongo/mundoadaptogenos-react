@@ -3,54 +3,54 @@ import apiClient from './apiClient';
 import { authEndpoint } from './utils';
 
 // Autentica a un usuario con sus credenciales y devuelve un token de autenticación.
-export const login = ( loginData: LoginData ) => {
-  return apiClient.post<LoginResponse>(`${authEndpoint}/login`, loginData );
+export const login = ( loginData: ILoginData ) => {
+  return apiClient.post<ILoginResponse>(`${authEndpoint}/login`, loginData );
 };
 
 // Registra un nuevo usuario en el sistema con los detalles proporcionados.
-export const register = ( registerData: RegisterData ) => {
-  return apiClient.post<RegisterResponse>(`${authEndpoint}/register`, registerData );
+export const register = ( registerData: IRegisterData ) => {
+  return apiClient.post<IRegisterResponse>(`${authEndpoint}/register`, registerData );
 };
 
-export const registerAdmin = ( registerAdminData: RegisterAdminData ) => {
-  return apiClient.post<RegisterAdminResponse>(`${authEndpoint}/register-admin`, registerAdminData );
+export const registerAdmin = ( registerAdminData: IRegisterAdminData ) => {
+  return apiClient.post<IRegisterAdminResponse>(`${authEndpoint}/register-admin`, registerAdminData );
 };
 
-export type User = {
+export interface IUser {
   id: string;
   name: string;
   email: string;
   role: 'SUPER_ADMIN' | 'ADMIN' | 'USER';
 };
 
-export type LoginData = {
+export interface ILoginData {
   email: string;
   password: string;
 };
 
-export type LoginResponse = {
+export interface ILoginResponse {
   token: string;
-  user: User;
+  user: IUser;
 };
 
-export type RegisterData = {
+export interface IRegisterData {
   name: string;
   email: string;
   password: string;
 };
 
-export type RegisterResponse = {
+export interface IRegisterResponse {
   token: string;
-  user: User;
+  user: IUser;
 };
 
-export type RegisterAdminData = {
+export interface IRegisterAdminData {
   name: string;
   email: string;
   password: string;
 }
 
-export type RegisterAdminResponse = {
+export interface IRegisterAdminResponse {
   token: string;
-  user: User;
+  user: IUser;
 };

@@ -1,5 +1,6 @@
 // src/theme/textStyles.tsx
 import { styled, Theme, Typography, TypographyProps } from '@mui/material';
+import { greyColor } from './theme';
 
 export const defaultFonts = {
   letter: {
@@ -7,8 +8,8 @@ export const defaultFonts = {
     normal: 0.3,
   },
   family: {
-    titulos: "Exo, Fira Sans Extra Condensed, arial, calibri, sans-serif",
-    textos: "Josefin Sans, Jost, arial, calibri, sans-serif",
+    titulos: "Comfortaa, arial, calibri, sans-serif",
+    textos: "Albert Sans, calibri, arial, sans-serif",
   },
 };
 
@@ -23,11 +24,19 @@ export const customFonts = {
   },
 }
 
+export const defaultHeading = () => ({
+  fontFamily: defaultFonts.family.titulos,
+  letterSpacing: defaultFonts.letter.normal,
+  fontWeight: 500,
+  color: greyColor[950],
+  // lineHeight: 1.2,
+});
+
 export const defaultParagraph = () => ({
   fontFamily: defaultFonts.family.textos,
   fontWeight: "normal",
   letterSpacing: defaultFonts.letter.normal,
-  color: "inherit",
+  color: greyColor[950],
   lineHeight: 1.3,
 });
 
@@ -35,23 +44,19 @@ export const defaultCTA = () => ({
   fontFamily: defaultFonts.family.textos,
   fontWeight: "normal",
   letterSpacing: defaultFonts.letter.wide,
-  color: "inherit",
+  color: greyColor[950],
 });
 
-export const defaultTitle = () => ({
-  fontFamily: defaultFonts.family.titulos,
-  letterSpacing: defaultFonts.letter.normal,
-  fontWeight: 500,
-  color: "inherit",
-  // lineHeight: 1.2,
-});
-
-export const inputAdvice = () => ({
+export const defaultInput = () => ({
   fontFamily: defaultFonts.family.textos,
-  fontSize: "0.75rem", // 12px
-  color: "inherit",
+  color: greyColor[800],
 });
 
+export const defaultButtons = () => ({
+  fontFamily: defaultFonts.family.textos,
+  fontWeight: 700,
+  letterSpacing: defaultFonts.letter.normal,
+});
 // Helper para recibir sx extra
 
 const responsiveFontSize = (fontSizes: { xxl?: string; xl?: string; lg?: string; md?: string; sm?: string, xs?: string }) => (theme: Theme) => ({
@@ -65,46 +70,64 @@ const responsiveFontSize = (fontSizes: { xxl?: string; xl?: string; lg?: string;
 });
 
 // TITLES
-export const  TitleHero = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xxl: '6rem', xl: '4.75rem', lg: '4.2rem', md: '4rem', sm: '3.75rem', xs: '3.75rem' })(theme), // 60px
+export const  HeadingHero = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+  ...defaultHeading(),
+  ...responsiveFontSize({xl: '4.75rem', lg: '4.2rem', md: '4rem', sm: '3.75rem', xs: '3.75rem' })(theme), // 60px   // xxl: '6rem', 
   fontWeight: 600,
   lineHeight: 1.1,
   textShadow: customFonts.shadow.titulos,
 }))
-export const  TitleHero2 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xxl: '3.27rem', xl: '2.45rem', lg: '2.23rem', md: '2.12rem', sm: '2rem', xs: '2rem' })(theme), // 60px
+export const  HeadingHero2 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+  ...defaultHeading(),
+  ...responsiveFontSize({xl: '2.45rem', lg: '2.23rem', md: '2.12rem', sm: '2rem', xs: '2rem' })(theme), // 60px   // xxl: '3.27rem'
   fontWeight: 600,
   // lineHeight: 1.1,
 }))
 
-export const TitleXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xxl: '3rem', xl: '2.25rem', lg: '2.05rem', md: '1.95rem', sm: '1.85rem', xs: '1.85rem' })(theme), // 36px
+export const HeadingXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+  ...defaultHeading(),
+  ...responsiveFontSize({xl: '2.25rem', lg: '2.05rem', md: '1.95rem', sm: '1.85rem', xs: '1.85rem' })(theme), // 36px   // xxl: '3rem', 
   textTransform: "uppercase",
 }));
 
-export const Title1 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xl: '1.75rem', lg: '1.59rem', md: '1.52rem', sm: '1.44rem', xs: '1.44rem' })(theme), // 24px
+export const Heading1 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  // ...responsiveFontSize({xl: '40px', lg: '36px', md: '34px', sm: '32px', xs: '32px'  })(theme),   //  xxl: '52px', 
+  fontSize: '32px',
+  lineHeight: "40px",
   textWrap: "wrap",
-  textTransform: "uppercase",
+
 }));
 
-export const Title2 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xl: '1.5rem', lg: '1.375rem', md: '1.325rem', sm: '1.3rem', xs: '1.3rem' })(theme), // 20px
+export const Heading2 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  // ...responsiveFontSize({xl: '32px', lg: '28px', md: '26px', sm: '24px', xs: '24px' })(theme),    //  xxl: '42px', 
+  fontSize: '24px',
+  lineHeight: "32px",
   textWrap: "wrap",
-  textTransform: "uppercase",
+
 }));
 
-export const Title3 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...defaultTitle(),
-  ...responsiveFontSize({ xl: '1.25rem', lg: '1.15rem', md: '1.1rem', sm: '1.05rem', xs: '1.05rem' })(theme), // 16px
-  fontWeight: 'normal',
+export const Heading3 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  // ...responsiveFontSize({xl: '28px', lg: '24px', md: '22px', sm: '20px', xs: '20px'  })(theme),   //  xxl: '36px', 
+  fontSize: '20px',
+  lineHeight: "28px",
   textWrap: "wrap",
-  textTransform: "uppercase",
+}));
+export const Heading4 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  // ...responsiveFontSize({xl: '26px', lg: '22px', md: '20px', sm: '18px', xs: '18px'  })(theme),   //  xxl: '34px', 
+  fontSize: '18px',
+  lineHeight: "26px",
+  textWrap: "wrap",
+}));
+export const Heading5 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  // ...responsiveFontSize({ xl: '24px', lg: '20px', md: '18px', sm: '16px', xs: '16px'  })(theme),
+  fontSize: '16px',
+  lineHeight: "24px",
+  textWrap: "wrap",
 }));
 
 // CTA
@@ -116,18 +139,18 @@ export const CallToAction = styled((props: TypographyProps) => <Typography {...p
 }));
 // SUBTITLES
 
-export const SubtitleXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const SubHeadingXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultParagraph(),
   ...responsiveFontSize({ xl: "1.5rem", lg: "1.375rem", md: "1.32rem", sm: "1.27rem", xs: "1.27rem"})(theme), // 24px
   textWrap: "wrap",
 }));
 
-export const SubtitleBold = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const SubHeadingBold = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultParagraph(),
   fontWeight: 600,
   ...responsiveFontSize({ xl: '0.89rem', lg: '0.8125rem', md: '0.78rem', sm: '0.75rem', xs: '0.75rem' })(theme), // 14px
 }));
-export const Subtitle = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const SubHeading = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultParagraph(),
   ...responsiveFontSize({ xl: '0.89rem', lg: '0.8125rem', md: '0.78rem', sm: '0.75rem', xs: '0.75rem' })(theme), // 14px
   textWrap: "wrap",
@@ -140,22 +163,68 @@ export const ButtonMini = styled((props: TypographyProps) => <Typography {...pro
 }));
 
 // PARAGRAPHS
-export const Text1 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const BodyL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
   ...defaultParagraph(),
-  ...responsiveFontSize({ xs: '1.15rem', md: '1.21rem', lg: '1.28rem', xl: '1.4rem' })(theme),
+  // ...responsiveFontSize({xl: '28px', lg: '24px', md: '22px', sm: '20px', xs: '20px'})(theme),   //xxl: '36px', 
+  fontSize: '20px',
+  lineHeight: "28px",
   textWrap: "wrap",
 }));
-
-export const Text2 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const BodyLEmph = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
   ...defaultParagraph(),
-  ...responsiveFontSize({ xs: '1.1rem', md: '1.1rem', lg: '1.2rem', xl: '1.3rem' })(theme),
+  // ...responsiveFontSize({xl: '28px', lg: '24px', md: '22px', sm: '20px', xs: '20px'})(theme),   //xxl: '36px', 
+  fontSize: '20px',
+  lineHeight: "28px",
   textWrap: "wrap",
+  fontWeight: 800,
 }));
 
-export const Text3 = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const BodyM = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
   ...defaultParagraph(),
-  ...responsiveFontSize({ xs: '0.8rem', md: '1rem', lg: '1.1rem', xl: '1.2rem' })(theme),
+  // ...responsiveFontSize({xl: '24px', lg: '20px', md: '18px', sm: '16px', xs: '16px'})(theme),   //xxl: '30px', 
+  fontSize: '16px',
+  lineHeight: "24px",
   textWrap: "wrap",
+}));
+export const BodyMEmph = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  // ...responsiveFontSize({xl: '24px', lg: '20px', md: '18px', sm: '16px', xs: '16px'})(theme),   //xxl: '30px', 
+  fontSize: '16px',
+  lineHeight: "24px",
+  textWrap: "wrap",
+  fontWeight: 800,
+}));
+
+export const BodyS = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  // ...responsiveFontSize({xl: '20px', lg: '18px', md: '16px', sm: '14px', xs: '14px'})(theme),   //xxl: '26px', 
+  fontSize: '14px',
+  lineHeight: "20px",
+  textWrap: "wrap",
+}));
+export const BodySEmph = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  // ...responsiveFontSize({xl: '20px', lg: '18px', md: '16px', sm: '14px', xs: '14px'})(theme),   //xxl: '26px', 
+  fontSize: '14px',
+  lineHeight: "20px",
+  textWrap: "wrap",
+  fontWeight: 800,
+}));
+
+export const Caption = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  // ...responsiveFontSize({xl: '16px', lg: '14px', md: '13px', sm: '12px', xs: '12px'})(theme),   //xxl: '20px', 
+  fontSize: '12px',
+  lineHeight: "16px",
+  textWrap: "wrap",
+}));
+export const CaptionAlt = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  // ...responsiveFontSize({xl: '14px', lg: '12px', md: '11px', sm: '10px', xs: '10px'})(theme),   //xxl: '18px', 
+  fontSize: '10px',
+  lineHeight: "14px",
+  textWrap: "wrap",
+  fontWeight: 800,
 }));
 
 export const ParagraphLight = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
@@ -181,16 +250,41 @@ export const TextBox = styled((props: TypographyProps) => <Typography {...props}
 }));
 
 // INPUTS
-export const InputAdvice = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
-  ...inputAdvice(),
+export const InputLabel = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultInput(),
+    fontSize: "14px",
+
+}));
+export const InputField = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultInput(),
+    fontSize: "16px",
+
+}));
+export const InputHelper = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultInput(),
+    fontSize: "12px",
+
 }));
 
 export const InputError = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
-  ...inputAdvice(),
+  ...defaultInput(),
   color: theme.palette.error.main,
 }));
 
-
+// BUTTONS
+export const ButtonL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultButtons(),
+  fontSize: "16px",  
+}));
+export const ButtonM = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultButtons(),
+  fontSize: "14px",
+  lineHeight: "16px",
+}));
+export const ButtonS = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultButtons(),
+  fontSize: "12px",
+}));
 
 
 import React from "react";
@@ -198,25 +292,25 @@ import React from "react";
 interface Props {
   children: React.ReactNode
   sx?: object
-  id?: string
+  id: string
 }
-export const SectionTitle: React.FC<Props> = ({ children, sx, id }) => {
+export const SectionHeading: React.FC<Props> = ({ children, sx, id }) => {
   return (
-    <Title1
+    <Heading2
       id={id}
       sx={{
-        marginTop: {xs:"3rem", lg:"3rem"},
-        marginBottom: "1rem",
+        marginTop: {xs:customFonts.space.large, lg:customFonts.space.large},
+        marginBottom: customFonts.space.medium,
         textAlign: "center",
       ...sx }}>
       { children }
-    </Title1>
+    </Heading2>
   )
 };
 
-export const SectionSubTitle: React.FC<Props> = ({ children, sx, id }) => {
+export const SectionSubHeading: React.FC<Props> = ({ children, sx, id }) => {
   return (
-    <Text1
+    <BodyM
     id={id}
     sx={{
       textAlign: "center", 
@@ -227,6 +321,6 @@ export const SectionSubTitle: React.FC<Props> = ({ children, sx, id }) => {
       ...sx}}
     >
       { children }
-    </Text1>
+    </BodyM>
   )
 }

@@ -12,8 +12,8 @@ import {
   useTheme,
   Badge
 } from '@mui/material';
-import logoTextHorizontal from '@img/logo_nombre.svg';
-import logoTextVertical from '@img/logo_img.svg';
+import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
+import logoTextVertical from '@img/logo-nombre-vertical.svg';
 import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -124,6 +124,7 @@ export const HeaderOneLine: React.FC = () => {
               <>
                 <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center',  paddingX: { xs: '1rem',} }}>
                   <IconButton
+                    id="bti-open-menu-mobile"
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
@@ -139,7 +140,11 @@ export const HeaderOneLine: React.FC = () => {
                   height="60px"
                   onClick={handleLogoClick}
                   />
-                  <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
+                  <IconButton
+                    id="bti-cart-mobile"
+                    onClick={() => navigate("/cart")} 
+                    sx={{ mx: 2 }}
+                  >
                     {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                     <Badge badgeContent={"1"} color="primary">
                       <ShoppingCartOutlinedIcon />
@@ -174,7 +179,11 @@ export const HeaderOneLine: React.FC = () => {
                       }}>{item.text}</Heading2>
                     </Box>
                   ))}
-                  <IconButton onClick={() => navigate("/cart")} sx={{ mx: 2 }}>
+                  <IconButton 
+                    id="bti-cart-desktop"
+                    onClick={() => navigate("/cart")} 
+                    sx={{ mx: 2 }}
+                  >
                     {/* <Badge badgeContent={cartItems.length} color="primary"> */}
                     <Badge badgeContent={"1"} color="primary">
                       <ShoppingCartOutlinedIcon />

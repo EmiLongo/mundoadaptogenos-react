@@ -147,7 +147,12 @@ export const RegisterPage: React.FC = () => {
                 input: {
                   endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={handleClickShowPassword} edge="end" sx={{ border: "none", marginRight: "0.25rem" }}>
+                    <IconButton
+                      id="bti-register-show-password"
+                      onClick={handleClickShowPassword} 
+                      edge="end" 
+                      sx={{ border: "none", marginRight: "0.25rem" }}
+                    >
                       {showPassword ? <VisibilityOffOutlinedIcon /> : <VisibilityOutlinedIcon />}
                     </IconButton>
                   </InputAdornment>
@@ -174,7 +179,12 @@ export const RegisterPage: React.FC = () => {
                 input: {
                   endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={handleClickShowConfirmPassword} edge="end" sx={{ border: "none", marginRight: "0.25rem" }}>
+                    <IconButton
+                      id="bti-register-show-confirm-password"
+                      onClick={handleClickShowConfirmPassword} 
+                      edge="end" 
+                      sx={{ border: "none", marginRight: "0.25rem" }}
+                    >
                       {showConfirmPassword ? <VisibilityOffOutlinedIcon /> : <VisibilityOutlinedIcon />}
                     </IconButton>
                   </InputAdornment>

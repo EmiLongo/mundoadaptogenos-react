@@ -72,6 +72,7 @@ export const ModalDeleteCartItem: React.FC<IModalDeleteCartItem> = ({
       }}
       >
         <IconButton 
+          id="bti-close-del-item-modal"
           onClick={closeDeleteItemModal}
           sx={{position: "absolute", top: "8px", right: "8px", border: "none"}}
         >

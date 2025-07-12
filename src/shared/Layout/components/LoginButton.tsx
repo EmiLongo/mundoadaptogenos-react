@@ -20,7 +20,10 @@ export const LoginButton: React.FC = () => {
 
   return (
     isUserLoggedIn ? 
-    <IconButton onClick={() => navigate("/profile")}>
+    <IconButton
+      id="bti-menu-profile"
+      onClick={() => navigate("/profile")}
+    >
       <PersonOutlineOutlinedIcon />
     </IconButton>
     :

@@ -35,7 +35,11 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
         transform: {sm: "translate(50%, 50%)", md: "unset"},
       }}>
         {isOpenForgetPass && 
-          <IconButton onClick={() => setIsOpenForgetPass(false)} sx={{ border: "none", position: "absolute", top: "0.6rem", left: "1rem"}}>
+          <IconButton
+            id="bti-back-to-login"
+            onClick={() => setIsOpenForgetPass(false)} 
+            sx={{ border: "none", position: "absolute", top: "0.6rem", left: "1rem"}}
+          >
             <ArrowBackOutlinedIcon />
           </IconButton>
         }

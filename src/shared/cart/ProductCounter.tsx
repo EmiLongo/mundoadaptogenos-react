@@ -36,16 +36,20 @@ export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handl
         border: `1px ${greyColor[950]} solid`
       }}
     >
-      <IconButton sx={{...iconBtStyles}}
+      <IconButton 
+      id={`bti-decrease-quantity-${index}`}
       onClick={handleSus}
       disabled={isLoading}
+      sx={{...iconBtStyles}}
       >
         <RemoveOutlinedIcon width={20} sx={{color: greyColor[950]}} />
       </IconButton>
       <InputField sx={{width: "20px", textAlign: "center"}}>{counter}</InputField>
-      <IconButton sx={{...iconBtStyles}}
+      <IconButton
+      id={`bti-increase-quantity-${index}`}
       onClick={handleAdd}
       disabled={isLoading}
+      sx={{...iconBtStyles}}
       >
         <AddOutlinedIcon width={20} sx={{color: greyColor[950]}} />
       </IconButton>

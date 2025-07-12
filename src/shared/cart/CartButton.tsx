@@ -15,7 +15,11 @@ export const CartButton: React.FC<ICartButton> = ({openCartDrawer, closeCartDraw
   const { itemsCount, isEmpty } = useCart();
   return (
     <>
-    <IconButton onClick={handleCartButton} sx={{border: {xs: "none", md:`1px solid ${greyColor[950]}`,} }}>
+    <IconButton 
+      id="bti-cart"
+      onClick={handleCartButton} 
+      sx={{border: {xs: "none", md:`1px solid ${greyColor[950]}`,} }}
+    >
       {/* <Badge badgeContent={cartItems.length} color="primary"> */}
       <Badge 
         badgeContent={itemsCount} 

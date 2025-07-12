@@ -73,6 +73,7 @@ export const MenuAdmin = () => {
           }}
         >
           <IconButton
+            id="bti-menu-extend"
             onClick={handleDrawerToggle}
           >
             <ChevronLeftOutlinedIcon sx={{ 

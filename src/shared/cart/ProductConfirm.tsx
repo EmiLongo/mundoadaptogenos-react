@@ -64,6 +64,7 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartOpen, last
       }}
       >
         <IconButton 
+          id="bti-close-product-confirm"
           onClick={handleCloseProductConfirm}
           sx={{position: "absolute", top: 0, right: "-4px", border: "none"}}
         >

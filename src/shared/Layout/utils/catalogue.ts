@@ -1,4 +1,12 @@
 import { IProduct } from "@shared/components/types";
+import colaPavoImg from "@img/card/cola-pavo.png" 
+import melenaImg from "@img/card/melena-leon.png" 
+import reishiImg from "@img/card/reishi.png" 
+import cordycepsImg from "@img/card/cordyceps-militaris.png"
+import colaPavoThumb from "@img/card/thumbnail-cola-pavo.png" 
+import melenaThumb from "@img/card/thumbnail-melena-leon.png" 
+import reishiThumb from "@img/card/thumbnail-reishi.png" 
+import cordycepsThumb from "@img/card/thumbnail-cordyceps-militaris.png" 
 
 export const catalogue: IProduct[] = [{
   id: 111,
@@ -10,8 +18,8 @@ export const catalogue: IProduct[] = [{
   priceDiscount: 32000,
   priceTransfer: 25600,
   plan: "6 x $5.333 sin interés",
-  urlPhoto: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_melena_de_leon.jpg",
-  urlThumbnail: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_melena_de_leon.jpg",
+  urlPhoto: melenaImg,
+  urlThumbnail: melenaThumb,
   isValid: true,
 },
 {
@@ -24,8 +32,8 @@ export const catalogue: IProduct[] = [{
   priceDiscount: 32000,
   priceTransfer: 25600,
   plan: "6 x $5.333 sin interés",
-  urlPhoto: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_cordyceps_militaris.jpg",
-  urlThumbnail: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_cordyceps_militaris.jpg",
+  urlPhoto: cordycepsImg,
+  urlThumbnail: cordycepsThumb,
   isValid: true,
 },
 {
@@ -38,8 +46,8 @@ export const catalogue: IProduct[] = [{
   priceDiscount: 32000,
   priceTransfer: 25600,
   plan: "6 x $5.333 sin interés",
-  urlPhoto: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_reishi.jpg",
-  urlThumbnail: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_reishi.jpg",
+  urlPhoto: reishiImg,
+  urlThumbnail: reishiThumb,
   isValid: true,
 },
 {
@@ -52,8 +60,8 @@ export const catalogue: IProduct[] = [{
   priceDiscount: 32000,
   priceTransfer: 25600,
   plan: "6 x $5.333 sin interés",
-  urlPhoto: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_cola_de_pavo.jpg",
-  urlThumbnail: "https://mundoadaptogenos.netlify.app/assets/img/thumbnail/frasco_cola_de_pavo.jpg",
+  urlPhoto: colaPavoImg,
+  urlThumbnail: colaPavoThumb,
   isValid: true,
 },
 {

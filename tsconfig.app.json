@@ -32,6 +32,7 @@
       "@components/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@shared/*": ["src/shared/*"],
+      "@store/*": ["src/store/*"],
       "@theme/*": ["src/theme/*"]
     },
     

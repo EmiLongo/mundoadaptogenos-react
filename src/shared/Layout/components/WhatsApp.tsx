@@ -42,7 +42,7 @@ export const WhatsApp: React.FC = () => {
     id="whatsapp"
     ref={iconRef}
     component={"a"}
-    href="https://wa.me/5493476619576?text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Talleres%20Montreal."
+    href="https://wa.me/5493412667096?text=🍄%20Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20hongos%20adaptógenos."
     target="_blank"
     rel="noopener noreferrer"
     sx={{ 

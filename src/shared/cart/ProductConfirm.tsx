@@ -5,10 +5,10 @@ import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
 import { BodyMEmph, BodyS } from "@theme/textStyles";
 import { brownColor, greyColor } from "@theme/theme";
-import { navBar1DesktopHeight, navBarMobileHeight } from "../Layout/utils/info";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from "@/store/useCartStore";
 import { IProduct } from "../components/types";
+import { navBar1DesktopHeight, navBarMobileHeight } from "../Layout/utils/info";
 
 interface IProductConfirm {
   handleCartOpen: ()=>void;

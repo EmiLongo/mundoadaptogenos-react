@@ -7,8 +7,8 @@ import { HeaderTwoLines } from "../components/HeaderTwoLines";
 import { Box } from "@mui/material";
 import { WhatsApp } from "../components/WhatsApp";
 import { Bounce, ToastContainer } from "react-toastify";
-import { navBarLines } from "../utils/info";
 import { ScrollToTop } from "@/routes/ScrollToTop";
+import { navBarLines } from "../utils/info";
 
 export const Layout: React.FC = () => {
   const { pathname } = useLocation();

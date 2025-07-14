@@ -9,7 +9,7 @@ import { ButtonL, ButtonM, ButtonS } from "@theme/textStyles";
 
 type OnlyTextButtonProps = {
   id: string;
-  type?: "greyButton" | "blueButton";
+  type?: "greyButton" | "primaryButton";
   size?: "S" | "M" | "L";
   onClick: () => void;
   text: string;
@@ -23,7 +23,7 @@ type OnlyTextButtonProps = {
 export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
   id,
   onClick = () => {},
-	type = "blueButton",
+	type = "primaryButton",
   size = "S",
   text = "",
   fetchingText = "",
@@ -46,12 +46,12 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
         alignItems: "center",
         gap: "0.5rem",
         boxShadow: "none",
-        color: type === "blueButton" ? brownColor[950] : greyColor[950],
+        color: type === "primaryButton" ? "primary.dark" : greyColor[950],
         backgroundColor: "transparent",
         padding: 0,
         "&:hover": {
           boxShadow: "none",
-          color: type === "blueButton" ? brownColor[950] : brownColor[700],
+          color: type === "primaryButton" ? "primary.main" : brownColor[700],
           fontWeight: 800,
         },
         ...sx,

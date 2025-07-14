@@ -216,7 +216,7 @@ export const Footer: React.FC = () => {
               <OnlyTextButton
                 id="bt-footer-terms-conditions"
                 onClick={()=>navigate("./terms-and-conditions")}
-                type="blueButton"
+                type="primaryButton"
                 text="Términos y condiciones"
                 isFetching={false}
                 disabled={false}
@@ -227,7 +227,7 @@ export const Footer: React.FC = () => {
               <OnlyTextButton
                 id="bt-footer-privacy-policy"
                 onClick={()=>navigate("./privacy-policy")}
-                type="blueButton"
+                type="primaryButton"
                 text="Políticas de privacidad"
                 isFetching={false}
                 disabled={false}

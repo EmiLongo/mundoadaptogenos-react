@@ -84,13 +84,13 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: brownColor[600],
-      dark: brownColor[900],
+      dark: brownColor[950],
       light: brownColor[200],
       ...brownColor,
     },
     secondary: {
-      main: greenColor[500], // Color naranja
-      dark: greenColor[800],
+      main: greenColor[500], 
+      dark: greenColor[900],
       light: greenColor[200],
       ...greenColor,
     },
@@ -146,16 +146,29 @@ export const theme = createTheme({
           gap: "0.5rem",
           height: "40px",
           width: "40px",
-          border: `1px solid ${greyColor[950]}`,
+          border: `1px solid ${brownColor[950]}`,
           borderRadius: "30px",
-          color: greyColor[950],
+          color: brownColor[950],
           "&:hover": {
-            borderColor: greyColor[700],
             backgroundColor: greyColor[300],
             color: "primary.main",
           },
         },
       },
+      variants: [
+        {
+          props: { color: "secondary" },
+          style: {
+            border: "none",
+            color: "primary.dark",
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "secondary.dark",
+            },
+          },
+        },
+      ],
     },
      
     MuiTextField: {

@@ -114,7 +114,7 @@ export const Login: React.FC<LoginProps> = ({
         text="OLVIDÉ MI CONTRASEÑA" 
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting}
-        type="blueButton"
+        type="primaryButton"
         fetchingText="...recuperando"
         sx={{
 
@@ -139,7 +139,7 @@ export const Login: React.FC<LoginProps> = ({
         text="Registrarme" 
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting} 
-        type="blueButton"
+        type="primaryButton"
         sx={{width:'50%', marginX: "auto"}}
         onClick={handleGoToRegister}
         />

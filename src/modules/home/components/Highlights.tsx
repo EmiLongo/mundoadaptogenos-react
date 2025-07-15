@@ -19,7 +19,7 @@ export const Highlights: React.FC = () => {
         textAlign: "center",
       }}
       >
-        Destacados
+        Productos
       </SectionHeading>
       <Box sx={{
         display: "grid",

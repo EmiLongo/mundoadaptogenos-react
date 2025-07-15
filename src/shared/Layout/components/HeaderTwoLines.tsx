@@ -9,29 +9,22 @@ import {
   List,
   useMediaQuery,
   useTheme,
+  Divider,
 } from '@mui/material';
-import logoTextHorizontal from '@img/logo_nombre.svg';
-import logoTextVertical from '@img/logo_nombre_vertical.svg';
-// import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
+import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
+import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Heading5 } from '@theme/textStyles';
-import { SearchField } from './SearchField';
+import { BodyS, Heading5 } from '@theme/textStyles';
 import { greyColor } from '@theme/theme';
-import { LoginButton } from './LoginButton';
 import { CartButton } from '@shared/cart/CartButton';
 import { ProductConfirm } from '@shared/cart/ProductConfirm';
 import { useCart } from '@store/useCartStore';
-import { 
-  isNavBarTransparent, 
-  menuItems, 
-  navBar1DesktopHeight, 
-  navBar2DesktopHeight, 
-  navBarDesktopHeight, 
-  navBarMobileHeight, 
-  productsItems 
-} from '../utils/info';
+
+import { FAQButton } from './FAQButton';
+import { ContactButton } from './ContactButton';
+import { isNavBarTransparent, menuItems, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 
 
 export const HeaderTwoLines: React.FC = () => {
@@ -63,45 +56,45 @@ export const HeaderTwoLines: React.FC = () => {
 
   // menu lateral en mobile
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "3rem", mb: "2rem" }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px" }}>
+      {/* logo */}
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem" }}>
         <Box 
           component={"img"} 
-          src={logoTextVertical} 
+          src={logoTextHorizontal} 
           alt="Logo Óptica Villagra" 
-          height="100px" 
+          width="190px" 
           onClick={handleLogoClick}
           decoding="async"
           loading="lazy"
         />
       </Box>
+      {/* boton para cerrar */}
       <Box
         sx={{ position: 'absolute', top: "1rem", right: "1rem" }}
         onClick={handleDrawerToggle}
       >
         <CloseIcon />
       </Box>
-      <Box
-        sx={{ position: 'absolute', top: "1rem", left: "1rem" }}
-        onClick={handleDrawerToggle}
-      />
-      <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+      <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {productsItems.map((item) => (
-          <Box key={item.text} component={"a"} href={item.path}>
-            <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+          <Box key={item.text} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
+            <Heading5 sx={{ "&:hover":{color: palette.text.primary,  }}}>
               {item.text}
             </Heading5>
           </Box>
         ))}
+        <Divider />
         {menuItems.map((item) => (
-          <Box key={item.text} component={"a"} href={item.path}>
+          <Box key={item.text} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
+            {item.icon}
             <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
               {item.text}
             </Heading5>
           </Box>
         ))}
       </List>
-      {/* <Box
+      <Box
         component={"a"}
         href="https://inpulse.com.ar"
         target="_blank"
@@ -126,7 +119,7 @@ export const HeaderTwoLines: React.FC = () => {
         <BodyS sx={{ color: "inherit",textAlign: "center" }}>
           Desarrollado por
         </BodyS>
-      </Box> */}
+      </Box>
     </Box>
   );
 
@@ -155,8 +148,6 @@ export const HeaderTwoLines: React.FC = () => {
         width: "100%",
         height: isMobile ? navBarMobileHeight : navBarDesktopHeight, 
         backgroundColor: "backcground.default",
-        // backdropFilter: "blur(10px) saturate(180%)",
-        // WebkitBackdropFilter: "blur(10px) saturate(180%)",
       }}
       >
         <Box sx={{ height: '100%', width: "100%" }}>
@@ -166,6 +157,7 @@ export const HeaderTwoLines: React.FC = () => {
                 <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: "space-between", paddingX: { xs: '1rem',} }}>
                   <Box sx={{display: "flex", gap: "20px"}}>
                     <IconButton
+                      id="bti-menu-icon"
                       color="inherit"
                       aria-label="open drawer"
                       edge="start"
@@ -188,7 +180,11 @@ export const HeaderTwoLines: React.FC = () => {
             ) : (
               // versión escritorio
               <>
-              <Toolbar disableGutters sx={{ height: navBar1DesktopHeight, borderBottom: `1px solid ${greyColor[500]}`, width: "100%", justifyContent: "center" }}>
+              <Toolbar disableGutters sx={{ 
+                height: navBar1DesktopHeight, 
+                borderBottom: `1px solid ${greyColor[500]}`, 
+                width: "100%", 
+                justifyContent: "center" }}>
                 <Box sx={{ 
                   flexGrow: 1, 
                   display: 'flex', 
@@ -197,14 +193,13 @@ export const HeaderTwoLines: React.FC = () => {
                   paddingX: { md: '4rem', lg: '5rem', xl: '8rem'},
                   // gap: {md: '3rem', lg: '4rem', xl: '5rem'}
                 }}>
-                  <SearchField sx={{flex: 1}}/>
                   <Box 
                     component={"img"}
                     src={logoTextHorizontal}
                     alt="Logo Óptica Villagra"
                     height="60px"
                     onClick={handleLogoClick}
-                    sx={{flex: 1}}
+
                   />
                   <Box sx={{ 
                     display: 'flex', 
@@ -213,25 +208,9 @@ export const HeaderTwoLines: React.FC = () => {
                     gap: '1rem',
                     flex: 1,
                   }}>
+                  <ContactButton />
                   <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={closeCartDrawer} handleCartButton={handleCartButton} />
-                  <LoginButton />
-
-                    {/* {menuItems.map((item) => (
-                      <Box
-                        key={item.text}
-                        component={"a"}
-                        href={item.path}
-                      >
-                        <Heading5 sx={{
-                          fontWeight: 500,
-                          color: 'text.primary',
-                          '&:hover': {
-                            color: palette.primary[600],
-                          },
-                          textTransform: 'none',
-                        }}>{item.text}</Heading5>
-                      </Box>
-                    ))} */}
+                  <FAQButton />
                   </Box>
                 </Box>
               </Toolbar>
@@ -255,7 +234,7 @@ export const HeaderTwoLines: React.FC = () => {
                       </Heading5>
                     </Box>
                   ))}
-                  {menuItems.map((item) => (
+                  {/* {menuItems.map((item) => (
                     <Box
                       key={item.text}
                       component={"a"}
@@ -265,7 +244,7 @@ export const HeaderTwoLines: React.FC = () => {
                         {item.text}
                       </Heading5>
                     </Box>
-                  ))}
+                  ))} */}
                 </Box>
               </Toolbar>
             </>
@@ -283,7 +262,7 @@ export const HeaderTwoLines: React.FC = () => {
           }}
           sx={{
             display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 280 },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 350 },
           }}
         >
           {drawer}

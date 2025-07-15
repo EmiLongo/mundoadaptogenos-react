@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material"
 import React from "react"
-import heroImageDesktop from '@img/home/hero_desktop.webp'
-import heroImageMobile from '@img/home/hero_mobile.webp'
+import heroImageDesktop from '@img/home/hero_desktop.png'
+import heroImageMobile from '@img/home/hero_mobile.png'
 
 
 

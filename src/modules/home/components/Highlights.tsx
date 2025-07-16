@@ -23,8 +23,9 @@ export const Highlights: React.FC = () => {
       </SectionHeading>
       <Box sx={{
         display: "grid",
-        gridTemplateColumns: {xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)", xl: "repeat(5, 1fr)"},
-        gap: {xs: "1rem", md: "1.5rem", lg: "2rem"},
+        gridTemplateColumns: {xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 250px)", lg: "repeat(4, 250px)", xl: "repeat(5, 250px)"},
+        gap: {sx: "1rem", xl: "1.5rem"},
+        justifyContent: "center"
       }}>
         {catalogue.map((product, index) => (
           <ProductCard product={product} index={index} />

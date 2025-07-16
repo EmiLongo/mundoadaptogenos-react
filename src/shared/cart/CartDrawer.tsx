@@ -72,7 +72,7 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
         {cart && !!itemsCount &&
         <>
           {/* Productos de carrito */}
-          <Box sx={{ overflowY: "auto"}}>
+          <Box sx={{ overflowY: "auto", overflowX: "hidden"}}>
             {cart.cartItems.map((cartItem, index)=>(
               <CartDrawerItem 
                 cartItem={cartItem} 

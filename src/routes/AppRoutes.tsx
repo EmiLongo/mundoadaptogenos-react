@@ -16,6 +16,7 @@ const ManageHistoryPage = lazy(() => import("@/modules/admin/page/ManageHistoryP
 const ManageAdminsPage = lazy(() => import("@/modules/admin/page/ManageAdminsPage").then(module => ({ default: module.ManageAdminsPage })));
 const CartPage = lazy(() => import("@/modules/cart/page/CartPage").then(module => ({ default: module.CartPage })));
 const FAQPage = lazy(() => import("@/modules/faq/page/FAQPage").then(module => ({ default: module.FAQPage })));
+const ShopPage = lazy(() => import("@/modules/shop/page/ShopPage").then(module => ({ default: module.ShopPage })));
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <RegisterPage /> },
       { path: "/profile", element: <Profile /> },
       { path: "/cart", element: <CartPage /> },
+      { path: "/shop", element: <ShopPage /> },
       { path: "/cordyceps-militaris", element: <FAQPage /> },
       { path: "/melena-de-leon", element: <FAQPage /> },
       { path: "/cola-de-pavo", element: <FAQPage /> },

@@ -17,6 +17,7 @@ export const navBarMobileHeight: string = "60px";
 
 
 export const productsItems = [
+  { text: 'Comprar', path: '/shop'},
   { text: 'Cordyceps Militaris', path: '/cordyceps-militaris' },
   { text: 'Melena de León', path: '/melena-de-leon' },
   { text: 'Cola de Pavo', path: '/cola-de-pavo' },

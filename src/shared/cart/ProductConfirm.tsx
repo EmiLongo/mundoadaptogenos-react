@@ -8,7 +8,7 @@ import { brownColor, greyColor } from "@theme/theme";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from "@/store/useCartStore";
 import { IProduct } from "../components/types";
-import { navBar1DesktopHeight, navBarMobileHeight } from "../Layout/utils/info";
+import { heightForModals, navBarMobileHeight } from "../Layout/utils/info";
 
 interface IProductConfirm {
   handleCartOpen: ()=>void;
@@ -48,7 +48,7 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartOpen, last
       borderRadius: "8px",
       position: "fixed",
       right:{xs: "1rem", sm: "2rem", md: "4rem", lg:"5rem", xl:"8rem"},
-      top: {xs: navBarMobileHeight, md: navBar1DesktopHeight},
+      top: {xs: navBarMobileHeight, md: heightForModals},
       zIndex: 1200,
     }}>
       {/* Foto y detalle */}

@@ -43,7 +43,7 @@ export const HeaderOneLine: React.FC = () => {
         <Box 
           component={"img"} 
           src={logoTextVertical} 
-          alt="Logo Óptica Villagra" 
+          alt="Logo Mundo Adaptógenos" 
           height="100px" 
           onClick={handleLogoClick}
           decoding="async"
@@ -136,7 +136,7 @@ export const HeaderOneLine: React.FC = () => {
                   <Box 
                   component={"img"}
                   src={logoTextHorizontal}
-                  alt="Logo Óptica Villagra"
+                  alt="Logo Mundo Adaptógenos"
                   height="60px"
                   onClick={handleLogoClick}
                   />
@@ -158,7 +158,7 @@ export const HeaderOneLine: React.FC = () => {
                 <Box 
                   component={"img"}
                   src={logoTextHorizontal}
-                  alt="Logo Óptica Villagra"
+                  alt="Logo Mundo Adaptógenos"
                   height="60px"
                   onClick={handleLogoClick}
                 />

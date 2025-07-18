@@ -25,6 +25,7 @@ import { useCart } from '@store/useCartStore';
 import { FAQButton } from './FAQButton';
 import { ContactButton } from './ContactButton';
 import { isNavBarTransparent, menuItems, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
+import { useNavigate } from 'react-router-dom';
 
 
 export const HeaderTwoLines: React.FC = () => {
@@ -33,7 +34,8 @@ export const HeaderTwoLines: React.FC = () => {
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+  const navigate = useNavigate()
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openCartDrawer, setOpenCartDrawer] = useState<boolean>(false)
 
@@ -49,7 +51,7 @@ export const HeaderTwoLines: React.FC = () => {
   };
   
   const handleLogoClick = () => {
-    window.location.href = './';
+    navigate('/');
   };
 
  
@@ -62,7 +64,7 @@ export const HeaderTwoLines: React.FC = () => {
         <Box 
           component={"img"} 
           src={logoTextHorizontal} 
-          alt="Logo Óptica Villagra" 
+          alt="Logo Mundo Adaptógenos" 
           width="190px" 
           onClick={handleLogoClick}
           decoding="async"
@@ -169,7 +171,7 @@ export const HeaderTwoLines: React.FC = () => {
                     <Box 
                     component={"img"}
                     src={logoTextHorizontal}
-                    alt="Logo Óptica Villagra"
+                    alt="Logo Mundo Adaptógenos"
                     height="40px"
                     onClick={handleLogoClick}
                     />
@@ -196,7 +198,7 @@ export const HeaderTwoLines: React.FC = () => {
                   <Box 
                     component={"img"}
                     src={logoTextHorizontal}
-                    alt="Logo Óptica Villagra"
+                    alt="Logo Mundo Adaptógenos"
                     height="60px"
                     onClick={handleLogoClick}
 

@@ -1,8 +1,8 @@
-import { Highlights } from "@/modules/home/components/Highlights";
 import React from "react";
+import { Shop } from "../components/Shop";
 
 export const ShopPage: React.FC = () => {
   return (
-    <Highlights />
+    <Shop />
   )
 }

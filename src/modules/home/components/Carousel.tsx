@@ -23,7 +23,7 @@ export const Carousel: React.FC = () => {
     };
   
     return (
-      <Box sx={{position:"relative", width:"100%", height: "520px", overflow:"hidden"}}>
+      <Box sx={{position:"relative", width:"100%", height: "520px", overflow:"hidden", display: {xs:"block", md:"flex"}, justifyContent:{xs:"start", md: "center"}}}>
         {/* Botón izquierdo */}
         <Box sx={{
           height: "520px",

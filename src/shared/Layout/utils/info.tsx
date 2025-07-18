@@ -9,10 +9,13 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 export const navBarLines: number = 2;   //  1
 export const isNavBarTransparent: boolean = false;
-export const navBarDesktopHeight: string = "150px"; // tiene que ser la suma de las 2 de abajo
+export const navBarDesktopHeight: string = "182px"; // tiene que ser la suma de las 2 de abajo
+export const navBarDesktopInfoHeight: string = "32px"; // tiene que ser la suma de las 2 de abajo
 export const navBar1DesktopHeight: string = "100px";
 export const navBar2DesktopHeight: string = "50px";
 export const navBarMobileHeight: string = "60px";
+export const heightForModals: string = "132px";
+
 
 
 

@@ -34,7 +34,7 @@ export const Carousel: React.FC = () => {
           display: {xs: "flex", lg: "none"},
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(-90deg,rgba(249, 249, 249, 1) 20%, rgba(249, 249, 249, 0.01) 100%)"
+          background: "linear-gradient(90deg,rgba(249, 249, 249, 1) 20%, rgba(249, 249, 249, 0.01) 100%)"
         }}>
           <IconButton
             disabled={widthMoved === 0}

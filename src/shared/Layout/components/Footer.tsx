@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Óptica Villagra",
+          title: "Mundo Adaptógenos",
           url: window.location.href,
         })
         .catch(console.error);

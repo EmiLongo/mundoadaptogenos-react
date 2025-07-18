@@ -60,7 +60,8 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: "1rem"
+        padding: "1rem",
+        backgroundColor: greyColor[50],
       }}>
         <Heading5 sx={{height: "4.5em"}}>{product.title}</Heading5>
         <Box sx={{display: "flex", alignItems: "center", gap: "16px"}}>

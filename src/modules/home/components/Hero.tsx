@@ -19,34 +19,45 @@ import {
   Heading2,
 } from "@theme/textStyles";
 
-// Definimos la animación keyframe
+// animación del hongo
 const floatUpAnimation = keyframes`
   0% {
-    transform: translateY(100vh) rotate(25deg);
-    opacity: 0;
+    transform: translateY(100vh);
   }
-  80% {
-    transform: translateY(0) rotate(25deg);
-    opacity: 1;
+  50% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    transform-origin: 50% 50%;
+  }
+  // 56% {
+  //   transform: translateY(0) translateX(-30px) rotate(-6deg);
+  // }
+  // 65% {
+  //   transform: translateY(0) translateX(15px) rotate(6deg);
+  // }
+  74% {
+    transform: translateY(0) translateX(-15px) rotate(-6deg);
+  }
+  83% {
+    transform: translateY(0) translateX(9px) rotate(3deg);
+  }
+  92% {
+    transform: translateY(0) translateX(-6px) rotate(-1.2deg);
   }
   100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg);
+    transform-origin: 50% 50%;
   }
 `;
 
 // Animación para la sombra
 const fadeInAnimation = keyframes`
   0% {
-    opacity: 0;
     transform: scale(0.5);
   }
   60% {
-    opacity: 0;
     transform: scale(0.5);
   }
   100% {
-    opacity: 1;
     transform: scale(1);
   }
 `;
@@ -130,7 +141,7 @@ export const Hero: React.FC = () => {
             zIndex: 10,
             position: "relative",
             // animación del hongo
-            animation: `${floatUpAnimation} 1s ease-out`,
+            animation: `${floatUpAnimation} 1.5s ease-out`,
           }}
         >
           <Box
@@ -158,7 +169,7 @@ export const Hero: React.FC = () => {
               position: "absolute",
               bottom: "-30%",
               // Animación para la sombra (aparece después del hongo)
-              animation: `${fadeInAnimation} 1.5s ease-out`,
+              animation: `${fadeInAnimation} 1.4s ease-out`,
             }}
           >
             <Box

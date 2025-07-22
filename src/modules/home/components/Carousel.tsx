@@ -48,7 +48,7 @@ export const Carousel: React.FC = () => {
         {/* Carrusel de tarjetas */}
         <Box
           sx={{
-            width: `${266*catalogue.length}px`,
+            width: `${300*catalogue.length}px`,
             height: "100%",
             display: "flex",
             alignItems: "center",

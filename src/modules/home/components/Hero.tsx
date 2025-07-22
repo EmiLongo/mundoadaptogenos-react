@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
             zIndex: 10,
             position: "relative",
             // animación del hongo
-            animation: `${floatUpAnimation} 1.2s ease-out`,
+            animation: `${floatUpAnimation} 1s ease-out`,
           }}
         >
           <Box
@@ -158,7 +158,7 @@ export const Hero: React.FC = () => {
               position: "absolute",
               bottom: "-30%",
               // Animación para la sombra (aparece después del hongo)
-              animation: `${fadeInAnimation} 1.8s ease-out`,
+              animation: `${fadeInAnimation} 1.5s ease-out`,
             }}
           >
             <Box
@@ -205,7 +205,7 @@ export const Hero: React.FC = () => {
             zIndex: 2,
           }}
         >
-          <Box sx={{ animation: `${translateToRightAnimation} 1s ease-out` }}>
+          <Box sx={{ animation: `${translateToRightAnimation} 0.7s ease-out` }}>
             {isMobile ? (
               <>
                 <Heading1 sx={{ width: "100%", textAlign: "left" }}>
@@ -240,7 +240,7 @@ export const Hero: React.FC = () => {
               sx={{
                 width: "100%",
                 textAlign: "right",
-                animation: `${translateToLeftAnimation} 1s ease-out`,
+                animation: `${translateToLeftAnimation} 0.7s ease-out`,
               }}
             >
               De manera natural.
@@ -250,7 +250,7 @@ export const Hero: React.FC = () => {
               sx={{
                 width: "100%",
                 textAlign: "right",
-                animation: `${translateToLeftAnimation} 1s ease-out`,
+                animation: `${translateToLeftAnimation} 0.7s ease-out`,
                 paddingRight: {xs: 0, lg:"3rem", xl: 0}
               }}
             >

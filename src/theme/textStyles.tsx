@@ -84,10 +84,26 @@ export const  HeadingHero2 = styled((props: TypographyProps) => <Typography {...
   // lineHeight: 1.1,
 }))
 
-export const HeadingXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
+export const DisplayHeadingXXL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
   ...defaultHeading(),
-  ...responsiveFontSize({xl: '2.25rem', lg: '2.05rem', md: '1.95rem', sm: '1.85rem', xs: '1.85rem' })(theme), // 36px   // xxl: '3rem', 
-  textTransform: "uppercase",
+  fontWeight: 700,
+  fontSize: '64px',
+  lineHeight: "74px",
+  letterSpacing: "5%",
+}));
+
+export const DisplayHeadingXL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  fontWeight: 700,
+  fontSize: '56px',
+  lineHeight: "64px",
+}));
+
+export const DisplayHeadingL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultHeading(),
+  fontWeight: 700,
+  fontSize: '48px',
+  lineHeight: "56px",
 }));
 
 export const Heading1 = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
@@ -138,6 +154,21 @@ export const CallToAction = styled((props: TypographyProps) => <Typography {...p
   textTransform: "uppercase",
 }));
 // SUBTITLES
+
+export const DisplayBodyXL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  fontWeight: 700,
+  fontSize: '56px',
+  lineHeight: "64px",
+}));
+
+export const DisplayBodyL = styled((props: TypographyProps) => <Typography {...props} />)(() => ({
+  ...defaultParagraph(),
+  fontWeight: 700,
+  fontSize: '56px',
+  lineHeight: "48px",
+}));
+
 
 export const SubHeadingXL = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultParagraph(),

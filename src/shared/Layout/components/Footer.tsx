@@ -67,7 +67,11 @@ export const Footer: React.FC = () => {
           }}
         >
           {/* Logo */}
-          <Box sx={{display: "flex", justifyContent: {xs:"center", sm:"start",}, alignContent: "start"}}>
+          <Box sx={{display: "flex", 
+          justifyContent: {xs:"center", sm:"start",}, 
+          alignItems: "flex-start",
+          gridArea: {xs:"1 / 1 / 2 / 2", sm:"1 / 1 / 2 / 2", lg:"1 / 1 / 2 / 2"},
+          }}>
             <Box
               component={"img"}
               width="80px"
@@ -76,9 +80,6 @@ export const Footer: React.FC = () => {
               decoding="async"
               loading="lazy"
               onClick={shareURL}
-              sx={{
-                gridArea: {xs:"1 / 1 / 2 / 2", sm:"1 / 1 / 2 / 2", lg:"1 / 1 / 2 / 2"},
-              }}
             />
           </Box>
 
@@ -166,12 +167,12 @@ export const Footer: React.FC = () => {
           <Box sx={{
             display:"flex", 
             justifyContent: {xs: "center", sm: "center", lg: "start"},
+            gridArea: {xs: "2 / 1 / 3 / 2", sm: "3 / 1 / 4 / 2" , lg: "2 / 2 / 3 / 3"},
           }}>
             <Box sx={{
               display:"flex", 
               width: {xs: "unset",sm: "210px", lg:"unset"},
               gap: "8px", 
-              gridArea: {xs: "2 / 1 / 3 / 2", sm: "3 / 1 / 4 / 2" , lg: "2 / 2 / 3 / 3"},
             }}>
             <Box component={"img"} src={WhatsAppIcon} width="24px" sx={{color: "primary.main"}} />
             <Box component={"img"} src={InstagramIcon} width="24px" sx={{color: "primary.main"}} />

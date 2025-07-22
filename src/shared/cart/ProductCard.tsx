@@ -23,6 +23,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
     <Card 
     elevation={3}
     sx={{
+      minWidth: "250px",
       width: '250px',
       height: '500px',
       display: 'flex',

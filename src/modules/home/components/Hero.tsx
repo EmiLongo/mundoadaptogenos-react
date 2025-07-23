@@ -6,18 +6,18 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import backgroundHeroWebp from "@img/home/hero/fondo.webp";
-// import backgroundHeroPng from "@img/home/hero/fondo.png"
-import floatingMushroomWebp from "@img/home/hero/floating_mushroom.webp";
-import floatingMushroomPng from "@img/home/hero/floating_mushroom.png";
-import shadowMushroomWebp from "@img/home/hero/sombra.webp";
-import shadowMushroomPng from "@img/home/hero/sombra.png";
 import {
   DisplayHeadingL,
   DisplayHeadingXXL,
   Heading1,
   Heading2,
 } from "@theme/textStyles";
+import { Parallax } from "./Parallax";
+
+import floatingMushroomWebp from "@img/home/hero/floating_mushroom.webp";
+import floatingMushroomPng from "@img/home/hero/floating_mushroom.png";
+import shadowMushroomWebp from "@img/home/hero/sombra.webp";
+import shadowMushroomPng from "@img/home/hero/sombra.png";
 
 // animación del hongo
 const floatUpAnimation = keyframes`
@@ -126,13 +126,8 @@ export const Hero: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          boxShadow:
-            "inset 0px 10px 10px 0px rgba(41, 23, 17, 0.2), inset 0px -10px 10px 0px rgba(41, 23, 17, 0.2)",
           position: "relative",
           overflow: "hidden",
-          backgroundImage: `url(${backgroundHeroWebp})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
         }}
       >
         <Box
@@ -213,7 +208,7 @@ export const Hero: React.FC = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            zIndex: 2,
+            zIndex: 7,
           }}
         >
           <Box sx={{ animation: `${translateToRightAnimation} 0.7s ease-out` }}>
@@ -269,6 +264,17 @@ export const Hero: React.FC = () => {
             </Heading1>
           )}
         </Box>
+        <Box
+          sx={{
+            height: "100%",
+            width: "100%",
+            boxShadow:
+              "inset 0px 10px 10px 0px rgba(41, 23, 17, 0.2), inset 0px -10px 10px 0px rgba(41, 23, 17, 0.2)",
+            position: "absolute",
+            zIndex: 100,
+          }}
+        />
+        <Parallax />
       </Box>
     </>
   );

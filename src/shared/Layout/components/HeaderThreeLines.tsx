@@ -24,7 +24,7 @@ import { useCart } from '@store/useCartStore';
 
 import { FAQButton } from './FAQButton.tsx';
 import { ContactButton } from './ContactButton.tsx';
-import { isNavBarTransparent, menuItems, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
+import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -153,11 +153,11 @@ export const HeaderThreeLines: React.FC = () => {
       }}
       >
         {!isMobile && 
-          <Box sx={{width: "100%", height: navBarDesktopInfoHeight, display: "flex", justifyContent:"center", alignItems: "center", backgroundColor: greyColor[100] }}>
+          <Box sx={{width: "100%", height: navBarDesktopInfoHeight, display: "flex", justifyContent:"center", alignItems: "center", backgroundColor: greyColor[200] }}>
             <BodyM>20% OFF POR TRANSFERENCIA | 3 Y 6 CUOTAS SIN INTERÉS CON TODOS LOS BANCOS | ENVÍOS GRATIS (SOLO ARGENTINA)</BodyM>
           </Box>
         }
-        <Box sx={{ height: '100%', width: "100%", backgroundColor: greyColor[50] }}>
+        <Box sx={{ height: navBar12DesktopHeight, width: "100%", backgroundColor: greyColor[50] }}>
             {isMobile ? (
               // versión móvil
               <Toolbar disableGutters sx={{ height: '100%' }}>

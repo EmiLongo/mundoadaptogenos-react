@@ -1,3 +1,4 @@
+// src/modules/home/components/PresentationPower.tsx
 import { BodyMEmph, Heading1, Heading3 } from "@/theme/textStyles";
 import { brownColor, greenColor, greyColor } from "@/theme/theme";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
@@ -39,9 +40,9 @@ export const PresentationPower: React.FC = () => {
             justifyContent: {xs: "center", md: "end"},
             position: "relative"
           }}>
-            <Box component="img" src={frasco} />
+            <Box component="img" src={frasco} alt="Nuestra presentación de frasco con gotero" />
             {!isMobile && <>
-            <Box component="img" src={medal} sx={{position:"absolute", top: "12px", right:"12px"}}/>
+            <Box component="img" src={medal} sx={{position:"absolute", top: "12px", right:"12px"}} alt="Etiqueta para reconocer nuestro producto" />
             <BodyMEmph sx={{color: greenColor[300], marginBottom: "1rem", marginTop: "1.5rem" }}>DOBLE EXTRACTO</BodyMEmph>
             </>}
           </Box>
@@ -60,7 +61,7 @@ export const PresentationPower: React.FC = () => {
             position: "relative"
           }}>
             {isMobile && <>
-            <Box component="img" src={medal} sx={{position:"absolute", top: "12px", right:"12px"}}/>
+            <Box component="img" src={medal} sx={{position:"absolute", top: "12px", right:"12px"}} alt="Etiqueta para reconocer nuestro producto" />
             <BodyMEmph sx={{
               color: greyColor[50], 
               marginBottom: "1rem", 
@@ -72,18 +73,18 @@ export const PresentationPower: React.FC = () => {
             </BodyMEmph>
             </>}
             <Box sx={{display: "flex", justifyContent: {xs: "start", md: "center"},}}>
-              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} />
-              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} />
-              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} />
-              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} />
-              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} />
+              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={isMobile ? puntoHongoBlanco : puntoHongo} alt="Puntaje con forma de hongo" />
             </Box>
           </Box>
         </Box>
         {/* capsulas */}
         <Box sx={{flex:1, display: "flex", flexDirection: {xs: "row", md: "column"}, alignItems: "center", gap: {xs:"3rem", md:0}}}>
           <Box sx={{height: {xs: "150px", md: "240px"}, width: {xs: "150px", md: "unset"}, display:"flex", flexDirection: "column", alignItems:"center", justifyContent: "end",}}>
-            <Box component="img" src={capsulas} />
+            <Box component="img" src={capsulas} alt="Presentación en cápsulas" />
             {!isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Cápsulas</BodyMEmph>}
           </Box>
           <Box sx={{display: "flex", 
@@ -97,18 +98,18 @@ export const PresentationPower: React.FC = () => {
           }}>
             {isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Cápsulas</BodyMEmph>}
             <Box sx={{display: "flex", justifyContent: {xs: "start", md: "center"},}}>
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoMedioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoMedioHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo" />
             </Box>
           </Box>
         </Box>
         {/* tintura madre */}
         <Box sx={{flex:1, display: "flex", flexDirection: {xs: "row", md: "column"}, alignItems: "center", gap: {xs:"3rem", md:0}}}>
           <Box sx={{height: {xs: "150px", md: "240px"}, width: {xs: "150px", md: "unset"}, display:"flex", flexDirection: "column", alignItems:"center", justifyContent: "end",}}>
-            <Box component="img" src={tintura} />
+            <Box component="img" src={tintura} alt="Presentación en tintura" />
             {!isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Tintura Madre</BodyMEmph>}
           </Box>
           <Box sx={{
@@ -123,18 +124,18 @@ export const PresentationPower: React.FC = () => {
           }}>
             {isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Tintura Madre</BodyMEmph>}
             <Box sx={{display: "flex", justifyContent: {xs: "start", md: "center"},}}>
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoVacioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo" />
             </Box>
           </Box>
         </Box>
         {/* polvo de hongos */}
         <Box sx={{flex:1, display: "flex", flexDirection: {xs: "row", md: "column"}, alignItems: "center", gap: {xs:"3rem", md:0}}}>
           <Box sx={{height: {xs: "150px", md: "240px"}, width: {xs: "150px", md: "unset"}, display:"flex", flexDirection: "column", alignItems:"center", justifyContent: "end",}}>
-            <Box component="img" src={polvo} />
+            <Box component="img" src={polvo} alt="Presentación en polvo" />
             {!isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Polvo</BodyMEmph>}
           </Box>
           <Box sx={{
@@ -149,18 +150,18 @@ export const PresentationPower: React.FC = () => {
           }}>
             {isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Polvo</BodyMEmph>}
             <Box sx={{display: "flex", justifyContent: {xs: "start", md: "center"},}}>
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoMedioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoMedioHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo" />
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo" />
             </Box>
           </Box>
         </Box>
         {/* hongo puro */}
         <Box sx={{flex:1, display: "flex", flexDirection: {xs: "row", md: "column"}, alignItems: "center", gap: {xs:"3rem", md:0}}}>
           <Box sx={{height: {xs: "150px", md: "240px"}, width: {xs: "150px", md: "unset"}, display:"flex", flexDirection: "column", alignItems:"center", justifyContent: "end",}}>
-            <Box component="img" src={hongo} />
+            <Box component="img" src={hongo} alt="Presentación en hongo crudo" />
             {!isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Hongo puro</BodyMEmph>}
           </Box>
           <Box sx={{
@@ -175,11 +176,11 @@ export const PresentationPower: React.FC = () => {
           }}>
             {isMobile && <BodyMEmph sx={{marginBottom: "1rem", marginTop: "1.5rem"}}>Hongo puro</BodyMEmph>}
             <Box sx={{display: "flex", justifyContent: {xs: "start", md: "center"},}}>
-              <Box component="img" src={puntoHongo} />
-              <Box component="img" src={puntoVacioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
-              <Box component="img" src={puntoVacioHongo} />
+              <Box component="img" src={puntoHongo} alt="Puntaje con forma de hongo"/>
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo"/>
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo"/>
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo"/>
+              <Box component="img" src={puntoVacioHongo} alt="Puntaje con forma de hongo"/>
             </Box>
           </Box>
         </Box>

@@ -31,7 +31,7 @@ export const infoMelena: IMushroomDetails = {
       description: "Regula el sistema inmunológico",
     },
   ],
-  productCardById: [1001, 1005],
+  productSection: [1],
   bioactive: ["HERICENONAS", "ERINACINAS", "BETA-GLUCANOS", "VITAMINAS B", "VITAMINAS D", "MINERALES"],
   healthEffects: [
     {

@@ -32,7 +32,7 @@ export const infoCordyceps: IMushroomDetails = {
       description: "Protector renal y hepático",
     },
   ],
-  productCardById: [1001, 1005],
+  productSection: [2],
   bioactive: ["Ác A-LINOLÉNICO y LINOLÉNICO","ERGOSTEROL","BETA-GLUCANOS","ADENOSINA","CORDICEPINA","ÁCIDO CORDICÉPTICO"],
   healthEffects: [
     {

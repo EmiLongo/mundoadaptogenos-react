@@ -68,17 +68,25 @@ export const greenColor = {   // Lime Green: secondaryColor
   950: "#163300"
 };
 
-
-export const customFonts = {
-  letter: {
-    wide: 1.3,
-    normal: 0.3,
-  },
-  family: {
-    alata: "Alata, impact, arial, calibri, sans-serif",
-    hindMadurai: "Hind Madurai, open-sans, arial, calibri, sans-serif",
-  },
-};
+//son todas iguales por el momento
+export const shadow = {
+  small: {boxShadow: `
+  0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+  0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+  0px 2px 1px -1px rgba(0, 0, 0, 0.20)
+  `,},
+  medium: {boxShadow: `
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.20)
+    `,},
+  large:{boxShadow: `
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.20)
+    `,},
+}
+export const paddingPage = { paddingX:{xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"}, }
 
 export const theme = createTheme({
   palette: {
@@ -129,7 +137,7 @@ export const theme = createTheme({
         root: {
           minHeight: '30px',
           borderRadius: '4px',
-          letterSpacing: customFonts.letter.wide,
+          letterSpacing: defaultFonts.letter.wide,
           width: "fit-content",
           fontFamily: defaultFonts.family.textos,
           fontWeight: 500,

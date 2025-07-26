@@ -8,6 +8,9 @@ import { MushroomTitle } from "../components/MushroomTitle";
 import { GeneralInfo } from "../components/GeneralInfo";
 import { HealthEffectsMobile } from "../components/HealthEffectsMobile";
 import { HealthEffectsDesktop } from "../components/HealthEffectsDesktop";
+import { Carousel } from "@/modules/home/components/Carousel";
+import { catalogue } from "@shared/Layout/utils/catalogue";
+import { filterByMultipleSectionIds } from "@/shared/Layout/utils/filterProducts";
 
 interface IMushroomTypePage {
   mushroom: IMushroomDetails;
@@ -16,7 +19,7 @@ export const MushroomTypePage: React.FC<IMushroomTypePage> = ({ mushroom }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
-  console.log("hongo", mushroom);
+  const filteredCatalogue = filterByMultipleSectionIds(catalogue, mushroom.productSection)
   return (
     <Box component="main" sx={{width: "100%"}}>
       <Box component="h1" sx={{color:"transparent", position:"absolute", zIndex: -1}}>Encontrá la información de tu hongo adaptógeno favorito. Melena de León, Reishi, Cordyceps Militaris, Cola de Pavo</Box>
@@ -25,6 +28,13 @@ export const MushroomTypePage: React.FC<IMushroomTypePage> = ({ mushroom }) => {
 
       {/* Beneficios */}
       <Benefits benefits={mushroom.benefits} isMobile={isMobile} />
+
+      {/* Productos */}
+      {isMobile
+        ? <Carousel catalogue={filteredCatalogue} />
+        // TODO: agregar tarjetas nuevas
+        : <Box />
+      }
 
       {/* Bioactivos y efectos en la salud*/}
       <Bioactive bioactive={mushroom.bioactive} isMobile={isMobile} />

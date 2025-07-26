@@ -4,7 +4,7 @@ import { Box, Collapse, IconButton, keyframes } from "@mui/material";
 import { brownColor, greyColor, paddingPage } from "@theme/theme";
 import { IMushroomDetails } from "./types";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { BodyM, Heading3, Heading4, Heading5 } from "@/theme/textStyles";
+import { BodyM, Heading4, Heading5 } from "@/theme/textStyles";
 
 // Animación para el texto
 const fadeInAnimation = keyframes`
@@ -23,8 +23,15 @@ interface IHealthEffectsComponent {
 export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
   mushroom,
 }) => {
-  const [indexSelected, setIndexSelected] = useState<number>(0);
+  const [indexSelected, setIndexSelected] = useState<number | null>(0);
 
+  const handleClick = (index: number) => {
+    if(indexSelected === index){
+      setIndexSelected(null)
+      return
+    }
+    setIndexSelected(index)
+  }
   return (
     <Box
     component="section"
@@ -53,10 +60,12 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
             alignItems: "center", 
             justifyContent: "space-between",
             background: indexSelected === index ? greyColor[50] : "transparent",
+            borderTopLeftRadius: indexSelected === index ? "8px" : "0",
+            borderTopRightRadius: indexSelected === index ? "8px" : "0",
             cursor: "pointer",
             transition: "all 0.3s ease-out"
           }}
-          onClick={() => setIndexSelected(index)}
+          onClick={() => handleClick(index)}
           >
           <Heading4
           sx={{
@@ -87,14 +96,22 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
         >
           <Box
             key={`effects-info-${indexSelected}`}
-            sx={{padding: "16px", display: "flex", flexDirection: "column", gap: "8px", background: greyColor[100]}}
+            sx={{
+              padding: "16px", 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "8px", 
+              background: greyColor[100],
+              borderBottomLeftRadius: "8px",
+              borderBottomRightRadius: "8px",
+            }}
             >
-            <Heading3 sx={{
+            {/* <Heading3 sx={{
               color: brownColor[800],
               animation: `1s ${fadeInAnimation} ease-out`
             }}>
               {effect.title}
-            </Heading3>
+            </Heading3> */}
             {effect.subtitle && <Heading5
             sx={{
               color: brownColor[800],

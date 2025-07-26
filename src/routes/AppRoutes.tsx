@@ -8,6 +8,10 @@ import { HomePage } from "@/modules/home/page/HomePage";
 import { RegisterPage } from "@/shared/components/auth/RegisterPage";
 import { Profile } from "@/shared/components/user/Profile";
 import { AdminLayout } from "@/modules/admin/layout/Layout";
+import { infoReishi } from "@/modules/mushroom-type/utils/Reishi";
+import { infoColaPavo } from "@/modules/mushroom-type/utils/ColaPavo";
+import { infoMelena } from "@/modules/mushroom-type/utils/Melena";
+import { infoCordyceps } from "@/modules/mushroom-type/utils/Cordyceps";
 
 const ManageSectionsPage = lazy(() => import("@/modules/admin/page/ManageSectionsPage").then(module => ({ default: module.ManageSectionsPage })));
 const ManageProductsPage = lazy(() => import("@/modules/admin/page/ManageProductsPage").then(module => ({ default: module.ManageProductsPage })));
@@ -17,6 +21,7 @@ const ManageAdminsPage = lazy(() => import("@/modules/admin/page/ManageAdminsPag
 const CartPage = lazy(() => import("@/modules/cart/page/CartPage").then(module => ({ default: module.CartPage })));
 const FAQPage = lazy(() => import("@/modules/faq/page/FAQPage").then(module => ({ default: module.FAQPage })));
 const ShopPage = lazy(() => import("@/modules/shop/page/ShopPage").then(module => ({ default: module.ShopPage })));
+const MushroomTypePage = lazy(() => import("@/modules/mushroom-type/page/MushroomTypePage").then(module => ({ default: module.MushroomTypePage })));
 
 export const router = createBrowserRouter([
   {
@@ -27,10 +32,11 @@ export const router = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/shop", element: <ShopPage /> },
-      { path: "/cordyceps-militaris", element: <FAQPage /> },
-      { path: "/melena-de-leon", element: <FAQPage /> },
-      { path: "/cola-de-pavo", element: <FAQPage /> },
-      { path: "/reishi", element: <FAQPage /> },
+      { path: "/cordyceps-militaris", element: <MushroomTypePage mushroom={infoCordyceps} /> },
+      { path: "/melena-de-leon", element: <MushroomTypePage mushroom={infoMelena} /> },
+      { path: "/cola-de-pavo", element: <MushroomTypePage mushroom={infoColaPavo} /> },
+      { path: "/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
+      { path: "/faq", element: <FAQPage /> },
       {
         path: "/admin",
         element: <AdminLayout />,

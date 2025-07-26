@@ -3,6 +3,8 @@ import { Box } from "@mui/material"
 import React from "react"
 import { SectionHeading } from "@theme/textStyles"
 import { Carousel } from "./Carousel"
+import { catalogue } from "@shared/Layout/utils/catalogue";
+
 
 
 export const Highlights: React.FC = () => {
@@ -20,7 +22,7 @@ export const Highlights: React.FC = () => {
       >
         PRODUCTOS
       </SectionHeading>
-      <Carousel />
+      <Carousel catalogue={catalogue} />
     </Box>
   )
 }

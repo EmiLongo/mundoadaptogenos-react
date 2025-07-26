@@ -1,11 +1,14 @@
-import { ProductCard } from "@shared/cart/ProductCard";
-import { catalogue } from "@shared/Layout/utils/catalogue";
 import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { greyColor } from "@theme/theme";
+import { ProductCard } from "@shared/cart/ProductCard";
+import { IProduct } from "@shared/components/types";
 
-export const Carousel: React.FC = () => {
+interface ICarousel {
+  catalogue: IProduct[];
+}
+export const Carousel: React.FC<ICarousel> = ({catalogue}) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
     const isTablet = useMediaQuery(theme.breakpoints.down("md"))

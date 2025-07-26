@@ -12,8 +12,8 @@ import kit from "@img/card/kit-equilibrio.png"
 
 
 export const catalogue: IProduct[] = [{
-  id: 111,
-  sectionId: 1,
+  id: 1011,
+  sectionId: [1],
   title: 'Melena de León - Extracto Doble de 30ml con gotero',
   description: "Doble Extracto Concentrado. Ayuda a tu cerebro y mejora tu salud gastrointestinal.",
   discount: 15,
@@ -26,8 +26,8 @@ export const catalogue: IProduct[] = [{
   isValid: true,
 },
 {
-  id: 112,
-  sectionId: 1,
+  id: 1012,
+  sectionId: [2],
   title: 'Cordyceps Militaris - Extracto Doble de 30ml con gotero',
   description: "Doble Extracto Concentrado. Vigorizante, reduce la fatiga y estimula el sistema inmunológico.",
   discount: 15,
@@ -40,8 +40,8 @@ export const catalogue: IProduct[] = [{
   isValid: true,
 },
 {
-  id: 113,
-  sectionId: 1,
+  id: 1013,
+  sectionId: [3],
   title: 'Reishi - Extracto Doble de 30ml con gotero',
   description: "Doble Extracto Concentrado. Lucha contra el cáncer, mejora respuesta inmune y efecto antioxidante.",
   discount: 15,
@@ -54,8 +54,8 @@ export const catalogue: IProduct[] = [{
   isValid: true,
 },
 {
-  id: 114,
-  sectionId: 1,
+  id: 1014,
+  sectionId: [4],
   title: 'Cola de Pavo - Extracto Doble de 30ml con gotero',
   description: "Doble Extracto Concentrado. Potencia las defensas del sistema inmunológico y favorece la salud intestinal.",
   discount: 15,
@@ -68,8 +68,8 @@ export const catalogue: IProduct[] = [{
   isValid: true,
 },
 {
-  id: 115,
-  sectionId: 1,
+  id: 1015,
+  sectionId: [1, 2, 3, 4],
   title: 'Kit Equilibrio - 3x Extracto Doble de 30ml a elección',
   description: "Doble Extracto Concentrado. Podés elegir cualquiera de nuestras opciones",
   discount: 15,

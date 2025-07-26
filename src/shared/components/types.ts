@@ -13,7 +13,7 @@
 // }
 export interface IProduct {
   id: number;
-  sectionId: number;
+  sectionId: number[];
   title: string;
   description?: string;
   discount: number;

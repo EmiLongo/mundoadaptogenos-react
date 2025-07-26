@@ -17,7 +17,7 @@ export interface IMushroomDetails {
   subtitle: string;
   basicDescription: string;
   benefits: IBenefit[];
-  productCardById: number[];
+  productSection: number[];
   bioactive: string[];
   healthEffects: IHealthEffect[];
   imgDescription: ImageSource;

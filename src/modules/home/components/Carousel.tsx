@@ -7,8 +7,9 @@ import { IProduct } from "@shared/components/types";
 
 interface ICarousel {
   catalogue: IProduct[];
+  sx?: object;
 }
-export const Carousel: React.FC<ICarousel> = ({catalogue}) => {
+export const Carousel: React.FC<ICarousel> = ({catalogue, sx={}}) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
     const isTablet = useMediaQuery(theme.breakpoints.down("md"))
@@ -26,7 +27,15 @@ export const Carousel: React.FC<ICarousel> = ({catalogue}) => {
     };
   
     return (
-      <Box sx={{position:"relative", width:"100%", height: "520px", overflow:"hidden", display: {xs:"block", md:"flex"}, justifyContent:{xs:"start", md: "center"}}}>
+      <Box sx={{
+        position:"relative", 
+        width:"100%", 
+        height: "520px", 
+        overflow:"hidden", 
+        display: {xs:"block", md:"flex"}, 
+        justifyContent:{xs:"start", md: "center"},
+        ...sx
+      }}>
         {/* Botón izquierdo */}
         <Box sx={{
           height: "520px",

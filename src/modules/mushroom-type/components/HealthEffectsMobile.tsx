@@ -60,8 +60,8 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
             alignItems: "center", 
             justifyContent: "space-between",
             background: indexSelected === index ? greyColor[50] : "transparent",
-            borderTopLeftRadius: indexSelected === index ? "8px" : "0",
-            borderTopRightRadius: indexSelected === index ? "8px" : "0",
+            borderTop: index === 0 ? `1px solid ${greyColor[400]}` : 'none',
+            borderBottom: `1px solid ${greyColor[400]}`,
             cursor: "pointer",
             transition: "all 0.3s ease-out"
           }}
@@ -100,18 +100,10 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
               padding: "16px", 
               display: "flex", 
               flexDirection: "column", 
-              gap: "8px", 
-              background: greyColor[100],
-              borderBottomLeftRadius: "8px",
-              borderBottomRightRadius: "8px",
+              gap: "8px",
+              borderBottom: `1px solid ${greyColor[400]}`,
             }}
             >
-            {/* <Heading3 sx={{
-              color: brownColor[800],
-              animation: `1s ${fadeInAnimation} ease-out`
-            }}>
-              {effect.title}
-            </Heading3> */}
             {effect.subtitle && <Heading5
             sx={{
               color: brownColor[800],

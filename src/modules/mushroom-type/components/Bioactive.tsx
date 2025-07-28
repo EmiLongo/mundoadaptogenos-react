@@ -1,7 +1,7 @@
 // src/modules/mushroom-type/components/Bioactive.tsx
 import React from "react";
 import { Box } from "@mui/material";
-import { Heading2, Heading3, Heading5 } from "@/theme/textStyles";
+import { BodyS, Heading2, Heading3, Heading5 } from "@/theme/textStyles";
 import bioactiveBg from "@img/mushroom-types/textura-fondo-bioactivos.png";
 import { paddingPage, shadow } from "@theme/theme";
 
@@ -68,13 +68,13 @@ export const Bioactive: React.FC<IBioactiveComponent> = ({
             }}
           >
             {isMobile ? (
+              <BodyS sx={{ textAlign: "center", zIndex: 10 }}>
+                {compound}
+              </BodyS>
+            ) : (
               <Heading5 sx={{ textAlign: "center", zIndex: 10 }}>
                 {compound}
               </Heading5>
-            ) : (
-              <Heading3 sx={{ textAlign: "center", zIndex: 10 }}>
-                {compound}
-              </Heading3>
             )}
             <Box
               sx={{

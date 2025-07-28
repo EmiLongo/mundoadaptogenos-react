@@ -3,6 +3,7 @@ import { Box } from "@mui/material"
 import React from "react"
 import { SectionHeading } from "@theme/textStyles"
 import { Carousel } from "@/modules/home/components/Carousel"
+import { catalogue } from "@/shared/Layout/utils/catalogue"
 
 
 export const Shop: React.FC = () => {
@@ -21,7 +22,7 @@ export const Shop: React.FC = () => {
       >
         Productos
       </SectionHeading>
-      <Carousel />
+      <Carousel catalogue={catalogue}/>
     </Box>
   )
 }

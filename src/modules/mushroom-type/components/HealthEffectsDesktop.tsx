@@ -48,7 +48,7 @@ export const HealthEffectsDesktop: React.FC<IHealthEffectsComponent> = ({
         }}>
           {mushroom.healthEffects.map((effect, index) => (
             <Box 
-            key={`effect-${effect.title.split(" ").concat("_")}`} 
+            key={`effect-${index}-${effect.title.split(" ").concat("_")}`} 
             sx={{
               paddingRight: "16px",
               width: "100%",
@@ -111,7 +111,12 @@ export const HealthEffectsDesktop: React.FC<IHealthEffectsComponent> = ({
             {mushroom.healthEffects[indexSelected].subtitle}
             </Heading4>
             {mushroom.healthEffects[indexSelected].description.map( effect => (
-              <BodyL sx={{animation: `1s ${fadeInAnimation} ease-out`}}>{effect}</BodyL>))
+              <BodyL
+              key={`effect-text-${effect.split(" ").concat("_")}`} 
+              sx={{animation: `1s ${fadeInAnimation} ease-out`}}
+              >
+                {effect}
+              </BodyL>))
             }
         </Box>
       </Box>

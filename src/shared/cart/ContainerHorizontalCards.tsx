@@ -10,7 +10,7 @@ export const ContainerHorizontalCards: React.FC<IContainerHorizontalCards> = ({c
   return (
     <Box sx={{display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center"}}>
     {catalogue.map((product, index) => (
-      <ProductCardHorizontal product={product} index={index} />
+      <ProductCardHorizontal product={product} index={index} key={`card-horizontal-${product.id}`}/>
     ))}
     </Box>
   )

@@ -39,17 +39,19 @@ export const Benefits: React.FC<IBenefitsComponent> = ({
           justifyContent: "center",
         }}
       >
-        {benefits.map((benefit) => (
-          <Box sx={{ 
-            width: { xs: "135px", md: "200px" },
-            height: {xs:"180px", md: "235px"},
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px"
-
-          }}>
+        {benefits.map((benefit, index) => (
+          <Box
+            key={`benefit-${index}`}
+            sx={{ 
+              width: { xs: "135px", md: "200px" },
+              height: {xs:"180px", md: "235px"},
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
             <Box
               sx={{
                 display: "flex",

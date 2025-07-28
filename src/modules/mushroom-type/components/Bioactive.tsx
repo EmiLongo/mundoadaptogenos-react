@@ -54,6 +54,7 @@ export const Bioactive: React.FC<IBioactiveComponent> = ({
       >
         {bioactive.map((compound) => (
           <Box
+            key={`bioactive-${compound.split(" ").concat("_")}`}
             sx={{
               width: { xs: "100%", md: "200px", lg: "300px" },
               height: "80px",

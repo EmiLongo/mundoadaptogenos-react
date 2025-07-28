@@ -11,6 +11,7 @@ import { HealthEffectsDesktop } from "../components/HealthEffectsDesktop";
 import { Carousel } from "@/modules/home/components/Carousel";
 import { catalogue } from "@shared/Layout/utils/catalogue";
 import { filterByMultipleSectionIds } from "@/shared/Layout/utils/filterProducts";
+import { ContainerHorizontalCards } from "@/shared/cart/ContainerHorizontalCards";
 
 interface IMushroomTypePage {
   mushroom: IMushroomDetails;
@@ -30,11 +31,12 @@ export const MushroomTypePage: React.FC<IMushroomTypePage> = ({ mushroom }) => {
       <Benefits benefits={mushroom.benefits} isMobile={isMobile} />
 
       {/* Productos */}
+      <Box sx={{paddingY: "40px"}}>
       {isMobile
         ? <Carousel catalogue={filteredCatalogue} />
-        // TODO: agregar tarjetas nuevas
-        : <Box />
+        : <ContainerHorizontalCards catalogue={filteredCatalogue} />
       }
+      </Box>
 
       {/* Bioactivos y efectos en la salud*/}
       <Bioactive bioactive={mushroom.bioactive} isMobile={isMobile} />

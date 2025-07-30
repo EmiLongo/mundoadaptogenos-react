@@ -29,7 +29,10 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
     updateProductQuantity(cartItem.productId, quantity)
   }
   const handleSus = () => {
-    if (counter === 1 ) return;
+    if (counter === 1 ) {
+      handleShowDelete()
+      return
+    };
     const quantity = counter-1;
     setCounter(quantity);
     updateProductQuantity(cartItem.productId, quantity)

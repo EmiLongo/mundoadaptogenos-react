@@ -35,11 +35,6 @@ export const infoMelena: IMushroomDetails = {
   bioactive: ["HERICENONAS", "ERINACINAS", "BETA-GLUCANOS", "VITAMINAS B", "VITAMINAS D", "MINERALES"],
   healthEffects: [
     {
-      title: "Neuroprotección y Cognición",
-      subtitle: "Erinacinas y Hericenonas",
-      description: ["Presenta un importante efecto nootrópico, capaz de potenciar las funciones cognitivas del cerebro, la atención y la memoria. Esto es posible dado que contiene Erinacinas y Hericenonas que estimulan la producción del factor de crecimiento nervioso (NGF). Esta es una proteína que interviene de manera directa en la regeneración y reparación de las neuronas del sistema nervioso.", "Los extractos de Hericium Erináceus, al evitar el deterioro neuronal y la apoptosis de las células nerviosas, pueden comportarse como neuroprotector para la prevención de enfermedades neurodegenerativas tales como el Alzheimer o el Parkinson."],
-    },
-    {
       title: "Combate la Ansiedad y Depresión",
       subtitle: "",
       description: ["Además de promover la neurogénesis en el hipocampo (región del cerebro responsable de las respuestas emocionales) también posee propiedades antiinflamatorias. Se cree que ambas propiedades pueden ayudar a reducir los síntomas asociados a la ansiedad y la depresión.", "Sin embargo, la investigación acerca de la acción antidepresiva de Hericium Erináceus todavía se encuentra en etapas tempranas y los mecanismos específicos acerca de su modo de acción todavía requieren una mayor profundización."],
@@ -48,6 +43,11 @@ export const infoMelena: IMushroomDetails = {
       title: "Regula la Microbiota y la Inmunidad",
       subtitle: "",
       description: ["Varios estudios científicos han destacado su importancia en el tratamiento de enfermedades inflamatorias intestinales (como las úlceras y la enfermedad de Crohn) debido a sus polisacáridos y su acción prebiótica capaz de estabilizar la flora intestinal.", "Existe un estrecho vínculo entre el equilibrio de la microbiota intestinal y el sistema inmune, por lo que el consumo de ciertas sustancias bioactivas puede tener un impacto significativo en nuestra inmunidad.", "Por otro lado, los beta-glucanos se consideran sustancias inmunomoduladoras capaces de reforzar el sistema inmune, ayudando así a combatir la acción dañina de ciertos agentes externos."],
+    },
+    {
+      title: "Neuroprotección y Cognición",
+      subtitle: "Erinacinas y Hericenonas",
+      description: ["Presenta un importante efecto nootrópico, capaz de potenciar las funciones cognitivas del cerebro, la atención y la memoria. Esto es posible dado que contiene Erinacinas y Hericenonas que estimulan la producción del factor de crecimiento nervioso (NGF). Esta es una proteína que interviene de manera directa en la regeneración y reparación de las neuronas del sistema nervioso.", "Los extractos de Hericium Erináceus, al evitar el deterioro neuronal y la apoptosis de las células nerviosas, pueden comportarse como neuroprotector para la prevención de enfermedades neurodegenerativas tales como el Alzheimer o el Parkinson."],
     },
   ],
   imgDescription: imgDescription,

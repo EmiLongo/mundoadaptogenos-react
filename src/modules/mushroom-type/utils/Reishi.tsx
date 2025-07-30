@@ -46,11 +46,6 @@ export const infoReishi: IMushroomDetails = {
       description: ["Los beta-glucanos y los ácidos ganodéricos presentes en el hongo poseen un efecto inmunomodulador.", "Los beta-glucanos presentes en el hongo mejoran la capacidad de respuesta del sistema inmunitario, favoreciendo la actuación de los linfocitos, mientras que al mismo tiempo estimulan la función de los macrófagos y de los natural killers, encargados de la detección y destrucción de organismos dañinos.", "También posee Triterpenos y Ácidos Ganodéricos, encargados de inhibir las enzimas asociadas a la proliferación de virus, hongos y bacterias. De esta forma tiene un poder antiinflamatorio y estimulante de la microbiota intestinal, muy ligada al sistema inmune."],
     },
     {
-      title: "Bien estar psicológico y cognitivo",
-      subtitle: "Triterpenos",
-      description: ["Sus Triterpenos son capaces de modular la sinapsis celular y la respuesta frente a diferentes estímulos. Además, estas moléculas intervienen en la producción de hormonas como la epinefrina y la serotonina, involucradas directamente en el control de las emociones y en el estado de ánimo de los individuos. De esta manera se considera que mejora el insomnio y favorece el bienestar psicológico de las personas.", "A diferencia de la mayoría de fármacos con propiedades similares, este hongo no afecta únicamente a un receptor específico, sino que afecta a varios genes y sistemas complejos del organismo, lo que conlleva una menor dependencia y menores efectos secundarios.", "Por otra parte, este hongo presenta un importante efecto nootrópico, regulando las funciones cognitivas del ser humano tales como la memoria, la inteligencia, la creatividad y la concentración."],
-    },
-    {
       title: "Potencial antitumoral",
       subtitle: "",
       description: ["Existen multitud de estudios que han demostrado que los polisacáridos presentes en el Reishi poseen una potencial actividad anticancerosa debido principalmente a sus propiedades inmunomoduladoras, proapoptóticas, antimetastásicas y antiangiogénicas.", "Esto sugiere que no sólo actúan estimulando la respuesta inmune, sino también mostrando efectos citotóxicos y citostáticos en las células tumorales.", "Habitualmente se utiliza como terapia coadyuvante de la quimio y radioterapia."],
@@ -59,6 +54,11 @@ export const infoReishi: IMushroomDetails = {
       title: "Protección cardiovascular",
       subtitle: "",
       description: ["Aunque no está totalmente contrastada la eficacia del Reishi para reducir los niveles altos de glucosa o de colesterol en sangre; sí hay estudios que ponen de manifiesto su importancia para ayudar a reducir la presión arterial, evitar la agregación plaquetaria, prevenir la trombosis y facilitar la circulación sanguínea."],
+    },
+    {
+      title: "Bien estar psicológico y cognitivo",
+      subtitle: "Triterpenos",
+      description: ["Sus Triterpenos son capaces de modular la sinapsis celular y la respuesta frente a diferentes estímulos. Además, estas moléculas intervienen en la producción de hormonas como la epinefrina y la serotonina, involucradas directamente en el control de las emociones y en el estado de ánimo de los individuos. De esta manera se considera que mejora el insomnio y favorece el bienestar psicológico de las personas.", "A diferencia de la mayoría de fármacos con propiedades similares, este hongo no afecta únicamente a un receptor específico, sino que afecta a varios genes y sistemas complejos del organismo, lo que conlleva una menor dependencia y menores efectos secundarios.", "Por otra parte, este hongo presenta un importante efecto nootrópico, regulando las funciones cognitivas del ser humano tales como la memoria, la inteligencia, la creatividad y la concentración."],
     },
   ],
   imgDescription: imgDescription,

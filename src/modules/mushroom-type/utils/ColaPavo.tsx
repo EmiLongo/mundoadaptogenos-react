@@ -41,6 +41,11 @@ export const infoColaPavo: IMushroomDetails = {
       description: ["Se utiliza como un estimulador del sistema inmune y ayuda en el tratamiento del cáncer en países de Europa, en China y Japón, donde está aprobado como inmunoterapia y sus gastos están cubiertos por el seguro de salud del gobierno.", "Ensayos conducidos en humanos han demostrado que el PSK puede bajar la recurrencia del cáncer cuando es usado como complemento del tratamiento de quimio y radioterapia.", "Se ha demostrado que puede reducir el crecimiento de ciertas células cancerosas y su toma es segura para dosis diarias durante períodos prolongados ya que no tiene efectos adversos."],
     },
     {
+      title: "Antioxidante y protector de la salud de la piel",
+      subtitle: "",
+      description: ["Aunque no es un cosmético directo, la Cola de Pavo puede beneficiar la piel de manera indirecta por sus efectos sobre el sistema inmunológico y la salud en general.", "Ayuda a combatir el estrés oxidativo, que es una de las causas del envejecimiento prematuro de la piel, y protege las células de la piel del daño causado por radicales libres (exposición solar, contaminación, etc.).", "Puede reducir la inflamación sistémica, lo cual se traduce muchas veces en menos enrojecimiento, irritación o brotes en pieles sensibles o con tendencia al acné."],
+    },
+    {
       title: "Potenciador de Inmunidad",
       subtitle: "Proteína PSP",
       description: ["Estudios han demostrado que la PSP tiene una variedad de funciones fisiológicas:", 
@@ -51,11 +56,6 @@ export const infoColaPavo: IMushroomDetails = {
         "  · Tiene propiedades antioxidantes",
         "  · Mejora los efectos secundarios causados por quimio y radioterapia.",
          "Se ha utilizado clínicamente para tratar distintos cánceres, Hepatitis, Hiperlipidemia, Bronquitis crónica. Al tener baja citotoxicidad no tiene reacciones adversas graves."],
-    },
-    {
-      title: "Antioxidante y protector de la salud de la piel",
-      subtitle: "",
-      description: ["Aunque no es un cosmético directo, la Cola de Pavo puede beneficiar la piel de manera indirecta por sus efectos sobre el sistema inmunológico y la salud en general.", "Ayuda a combatir el estrés oxidativo, que es una de las causas del envejecimiento prematuro de la piel, y protege las células de la piel del daño causado por radicales libres (exposición solar, contaminación, etc.).", "Puede reducir la inflamación sistémica, lo cual se traduce muchas veces en menos enrojecimiento, irritación o brotes en pieles sensibles o con tendencia al acné."],
     },
   ],
   imgDescription: imgDescription,

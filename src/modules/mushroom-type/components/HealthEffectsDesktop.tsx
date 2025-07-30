@@ -86,7 +86,7 @@ export const HealthEffectsDesktop: React.FC<IHealthEffectsComponent> = ({
         </Box>
         {/* SEGUNDA COLUMNA */}
         <Box
-          key={`effects-info-${indexSelected}`}
+          key={`effects-info-default-height`}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -94,30 +94,59 @@ export const HealthEffectsDesktop: React.FC<IHealthEffectsComponent> = ({
             paddingY: "24px",
             paddingX: "32px",
             width: {xs: "100%", md:"47%", lg: "60%"},
+            position: "relative"
           }}
         >
-          <Heading2 sx={{
-              color: brownColor[800],
-              animation: `1s ${fadeInAnimation} ease-out`
-          }}>
-            {mushroom.healthEffects[indexSelected].title}
+          <Heading2 sx={{color: "transparent",}}>
+            {mushroom.healthEffects[(mushroom.healthEffects.length-1)].title}
             </Heading2>
-            <Heading4
-            sx={{
-              color: brownColor[800],
-              animation: `1s ${fadeInAnimation} ease-out`
-            }}
-            >
-            {mushroom.healthEffects[indexSelected].subtitle}
+            <Heading4 sx={{ color: "transparent"}}>
+            {mushroom.healthEffects[(mushroom.healthEffects.length-1)].subtitle}
             </Heading4>
-            {mushroom.healthEffects[indexSelected].description.map( effect => (
+            {mushroom.healthEffects[(mushroom.healthEffects.length-1)].description.map( effect => (
               <BodyL
               key={`effect-text-${effect.split(" ").concat("_")}`} 
-              sx={{animation: `1s ${fadeInAnimation} ease-out`}}
+              sx={{color: "transparent"}}
               >
                 {effect}
               </BodyL>))
             }
+          <Box
+            key={`effects-info-${indexSelected}`}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              paddingY: "24px",
+              paddingX: "32px",
+              width: "100%",
+              position: "absolute",
+              inset: 0
+            }}
+          >
+            <Heading2 sx={{
+                color: brownColor[800],
+                animation: `1s ${fadeInAnimation} ease-out`
+            }}>
+              {mushroom.healthEffects[indexSelected].title}
+              </Heading2>
+              <Heading4
+              sx={{
+                color: brownColor[800],
+                animation: `1s ${fadeInAnimation} ease-out`
+              }}
+              >
+              {mushroom.healthEffects[indexSelected].subtitle}
+              </Heading4>
+              {mushroom.healthEffects[indexSelected].description.map( effect => (
+                <BodyL
+                key={`effect-text-${effect.split(" ").concat("_")}`} 
+                sx={{animation: `1s ${fadeInAnimation} ease-out`}}
+                >
+                  {effect}
+                </BodyL>))
+              }
+          </Box>
         </Box>
       </Box>
     </Box>

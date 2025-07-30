@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { BodyM, BodyS, Heading5 } from '@theme/textStyles';
-import { greyColor } from '@theme/theme';
+import { brownColor, greyColor } from '@theme/theme';
 import { CartButton } from '@shared/cart/CartButton';
 import { ProductConfirm } from '@shared/cart/ProductConfirm';
 import { useCart } from '@store/useCartStore';
@@ -25,7 +25,7 @@ import { useCart } from '@store/useCartStore';
 import { FAQButton } from './FAQButton.tsx';
 import { ContactButton } from './ContactButton.tsx';
 import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export const HeaderThreeLines: React.FC = () => {
@@ -34,7 +34,8 @@ export const HeaderThreeLines: React.FC = () => {
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openCartDrawer, setOpenCartDrawer] = useState<boolean>(false)
@@ -60,7 +61,7 @@ export const HeaderThreeLines: React.FC = () => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px" }}>
       {/* logo */}
-      <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem" }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem"}}>
         <Box 
           component={"img"} 
           src={logoTextHorizontal} 
@@ -80,15 +81,15 @@ export const HeaderThreeLines: React.FC = () => {
       </Box>
       <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {productsItems.map((item) => (
-          <Box key={item.text} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
+          <Box key={item.text.split(" ").join("_")} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
             <Heading5 sx={{ "&:hover":{color: palette.text.primary,  }}}>
               {item.text}
             </Heading5>
           </Box>
         ))}
         <Divider />
-        {menuItems.map((item) => (
-          <Box key={item.text} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
+        {menuItems.filter(item => item.path !== '/complaints-book').map((item) => (
+          <Box key={item.text.split(" ").join("_")} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
             {item.icon}
             <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
               {item.text}
@@ -199,7 +200,6 @@ export const HeaderThreeLines: React.FC = () => {
                   alignItems: 'center', 
                   justifyContent: 'space-between', 
                   paddingX: { md: '4rem', lg: '5rem', xl: '8rem'},
-                  // gap: {md: '3rem', lg: '4rem', xl: '5rem'}
                 }}>
                   <Box 
                     component={"img"}
@@ -207,7 +207,7 @@ export const HeaderThreeLines: React.FC = () => {
                     alt="Logo Mundo Adaptógenos"
                     height="60px"
                     onClick={handleLogoClick}
-
+                    sx={{cursor: "pointer" }}
                   />
                   <Box sx={{ 
                     display: 'flex', 
@@ -228,6 +228,7 @@ export const HeaderThreeLines: React.FC = () => {
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   width: '100%',
+                  height: "100%",
                   maxWidth: "1280px",
                   gap: {xs: '3rem', lg: '4rem', xl: '5rem'},
                   backgroundColor: greyColor[50],
@@ -237,8 +238,23 @@ export const HeaderThreeLines: React.FC = () => {
                       key={item.text}
                       component={"a"}
                       href={item.path}
+                      sx={{
+                        display: 'flex',
+                        alignItems: "center",
+                        height: "100%", 
+                        borderBottom: pathname.includes(item.path) ? `3px solid ${brownColor[800]}` : "none",
+                        "&:hover":{
+                          borderBottom: pathname.includes(item.path) ? `3px solid ${brownColor[800]}` : `3px solid ${greyColor[900]}`,
+                        }
+                      }}
                     >
-                      <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
+                      <Heading5 sx={{
+                        color: pathname.includes(item.path) ? brownColor[800] : greyColor[950],
+                        fontWeight: pathname.includes(item.path) ? 900 : 500,
+                        "&:hover":{
+                          fontWeight: 900,
+                        }
+                      }}>
                         {item.text}
                       </Heading5>
                     </Box>

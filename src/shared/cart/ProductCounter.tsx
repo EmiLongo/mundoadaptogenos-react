@@ -1,10 +1,12 @@
+// src/shared/cart/ProductCounter.tsx
 import React from "react";
 import { InputField } from "@theme/textStyles";
 import { Box, IconButton } from "@mui/material";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { greyColor } from "@theme/theme";
-import { useCart } from "@/store/useCartStore";
+import { useCart } from "@store/useCartStore";
 
 interface IProductCounter {
   index: number;
@@ -42,7 +44,10 @@ export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handl
       disabled={isLoading}
       sx={{...iconBtStyles}}
       >
-        <RemoveOutlinedIcon width={20} sx={{color: greyColor[950]}} />
+        {counter === 1
+          ? <DeleteForeverOutlinedIcon width={20} sx={{color: greyColor[950]}} />
+          : <RemoveOutlinedIcon width={20} sx={{color: greyColor[950]}} />
+        }
       </IconButton>
       <InputField sx={{width: "20px", textAlign: "center"}}>{counter}</InputField>
       <IconButton

@@ -106,7 +106,7 @@ export const CreateAdmin: React.FC = () => {
         </InputError>
         <ColorButton
           id="create-admin-bt"
-          type="blueButton"
+          type="brownButton"
           onClick={() => formik.handleSubmit()}
           text="Crear Administrador"
           isFetching={formik.isSubmitting}

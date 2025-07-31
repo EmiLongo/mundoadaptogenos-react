@@ -32,7 +32,7 @@ export const menuItems = [
   // { text: 'Inicio', path: '#home' },
   { text: 'Contacto', path: '/contact', icon: <EmailOutlinedIcon /> },
   { text: 'Preguntas Frecuentes', path: '/faq', icon: <HelpOutlineOutlinedIcon /> },
-  { text: 'Libro de quejas', path: '/complaints-book', icon: "" },
+  { text: 'Libro de quejas online', path: '/complaints-book', icon: "" },
   
 ];
 

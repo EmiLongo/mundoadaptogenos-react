@@ -5,7 +5,7 @@ import { greyColor, brownColor, greenColor, redColor } from "@theme/theme";
 
 type ColorButtonProps = {
   id: string
-  type: "greenButton" | "blueButton" | "redButton";
+  type?: "greenButton" | "brownButton" | "redButton";
   onClick: () => void;
   text: string;
   fetchingText?: string;
@@ -16,7 +16,7 @@ type ColorButtonProps = {
 
 export const ColorButton: React.FC<ColorButtonProps> = ({
   id,
-  type = "blueButton", //lightGreenButton, greenButton, yellowButton, brownButton
+  type = "brownButton",
   onClick = () => {},
   text = "",
   fetchingText = "",
@@ -35,7 +35,7 @@ export const ColorButton: React.FC<ColorButtonProps> = ({
       height: "40px",
       minWidth: "120px",
       borderRadius: "40px",
-      backgroundColor: type === "blueButton" ? brownColor[600] : type === "redButton" ? redColor[400] : greenColor[400],
+      backgroundColor: type === "brownButton" ? brownColor[800] : type === "redButton" ? redColor[400] : greenColor[400],
 
       ...sx,
     }}

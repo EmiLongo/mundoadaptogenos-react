@@ -61,7 +61,7 @@ export const NewsletterForm: React.FC = () => {
       />
       <ColorButton
         id="bt-footer-newsletter"
-        type="blueButton"
+        type="brownButton"
         text="ENVIAR"
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting}

@@ -126,7 +126,7 @@ export const Login: React.FC<LoginProps> = ({
       />
       <ColorButton
         id="bt-header-login"
-        type="blueButton"
+        type="brownButton"
         fetchingText="...enviando"
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting}

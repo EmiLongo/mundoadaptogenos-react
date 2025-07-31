@@ -168,7 +168,7 @@ export const ChangePassword: React.FC = () => {
 
             <ColorButton
               id="bt-password-change"
-              type="blueButton"
+              type="brownButton"
               onClick={() => formik.handleSubmit()}
               text="GUARDAR CAMBIOS"
               isFetching={formik.isSubmitting}

@@ -126,7 +126,7 @@ export const Profile: React.FC = () => {
 
         <ColorButton
           id="bt-profile-changes"
-          type="blueButton"
+          type="brownButton"
           onClick={() => formik.handleSubmit()}
           text="GUARDAR CAMBIOS"
           isFetching={formik.isSubmitting}

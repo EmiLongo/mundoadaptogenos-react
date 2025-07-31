@@ -204,7 +204,7 @@ export const RegisterPage: React.FC = () => {
 
             <ColorButton
               id="bt-register-page"
-              type="blueButton"
+              type="brownButton"
               onClick={() => formik.handleSubmit()}
               text="REGISTRARME"
               isFetching={formik.isSubmitting}

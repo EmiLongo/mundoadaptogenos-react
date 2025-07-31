@@ -1,30 +1,73 @@
-import React from "react";
-import { Box, Divider, useMediaQuery, useTheme } from "@mui/material";
-import { BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
+import React, { useState } from "react";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
 import { IProduct } from "@shared/components/types";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
-// import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-// import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
-// import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
-// import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
+import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import { OnlyTextButton } from "@/shared/components/buttons/OnlyTextButton";
+import { ColorButton } from "@/shared/components/buttons/ColorButton";
+import { ProductCounter } from "@/shared/cart/ProductCounter";
+import { useCart } from "@/store/useCartStore";
+import { toast } from "react-toastify";
 
 interface IBigCard {
   product: IProduct
 }
 export const BigCard: React.FC<IBigCard> = ({ product }) => {
+  const { addProduct } = useCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [counter, setCounter] = useState<number>(1);
+  console.log("product: ", product)
+  const handleShowDetails = () => {
+    console.log("handleShowDetails")
+  }
+  
+  const handleAddToCart = () => {
+    addProduct(product, counter);
+  }
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `Mundo Adaptógenos - ${product.title}`,
+          url: window.location.href,
+        })
+        .catch(console.error);
+    } else {
+      // Fallback para navegadores que no soportan Web Share API
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => toast.success("¡URL copiada al portapapeles!"))
+        .catch(() => toast.error("No se pudo copiar la URL"));
+    }
+  };
+  
+
+  const handleAdd = () => {
+    const quantity = counter+1;
+    setCounter(quantity);
+  }
+  const handleSus = () => {
+    if(counter === 1) return
+    const quantity = counter-1;
+    setCounter(quantity);
+  }
 
   return (
     <Box sx={{
       ...paddingPage
     }}>
-      <BodyS sx={{marginY: "24px"}}>`Inicio / Comprar / {product.title}`</BodyS>
-      <Box sx={{display: "flex", gap: "32px"}}>
+      <BodyS sx={{marginY: "24px"}}>Inicio / Comprar / {product.title}</BodyS>
+      <Box sx={{display: "flex", flexDirection: {xs: "column", md: "row"}, gap: "32px"}}>
         {/* primera columna */}
-        <Box sx={{flex: 1, position: "relative"}}>
+        <Box sx={{flex: 1, position: "relative", display: "flex", flexDirection: "column", gap: "8px"}}>
           <Box
             sx={{
               position: "absolute",
@@ -75,24 +118,112 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             sx={{ width: "100%", height: "100%", borderRadius: "10px" }}
             alt={`Foto descriptiva de ${product.title}`}
           />
-          </Box>
+          <OnlyTextButton 
+            id= "bt-shop-share-product"
+            type= "primaryButton"
+            onClick= {handleShare}
+            text= "Compartir"
+            isFetching= {false}
+            icon= {<ShareOutlinedIcon />}
+            disabled= {false}
+          />
+        </Box>
 
         {/* segunda columna */}
-        <Box sx={{flex: 1}}>
-        
-        {isMobile
-          ? <Heading3 >{product.title}</Heading3>
-          : <Heading2 >{product.title}</Heading2>}
-        <Box sx={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <Heading3 sx={{ color: greenColor[900],}}>{numberToPrice(product.priceDiscount)}</Heading3>
-          <BodyS sx={{ color: greyColor[700], textDecoration: "line-through" }}>
-            {numberToPrice(product.price)}
-          </BodyS>
-        </Box>
+        <Box sx={{flex: 1, display: "flex", flexDirection: "column", gap: "16px"}}>
+          {isMobile
+            ? <Heading3 >{product.title}</Heading3>
+            : <Heading2 >{product.title}</Heading2>}
+          <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: {xs: "16px", sm: "32px"} }}>
+              <Heading3 sx={{ color: greenColor[900],}}>{numberToPrice(product.priceDiscount)}</Heading3>
+              <BodyS sx={{ color: greyColor[700], textDecoration: "line-through" }}>
+                {numberToPrice(product.price)}
+              </BodyS>
+            </Box>
+            <BodyS sx={{ color: greyColor[700]}}>
+              {numberToPrice(product.price * 0.79)} sin impuestos
+            </BodyS>
+          </Box>
+          <Box sx={{display: "flex", flexDirection: "column", gap: "8px", color: greyColor[950]}}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
+              <PaymentsOutlinedIcon />
+              <BodyS sx={{textWrap: "wrap"}}>
+                {numberToPrice(product.priceTransfer)} con Transferencia o Depósito 
+              </BodyS>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
+              <CreditCardOutlinedIcon />
+              <BodyS sx={{textWrap: "wrap"}}>
+                {product.plan}
+              </BodyS>
+            </Box>
+            <OnlyTextButton
+              id="bt-shop-show-details"
+              onClick={handleShowDetails}
+              text="Ver más productos"
+              fetchingText=""
+              isFetching={false}
+              disabled={false}
+              />
+          </Box>
+          <Box sx={{
+            width: {xs: "100%", sm: "265px", lg: "350px"},
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px"
+          }}>
+            <ProductCounter 
+            index={999999}
+            counter={counter} 
+            handleAdd={handleAdd}
+            handleSus={handleSus}
+            isDelete={false}
+            type="primary"
+            />
+            <ColorButton
+              type="brownButton"
+              id={`bt-shop-add-cart`}
+              text="AÑADIR AL CARRITO"
+              fetchingText="AÑADIENDO..."
+              onClick={handleAddToCart}
+              isFetching={false}
+              disabled={false}
+              sx={{ borderRadius: "30px", width: "100%"}}
+            />
+          </Box>
+          <Box sx={{display: "flex", flexDirection: "column", gap: "8px", color: greyColor[950]}}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
+              <LocalShippingOutlinedIcon />
+              <BodyM sx={{textWrap: "wrap"}}>
+              Medios de envío
+              </BodyM>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
+              <BodyS sx={{color: greenColor[900]}}>
+              ENVÍO GRATIS
+              </BodyS>
+              <BodyS sx={{textWrap: "wrap"}}>
+              (en toda la Argentina)
+              </BodyS>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px"}}>
+              <StoreMallDirectoryOutlinedIcon />
+              <BodyM sx={{textWrap: "wrap"}}>
+              Punto de retiro
+              </BodyM>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column",}}>
+              <BodyS sx={{textWrap: "wrap"}}>
+              Sadi Carnot 5952, Rosario.
+              </BodyS>
+              <BodyS sx={{textWrap: "wrap"}}>
+              Santa Fe, Argentina. CP 2000
+              </BodyS>
+            </Box>
+          </Box>
         </Box>
       </Box>
-      <Divider sx={{color: greyColor[400], marginBottom: "3rem"}} />
-      <Heading2>Más productos</Heading2>
     </Box>
   )
 }

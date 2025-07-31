@@ -4,11 +4,11 @@ import { BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
 import { IProduct } from "@shared/components/types";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
+// import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
-import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+// import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
+// import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
+// import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
 interface IBigCard {
   product: IProduct

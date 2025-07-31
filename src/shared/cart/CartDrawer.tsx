@@ -2,14 +2,15 @@
 import React from "react";
 import { Box, Divider, Drawer } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { BodyS, Heading2, Heading4 } from "@/theme/textStyles";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { BodyS, Heading2, Heading4 } from "@theme/textStyles";
+import { greyColor } from "@theme/theme";
 import { CartDrawerItem } from "./CartDrawerItem";
-import { greyColor } from "@/theme/theme";
 import { numberToPrice } from "../utils/convertNumberToPrice";
 import { ColorButton } from "@shared/components/buttons/ColorButton";
+import { OnlyTextButton } from "@shared/components/buttons/OnlyTextButton";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "@/store/useCartStore";
+import { useCart } from "@store/useCartStore";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 interface ICartDrawerProps {
   openCartDrawer: boolean
@@ -26,6 +27,12 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
     closeCartDrawer();
     navigate("./cart");
   }
+
+  const handleKeepShopping = () => {
+    closeCartDrawer();
+    navigate("./shop");
+  }
+
   return(
     <Drawer
       variant="temporary"
@@ -112,16 +119,27 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
                 <BodyS sx={{color: "secondary.dark"}}>{`o hasta 6 cuotas de ${numberToPrice(totalWithDiscount / 6)} sin interes`}</BodyS>
               </Box>
             </Box>
-            <ColorButton
-            id="bt-cart-drawer-begin"
-            type="blueButton"
-            onClick={handleStartCheckout}
-            text="Iniciar compra"
-            fetchingText=""
-            isFetching={false}
-            disabled={false}
-            sx={{width: "100%"}}
-            />
+            <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
+              <ColorButton
+              id="bt-cart-drawer-begin"
+              type="brownButton"
+              onClick={handleStartCheckout}
+              text="Iniciar compra"
+              fetchingText=""
+              isFetching={false}
+              disabled={false}
+              sx={{width: "100%"}}
+              />
+              <OnlyTextButton
+              id="bt-cart-drawer-keep-shopping"
+              onClick={handleKeepShopping}
+              text="Ver más productos"
+              fetchingText=""
+              isFetching={false}
+              disabled={false}
+              sx={{marginX: "auto", p:{textDecoration: "underline" }}}
+              />
+            </Box>
           </Box>
         </>}
       </Box>

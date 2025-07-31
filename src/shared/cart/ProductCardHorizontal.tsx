@@ -1,6 +1,6 @@
 // src/shared/cart/ProductCardHorizontal.tsx
 import React from "react"
-import { Box, Card } from "@mui/material"
+import { Box, Card, Link } from "@mui/material"
 import { BodyS, Caption, Heading3, Heading5 } from "@/theme/textStyles"
 import { WhiteButton } from "@shared/components/buttons/WhiteButton"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -8,6 +8,7 @@ import { brownColor, greyColor, greenColor } from "@/theme/theme";
 import { IProduct } from "../components/types";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { useCart } from "@store/useCartStore";
+import { useNavigate } from "react-router-dom";
 
 interface IProductCard {
   product: IProduct;
@@ -15,9 +16,15 @@ interface IProductCard {
 }
 
 export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }) => {
+  const navigate = useNavigate();
+
   const { addProduct } = useCart();
   const addToCart = () => {
     addProduct(product, 1); // cantidad = 1
+  };
+  
+  const handleCard = () => {
+    navigate("/shop/product", { state: { product } });
   };
   return (
     <Card 
@@ -45,7 +52,18 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
       }}>
         <Caption sx={{color: greyColor[950], width: "100%", textAlign: "center"}}>-{product.discount}%</Caption>
       </Box>
-      <Box sx={{ minWidth: "250px",width: "250px", display: "flex", justifyContent: "center", alignItems: "center", overflow: 'hidden',}}>
+      <Box 
+      onClick={handleCard}
+      sx={{ 
+        minWidth: "250px",
+        width: "250px", 
+        display: "flex", 
+        justifyContent: "center", 
+        alignItems: "center", 
+        overflow: 'hidden',
+        cursor: "pointer"
+      }}
+      >
         <Box 
         component="img" 
         src={product.urlPhoto} 
@@ -63,7 +81,19 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
         padding: "1rem",
         backgroundColor: greyColor[50],
       }}>
-        <Heading5 sx={{height: "4.5em"}}>{product.title}</Heading5>
+        <Link
+        component="button"
+        onClick={handleCard}
+        sx={{
+          textDecoration: "none",
+          "&:hover": {
+            color: brownColor[950],
+            textDecoration: "underline",
+          }
+        }}
+        >
+          <Heading5 sx={{ height: "4.5em", width: "100%", textAlign: "left" }}>{product.title}</Heading5>
+        </Link>
         <Box sx={{display: "flex", alignItems: "center", gap: "16px"}}>
           <Heading3>{numberToPrice(product.priceDiscount)}</Heading3>
           <BodyS sx={{color: greyColor[700], textDecoration: "line-through"}}>{numberToPrice(product.price)}</BodyS>

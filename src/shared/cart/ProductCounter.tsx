@@ -5,7 +5,7 @@ import { Box, IconButton } from "@mui/material";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import { greyColor } from "@theme/theme";
+import { brownColor, greenColor, greyColor } from "@theme/theme";
 import { useCart } from "@store/useCartStore";
 
 interface IProductCounter {
@@ -13,8 +13,18 @@ interface IProductCounter {
   counter: number;
   handleAdd: ()=>void;
   handleSus: ()=>void;
+  isDelete?: boolean;
+  type?: "grey" | "primary" | "secondary";
 }
-export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handleAdd, handleSus}) => {
+export const ProductCounter: React.FC<IProductCounter> = ({
+  index, 
+  counter, 
+  handleAdd, 
+  handleSus, 
+  isDelete=true, 
+  type="grey"
+
+}) => {
   const { isLoading } = useCart()
   const iconBtStyles: object = {
     display:"flex", 
@@ -25,6 +35,9 @@ export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handl
     border: "none",
   }
 
+  const colorType= type === "grey" ? greyColor[950] : type === "primary" ? brownColor[950] : greenColor[950];
+  const colorDisabled = greyColor[400];
+  
   return (
     <Box
       key={`product-counter-${index}`}
@@ -35,7 +48,7 @@ export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handl
         justifyContent: "space-around",
         alignItems: "center",
         borderRadius: "30px",
-        border: `1px ${greyColor[950]} solid`
+        border: `1px ${colorType} solid`
       }}
     >
       <IconButton 
@@ -44,19 +57,19 @@ export const ProductCounter: React.FC<IProductCounter> = ({index, counter, handl
       disabled={isLoading}
       sx={{...iconBtStyles}}
       >
-        {counter === 1
-          ? <DeleteForeverOutlinedIcon width={20} sx={{color: greyColor[950]}} />
-          : <RemoveOutlinedIcon width={20} sx={{color: greyColor[950]}} />
+        {counter === 1 && isDelete
+          ? <DeleteForeverOutlinedIcon width={20} sx={{color: colorType}} />
+          : <RemoveOutlinedIcon width={20} sx={{color: counter === 1 ? colorDisabled : colorType}} />
         }
       </IconButton>
-      <InputField sx={{width: "20px", textAlign: "center"}}>{counter}</InputField>
+      <InputField sx={{width: "20px", textAlign: "center", color: colorType}}>{counter}</InputField>
       <IconButton
       id={`bti-increase-quantity-${index}`}
       onClick={handleAdd}
       disabled={isLoading}
       sx={{...iconBtStyles}}
       >
-        <AddOutlinedIcon width={20} sx={{color: greyColor[950]}} />
+        <AddOutlinedIcon width={20} sx={{color: colorType}} />
       </IconButton>
     </Box>
   )

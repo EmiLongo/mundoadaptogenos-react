@@ -26,13 +26,12 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
 	type = "primaryButton",
   size = "S",
   text = "",
+  icon = null,
   fetchingText = "",
   isFetching = false,
-  icon = null,
   disabled = false,
   sx = {},
 }) => {
-
 
   return (
     <Button
@@ -49,10 +48,12 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
         color: type === "primaryButton" ? "primary.dark" : type === "primaryLigthButton" ? brownColor[200] : greyColor[950],
         backgroundColor: "transparent",
         padding: 0,
+        textDecoration: "underline",
         "&:hover": {
           boxShadow: "none",
           color: type === "primaryButton" ? "primary.main" : type === "primaryLigthButton" ? brownColor[400] : brownColor[700],
           fontWeight: 800,
+          textDecoration: "underline",
         },
         ...sx,
       }}
@@ -68,17 +69,17 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
       )}
 
       {size === "S" && 
-        <ButtonS sx={{color: "inherit", fontWeight: "inherit"}}>
+        <ButtonS sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonS>
       }
       {size === "M" && 
-        <ButtonM>
+        <ButtonM sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonM>
       }
       {size === "L" && 
-        <ButtonL>
+        <ButtonL sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonL>
       }

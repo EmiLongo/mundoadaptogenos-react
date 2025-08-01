@@ -14,6 +14,7 @@ import { ColorButton } from "@/shared/components/buttons/ColorButton";
 import { ProductCounter } from "@/shared/cart/ProductCounter";
 import { useCart } from "@/store/useCartStore";
 import { toast } from "react-toastify";
+import { WhiteButton } from "@/shared/components/buttons/WhiteButton";
 
 interface IBigCard {
   product: IProduct
@@ -22,6 +23,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   const { addProduct } = useCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const sectionsProduct = product.sectionId;
   const [counter, setCounter] = useState<number>(1);
   console.log("product: ", product)
   const handleShowDetails = () => {
@@ -170,20 +172,32 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
           <Box sx={{
             width: {xs: "100%", sm: "265px", lg: "350px"},
             display: "flex",
-            flexDirection: "column",
+            flexDirection: sectionsProduct.length > 1 ? "column" : "row",
             gap: "12px"
           }}>
-            <ProductCounter 
-            index={999999}
-            counter={counter} 
-            handleAdd={handleAdd}
-            handleSus={handleSus}
-            isDelete={false}
-            type="primary"
-            />
+            <Box sx={{display: "flex", gap: "8px"}}>
+              <ProductCounter 
+              index={999999}
+              counter={counter} 
+              handleAdd={handleAdd}
+              handleSus={handleSus}
+              isDelete={false}
+              type="primary"
+              />
+              {sectionsProduct.length > 1 &&
+              <WhiteButton
+              id="bt-shop-edit-options"
+              onClick = {() => {}}
+              text = "EDITAR OPCIONES"
+              fetchingText = ""
+              isFetching = {false}
+              disabled = {false}
+              sx={(sectionsProduct.length > 1 ? {flex: 1} : {})}
+              />}
+            </Box>
             <ColorButton
-              type="brownButton"
               id={`bt-shop-add-cart`}
+              type="brownButton"
               text="AÑADIR AL CARRITO"
               fetchingText="AÑADIENDO..."
               onClick={handleAddToCart}

@@ -122,7 +122,7 @@ export const useCartStore = create<CartStore>()(
           updatedCart.cartItems.push(newItem);
         }
 
-        updatedCart.lastAddedProduct = product;
+        updatedCart.lastAddedProduct = { ...product, quantity };
         updatedCart.lastAddedAt = new Date().toISOString();
 
         // Actualizar actividad del carrito

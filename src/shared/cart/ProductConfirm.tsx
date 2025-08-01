@@ -12,12 +12,12 @@ import { heightForModals, navBarMobileHeight } from "../Layout/utils/info";
 
 interface IProductConfirm {
   handleCartOpen: ()=>void;
-  lastAddedProduct: IProduct;
+  lastAddedProduct: (IProduct & { quantity: number });
   lastAddedAt: string | null | undefined;
 }
 export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartOpen, lastAddedProduct, lastAddedAt }) => {
   const { clearLastAdded } = useCart();
-
+  console.log('lastAddedProduct: ', lastAddedProduct)
   // TODO: hacer lógica de cierre
   const handleCloseProductConfirm = () => {
     console.log("cerrar Confirmacion")
@@ -71,8 +71,8 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartOpen, last
           <CloseIcon sx={{width: "24px", color: greyColor[950]}} />
         </IconButton>
         <Box component="img" width={50} height={50}
-        alt={`Foto del Producto ${lastAddedProduct.title}`}
-        src={lastAddedProduct.urlThumbnail}
+        alt={`Foto del Producto ${lastAddedProduct?.title}`}
+        src={lastAddedProduct?.urlThumbnail}
         sx={{borderRadius: "8px"}}
         />
         <Box sx={{
@@ -81,15 +81,15 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartOpen, last
           flexDirection: "column", 
           gap: "8px"
         }}>
-          <BodyS sx={{height: "4em"}}>{lastAddedProduct.title}</BodyS>
-          <BodyS>1 x {numberToPrice(lastAddedProduct.price)}</BodyS>
+          <BodyS sx={{height: "4em"}}>{lastAddedProduct?.title}</BodyS>
+          <BodyS>{lastAddedProduct?.quantity} x {numberToPrice(lastAddedProduct?.price || 0)}</BodyS>
         </Box>
       </Box>
 
       <BodyMEmph sx={{color: brownColor[700]}}>¡Agregado al carrito!</BodyMEmph>
       <Box sx={{display: "flex", flexDirection:"column", alignItems: "center"}}>
-        <BodyMEmph>TOTAL (1 producto):</BodyMEmph>
-        <BodyMEmph>{numberToPrice(lastAddedProduct.price)}</BodyMEmph>
+        <BodyMEmph>TOTAL ({lastAddedProduct?.quantity} producto{lastAddedProduct?.quantity > 1 && "s"}):</BodyMEmph>
+        <BodyMEmph>{numberToPrice((lastAddedProduct?.price * lastAddedProduct?.quantity) || 0)}</BodyMEmph>
       </Box>
 
       <WhiteButton

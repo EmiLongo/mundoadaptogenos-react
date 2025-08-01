@@ -42,10 +42,10 @@ export const ProductBenefits: React.FC<IBenefitsComponent> = ({
         ...paddingPage
       }}
     >
-      <Box sx={{ height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Box sx={{ height: "60px", display: "flex", alignItems: "center" }}>
         {isMobile
-          ? <Heading3 sx={{textAlign: "center"}}>Beneficios para la salud</Heading3>
-          : <Heading2 sx={{textAlign: "center"}}>Beneficios para la salud</Heading2>}
+          ? <Heading3>Beneficios para la salud</Heading3>
+          : <Heading2>Beneficios para la salud</Heading2>}
       </Box>
       {allMushrooms.length === 1 &&
         <Box key={`benefit-${allMushrooms[0].title.split(" ").join("_")}`}

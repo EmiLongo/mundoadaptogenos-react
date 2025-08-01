@@ -54,7 +54,7 @@ export interface ICart {
   createdAt: string;
   updatedAt: string;
   lastActivity: string;
-  lastAddedProduct: IProduct | null;
+  lastAddedProduct: (IProduct & { quantity: number }) | null;
   lastAddedAt: string | null;
   abandonedAt?: string;
   emailSent: boolean;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
-import { IProduct } from "@shared/components/types";
+import { IProduct } from "@/shared/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
@@ -15,6 +15,7 @@ import { ProductCounter } from "@/shared/cart/ProductCounter";
 import { useCart } from "@/store/useCartStore";
 import { toast } from "react-toastify";
 import { WhiteButton } from "@/shared/components/buttons/WhiteButton";
+import { KitOptionsModal } from "./KitOptionsModal";
 
 interface IBigCard {
   product: IProduct
@@ -25,7 +26,9 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const sectionsProduct = product.sectionId;
   const [counter, setCounter] = useState<number>(1);
-  console.log("product: ", product)
+  const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  
   const handleShowDetails = () => {
     console.log("handleShowDetails")
   }
@@ -50,6 +53,10 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
         .catch(() => toast.error("No se pudo copiar la URL"));
     }
   };
+
+  const handleOpenOptionsModal = () => {
+    setIsKitOptionsModalOpen(true);
+  }
   
 
   const handleAdd = () => {
@@ -187,7 +194,8 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               {sectionsProduct.length > 1 &&
               <WhiteButton
               id="bt-shop-edit-options"
-              onClick = {() => {}}
+              onClick = {handleOpenOptionsModal}
+              type="red"
               text = "EDITAR OPCIONES"
               fetchingText = ""
               isFetching = {false}
@@ -238,6 +246,12 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
           </Box>
         </Box>
       </Box>
+      <KitOptionsModal
+        isOpen={isKitOptionsModalOpen}
+        onClose={() => setIsKitOptionsModalOpen(false)}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+      />
     </Box>
   )
 }

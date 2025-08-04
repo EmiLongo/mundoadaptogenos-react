@@ -2,7 +2,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { BodyL, BodyM, Heading2, Heading3, Heading4 } from "@/theme/textStyles";
-import { IMushroomDetails } from "./types";
+import { IMushroomDetails } from "@shared/types/MushroomTypes";
 import { greyColor, shadow } from "@theme/theme";
 
 interface IGeneralInfoComponent {

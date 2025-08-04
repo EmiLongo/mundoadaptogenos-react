@@ -1,5 +1,5 @@
 import React from "react";
-import { IProduct } from "../components/types";
+import { IProduct } from "../types/ProductTypes";
 import { ProductCardHorizontal } from "./ProductCardHorizontal";
 import { Box } from "@mui/material";
 

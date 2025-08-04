@@ -6,7 +6,7 @@ import benefits3 from "@img/mushroom-types/benefits-draw/strenght.svg"
 import benefits4 from "@img/mushroom-types/benefits-draw/kidneys.svg"
 import imgDescription from "@img/mushroom-types/cordyceps-militaris-caracteristicas-fisicas.webp"
 import imgHarvest from "@img/mushroom-types/cordyceps-militaris-cultivo.jpg"
-import { IMushroomDetails } from "../components/types"
+import { IMushroomDetails } from "@shared/types/MushroomTypes"
 
 //Ficha para Reishi
 export const infoCordyceps: IMushroomDetails = {

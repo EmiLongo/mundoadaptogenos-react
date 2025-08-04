@@ -1,7 +1,7 @@
 // src/shared/cart/ModalDeleteCartItem.tsx
 import { Box, IconButton, Modal } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { ICartItem } from "./types";
+import { ICartItem } from "../types/CartTypes";
 import { Heading4, Heading5 } from "@theme/textStyles";
 import warning from "@img/warning.png"
 import { greyColor, redColor } from "@theme/theme";

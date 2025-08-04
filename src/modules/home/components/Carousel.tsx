@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { greyColor } from "@theme/theme";
 import { ProductCard } from "@shared/cart/ProductCard";
-import { IProduct } from "@shared/components/types";
+import { IProduct } from "@/shared/types/ProductTypes";
 
 interface ICarousel {
   catalogue: IProduct[];

@@ -6,7 +6,7 @@ import benefits3 from "@img/mushroom-types/benefits-draw/peace.svg"
 import benefits4 from "@img/mushroom-types/benefits-draw/inmune.svg"
 import imgDescription from "@img/mushroom-types/melena-de-leon-caracteristicas-fisicas.jpg"
 import imgHarvest from "@img/mushroom-types/melena-de-leon-cultivo.webp"
-import { IMushroomDetails } from "../components/types"
+import { IMushroomDetails } from "@shared/types/MushroomTypes"
 //Ficha para Melena de León
 export const infoMelena: IMushroomDetails = {
   imgTitle: imgTitle,

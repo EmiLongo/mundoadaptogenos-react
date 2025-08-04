@@ -6,7 +6,7 @@ import benefits3 from "@img/mushroom-types/benefits-draw/heart.svg"
 import benefits4 from "@img/mushroom-types/benefits-draw/peace.svg"
 import imgDescription from "@img/mushroom-types/reishi-caracteristicas-fisicas.webp"
 import imgHarvest from "@img/mushroom-types/reishi-cultivo.jpg"
-import { IMushroomDetails } from "../components/types"
+import { IMushroomDetails } from "@shared/types/MushroomTypes"
 
 //Ficha para Reishi
 export const infoReishi: IMushroomDetails = {

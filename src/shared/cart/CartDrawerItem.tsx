@@ -1,7 +1,7 @@
 // src/shared/cart/CartDrawerItem.tsx
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { ICartItem } from "./types";
+import { ICartItem } from "../types/CartTypes";
 import { BodyMEmph, BodyS, ButtonS } from "@theme/textStyles";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";

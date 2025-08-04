@@ -1,4 +1,4 @@
-import { IProduct } from "@shared/components/types";
+import { IProduct } from "@/shared/types/ProductTypes";
 import colaPavoImg from "@img/card/cola-pavo.png" 
 import melenaImg from "@img/card/melena-leon.png" 
 import reishiImg from "@img/card/reishi.png" 

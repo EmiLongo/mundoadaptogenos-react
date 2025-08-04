@@ -300,6 +300,7 @@ export const InputHelper = styled((props: TypographyProps) => <Typography {...pr
 export const InputError = styled((props: TypographyProps) => <Typography {...props} />)(({ theme }) => ({
   ...defaultInput(),
   color: theme.palette.error.main,
+  fontSize: "12px",
 }));
 
 // BUTTONS

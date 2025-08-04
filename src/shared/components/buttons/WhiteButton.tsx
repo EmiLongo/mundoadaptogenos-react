@@ -1,7 +1,7 @@
 // src/shared/components/buttons/WhiteButton.tsx
 import { Box, Button, CircularProgress } from "@mui/material";
 import React from "react";
-import { brownColor, greyColor } from "@/theme/theme";
+import { brownColor, greyColor, redColor } from "@/theme/theme";
 import { ButtonM } from "@/theme/textStyles";
 
 interface IWhiteButtonProps {
@@ -13,6 +13,7 @@ interface IWhiteButtonProps {
   disabled: boolean;
   sx?: object;
   icon?: React.ReactNode;
+  type?: "grey" | "brown" | "red";
 }
 
 export const WhiteButton: React.FC<IWhiteButtonProps> = ({
@@ -24,7 +25,11 @@ export const WhiteButton: React.FC<IWhiteButtonProps> = ({
   disabled = false,
   sx = {},
   icon = null,
+  type = "grey"
 }) => {
+  const colorSelected = type === "grey" 
+                      ? greyColor[950] 
+                      : type === "brown" ? brownColor[950] : redColor[700]
   return (
     <Button
       id={id}
@@ -38,9 +43,9 @@ export const WhiteButton: React.FC<IWhiteButtonProps> = ({
         height: "40px",
 				display: "flex",
 				alignItems: "center",
-        color: brownColor[950],
+        color: colorSelected,
         backgroundColor: greyColor[50],
-				border: `1px solid ${brownColor[950]}`,
+				border: `1px solid ${colorSelected}`,
         borderRadius: "30px",
         boxShadow: "none",
 				// boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",

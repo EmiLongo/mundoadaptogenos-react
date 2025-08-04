@@ -220,6 +220,10 @@ export const theme = createTheme({
           "&.Mui-error": {
             color: redColor[700],
           },
+          "&.MuiFormLabel-filled": {
+            transform: "translate(16px, -9px) scale(0.7)",
+            color: brownColor[600],
+          },
         },
       },
     },

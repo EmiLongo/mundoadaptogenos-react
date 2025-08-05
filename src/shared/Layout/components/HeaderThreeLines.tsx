@@ -26,6 +26,7 @@ import { FAQButton } from './FAQButton.tsx';
 import { ContactButton } from './ContactButton.tsx';
 import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { LoginButton } from './LoginButton.tsx';
 
 
 export const HeaderThreeLines: React.FC = () => {
@@ -37,29 +38,85 @@ export const HeaderThreeLines: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [openCartDrawer, setOpenCartDrawer] = useState<boolean>(false)
 
-  const closeCartDrawer = () => {
-    setOpenCartDrawer(false)
-  }
   const handleCartButton = () => {
-    setOpenCartDrawer(!openCartDrawer)
+    if(!openCartDrawer){
+      handleCartDrawerOpen()
+    } else {
+      handleCartDrawerClose()
+    }
   }
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const handleMenuDrawerToggle = () => {
+    if(!mobileMenuOpen){
+      handleMenuDrawerOpen()
+    } else {
+      handleMenuDrawerClose()
+    }
   };
   
   const handleLogoClick = () => {
     navigate('/');
   };
 
- 
+   // Función para abrir el drawer
+   const handleMenuDrawerOpen = () => {
+    setMobileMenuOpen(true);
+    // Agregar una entrada al historial cuando se abre el drawer
+    window.history.pushState({ drawerOpen: true }, '');
+  };
+
+  // Función para cerrar el drawer
+  const handleMenuDrawerClose = () => {
+    setMobileMenuOpen(false);
+    // Si hay una entrada en el historial para el drawer, la removemos
+    if (window.history.state?.drawerOpen) {
+      window.history.back();
+    }
+  };
+
+   // Función para abrir el drawer
+   const handleCartDrawerOpen = () => {
+    setOpenCartDrawer(true);
+    // Agregar una entrada al historial cuando se abre el drawer
+    window.history.pushState({ drawerOpen: true }, '');
+  };
+
+  // Función para cerrar el drawer
+  const handleCartDrawerClose = () => {
+    setOpenCartDrawer(false);
+    // Si hay una entrada en el historial para el drawer, la removemos
+    if (window.history.state?.drawerOpen) {
+      window.history.back();
+    }
+  };
+
+  useEffect(() => {
+    // Función que maneja el evento popstate (tecla atrás)
+    const handlePopState = (event: PopStateEvent) => {
+      // Si el drawer está abierto y no hay estado de drawer en el historial
+      if (openCartDrawer && !event.state?.drawerOpen) {
+        setOpenCartDrawer(false);
+      }
+      if (mobileMenuOpen && !event.state?.drawerOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    // Agregar el listener para el evento popstate
+    window.addEventListener('popstate', handlePopState);
+
+    // Cleanup: remover el listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [openCartDrawer, mobileMenuOpen]);
 
   // menu lateral en mobile
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px" }}>
+    <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px" }}>
       {/* logo */}
       <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem"}}>
         <Box 
@@ -75,7 +132,7 @@ export const HeaderThreeLines: React.FC = () => {
       {/* boton para cerrar */}
       <Box
         sx={{ position: 'absolute', top: "1rem", right: "1rem" }}
-        onClick={handleDrawerToggle}
+        onClick={handleMenuDrawerToggle}
       >
         <CloseIcon />
       </Box>
@@ -169,7 +226,7 @@ export const HeaderThreeLines: React.FC = () => {
                       color="inherit"
                       aria-label="open drawer"
                       edge="start"
-                      onClick={handleDrawerToggle}
+                      onClick={handleMenuDrawerToggle}
                       sx={{ border: "none" }}
                     >
                       <MenuIcon />
@@ -182,7 +239,7 @@ export const HeaderThreeLines: React.FC = () => {
                     onClick={handleLogoClick}
                     />
                   </Box>
-                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={closeCartDrawer} handleCartButton={handleCartButton} />
+                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                 </Box>
               </Toolbar>
             ) : (
@@ -217,8 +274,9 @@ export const HeaderThreeLines: React.FC = () => {
                     flex: 1,
                   }}>
                   <ContactButton />
-                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={closeCartDrawer} handleCartButton={handleCartButton} />
+                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                   <FAQButton />
+                  <LoginButton />
                   </Box>
                 </Box>
               </Toolbar>
@@ -280,8 +338,8 @@ export const HeaderThreeLines: React.FC = () => {
         {/* Menú lateral en versión móvil */}
         <Drawer
           variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
+          open={mobileMenuOpen}
+          onClose={handleMenuDrawerToggle}
           ModalProps={{
             keepMounted: true, // Mejor rendimiento en móviles
           }}
@@ -293,7 +351,7 @@ export const HeaderThreeLines: React.FC = () => {
           {drawer}
         </Drawer>
         {lastAddedProduct && <ProductConfirm 
-          handleCartOpen={handleCartButton}
+          handleCartDrawerOpen={handleCartDrawerOpen}
           lastAddedProduct={lastAddedProduct}
           lastAddedAt={lastAddedAt}
         />}

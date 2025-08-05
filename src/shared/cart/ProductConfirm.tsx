@@ -11,11 +11,11 @@ import { IProduct } from "../types/ProductTypes";
 import { heightForModals, navBarMobileHeight } from "../Layout/utils/info";
 
 interface IProductConfirm {
-  handleDrawerOpen: ()=>void;
+  handleCartDrawerOpen: ()=>void;
   lastAddedProduct: (IProduct & { quantity: number });
   lastAddedAt: string | null | undefined;
 }
-export const ProductConfirm: React.FC<IProductConfirm> = ({ handleDrawerOpen, lastAddedProduct, lastAddedAt }) => {
+export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen, lastAddedProduct, lastAddedAt }) => {
   const { clearLastAdded } = useCart();
 
   // TODO: hacer lógica de cierre
@@ -95,7 +95,7 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleDrawerOpen, la
       <WhiteButton
       id={`confirm-cart-item`}
       text="VER CARRITO"
-      onClick={handleDrawerOpen}
+      onClick={handleCartDrawerOpen}
       fetchingText={"borrando"}
       isFetching={false}
       disabled={false}

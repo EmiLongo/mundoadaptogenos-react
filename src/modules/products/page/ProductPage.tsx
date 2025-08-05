@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { BigCard } from "../components/BigCard";
@@ -11,7 +11,11 @@ export const ProductPage: React.FC = () => {
   const product = state.product;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
-  console.log("product: ", product)
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
+
   return (
     <>
     <BigCard product={product} />

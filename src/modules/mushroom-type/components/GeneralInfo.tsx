@@ -57,10 +57,10 @@ export const GeneralInfo: React.FC<IGeneralInfoComponent> = ({
         <Box
           sx={{
             display: "flex",
+            flex: 1,
             flexDirection: "column",
             gap: "16px",
             width: { xs: "100%", md: "47%", lg: "38%" },
-            height: "100%",
             borderRadius: "8px",
             backgroundColor: greyColor[100],
             overflow: "hidden",
@@ -84,20 +84,23 @@ export const GeneralInfo: React.FC<IGeneralInfoComponent> = ({
             sx={{
               paddingX: { xs: "16px", sm: "24px", md: "40px" },
               paddingBottom: "32px",
-              flex: 1,
               display: "flex",
               flexDirection: "column"
             }}
           >
             {isMobile ? (
-              <>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column"
+              }}>
+
                 <Heading4 sx={{ marginY: "8px" }}>
                   CARACTERÍSTICAS FÍSICAS
                 </Heading4>
                 {mushroom.description.map((paragraph, index) => (
                   <BodyM key={`description-paragraph-${index}`}>{paragraph}</BodyM>
                 ))}
-              </>
+              </Box>
             ) : (
               <>
                 <Heading2 sx={{ marginY: "8px" }}>
@@ -114,10 +117,10 @@ export const GeneralInfo: React.FC<IGeneralInfoComponent> = ({
         <Box
           sx={{
             display: "flex",
+            flex: "1",
             flexDirection: "column",
             gap: "16px",
             width: { xs: "100%", md: "47%", lg: "60%" },
-            height: "100%",
             borderRadius: "8px",
             backgroundColor: greyColor[100],
             overflow: "hidden",
@@ -140,18 +143,20 @@ export const GeneralInfo: React.FC<IGeneralInfoComponent> = ({
             sx={{
               paddingX: { xs: "16px", sm: "24px", md: "40px" },
               paddingBottom: "32px",
-              flex: 1,
               display: "flex",
               flexDirection: "column",
             }}
           >
             {isMobile ? (
-              <>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column"
+              }}>
                 <Heading4 sx={{ marginY: "8px" }}>CULTIVO</Heading4>
                 {mushroom.harvest.map((paragraph, index) => (
                   <BodyM key={`harvest-paragraph-${index}`}>{paragraph}</BodyM>
                 ))}
-              </>
+              </Box>
             ) : (
               <>
                 <Heading2 sx={{ marginY: "8px" }}>CULTIVO</Heading2>

@@ -74,7 +74,7 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
           </Box>}
         </Box>
         {!itemsCount &&
-          <Heading4>😣 Aún no hay productos cargados al carrito...</Heading4>
+          <Heading4>Aún no hay productos cargados al carrito...</Heading4>
         }
         {cart && !!itemsCount &&
         <>

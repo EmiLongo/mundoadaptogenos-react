@@ -1,3 +1,4 @@
+// src\modules\products\components\BigCard.tsx
 import React, { useState } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
@@ -41,12 +42,15 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
     label: title.split(" - ")[0]
   }));
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async() => {
     if(sectionsProduct.length > 1){
       if(selectedOptions.some((option) => option === "")){
         setIsKitOptionsModalOpen(true)
       } else {
-        addProduct(product, counter, selectedOptions);
+        const success = await addProduct(product, counter, selectedOptions);
+        if (success) {
+          setSelectedOptions(["", "", ""]);
+        }
       }
     } else {
       addProduct(product, counter, selectedOptions);

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { IProduct } from '@shared/components/types';
-import { ICart, ICartItem } from '@shared/cart/types';
+import { IProduct } from '@/shared/types/ProductTypes';
+import { ICart, ICartItem } from '@/shared/types/CartTypes';
 
 // Tipos específicos para el store
 export interface CartState {
@@ -13,8 +13,9 @@ export interface CartState {
 export interface CartActions {
   // Acciones básicas del carrito
   initializeCart: (userId?: number, sessionId?: string) => void;
-  addToCart: (product: IProduct, quantity?: number) => void;
+  addToCart: (product: IProduct, quantity?: number, options?: string[]) => void;
   removeFromCart: (productId: number) => void;
+  removeFromCartByCartItemId: (cartItemId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
   clearLastAdded: () => void;
@@ -28,6 +29,12 @@ export interface CartActions {
   // Gestión de estado
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+
+  // Gestionar opciones
+  addOptionToCartItem: (productId: number, option: string) => void;
+  removeOptionFromCartItem: (productId: number, option: string) => void;
+  updateCartItemOptions: (productId: number, options: string[]) => void;
+  clearCartItemOptions: (productId: number) => void;
 }
 
 export type CartStore = CartState & CartActions;
@@ -54,12 +61,13 @@ const createEmptyCart = (userId?: number, sessionId?: string): ICart => {
 };
 
 // Función para crear un item del carrito
-const createCartItem = (product: IProduct, quantity: number, cartId: number): ICartItem => {
+const createCartItem = (product: IProduct, quantity: number, cartId: number, options?: string[]): ICartItem => {
   return {
     id: generateTempId(),
     cartId,
     productId: product.id,
     quantity,
+    options,
     addedAt: new Date().toISOString(),
     product
   };
@@ -94,7 +102,7 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Agregar producto al carrito
-      addToCart: (product: IProduct, quantity = 1) => {
+      addToCart: (product: IProduct, quantity = 1, options = []) => {
         const { cart } = get();
         let updatedCart: ICart;
 
@@ -111,14 +119,19 @@ export const useCartStore = create<CartStore>()(
         );
 
         if (existingItemIndex >= 0) {
-          // Actualizar cantidad si ya existe
+          // Si no tiene opciones, Actualizar cantidad si ya existe
+          if (!product.hasOptions) {
           updatedCart.cartItems[existingItemIndex] = {
             ...updatedCart.cartItems[existingItemIndex],
-            quantity: updatedCart.cartItems[existingItemIndex].quantity + quantity
-          };
+            quantity: updatedCart.cartItems[existingItemIndex].quantity + quantity}
+          } else {
+            // Si ya hay un producto con el id y tiene opciones Agregar nuevo item
+            const newItem = createCartItem(product, quantity, updatedCart.id, options);
+            updatedCart.cartItems.push(newItem);
+          }
         } else {
-          // Agregar nuevo item
-          const newItem = createCartItem(product, quantity, updatedCart.id);
+          // Si tiene opciones Agregar nuevo item
+          const newItem = createCartItem(product, quantity, updatedCart.id, options);
           updatedCart.cartItems.push(newItem);
         }
 
@@ -134,7 +147,7 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
-      // Remover producto del carrito
+      // Remover producto del carrito por productId
       removeFromCart: (productId: number) => {
         const { cart } = get();
         if (!cart) return;
@@ -142,6 +155,19 @@ export const useCartStore = create<CartStore>()(
         const updatedCart = {
           ...updateCartActivity(cart),
           cartItems: cart.cartItems.filter(item => item.productId !== productId)
+        };
+
+        set({ cart: updatedCart, error: null });
+      },
+
+      // Remover producto del carrito por productId
+      removeFromCartByCartItemId: (cartItemId: number) => {
+        const { cart } = get();
+        if (!cart) return;
+
+        const updatedCart = {
+          ...updateCartActivity(cart),
+          cartItems: cart.cartItems.filter(item => item.id !== cartItemId)
         };
 
         set({ cart: updatedCart, error: null });
@@ -236,7 +262,88 @@ export const useCartStore = create<CartStore>()(
       // Gestión de errores
       setError: (error: string | null) => {
         set({ error });
-      }
+      },
+
+      // Agregar una opción a un item específico
+      addOptionToCartItem: (productId: number, option: string) => {
+        const { cart } = get();
+        if (!cart) return;
+
+        const updatedCart = {
+          ...updateCartActivity(cart),
+          cartItems: cart.cartItems.map(item => {
+            if (item.productId === productId) {
+              const currentOptions = item.options || [];
+              // Evitar duplicados
+              if (currentOptions.includes(option)) {
+                return item;
+              }
+              return {
+                ...item,
+                options: [...currentOptions, option]
+              };
+            }
+            return item;
+          })
+        };
+
+        set({ cart: updatedCart, error: null });
+      },
+
+      // Remover una opción específica
+      removeOptionFromCartItem: (productId: number, option: string) => {
+        const { cart } = get();
+        if (!cart) return;
+
+        const updatedCart = {
+          ...updateCartActivity(cart),
+          cartItems: cart.cartItems.map(item => {
+            if (item.productId === productId && item.options) {
+              return {
+                ...item,
+                options: item.options.filter(opt => opt !== option)
+              };
+            }
+            return item;
+          })
+        };
+
+        set({ cart: updatedCart, error: null });
+      },
+
+      // Reemplazar todas las opciones de un item
+      updateCartItemOptions: (productId: number, options: string[]) => {
+        const { cart } = get();
+        if (!cart) return;
+
+        const updatedCart = {
+          ...updateCartActivity(cart),
+          cartItems: cart.cartItems.map(item => 
+            item.productId === productId 
+              ? { ...item, options: [...options] }
+              : item
+          )
+        };
+
+        set({ cart: updatedCart, error: null });
+      },
+
+      // Limpiar todas las opciones de un item
+      clearCartItemOptions: (productId: number) => {
+        const { cart } = get();
+        if (!cart) return;
+
+        const updatedCart = {
+          ...updateCartActivity(cart),
+          cartItems: cart.cartItems.map(item => 
+            item.productId === productId 
+              ? { ...item, options: undefined }
+              : item
+          )
+        };
+
+        set({ cart: updatedCart, error: null });
+      },
     }),
     {
       name: 'cart-storage', // Nombre para localStorage

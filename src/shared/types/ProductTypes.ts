@@ -14,6 +14,7 @@
 export interface IProduct {
   id: number;
   sectionId: number[];
+  packagingId: number;
   title: string;
   description?: string;
   discount: number;
@@ -23,6 +24,7 @@ export interface IProduct {
   plan: string;
   urlPhoto: string;
   urlThumbnail: string;
+  hasOptions: boolean
   isValid: boolean;
   createdAt?: string;
 }

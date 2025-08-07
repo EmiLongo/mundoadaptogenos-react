@@ -16,6 +16,8 @@ import { useCart } from "@/store/useCartStore";
 import { toast } from "react-toastify";
 import { WhiteButton } from "@/shared/components/buttons/WhiteButton";
 import { KitOptionsModal } from "./KitOptionsModal";
+import { filterByPackagingIdByNotSectionId } from "@/shared/Layout/utils/filterProducts";
+import { catalogue } from "@/shared/Layout/utils/catalogue";
 
 interface IBigCard {
   product: IProduct
@@ -27,14 +29,28 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   const sectionsProduct = product.sectionId;
   const [counter, setCounter] = useState<number>(1);
   const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(["","",""]);
+
   const handleShowDetails = () => {
     console.log("handleShowDetails")
   }
   
+  const products = filterByPackagingIdByNotSectionId(catalogue, 1, 5)
+  const selectInfo = products.map(({ id, title }) => ({
+    value: String(id),
+    label: title.split(" - ")[0]
+  }));
+
   const handleAddToCart = () => {
-    addProduct(product, counter);
+    if(sectionsProduct.length > 1){
+      if(selectedOptions.some((option) => option === "")){
+        setIsKitOptionsModalOpen(true)
+      } else {
+        addProduct(product, counter, selectedOptions);
+      }
+    } else {
+      addProduct(product, counter, selectedOptions);
+    }
   }
 
   const handleShare = () => {
@@ -170,7 +186,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             <OnlyTextButton
               id="bt-shop-show-details"
               onClick={handleShowDetails}
-              text="Ver más productos"
+              text="Ver más detalles"
               fetchingText=""
               isFetching={false}
               disabled={false}
@@ -182,7 +198,31 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             flexDirection: sectionsProduct.length > 1 ? "column" : "row",
             gap: "12px"
           }}>
+            {sectionsProduct.length > 1 &&
+              <Box>
+                {selectedOptions[0] !== "" && 
+                  (() => {
+                    const found = selectInfo.find(info => info.value === selectedOptions[0]);
+                    return found && <BodyS>1 x {found.label}</BodyS>;
+                  })()
+                }
+                {selectedOptions[1] !== "" && 
+                  (() => {
+                    const found = selectInfo.find(info => info.value === selectedOptions[1]);
+                    return found && <BodyS>1 x {found.label}</BodyS>;
+                  })()
+                }
+                {selectedOptions[2] !== "" && 
+                  (() => {
+                    const found = selectInfo.find(info => info.value === selectedOptions[2]);
+                    return found && <BodyS>1 x {found.label}</BodyS>;
+                  })()
+                }
+              </Box>
+            }
             <Box sx={{display: "flex", gap: "8px"}}>
+              <>
+              {sectionsProduct.length === 1 &&
               <ProductCounter 
               index={999999}
               counter={counter} 
@@ -190,18 +230,19 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               handleSus={handleSus}
               isDelete={false}
               type="primary"
-              />
+              />}
               {sectionsProduct.length > 1 &&
               <WhiteButton
               id="bt-shop-edit-options"
               onClick = {handleOpenOptionsModal}
               type="red"
-              text = "EDITAR OPCIONES"
+              text = {selectedOptions.some(option => option !== "") ? "CAMBIAR OPCIONES" : "ELEGIR OPCIONES"}
               fetchingText = ""
               isFetching = {false}
               disabled = {false}
               sx={(sectionsProduct.length > 1 ? {flex: 1} : {})}
               />}
+              </>
             </Box>
             <ColorButton
               id={`bt-shop-add-cart`}
@@ -251,6 +292,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
         onClose={() => setIsKitOptionsModalOpen(false)}
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
+        selectInfo={selectInfo}
       />
     </Box>
   )

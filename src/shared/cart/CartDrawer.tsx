@@ -82,7 +82,7 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
           <Box sx={{ overflowY: "auto", overflowX: "hidden"}}>
             {cart.cartItems.map((cartItem, index)=>(
               <CartDrawerItem 
-                key={`cartItem-${index}`}
+                key={`cartItem-${cartItem.id}`}
                 cartItem={cartItem} 
                 index={index} 
                 closeCartDrawer={closeCartDrawer}

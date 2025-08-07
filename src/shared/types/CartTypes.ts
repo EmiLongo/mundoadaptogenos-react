@@ -23,6 +23,7 @@ export interface ICartItem {
   quantity: number;
   addedAt: string;
   product: IProduct;
+  options?: string[]
 }
 
 // Modelo para Carrito (unificado con carritos abandonados)

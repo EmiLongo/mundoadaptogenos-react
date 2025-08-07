@@ -17,7 +17,7 @@ interface ICartDrawerItem {
   closeCartDrawer: ()=>void;
 }
 export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, closeCartDrawer}) => {
-  const { updateProductQuantity, removeProduct, error, isLoading, clearError } = useCart();
+  const { updateProductQuantity, removeProductByCartItemId, error, isLoading, clearError } = useCart();
   const [counter, setCounter] = useState<number>(cartItem.quantity);
 
   const [showDeleteBt, setShowDeleteBt] = useState<boolean>(false)
@@ -44,7 +44,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
 
   const handleDeleteCartItem = () => {
     setIsFetching(true)
-    removeProduct(cartItem.productId);
+    removeProductByCartItemId(cartItem.id);
   }
 
   useEffect(() => {

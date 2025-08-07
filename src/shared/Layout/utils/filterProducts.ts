@@ -18,3 +18,11 @@ export const filterByMultipleSectionIds = (catalogue: IProduct[], sectionIds: nu
     product.sectionId.some(id => sectionIds.includes(id)) && product.isValid
   );
 };
+
+export const filterByPackagingIdByNotSectionId = (catalog: IProduct[], packagingId: number, sectionId: number) => {
+  return catalog.filter(
+    (item) =>
+      item.packagingId === packagingId &&
+      !item.sectionId.includes(sectionId) // que NO contenga
+  );
+};

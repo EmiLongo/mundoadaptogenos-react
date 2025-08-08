@@ -10,6 +10,7 @@ import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { OnlyTextButton } from "@/shared/components/buttons/OnlyTextButton";
 import { ColorButton } from "@/shared/components/buttons/ColorButton";
 import { ProductCounter } from "@/shared/cart/ProductCounter";
@@ -19,14 +20,17 @@ import { WhiteButton } from "@/shared/components/buttons/WhiteButton";
 import { KitOptionsModal } from "./KitOptionsModal";
 import { filterByPackagingIdByNotSectionId } from "@/shared/Layout/utils/filterProducts";
 import { catalogue } from "@/shared/Layout/utils/catalogue";
+import { useCartDrawer } from "@/store/useCartDrawer";
 
 interface IBigCard {
   product: IProduct
 }
 export const BigCard: React.FC<IBigCard> = ({ product }) => {
-  const { addProduct } = useCart();
+  const { addProduct, isProductInCart } = useCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const { toggleCartDrawer } = useCartDrawer();
+
   const sectionsProduct = product.sectionId;
   const [counter, setCounter] = useState<number>(1);
   const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
@@ -239,8 +243,8 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               <WhiteButton
               id="bt-shop-edit-options"
               onClick = {handleOpenOptionsModal}
-              type="red"
-              text = {selectedOptions.some(option => option !== "") ? "CAMBIAR OPCIONES" : "ELEGIR OPCIONES"}
+              type= {selectedOptions.some(option => option !== "") ? "grey" : "red"}
+              text = {selectedOptions.some(option => option !== "") ? "EDITAR OPCIONES" : "ELEGIR OPCIONES"}
               fetchingText = ""
               isFetching = {false}
               disabled = {false}
@@ -260,6 +264,21 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             />
           </Box>
           <Box sx={{display: "flex", flexDirection: "column", gap: "8px", color: greyColor[950]}}>
+            {isProductInCart(product.id) && <Box sx={{display:"flex", alignItems: "center", gap:"8px", marginBottom: "1.5rem"}}>
+              <DoneAllIcon />
+              <BodyM sx={{textWrap: "wrap"}}>
+              Ya agregaste este producto al carrito.
+              </BodyM>
+              <OnlyTextButton 
+                id= "bt-product-open-cart-drawer"
+                type= "greyButton"
+                size= "M"
+                onClick= {toggleCartDrawer}
+                text= "Ver Carrito"
+                isFetching= {false}
+                disabled= {false}
+              />
+            </Box>}
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
               <LocalShippingOutlinedIcon />
               <BodyM sx={{textWrap: "wrap"}}>

@@ -192,17 +192,38 @@ export const theme = createTheme({
           color: greyColor[950],
           height: "40px",
           borderRadius: "40px",
+          // Estado por defecto (enabled)
           "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: greyColor[800],
+          },
+          "& .MuiSelect-select": {
+            color: greyColor[800],
+          },
+          // Hover
+          "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: greyColor[950],
           },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: greyColor[700],
-          },
+          // Focused
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: brownColor[600],
+            borderColor: greenColor[900],
           },
           "&.Mui-error .MuiOutlinedInput-notchedOutline": {
             borderColor: redColor[700],
+          },
+          // Disabled
+          "&.Mui-disabled": {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: greyColor[600],
+            },
+            "& .MuiSelect-select": {
+              color: greyColor[600],
+            },
+          },
+          // Error
+          "&.Mui-error": {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: redColor[700],
+            },
           },
         },
       },
@@ -223,6 +244,42 @@ export const theme = createTheme({
           "&.MuiFormLabel-filled": {
             transform: "translate(16px, -9px) scale(0.7)",
             color: brownColor[600],
+          },
+        },
+      },
+    },
+
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          "&.Mui-error": {
+            color: redColor[700],
+          },
+        },
+      },
+    },
+
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          // Texto por defecto
+          color: greyColor[800],
+        },
+        icon: {
+          color: greyColor[800],
+        },
+      },
+    },
+
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: greyColor[800], // texto en el desplegable
+          "&.Mui-selected": {
+            color: greyColor[800],
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: greyColor[950],
+            },
           },
         },
       },

@@ -1,5 +1,5 @@
 // src\modules\products\components\BigCard.tsx
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
@@ -21,20 +21,30 @@ import { KitOptionsModal } from "./KitOptionsModal";
 import { filterByPackagingIdByNotSectionId } from "@/shared/Layout/utils/filterProducts";
 import { catalogue } from "@/shared/Layout/utils/catalogue";
 import { useCartDrawer } from "@/store/useCartDrawer";
+import { OptionsModal } from "./OptionsModal";
 
 interface IBigCard {
   product: IProduct
+}
+export enum ClickFrom {
+  ADD_TO_CART = "addToCart",
+  SELECT_OPTIONS = "selectOptions",
+  LARGE_SCREEN = "largeScreen",
 }
 export const BigCard: React.FC<IBigCard> = ({ product }) => {
   const { addProduct, isProductInCart } = useCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const { toggleCartDrawer } = useCartDrawer();
 
   const sectionsProduct = product.sectionId;
   const [counter, setCounter] = useState<number>(1);
-  const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
+  const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<string | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(["","",""]);
+
+  const formikValidateRef = useRef<(() => Promise<any>) | null>(null);
+  const formikResetRef = useRef<(() => void) | null>(null);
 
   const handleShowDetails = () => {
     console.log("handleShowDetails")
@@ -47,13 +57,26 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   }));
 
   const handleAddToCart = async() => {
+    // si tiene opciones
     if(sectionsProduct.length > 1){
+      // se fija que esten todos completos sino abre modal
       if(selectedOptions.some((option) => option === "")){
-        setIsKitOptionsModalOpen(true)
+        if(isLargeScreen){
+          if (formikValidateRef.current) {
+            const errors = await formikValidateRef.current();
+            if (Object.keys(errors).length > 0) {
+              toast.error("Se deben elegir todas las opciones");
+              return;
+            }
+          }
+        } else {
+          setIsKitOptionsModalOpen(ClickFrom.ADD_TO_CART)
+        }
       } else {
         const success = await addProduct(product, counter, selectedOptions);
         if (success) {
           setSelectedOptions(["", "", ""]);
+          if (formikResetRef.current) formikResetRef.current();
         }
       }
     } else {
@@ -79,7 +102,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   };
 
   const handleOpenOptionsModal = () => {
-    setIsKitOptionsModalOpen(true);
+    setIsKitOptionsModalOpen(ClickFrom.SELECT_OPTIONS);
   }
   
 
@@ -200,6 +223,19 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               disabled={false}
               />
           </Box>
+          {isLargeScreen && sectionsProduct.length > 1 && 
+          <OptionsModal 
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+            selectInfo={selectInfo}
+            exposeValidation={(validateFn) => {
+              formikValidateRef.current = validateFn;
+            }}
+            exposeReset={(resetFn) => {
+              formikResetRef.current = resetFn;
+            }}
+          />
+          }
           <Box sx={{
             width: {xs: "100%", sm: "265px", lg: "350px"},
             display: "flex",
@@ -239,7 +275,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               isDelete={false}
               type="primary"
               />}
-              {sectionsProduct.length > 1 &&
+              {sectionsProduct.length > 1 && !isLargeScreen &&
               <WhiteButton
               id="bt-shop-edit-options"
               onClick = {handleOpenOptionsModal}
@@ -311,8 +347,9 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
         </Box>
       </Box>
       <KitOptionsModal
-        isOpen={isKitOptionsModalOpen}
-        onClose={() => setIsKitOptionsModalOpen(false)}
+        isOpen={isKitOptionsModalOpen !== null} 
+        onClose={() => setIsKitOptionsModalOpen(null)}
+        clickFrom={isKitOptionsModalOpen as ClickFrom}
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
         selectInfo={selectInfo}

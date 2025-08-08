@@ -27,11 +27,13 @@ import { ContactButton } from './ContactButton.tsx';
 import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton.tsx';
+import { useCartDrawer } from '@/store/useCartDrawer.ts';
 
 
 export const HeaderThreeLines: React.FC = () => {
   const { initializeCart } = useCart();
   const { lastAddedProduct, lastAddedAt } = useCart();
+  const { isOpenCartDrawer, toggleCartDrawer, setCartDrawer } = useCartDrawer();
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -39,14 +41,9 @@ export const HeaderThreeLines: React.FC = () => {
   const { pathname } = useLocation();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const [openCartDrawer, setOpenCartDrawer] = useState<boolean>(false)
 
   const handleCartButton = () => {
-    if(!openCartDrawer){
-      handleCartDrawerOpen()
-    } else {
-      handleCartDrawerClose()
-    }
+    toggleCartDrawer()
   }
 
   const handleMenuDrawerToggle = () => {
@@ -79,14 +76,14 @@ export const HeaderThreeLines: React.FC = () => {
 
    // Función para abrir el drawer
    const handleCartDrawerOpen = () => {
-    setOpenCartDrawer(true);
+    setCartDrawer(true);
     // Agregar una entrada al historial cuando se abre el drawer
     window.history.pushState({ drawerOpen: true }, '');
   };
 
   // Función para cerrar el drawer
   const handleCartDrawerClose = () => {
-    setOpenCartDrawer(false);
+    setCartDrawer(false);
     // Si hay una entrada en el historial para el drawer, la removemos
     if (window.history.state?.drawerOpen) {
       window.history.back();
@@ -97,8 +94,8 @@ export const HeaderThreeLines: React.FC = () => {
     // Función que maneja el evento popstate (tecla atrás)
     const handlePopState = (event: PopStateEvent) => {
       // Si el drawer está abierto y no hay estado de drawer en el historial
-      if (openCartDrawer && !event.state?.drawerOpen) {
-        setOpenCartDrawer(false);
+      if (isOpenCartDrawer && !event.state?.drawerOpen) {
+        setCartDrawer(false);
       }
       if (mobileMenuOpen && !event.state?.drawerOpen) {
         setMobileMenuOpen(false);
@@ -112,7 +109,7 @@ export const HeaderThreeLines: React.FC = () => {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [openCartDrawer, mobileMenuOpen]);
+  }, [isOpenCartDrawer, mobileMenuOpen]);
 
   // menu lateral en mobile
   const drawer = (
@@ -239,7 +236,7 @@ export const HeaderThreeLines: React.FC = () => {
                     onClick={handleLogoClick}
                     />
                   </Box>
-                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
+                  <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                 </Box>
               </Toolbar>
             ) : (
@@ -274,7 +271,7 @@ export const HeaderThreeLines: React.FC = () => {
                     flex: 1,
                   }}>
                   <ContactButton />
-                  <CartButton openCartDrawer={openCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
+                  <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                   <FAQButton />
                   <LoginButton />
                   </Box>

@@ -31,10 +31,10 @@ export interface CartActions {
   setError: (error: string | null) => void;
 
   // Gestionar opciones
-  addOptionToCartItem: (productId: number, option: string) => void;
-  removeOptionFromCartItem: (productId: number, option: string) => void;
-  updateCartItemOptions: (productId: number, options: string[]) => void;
-  clearCartItemOptions: (productId: number) => void;
+  addOptionToCartItem: (cartId: number, option: string) => void;
+  removeOptionFromCartItem: (cartId: number, option: string) => void;
+  updateCartItemOptions: (cartId: number, options: string[]) => void;
+  clearCartItemOptions: (cartId: number) => void;
 }
 
 export type CartStore = CartState & CartActions;
@@ -265,14 +265,14 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Agregar una opción a un item específico
-      addOptionToCartItem: (productId: number, option: string) => {
+      addOptionToCartItem: (cartId: number, option: string) => {
         const { cart } = get();
         if (!cart) return;
 
         const updatedCart = {
           ...updateCartActivity(cart),
           cartItems: cart.cartItems.map(item => {
-            if (item.productId === productId) {
+            if (item.id === cartId) {
               const currentOptions = item.options || [];
               // Evitar duplicados
               if (currentOptions.includes(option)) {
@@ -291,14 +291,14 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Remover una opción específica
-      removeOptionFromCartItem: (productId: number, option: string) => {
+      removeOptionFromCartItem: (cartId: number, option: string) => {
         const { cart } = get();
         if (!cart) return;
 
         const updatedCart = {
           ...updateCartActivity(cart),
           cartItems: cart.cartItems.map(item => {
-            if (item.productId === productId && item.options) {
+            if (item.id === cartId && item.options) {
               return {
                 ...item,
                 options: item.options.filter(opt => opt !== option)
@@ -312,14 +312,14 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Reemplazar todas las opciones de un item
-      updateCartItemOptions: (productId: number, options: string[]) => {
+      updateCartItemOptions: (cartId: number, options: string[]) => {
         const { cart } = get();
         if (!cart) return;
 
         const updatedCart = {
           ...updateCartActivity(cart),
           cartItems: cart.cartItems.map(item => 
-            item.productId === productId 
+            item.id === cartId 
               ? { ...item, options: [...options] }
               : item
           )
@@ -329,14 +329,14 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Limpiar todas las opciones de un item
-      clearCartItemOptions: (productId: number) => {
+      clearCartItemOptions: (cartId: number) => {
         const { cart } = get();
         if (!cart) return;
 
         const updatedCart = {
           ...updateCartActivity(cart),
           cartItems: cart.cartItems.map(item => 
-            item.productId === productId 
+            item.id === cartId 
               ? { ...item, options: undefined }
               : item
           )

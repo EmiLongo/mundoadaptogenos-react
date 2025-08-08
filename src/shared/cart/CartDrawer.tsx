@@ -11,6 +11,8 @@ import { OnlyTextButton } from "@shared/components/buttons/OnlyTextButton";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@store/useCartStore";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { filterByPackagingIdByNotSectionId } from "../Layout/utils/filterProducts";
+import { catalogue } from "../Layout/utils/catalogue";
 
 interface ICartDrawerProps {
   openCartDrawer: boolean
@@ -32,6 +34,12 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
     closeCartDrawer();
     navigate("./shop");
   }
+
+  const products = filterByPackagingIdByNotSectionId(catalogue, 1, 5)
+  const selectInfo = products.map(({ id, title }) => ({
+    value: String(id),
+    label: title.split(" - ")[0]
+  }));
 
   return(
     <Drawer
@@ -86,6 +94,7 @@ export const CartDrawer: React.FC<ICartDrawerProps> = ({openCartDrawer = false, 
                 cartItem={cartItem} 
                 index={index} 
                 closeCartDrawer={closeCartDrawer}
+                selectInfo={selectInfo}
               />
             ))}
           </Box>

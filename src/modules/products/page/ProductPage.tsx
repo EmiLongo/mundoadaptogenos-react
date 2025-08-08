@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { BigCard } from "../components/BigCard";
 import { ProductBenefits } from "../components/ProductBenefits";
@@ -11,8 +11,10 @@ export const ProductPage: React.FC = () => {
   const product = state.product;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
+    if(!product) navigate("/")
     window.scrollTo(0, 0);
   }, [product]);
 

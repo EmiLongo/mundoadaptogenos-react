@@ -28,6 +28,7 @@ import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHe
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton.tsx';
 import { useCartDrawer } from '@/store/useCartDrawer.ts';
+import { Marquee } from './Marquee.tsx';
 
 
 export const HeaderThreeLines: React.FC = () => {
@@ -207,10 +208,13 @@ export const HeaderThreeLines: React.FC = () => {
         backgroundColor: greyColor[50],
       }}
       >
-        {!isMobile && 
-          <Box sx={{width: "100%", height: navBarDesktopInfoHeight, display: "flex", justifyContent:"center", alignItems: "center", backgroundColor: greyColor[200] }}>
-            <BodyM>20% OFF POR TRANSFERENCIA | 3 Y 6 CUOTAS SIN INTERÉS CON TODOS LOS BANCOS | ENVÍOS GRATIS (SOLO ARGENTINA)</BodyM>
-          </Box>
+        {!isMobile  
+          ? <Box sx={{width: "100%", height: navBarDesktopInfoHeight, display: "flex", justifyContent:"center", alignItems: "center", backgroundColor: greyColor[200] }}>
+              <BodyM>20% OFF POR TRANSFERENCIA | 3 Y 6 CUOTAS SIN INTERÉS CON TODOS LOS BANCOS | ENVÍOS GRATIS (SOLO ARGENTINA)</BodyM>
+            </Box>
+          : <Box sx={{width: "100%", height: navBarDesktopInfoHeight, display: "flex", justifyContent:"center", alignItems: "center", backgroundColor: greyColor[200] }}>
+              <Marquee />
+            </Box>
         }
         <Box sx={{ height: navBar12DesktopHeight, width: "100%", backgroundColor: greyColor[50] }}>
             {isMobile ? (

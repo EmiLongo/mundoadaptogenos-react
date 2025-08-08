@@ -2,12 +2,13 @@
 import React from "react";
 import { Box, IconButton, MenuItem, Modal, Select, FormControl } from "@mui/material";
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { BodyM, InputLabel } from "@theme/textStyles";
+import { BodyM, Heading5, InputLabel } from "@theme/textStyles";
 import { greyColor } from "@theme/theme";
 import { OnlyTextButton } from "@shared/components/buttons/OnlyTextButton";
 import { toast } from "react-toastify";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { ClickFrom } from "./BigCard";
 
 // Esquema de validación con Yup
 const validationSchema = Yup.object({
@@ -19,14 +20,21 @@ const validationSchema = Yup.object({
 interface IKitOptionsModal {
   isOpen: boolean;
   onClose: () => void;
+  clickFrom: ClickFrom | null; // Permitir null
   selectedOptions: string[];
   setSelectedOptions: (options: string[]) => void;
   selectInfo: {value: string, label: string}[];
 }
 
+type ModalText = {
+  titleModal: string;
+  subtitleModal: string;
+};
+
 export const KitOptionsModal: React.FC<IKitOptionsModal> = ({ 
   isOpen, 
   onClose,
+  clickFrom,
   selectedOptions,
   setSelectedOptions,
   selectInfo
@@ -35,6 +43,35 @@ export const KitOptionsModal: React.FC<IKitOptionsModal> = ({
   const handleBtClose = () => {
     onClose()
   };
+
+  const texts: Record<ClickFrom, ModalText> = {
+    [ClickFrom.ADD_TO_CART]: {
+      titleModal: "ELEGIR OPCIONES",
+      subtitleModal: "Para añadir al carrito debés seleccionar las variantes:",
+    },
+    [ClickFrom.SELECT_OPTIONS]: {
+      titleModal: "",
+      subtitleModal: "Elegí las tres opciones de variantes:",
+    },
+    [ClickFrom.LARGE_SCREEN]: {
+      titleModal: "",
+      subtitleModal: "",
+    },
+  };
+
+  // Texto por defecto si clickFrom es null
+  const defaultText: ModalText = {
+    titleModal: "",
+    subtitleModal: "Elegí las opciones:",
+  };
+
+  // Obtener el texto actual de forma segura
+  const currentText = clickFrom ? texts[clickFrom] : defaultText;
+
+  // Si no hay clickFrom válido, no mostrar el modal
+  if (!clickFrom) {
+    return null;
+  }
 
   return (
     <Modal
@@ -77,10 +114,15 @@ export const KitOptionsModal: React.FC<IKitOptionsModal> = ({
           }}>
             <CloseOutlinedIcon sx={{cursor: "pointer", color: greyColor[950]}} onClick={onClose} />
           </IconButton>
-          <BodyM sx={{textAlign: "center", width: "100%"}}>Elegí las tres opciones de variantes:</BodyM>
+          {Boolean(currentText.titleModal) && <Heading5 sx={{textAlign: "center", width: "100%"}}>{currentText.titleModal}</Heading5>}
+          <BodyM sx={{textAlign: "center", width: "100%"}}>{currentText.subtitleModal}</BodyM>
           
           <Formik
-            initialValues={{ option1: selectedOptions[0], option2: selectedOptions[1], option3: selectedOptions[2] }}
+            initialValues={{ 
+              option1: selectedOptions[0] || "", 
+              option2: selectedOptions[1] || "", 
+              option3: selectedOptions[2] || "" 
+            }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               setSelectedOptions([values.option1, values.option2, values.option3]);
@@ -155,7 +197,7 @@ export const KitOptionsModal: React.FC<IKitOptionsModal> = ({
                   </FormControl>
                 </Box>
 
-                <Box sx={{display: "flex", justifyContent: "space-between", position: "relative", top: "20px"}}>
+                <Box sx={{display: "flex", justifyContent: "space-between", marginTop: "20px"}}>
                   <OnlyTextButton 
                     id={`bt-product-options-cancel`}
                     type="primaryButton"

@@ -1,6 +1,7 @@
 // src/modules/home/page/HomePage.tsx
-import React from "react";
-import { Hero } from "../components/Hero";
+import React, { lazy } from "react";
+const Hero = lazy(() => import("../components/Hero").then(module => ({ default: module.Hero })));
+
 import { Highlights } from "../components/Highlights";
 import { PresentationPower } from "../components/PresentationPower";
 

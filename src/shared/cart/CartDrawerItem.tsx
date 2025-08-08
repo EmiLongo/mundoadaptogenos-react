@@ -10,19 +10,24 @@ import { useCart } from "@store/useCartStore";
 import { toast } from "react-toastify";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { greyColor, redColor } from "@/theme/theme";
+import { KitOptionsModal } from "@/modules/products/components/KitOptionsModal";
 
 interface ICartDrawerItem {
   cartItem: ICartItem;
   index: number;
   closeCartDrawer: ()=>void;
+  selectInfo: {value: string, label: string,}[];
 }
-export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, closeCartDrawer}) => {
-  const { updateProductQuantity, removeProductByCartItemId, error, isLoading, clearError } = useCart();
+export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, closeCartDrawer, selectInfo}) => {
+  const { updateProductQuantity, removeProductByCartItemId, updateCartItemMultipleOptions, error, isLoading, clearError } = useCart();
   const [counter, setCounter] = useState<number>(cartItem.quantity);
 
   const [showDeleteBt, setShowDeleteBt] = useState<boolean>(false)
   const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(cartItem.options as string[]);
+  const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
 
+  console.log("cartItem: ", cartItem)
   const handleAdd = () => {
     const quantity = counter+1;
     setCounter(quantity);
@@ -47,6 +52,14 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
     removeProductByCartItemId(cartItem.id);
   }
 
+  const handleOpenOptionsModal = () => {
+    setIsKitOptionsModalOpen(true);
+  }
+
+  const onCloseOptionsModal = () => {
+      setIsKitOptionsModalOpen(false);
+  }
+  
   useEffect(() => {
     if(error){
     toast.error("Error: No se pudo borrar el Item")
@@ -64,6 +77,11 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
     }
   }, [isFetching])
 
+  useEffect(() => {
+    if(selectedOptions.some(option => option === "")) return
+    updateCartItemMultipleOptions(cartItem, selectedOptions);
+  }, [selectedOptions])
+  console.log("selectedInfo :", selectInfo)
   return (
     <Box 
     key={`cart-item-${index}`}
@@ -128,17 +146,31 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
       alt={`Foto del Producto ${index} del Carrito`}
       src={cartItem.product.urlThumbnail}
       sx={{
-                  border: "none",
+        border: "none",
         borderRadius: "8px",
         borderTopLeftRadius: showDeleteBt ? 0 : "8px",
         borderBottomLeftRadius: showDeleteBt ? 0 : "8px",
         marginRight: "16px"
-        
       }}
       />
       <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
         <BodyS sx={{height: "2.5em"}}>{cartItem.product.title}</BodyS>
         <BodyMEmph>{numberToPrice(cartItem.product.price * counter)}</BodyMEmph>
+        {cartItem.product.hasOptions && (
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "3px"}}>
+            {(cartItem.options || ["", "", ""])
+              .filter(option => option !== "")
+              .map((option, index, arr) => {
+                const infoSelected = selectInfo.find(info => info.value === option);
+                return infoSelected ? (
+                  <BodyS key={index}>
+                    1x {infoSelected.label}
+                    {index !== arr.length - 1 && ', '}
+                  </BodyS>
+                ) : null;
+              })}
+          </Box>
+        )}
         <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
         {showDeleteBt
         ? <WhiteButton
@@ -150,12 +182,24 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           disabled={isLoading}
           sx={{width: "150px"}}
           />
-        : <><ProductCounter 
+        : <>
+  
+          {cartItem.product.hasOptions
+          ? <WhiteButton
+              id="bt-drawer-edit-options"
+              onClick = {handleOpenOptionsModal}
+              type= {selectedOptions.some(option => option !== "") ? "grey" : "red"}
+              text = {selectedOptions.some(option => option !== "") ? "EDITAR OPCIONES" : "ELEGIR OPCIONES"}
+              fetchingText = ""
+              isFetching = {false}
+              disabled = {false}
+            />
+          : <ProductCounter 
           index={index}
           counter={counter} 
           handleAdd={handleAdd}
           handleSus={handleSus}
-          />
+          />}
           <WhiteButton
           id={`delete-cart-item-${index}`}
           text="BORRAR"
@@ -167,6 +211,13 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           /></>}
         </Box>
       </Box>
+      <KitOptionsModal
+        isOpen={isKitOptionsModalOpen}
+        onClose={onCloseOptionsModal}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+        selectInfo={selectInfo}
+      />
     </Box>
   )
 }

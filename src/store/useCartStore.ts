@@ -2,6 +2,7 @@
 import { toast } from 'react-toastify';
 import { useCartStore } from './cartStore';
 import { IProduct } from '@/shared/types/ProductTypes';
+import { ICartItem } from '@/shared/types/CartTypes';
 
 export const useCart = () => {
   const {
@@ -111,13 +112,13 @@ export const useCart = () => {
     }
   };
 
-  const addSingleOptionToCartItem = (product: IProduct, option: string) => {
+  const addSingleOptionToCartItem = (cartItem: ICartItem, option: string) => {
     setLoading(true);
-    if(!product.hasOptions){
+    if(!cartItem.product.hasOptions){
       setError("El producto no permite opciones")
     }
     try{
-      addOptionToCartItem(product.id, option)
+      addOptionToCartItem(cartItem.id, option)
     } catch (err) {
     toast.error("Ocurrió un error al agregar la opción")
     console.log(err)
@@ -126,13 +127,13 @@ export const useCart = () => {
     }
   };
 
-  const removeSingleOptionFromCartItem = (product: IProduct, option: string) =>{
+  const removeSingleOptionFromCartItem = (cartItem: ICartItem, option: string) =>{
     setLoading(true);
-    if(!product.hasOptions){
+    if(!cartItem.product.hasOptions){
       setError("El producto no permite opciones")
     }
     try{
-      removeOptionFromCartItem(product.id, option)
+      removeOptionFromCartItem(cartItem.id, option)
     } catch (err) {
     toast.error("Ocurrió un error al borrar la opción")
     console.log(err)
@@ -141,13 +142,13 @@ export const useCart = () => {
     }
   };
 
-  const updateCartItemMultipleOptions = (product: IProduct, options: string[]) =>{
+  const updateCartItemMultipleOptions = (cartItem: ICartItem, options: string[]) =>{
     setLoading(true);
-    if(!product.hasOptions){
+    if(!cartItem.product.hasOptions){
       setError("El producto no permite opciones")
     }
     try{
-      updateCartItemOptions(product.id, options)
+      updateCartItemOptions(cartItem.id, options)
     } catch (err) {
     toast.error("Ocurrió un error al actualizar las opciones")
     console.log(err)
@@ -156,13 +157,13 @@ export const useCart = () => {
     }
   };
 
-  const clearCartItemOptionsByProduct = (product: IProduct) =>{
+  const clearCartItemOptionsByProduct = (cartItem: ICartItem) =>{
     setLoading(true);
-    if(!product.hasOptions){
+    if(!cartItem.product.hasOptions){
       setError("El producto no permite opciones")
     }
     try{
-      clearCartItemOptions(product.id)
+      clearCartItemOptions(cartItem.id)
     } catch (err) {
     toast.error("Ocurrió un error al borrar las opciones")
     console.log(err)

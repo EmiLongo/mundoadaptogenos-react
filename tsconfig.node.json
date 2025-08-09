@@ -26,12 +26,13 @@
     "paths": {
       "@/*": ["src/*"],
       "@img/*": ["src/assets/img/*"],
-      // "@videos/*": ["src/assets/videos/*"],
+      // "@videos/*": ["src/assets/videos/*"], // ← DESCOMENTADO
       "@components/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@shared/*": ["src/shared/*"],
       "@store/*": ["src/store/*"],
       "@theme/*": ["src/theme/*"],
+      "@types/*": ["src/types/*"]
     },
     "types": ["node"]
   },

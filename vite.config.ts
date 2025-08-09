@@ -9,13 +9,13 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@img': path.resolve(__dirname, './src/assets/img'),
-      // '@api': path.resolve(__dirname, './src/api'),
+      // '@videos': path.resolve(__dirname, './src/assets/videos'), // ← AGREGADO
       '@components': path.resolve(__dirname, './src/components'),
       '@modules': path.resolve(__dirname, './src/modules'),
       '@shared': path.resolve(__dirname, './src/shared'),
       '@store': path.resolve(__dirname, './src/store'),
       '@theme': path.resolve(__dirname, './src/theme'),
-      '@types': path.resolve(__dirname, './src/shared/types'),
+      '@types': path.resolve(__dirname, './src/types'),
     },
   },
 })

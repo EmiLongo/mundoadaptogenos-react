@@ -23,22 +23,35 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     
-    /* Paths - importante para los alias */
+    /* Paths - completamente sincronizado con Vite */
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
       "@img/*": ["src/assets/img/*"],
-      "@videos/*": ["src/assets/videos/*"],
+      // "@videos/*": ["src/assets/videos/*"],
       "@components/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@shared/*": ["src/shared/*"],
       "@store/*": ["src/store/*"],
       "@theme/*": ["src/theme/*"],
-      "@types/*": ["src/shared/types/*"]
+      "@types/*": ["src/types/*"]
     },
     
-    /* Tipos para Node.js */
-    "types": ["node", "vite/client"]
+    /* Tipos mejorados */
+    "types": ["vite/client"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*",
+    "src/**/*.tsx",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

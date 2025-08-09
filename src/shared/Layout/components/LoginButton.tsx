@@ -5,13 +5,13 @@ import { IconButton } from "@mui/material";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { ModalLogin } from "@shared/components/auth/ModalLogin";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
+import { useUserStore } from "@store/useUserStore";
 
 export const LoginButton: React.FC = () => {
   const navigate = useNavigate();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenForgetPass, setIsOpenForgetPass] = useState(false);
-  // TODO: hacer la logica para verificar si el usuario esta logueado
-  const isUserLoggedIn = false;
+  const { isAuthenticated } = useUserStore();
 
   const handleCloseLogin = () => {
     setIsOpenLogin(false);
@@ -19,7 +19,8 @@ export const LoginButton: React.FC = () => {
   }
 
   return (
-    isUserLoggedIn ? 
+    <>
+    {isAuthenticated() ? 
     <IconButton
       id="bti-menu-profile"
       onClick={() => navigate("/profile")}
@@ -44,6 +45,7 @@ export const LoginButton: React.FC = () => {
       setIsOpenForgetPass={setIsOpenForgetPass}
       isOpenForgetPass={isOpenForgetPass}
     />
+    </>}
     </>
   );
 };

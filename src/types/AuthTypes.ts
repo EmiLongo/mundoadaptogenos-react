@@ -1,11 +1,15 @@
 // src/shared/types/AuthTypes.ts
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
+export enum Role {
+  ADMIN = 'admin',
+  CLIENT = 'client',
+}
 export interface IProfile {
   id: string;
   email: string;
   full_name: string | null;
-  role: 'admin' | 'client';
+  role: Role;
   avatar_url: string | null;
   created_at: string;
   updated_at: string;
@@ -15,7 +19,7 @@ export interface IUser {
   id: string;
   name: string | null;
   email: string;
-  role: 'admin' | 'client';
+  role: Role;
   avatar_url: string | null;
   created_at: string;
   // Datos adicionales de Supabase si los necesitas

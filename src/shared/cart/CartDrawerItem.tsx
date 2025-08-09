@@ -1,7 +1,7 @@
 // src/shared/cart/CartDrawerItem.tsx
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { ICartItem } from "../types/CartTypes";
+import { ICartItem } from "../../types/CartTypes";
 import { BodyMEmph, BodyS, ButtonS } from "@theme/textStyles";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { greyColor, redColor } from "@/theme/theme";
 import { KitOptionsModal } from "@/modules/products/components/KitOptionsModal";
+import { ClickFrom } from "@/modules/products/components/BigCard";
 
 interface ICartDrawerItem {
   cartItem: ICartItem;
@@ -217,6 +218,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
         selectInfo={selectInfo}
+        clickFrom={ClickFrom.ADD_TO_CART}
       />
     </Box>
   )

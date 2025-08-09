@@ -8,6 +8,7 @@ import { InputError } from "@/theme/textStyles";
 import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/shared/hooks/api/auth/useAuth";
 
 const validationSchema: Yup.ObjectSchema<{email: string, password: string}> = Yup.object({
   email: Yup.string().email('Correo inválido').required('Requerido'),
@@ -31,6 +32,7 @@ export const Login: React.FC<LoginProps> = ({
   // const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const { signIn } = useAuth();
 
   const handleGoToRegister = () => {
     handleClose();
@@ -46,8 +48,8 @@ export const Login: React.FC<LoginProps> = ({
     validationSchema,
     onSubmit: (values, { resetForm, setSubmitting }) => {
       if (!formRef.current) return;
-      console.log(values);
-      try {        
+      try {
+        signIn(values)
         toast.success('Login exitoso')
         resetForm();
         if (isModal) {

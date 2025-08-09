@@ -1,8 +1,8 @@
 // src/store/useCartStore.ts
 import { toast } from 'react-toastify';
 import { useCartStore } from './cartStore';
-import { IProduct } from '@/shared/types/ProductTypes';
-import { ICartItem } from '@/shared/types/CartTypes';
+import { IProduct } from '@/types/ProductTypes';
+import { ICartItem } from '@/types/CartTypes';
 
 export const useCart = () => {
   const {

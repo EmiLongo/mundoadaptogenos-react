@@ -1,4 +1,4 @@
-import { IBenefit } from "@shared/types/MushroomTypes";
+import { IBenefit } from "@/types/MushroomTypes";
 import { infoColaPavo } from "./ColaPavo";
 import { infoCordyceps } from "./Cordyceps";
 import { infoMelena } from "./Melena";

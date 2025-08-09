@@ -6,7 +6,7 @@ import benefits3 from "@img/mushroom-types/benefits-draw/cancer.svg"
 import benefits4 from "@img/mushroom-types/benefits-draw/skincare.svg"
 import imgDescription from "@img/mushroom-types/cola-de-pavo-caracteristicas-fisicas.jpg"
 import imgHarvest from "@img/mushroom-types/cola-de-pavo-cultivo.jpg"
-import { IMushroomDetails } from "@shared/types/MushroomTypes"
+import { IMushroomDetails } from "@/types/MushroomTypes"
 
 //Ficha para Reishi
 export const infoColaPavo: IMushroomDetails = {

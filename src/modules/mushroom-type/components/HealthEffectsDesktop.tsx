@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Box, IconButton, keyframes } from "@mui/material";
 import { brownColor, greyColor, paddingPage } from "@theme/theme";
-import { IMushroomDetails } from "@shared/types/MushroomTypes";
+import { IMushroomDetails } from "@/types/MushroomTypes";
 import { BodyL, Heading2, Heading4 } from "@theme/textStyles";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 

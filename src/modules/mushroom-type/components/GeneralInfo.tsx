@@ -1,9 +1,10 @@
 // src/modules/mushroom-type/components/GeneralInfo.tsx
 import React from "react";
 import { Box } from "@mui/material";
-import { BodyL, BodyM, Heading2, Heading3, Heading4 } from "@/theme/textStyles";
-import { IMushroomDetails } from "@shared/types/MushroomTypes";
+import { BodyL, BodyM, Heading2, Heading3, Heading4 } from "@theme/textStyles";
+
 import { greyColor, shadow } from "@theme/theme";
+import { IMushroomDetails } from "@/types/MushroomTypes";
 
 interface IGeneralInfoComponent {
   isMobile: boolean;

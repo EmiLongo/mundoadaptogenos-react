@@ -3,7 +3,7 @@ import React from "react";
 import { Heading2, Heading3, Heading5 } from "@theme/textStyles";
 import { greenColor, greyColor, shadow } from "@theme/theme";
 import { Box } from "@mui/material";
-import { IBenefit } from "@shared/types/MushroomTypes";
+import { IBenefit } from "@/types/MushroomTypes";
 
 interface IBenefitsComponent {
   benefits: IBenefit[];

@@ -1,7 +1,7 @@
 // src/modules/mushroom-type/components/MushroomTitle.tsx
 import { Box } from "@mui/material";
 import React from "react";
-import { IMushroomDetails } from "@shared/types/MushroomTypes";
+import { IMushroomDetails } from "@/types/MushroomTypes";
 import { BodyL, BodyM, DisplayHeadingXL, Heading1, Heading2, Heading4 } from "@/theme/textStyles";
 import { greyColor } from "@/theme/theme";
 

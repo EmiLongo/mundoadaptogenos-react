@@ -1,7 +1,7 @@
 // src/modules/mushroom-type/page/MushroomTypePage.tsx
 import { Box, useMediaQuery, useTheme } from "@mui/material"
 import React from "react"
-import { IMushroomDetails } from "@shared/types/MushroomTypes"
+import { IMushroomDetails } from "@/types/MushroomTypes"
 import { Benefits } from "../components/Benefits";
 import { Bioactive } from "../components/Bioactive";
 import { MushroomTitle } from "../components/MushroomTitle";

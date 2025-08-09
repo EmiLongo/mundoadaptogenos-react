@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
-import { IProduct } from "@/shared/types/ProductTypes";
+import { IProduct } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';

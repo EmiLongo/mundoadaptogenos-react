@@ -1,4 +1,4 @@
-import { IProduct } from "@/shared/types/ProductTypes";
+import { IProduct } from "@/types/ProductTypes";
 
 // Modelo para Items del Carrito
 // model CartItem {

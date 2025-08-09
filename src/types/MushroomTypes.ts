@@ -1,3 +1,4 @@
+// src/types/Mushroomtypes.ts
 type ImageSource = string | { default: string };
 
 export interface IBenefit {

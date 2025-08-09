@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { IProduct } from '@/shared/types/ProductTypes';
-import { ICart, ICartItem } from '@/shared/types/CartTypes';
+import { IProduct } from '@/types/ProductTypes';
+import { ICart, ICartItem } from '@/types/CartTypes';
 
 // Tipos específicos para el store
 export interface CartState {

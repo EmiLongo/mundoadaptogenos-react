@@ -1,5 +1,5 @@
 //  src/shared/Layout/utils/filterProducts.ts
-import { IProduct } from "@/shared/types/ProductTypes";
+import { IProduct } from "@/types/ProductTypes";
 
 
 // Filtra los productos del catálogo por sectionId

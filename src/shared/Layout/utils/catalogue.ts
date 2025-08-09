@@ -1,4 +1,5 @@
-import { IProduct } from "@/shared/types/ProductTypes";
+// src\shared\Layout\utils\catalogue.ts
+import { IProduct } from "@/types/ProductTypes";
 import colaPavoImg from "@img/card/cola-pavo.png" 
 import melenaImg from "@img/card/melena-leon.png" 
 import reishiImg from "@img/card/reishi.png" 

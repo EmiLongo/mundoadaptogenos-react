@@ -9,11 +9,17 @@ import * as Yup from 'yup';
 import { ColorButton } from "@shared/components/buttons/ColorButton";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import { supabase } from "@/api/apiClient";
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Requerido'),
   email: Yup.string().email('Correo inválido').required('Requerido'),
-  password: Yup.string().required('Requerido'),
+  password: Yup.string()
+  .min(8, 'Mínimo 8 caracteres')
+  .matches(/[A-Z]/, 'Debe tener al menos una mayúscula')
+  .matches(/[a-z]/, 'Debe tener al menos una minúscula')
+  .matches(/\d/, 'Debe tener al menos un número')
+  .required('Requerido'),
   confirmPassword: Yup.string().required('Requerido').oneOf([Yup.ref('password')], 'Las contraseñas no coinciden'),
 });
 
@@ -40,11 +46,23 @@ export const RegisterPage: React.FC = () => {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       if (!formRef.current) return;
       console.log(values);
-      try {        
-        toast.success('Registro exitoso')
+      try {
+
+        const { error } = await supabase.auth.signUp({
+          email: values.email,
+          password: values.password,
+          options: {
+            data: {
+              full_name: values.name
+            }
+          }
+        });
+  
+        if (error) throw error;            
+        toast.success('¡Revisa tu email para confirmar tu cuenta!')
         resetForm();
         // TODO: hacer la logica para el registro
       } catch (error) {

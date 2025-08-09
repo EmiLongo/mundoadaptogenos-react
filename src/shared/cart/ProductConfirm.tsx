@@ -7,7 +7,7 @@ import { BodyMEmph, BodyS } from "@theme/textStyles";
 import { brownColor, greyColor } from "@theme/theme";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from "@/store/useCartStore";
-import { IProduct } from "@types/ProductTypes";
+import { IProduct } from "@/types/ProductTypes";
 import { heightForModals, navBarMobileHeight } from "../Layout/utils/info";
 
 interface IProductConfirm {

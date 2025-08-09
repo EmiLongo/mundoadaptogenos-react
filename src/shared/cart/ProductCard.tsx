@@ -5,7 +5,7 @@ import { BodyS, Caption, Heading3, Heading5 } from "@/theme/textStyles";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { brownColor, greyColor, greenColor } from "@/theme/theme";
-import { IProduct } from "@types/ProductTypes";
+import { IProduct } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { useCart } from "@store/useCartStore";
 import { useNavigate } from "react-router-dom";

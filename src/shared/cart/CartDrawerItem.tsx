@@ -28,7 +28,6 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
   const [selectedOptions, setSelectedOptions] = useState<string[]>(cartItem.options as string[]);
   const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<boolean>(false);
 
-  console.log("cartItem: ", cartItem)
   const handleAdd = () => {
     const quantity = counter+1;
     setCounter(quantity);
@@ -82,7 +81,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
     if(selectedOptions.some(option => option === "")) return
     updateCartItemMultipleOptions(cartItem, selectedOptions);
   }, [selectedOptions])
-  console.log("selectedInfo :", selectInfo)
+
   return (
     <Box 
     key={`cart-item-${index}`}

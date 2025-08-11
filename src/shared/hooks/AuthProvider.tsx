@@ -18,7 +18,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const loadUserProfile = async (user: User) => {
       try {
-        console.log('Loading profile for user:', user.id);
         setLoading(true);
         
         // Query directa sin verificaciones adicionales
@@ -27,8 +26,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           .select("*")
           .eq('id', user.id)
           .single();
-
-        console.log('Profile query result:', { profile, error });
 
         if (error) {
           console.error('Error obteniendo perfil:', error);
@@ -57,7 +54,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             updated_at: profile.updated_at,
           };
           
-          console.log('✅ Setting auth data:', { userData, profileData });
           setAuth(userData, profileData);
         }
       } catch (error) {
@@ -72,11 +68,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const initializeAuth = async () => {
       try {
-        console.log('Initializing auth...');
         setLoading(true);
 
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        console.log("Session:", { user: session?.user?.id, error: sessionError });
         
         if (sessionError) {
           console.error('Error obteniendo sesión:', sessionError);
@@ -84,12 +78,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           return;
         }
 
+        //Found active session, loading profile...
         if (session?.user) {
-          console.log('Found active session, loading profile...');
           await loadUserProfile(session.user);
         } else {
-          console.log('No active session found');
-          logout();
+          closeLogout();
         }
       } catch (error) {
         console.error('Error inicializando auth:', error);
@@ -103,7 +96,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const closeLogout = async () => {
       try {
-        console.log('Initializing logout...');
         setLoading(true);
 
         await supabase.auth.signOut();
@@ -118,24 +110,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Listener para cambios de autenticación
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('Auth state change:', event, session?.user?.id);
 
         switch (event) {
           case 'SIGNED_IN':
             if (session?.user) {
-              console.log('SIGNED_IN event, loading profile...');
               await loadUserProfile(session.user);
             }
             break;
           
           case 'SIGNED_OUT':
-            console.log('SIGNED_OUT event, logging out...');
             closeLogout();
             break;
           
           case 'TOKEN_REFRESHED':
             if (session?.user) {
-              console.log('TOKEN_REFRESHED event, reloading profile...');
               await loadUserProfile(session.user);
             }
             break;
@@ -150,7 +138,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Y evitar doble inicialización
     if (hasHydrated && !hasInitialized.current) {
       hasInitialized.current = true;
-      console.log('Store is hydrated, calling initializeAuth');
       initializeAuth();
     }
 

@@ -1,18 +1,21 @@
 // src/store/useUserStore.ts
 import { IUser, IProfile, IAuthState, Role } from '@/types/AuthTypes';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface IUserState extends IAuthState {
+  // State adicional para controlar hidratación
+  hasHydrated: boolean;
+  
   // Actions
   setAuth: (user: IUser, profile: IProfile) => void;
   setProfile: (profile: IProfile) => void;
   updateProfile: (updates: Partial<IProfile>) => void;
   setLoading: (loading: boolean) => void;
   logout: () => void;
+  setHasHydrated: (hydrated: boolean) => void;
   
   // Getters
-  isAuthenticated: () => boolean;
   isAdmin: () => boolean;
   isClient: () => boolean;
 }
@@ -20,18 +23,28 @@ interface IUserState extends IAuthState {
 export const useUserStore = create<IUserState>()(
   persist(
     (set, get) => ({
-      // State
+      // State inicial
       user: null,
       profile: null,
       loading: true,
+      isAuthenticated: false,
+      hasHydrated: false,
 
       // Actions
-      setAuth: (user: IUser, profile: IProfile) => 
-        set({ 
+      setAuth: (user: IUser, profile: IProfile) => {
+        set((state) => ({
+          ...state,
           user, 
           profile,  
-          loading: false 
-        }),
+          isAuthenticated: true,
+          loading: false,
+        }));
+        
+        // Log inmediato para verificar
+        setTimeout(() => {
+          const newState = get();
+        }, 0);
+      },
 
       setProfile: (profile: IProfile) => {
         const currentUser = get().user;
@@ -43,7 +56,11 @@ export const useUserStore = create<IUserState>()(
             role: profile.role,
             avatar_url: profile.avatar_url,
           };
-          set({ profile, user: updatedUser });
+          set({ 
+            profile, 
+            user: updatedUser,
+            isAuthenticated: true
+          });
         } else {
           set({ profile });
         }
@@ -64,23 +81,25 @@ export const useUserStore = create<IUserState>()(
           
           set({ 
             profile: updatedProfile, 
-            user: updatedUser 
+            user: updatedUser,
+            isAuthenticated: !!updatedUser
           });
         }
       },
 
       setLoading: (loading: boolean) => set({ loading }),
 
-      logout: () => set({ 
-        user: null, 
-        profile: null, 
-        loading: false 
-      }),
+      logout: () => {
+        set({ 
+          user: null, 
+          profile: null, 
+          loading: false, 
+          isAuthenticated: false
+        });
+      },
 
-      // Getters
-      isAuthenticated: () => {
-        const { user } = get();
-        return !!user;
+      setHasHydrated: (hydrated: boolean) => {
+        set({ hasHydrated: hydrated });
       },
 
       isAdmin: () => {
@@ -95,14 +114,28 @@ export const useUserStore = create<IUserState>()(
     }),
     {
       name: 'user-storage',
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ 
         user: state.user, 
         profile: state.profile,
+        isAuthenticated: state.isAuthenticated,
+        loading: state.loading,
+        hasHydrated: state.hasHydrated
       }),
-
-      // Opcional: versión para migrar datos si cambias la estructura
       version: 1,
+      onRehydrateStorage: () => (state) => {
+        
+        // Marcar como hidratado después de la rehidratación
+        if (state) {
+          state.setHasHydrated(true);
+          // Si hay datos del usuario, mantener isAuthenticated consistente
+          if (state.user && state.profile) {
+            state.isAuthenticated = true;
+          } else {
+            state.isAuthenticated = false;
+          }
+        }
+      },
     }
   )
 );
-

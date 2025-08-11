@@ -40,10 +40,10 @@ export const useUserStore = create<IUserState>()(
           loading: false,
         }));
         
-        // Log inmediato para verificar
-        setTimeout(() => {
-          const newState = get();
-        }, 0);
+        // // Log inmediato para verificar
+        // setTimeout(() => {
+        //   const newState = get();
+        // }, 0);
       },
 
       setProfile: (profile: IProfile) => {

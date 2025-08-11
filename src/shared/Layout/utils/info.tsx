@@ -16,6 +16,7 @@ export const navBar2DesktopHeight: string = "50px";
 export const navBar12DesktopHeight: string = "150px";
 export const navBarMobileHeight: string = "60px";
 export const heightForModals: string = "132px";
+export const heightForModalsMobile: string = "92px";
 
 
 

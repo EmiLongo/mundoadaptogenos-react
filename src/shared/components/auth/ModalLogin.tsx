@@ -5,7 +5,7 @@ import { Heading3 } from "@/theme/textStyles";
 import { ForgetPass } from "./ForgetPass";
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { Closebutton } from "../buttons/Closebutton";
-import { heightForModals } from "@/shared/Layout/utils/info";
+import { heightForModals, heightForModalsMobile } from "@/shared/Layout/utils/info";
 import { greyColor, paddingModal } from "@/theme/theme";
 
 // Animación para el texto
@@ -41,13 +41,14 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
       <Box sx={{ 
         backgroundColor: "background.paper",
         position: "absolute", 
-        top: {xs: "200px", md: heightForModals}, 
-        right: {xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"},
+        top: {xs: heightForModalsMobile, md: heightForModals}, 
+        right: {xs: "50%", md:"4rem", lg:"5rem", xl:"8rem"},
         width: {xs: "97dvw", sm: "344px"},
+        maxWidth: "344px",
         border: `1px solid ${greyColor[950]}`,
         borderRadius: "8px",
-        transform: {xs: "translate(50%, 50%)", md: "unset"},
         zIndex: 100,
+        transform: "translateX(50%)",
         ...paddingModal
       }}>
         <Closebutton closeModal={()=>handleClose()} id="bti-close-modal-login" />

@@ -12,6 +12,7 @@ import {
   Divider,
 } from '@mui/material';
 import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
+import logo from '@img/logo.svg';
 import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -38,6 +39,7 @@ export const Header: React.FC = () => {
   const theme = useTheme();
   const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobileMini = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -119,9 +121,9 @@ export const Header: React.FC = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem"}}>
         <Box 
           component={"img"} 
-          src={logoTextHorizontal} 
+          src={logo} 
           alt="Logo Mundo Adaptógenos" 
-          width="190px" 
+          width="30px" 
           onClick={handleLogoClick}
           decoding="async"
           loading="lazy"
@@ -234,13 +236,16 @@ export const Header: React.FC = () => {
                     </IconButton>
                     <Box 
                     component={"img"}
-                    src={logoTextHorizontal}
+                    src={isMobileMini ? logo : logoTextHorizontal}
                     alt="Logo Mundo Adaptógenos"
                     height="40px"
                     onClick={handleLogoClick}
                     />
                   </Box>
-                  <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
+                  <Box sx={{display: "flex", gap: "20px"}}>
+                    <LoginButton />
+                    <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
+                  </Box>
                 </Box>
               </Toolbar>
             ) : (

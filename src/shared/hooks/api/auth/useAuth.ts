@@ -67,7 +67,6 @@ export const useAuth = () => {
       if (data.user) {
         setUser(data.user);
         const userProfile = await fetchProfile(data.user.id);
-        console.log("hook Auth/ signIn / data: ", data)
         if (userProfile) {
           syncWithStore(data.user, userProfile);
           toast.success(`¡Bienvenido/a ${userProfile.full_name || 'Usuario'}!`);
@@ -105,9 +104,6 @@ export const useAuth = () => {
       });
 
       if (error) throw error;
-      
-      //TODO: agregar data al store
-      console.log("data", data)
 
       return { success: true };
     } catch (error: any) {
@@ -116,67 +112,6 @@ export const useAuth = () => {
       return { success: false, error: error.message };
     }
   };
-
-  useEffect(() => {
-    // Obtener sesión actual
-    const getSession = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error) throw error;
-        
-        if (session?.user) {
-          setUser(session.user);
-          const userProfile = await fetchProfile(session.user.id);
-          if (userProfile) {
-            syncWithStore(session.user, userProfile);
-          }
-        }
-      } catch (error) {
-        console.error('Error getting session:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getSession();
-
-    // Escuchar cambios de autenticación
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth event:', event);
-        
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-          setUser(session?.user ?? null);
-          if (session?.user) {
-            const userProfile = await fetchProfile(session.user.id);
-            if (userProfile) {
-              syncWithStore(session.user, userProfile);
-              if (event === 'SIGNED_IN') {
-                toast.success('¡Sesión iniciada correctamente!');
-              }
-            }
-          }
-        } 
-        
-        if (event === 'SIGNED_OUT') {
-          setUser(null);
-          setProfile(null);
-          logout();
-          toast.info('Sesión cerrada');
-        }
-
-        // Manejar confirmación de email
-        if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
-          toast.success('¡Email confirmado! Bienvenido/a');
-        }
-
-        setLoading(false);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   // Función para cerrar sesión
   const signOut = async () => {

@@ -9,8 +9,7 @@ import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/shared/hooks/api/auth/useAuth";
-import { WhiteButton } from "../buttons/WhiteButton";
-import GoogleIcon from '@mui/icons-material/Google';
+import { GoogleLoginButton } from "../buttons/GoogleLoginButton";
 
 const validationSchema: Yup.ObjectSchema<{email: string, password: string}> = Yup.object({
   email: Yup.string().email('Correo inválido').required('Requerido'),
@@ -143,15 +142,7 @@ export const Login: React.FC<LoginProps> = ({
         text="Iniciar sesión"
         onClick={() => formik.handleSubmit()}
       />
-      <WhiteButton
-        id="bt-header-login-google"
-        text="iniciar con google"
-        isFetching={formik.isSubmitting}
-        disabled={formik.isSubmitting}
-        icon={<GoogleIcon />}
-        onClick={handleGoToRegister}
-        sx={{ width: "100%" }}
-      />
+      <GoogleLoginButton isFetching={formik.isSubmitting} disabled={formik.isSubmitting} sx={{width: "100%"}}/>
       <OnlyTextButton
         id="bt-header-register"
         text="Registrarme" 

@@ -7,7 +7,7 @@ export function UserAdminPrivateRoutes({ children }: { children: React.ReactNode
 
 	const { isAuthenticated, isAdmin } = useUserStore();
 
-    if ( !isAuthenticated() ) {
+    if ( !isAuthenticated ) {
         return <Navigate to="/login" replace />;
     }
 

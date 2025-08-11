@@ -7,6 +7,7 @@ export enum Role {
 }
 export interface IProfile {
   id: string;
+  user_id: string;
   email: string;
   full_name: string | null;
   role: Role;
@@ -49,4 +50,5 @@ export interface IAuthState {
   user: IUser | null;
   profile: IProfile | null;
   loading: boolean;
+  isAuthenticated: boolean;
 }

@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { redColor } from "@/theme/theme";
-import { InputError } from "@/theme/textStyles";
+import { BodyM, InputError } from "@/theme/textStyles";
 import { ColorButton } from "../buttons/ColorButton";
+import { OnlyTextButton } from "../buttons/OnlyTextButton";
 
 
 
@@ -17,10 +18,18 @@ interface IForgetPassProps {
   handleClose?: () => void;
   isModal?: boolean;
   setIsOpenDrawer?: (isOpen: boolean) => void;
+  setIsOpenForgetPass?: (isOpen: boolean) => void;
+  sx?: object
 }
 
 
-export const ForgetPass: React.FC<IForgetPassProps> = ({ isModal = false, setIsOpenDrawer = () => {}, handleClose = () => {} }) => {
+export const ForgetPass: React.FC<IForgetPassProps> = ({ 
+  isModal = false, 
+  setIsOpenDrawer = () => {}, 
+  handleClose = () => {},
+  setIsOpenForgetPass = () => {},
+  sx = {}
+}) => {
   // const [showPassword, setShowPassword] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -57,11 +66,14 @@ export const ForgetPass: React.FC<IForgetPassProps> = ({ isModal = false, setIsO
       sx={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        width: !isModal ? "100%" : {xs: "100%", sm: 400},
+        width: "100%",
         minHeight: !isModal ?  "80dvh" : "auto" ,
-        padding: !isModal ? {xs: "1rem 2rem", md: "1rem 35dvw"}: "1rem 2rem",
+        padding: !isModal ? {xs: "1rem 2rem", md: "1rem 35dvw"}: "0",
+        position: "relative",
+        ...sx
       }}
     >
+      <BodyM sx={{textWrap: "balance", marginBottom: "16px" }}>Te enviaremos un enlace al mail para que puedas recuperar tu contraseña.</BodyM>
       <TextField
         fullWidth
         label="Correo Electrónico"
@@ -72,9 +84,9 @@ export const ForgetPass: React.FC<IForgetPassProps> = ({ isModal = false, setIsO
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
-        sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}
+        sx={{ backgroundColor: 'background.paper', borderRadius: 1, marginBottom: "24px" }}
       />
-      <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
+      <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px", position: "absolute" }}>
         {formik.touched.email && formik.errors.email}
       </InputError>
 
@@ -84,9 +96,20 @@ export const ForgetPass: React.FC<IForgetPassProps> = ({ isModal = false, setIsO
         fetchingText="...enviando correo"
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting}
-        sx={{ marginX: "auto" }}
+        sx={{ width: "100%",}}
         text="OLVIDÉ MI CONTRASEÑA"
         onClick={() => formik.handleSubmit()}
+      />
+      <OnlyTextButton
+        id="bt-header-back-login"
+        text="Volver" 
+        isFetching={formik.isSubmitting}
+        disabled={formik.isSubmitting} 
+        type="primaryButton"
+        size="M"
+        isUnderline={false}
+        sx={{marginX: "auto", marginTop: "16px" }}
+        onClick={() => setIsOpenForgetPass(false)}
       />
     </Box>
   );

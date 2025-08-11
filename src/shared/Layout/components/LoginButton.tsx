@@ -1,13 +1,17 @@
 // src/shared/Layout/components/LoginButton.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { ModalLogin } from "@shared/components/auth/ModalLogin";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
 import { useUserStore } from "@store/useUserStore";
+import { useTheme } from "@mui/material";
+import { OnlyTextButton } from "@/shared/components/buttons/OnlyTextButton";
 
 export const LoginButton: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenForgetPass, setIsOpenForgetPass] = useState(false);
@@ -20,7 +24,7 @@ export const LoginButton: React.FC = () => {
 
   return (
     <>
-    {isAuthenticated ? 
+    {isAuthenticated && !isMobile ? 
     <IconButton
       id="bti-menu-profile"
       onClick={() => navigate("/profile")}
@@ -29,7 +33,19 @@ export const LoginButton: React.FC = () => {
     </IconButton>
     :
     <>
-    <WhiteButton
+    {isMobile 
+    ? <OnlyTextButton
+    id="login-button"
+    type= "greyButton"
+    onClick={() => setIsOpenLogin(true)}
+    size="M"
+    isUnderline={false}
+    text="INICIAR SESIÓN"
+    fetchingText=""
+    isFetching={false}
+    disabled={false}
+    />
+    : <WhiteButton
     id="login-button"
     onClick={() => setIsOpenLogin(true)}
     sx={{ width: "135px" }}
@@ -37,7 +53,7 @@ export const LoginButton: React.FC = () => {
     fetchingText=""
     isFetching={false}
     disabled={false}
-    />
+    />}
 
     <ModalLogin 
       isOpenLogin={isOpenLogin} 

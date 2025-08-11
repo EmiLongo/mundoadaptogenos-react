@@ -1,12 +1,12 @@
 // src/shared/Layout/page/Layout.tsx
-import { Outlet, useLocation } from "react-router-dom";
 import React, { lazy } from "react";
-const Footer = lazy(() => import("../components/Footer").then(module => ({ default: module.Footer })));
+import { Outlet, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import { WhatsApp } from "../components/WhatsApp";
 import { Bounce, ToastContainer } from "react-toastify";
 import { ScrollToTop } from "@/routes/ScrollToTop";
-import { HeaderThreeLines } from "../components/HeaderThreeLines";
+const Footer = lazy(() => import("../components/Footer").then(module => ({ default: module.Footer })));
+const HeaderThreeLines = lazy(() => import("../components/HeaderThreeLines").then(module => ({ default: module.HeaderThreeLines })));
 
 export const Layout: React.FC = () => {
   const { pathname } = useLocation();

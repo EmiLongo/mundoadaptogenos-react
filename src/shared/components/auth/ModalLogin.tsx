@@ -48,7 +48,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
         border: `1px solid ${greyColor[950]}`,
         borderRadius: "8px",
         zIndex: 100,
-        transform: "translateX(50%)",
+        transform: {xs: "translateX(-50%)", md: "translateX(0)"},
         ...paddingModal
       }}>
         <Closebutton closeModal={()=>handleClose()} id="bti-close-modal-login" />

@@ -9,6 +9,8 @@ import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/shared/hooks/api/auth/useAuth";
+import { WhiteButton } from "../buttons/WhiteButton";
+import GoogleIcon from '@mui/icons-material/Google';
 
 const validationSchema: Yup.ObjectSchema<{email: string, password: string}> = Yup.object({
   email: Yup.string().email('Correo inválido').required('Requerido'),
@@ -20,6 +22,7 @@ type LoginProps = {
   handleClose?: () => void;
   setIsOpenDrawer?: (isOpen: boolean) => void;
   setIsOpenForgetPass?: (isOpen: boolean) => void;
+  sx?: object
 }
 
 
@@ -27,7 +30,8 @@ export const Login: React.FC<LoginProps> = ({
   isModal = false, 
   handleClose = () => {}, 
   setIsOpenDrawer = () => {}, 
-  setIsOpenForgetPass = () => {} 
+  setIsOpenForgetPass = () => {},
+  sx = {}
 }) => {
   // const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -74,67 +78,79 @@ export const Login: React.FC<LoginProps> = ({
       sx={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        width: !isModal ? "100%" : {xs: "100%", sm: 400},
+        width: "100%",
         minHeight: !isModal ?  "80dvh" : "auto" ,
-        padding: !isModal ? {xs: "1rem 2rem", md: "1rem 35dvw"}: "1rem 2rem",
+        padding: !isModal ? {xs: "1rem 2rem", md: "1rem 35dvw"}: "0",
+        position: "relative",
+        gap: "24px",
+        ...sx
       }}
     >
-      <TextField
-        fullWidth
-        label="Correo Electrónico"
-        id="email"
-        name="email"
-        type="email"
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        error={formik.touched.email && Boolean(formik.errors.email)}
-        sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}
-      />
-      <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
-        {formik.touched.email && formik.errors.email}
-      </InputError>
-
-
-      <TextField
-        fullWidth
-        label="Contraseña"
-        id="password"
-        name="password"
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        error={formik.touched.password && Boolean(formik.errors.password)}
-        sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}
-      />
-      <InputError sx={{ mb: 2, color: redColor[400], paddingLeft: "12px" }}>
-        {formik.touched.password && formik.errors.password}
-      </InputError>
-      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", gap: "1rem" }}>
-      <OnlyTextButton
-        id="bt-forget-pass"
-        text="OLVIDÉ MI CONTRASEÑA" 
-        isFetching={formik.isSubmitting}
-        disabled={formik.isSubmitting}
-        type="primaryButton"
-        fetchingText="...recuperando"
-        sx={{
-
-          minWidth:'50%',
-          marginX: "auto",
-          "& p" : {fontSize: "0.80rem"}, 
-        }}
-        onClick={() => setIsOpenForgetPass(true)}
-      />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <Box>
+          <TextField
+            fullWidth
+            label="Correo Electrónico"
+            id="email"
+            name="email"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}
+          />
+          <InputError sx={{width: "100%", textAlign:"right", color: redColor[400], paddingRight: "12px", position: "absolute" }}>
+            {formik.touched.email && formik.errors.email}
+          </InputError>
+        </Box>
+        <Box>
+          <TextField
+            fullWidth
+            label="Contraseña"
+            id="password"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}
+          />
+          <InputError sx={{width: "100%", textAlign:"right", color: redColor[400], paddingRight: "12px", position: "absolute"  }}>
+            {formik.touched.password && formik.errors.password}
+          </InputError>
+        </Box>
+          <OnlyTextButton
+            id="bt-forget-pass"
+            text="Olvidé mi contraseña" 
+            isFetching={formik.isSubmitting}
+            disabled={formik.isSubmitting}
+            type="primaryButton"
+            fetchingText="...enviando mail"
+            isLowerCase={true}
+            onClick={() => setIsOpenForgetPass(true)}
+            sx={{ marginLeft: "1rem"}}
+          />
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", gap: "8px" }}>
       <ColorButton
         id="bt-header-login"
         type="brownButton"
         fetchingText="...enviando"
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting}
-        sx={{ marginX: "auto" }}
+        sx={{ width: "100%" }}
         text="Iniciar sesión"
         onClick={() => formik.handleSubmit()}
+      />
+      <WhiteButton
+        id="bt-header-login-google"
+        text="iniciar con google"
+        isFetching={formik.isSubmitting}
+        disabled={formik.isSubmitting}
+        icon={<GoogleIcon />}
+        onClick={handleGoToRegister}
+        sx={{ width: "100%" }}
       />
       <OnlyTextButton
         id="bt-header-register"
@@ -142,7 +158,9 @@ export const Login: React.FC<LoginProps> = ({
         isFetching={formik.isSubmitting}
         disabled={formik.isSubmitting} 
         type="primaryButton"
-        sx={{width:'50%', marginX: "auto"}}
+        size="M"
+        isUnderline={false}
+        sx={{marginX: "auto"}}
         onClick={handleGoToRegister}
         />
       </Box>

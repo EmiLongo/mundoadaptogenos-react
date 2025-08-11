@@ -87,6 +87,7 @@ export const shadow = {
     `,},
 }
 export const paddingPage = { paddingX:{xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"}, }
+export const paddingModal = { padding: "24px 24px 12px 24px" }
 
 export const theme = createTheme({
   palette: {
@@ -224,6 +225,9 @@ export const theme = createTheme({
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: redColor[700],
             },
+          },
+          "& input:-webkit-autofill": {
+          boxShadow: `0 0 0 100px ${greyColor[50]} inset`,
           },
         },
       },

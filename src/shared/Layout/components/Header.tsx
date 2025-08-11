@@ -31,7 +31,7 @@ import { useCartDrawer } from '@/store/useCartDrawer.ts';
 import { Marquee } from './Marquee.tsx';
 
 
-export const HeaderThreeLines: React.FC = () => {
+export const Header: React.FC = () => {
   const { initializeCart } = useCart();
   const { lastAddedProduct, lastAddedAt } = useCart();
   const { isOpenCartDrawer, toggleCartDrawer, setCartDrawer } = useCartDrawer();

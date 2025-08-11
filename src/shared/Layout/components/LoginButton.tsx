@@ -11,7 +11,7 @@ export const LoginButton: React.FC = () => {
   const navigate = useNavigate();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenForgetPass, setIsOpenForgetPass] = useState(false);
-  const { isAuthenticated } = useUserStore();
+  const isAuthenticated = useUserStore(state => state.isAuthenticated);
 
   const handleCloseLogin = () => {
     setIsOpenLogin(false);
@@ -20,7 +20,7 @@ export const LoginButton: React.FC = () => {
 
   return (
     <>
-    {isAuthenticated() ? 
+    {isAuthenticated ? 
     <IconButton
       id="bti-menu-profile"
       onClick={() => navigate("/profile")}

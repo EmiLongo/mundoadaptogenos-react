@@ -1,5 +1,5 @@
 // src/hooks/useAuth.js
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '@/api/apiClient';
 import { toast } from 'react-toastify';
 import { IProfile, IUser, ILoginData } from '@/types/AuthTypes';
@@ -102,7 +102,7 @@ export const useAuth = () => {
           redirectTo: `${window.location.origin}/auth/callback`
         }
       });
-
+      console.log(data, error);
       if (error) throw error;
 
       return { success: true };

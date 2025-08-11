@@ -16,6 +16,8 @@ type OnlyTextButtonProps = {
   fetchingText?: string;
   isFetching: boolean;
   icon?: React.ReactNode;
+  isLowerCase?: boolean;
+  isUnderline?: boolean;
   disabled: boolean;
   sx?: object;
 };
@@ -29,6 +31,8 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
   icon = null,
   fetchingText = "",
   isFetching = false,
+  isLowerCase = false,
+  isUnderline = true,
   disabled = false,
   sx = {},
 }) => {
@@ -48,12 +52,12 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
         color: type === "primaryButton" ? "primary.dark" : type === "primaryLigthButton" ? brownColor[200] : greyColor[950],
         backgroundColor: "transparent",
         padding: 0,
-        textDecoration: "underline",
+        textDecoration: isUnderline ? "underline" : "none",
         "&:hover": {
           boxShadow: "none",
           color: type === "primaryButton" ? "primary.main" : type === "primaryLigthButton" ? brownColor[400] : brownColor[700],
           fontWeight: 800,
-          textDecoration: "underline",
+          textDecoration: isUnderline ? "underline" : "none",
         },
         ...sx,
       }}
@@ -69,17 +73,17 @@ export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({
       )}
 
       {size === "S" && 
-        <ButtonS sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
+        <ButtonS sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit", textTransform: isLowerCase ? "none" : "uppercase"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonS>
       }
       {size === "M" && 
-        <ButtonM sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
+        <ButtonM sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit", textTransform: isLowerCase ? "none" : "uppercase"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonM>
       }
       {size === "L" && 
-        <ButtonL sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit"}}>
+        <ButtonL sx={{color: "inherit", fontWeight: "inherit", textDecoration: "inherit", textTransform: isLowerCase ? "none" : "uppercase"}}>
           {isFetching && fetchingText ? fetchingText : text}
         </ButtonL>
       }

@@ -1,4 +1,4 @@
-
+// src/shared/components/auth/ModalLogin.tsx
 import { Box, IconButton, keyframes, Modal } from "@mui/material";
 import { Login } from "./Login";
 import { Heading3 } from "@/theme/textStyles";
@@ -48,7 +48,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
         border: `1px solid ${greyColor[950]}`,
         borderRadius: "8px",
         zIndex: 100,
-        transform: {xs: "translateX(-50%)", md: "translateX(0)"},
+        transform: {xs: "translateX(50%)", md: "translateX(0)"},
         ...paddingModal
       }}>
         <Closebutton closeModal={()=>handleClose()} id="bti-close-modal-login" />

@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const { data: profile, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("user_id", userId)
+        .eq("id", userId)
         .single();
 
       if (error) {
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (profile) {
         const userData: IUser = {
-          id: profile.user_id,
+          id: profile.id,
           name: profile.full_name,
           email: profile.email,
           role: profile.role,

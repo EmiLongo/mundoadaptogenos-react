@@ -234,7 +234,7 @@ export const Header: React.FC = () => {
                   {productsItems.map((item) => (
                     <Box
                       key={`submenu-item-${item.text.split(" ").join("-")}`}
-                      component={"a"}
+                      component={!item.hasSubproducts ? "a" : "div"}
                       href={!item.hasSubproducts ? item.path : undefined}
                       onMouseEnter={() => toogleSubmenu(item)}
                       onMouseLeave={() => toogleSubmenu(item)}

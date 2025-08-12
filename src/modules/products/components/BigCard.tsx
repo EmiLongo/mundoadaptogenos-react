@@ -18,10 +18,9 @@ import { useCart } from "@/store/useCartStore";
 import { toast } from "react-toastify";
 import { WhiteButton } from "@/shared/components/buttons/WhiteButton";
 import { KitOptionsModal } from "./KitOptionsModal";
-import { filterByPackagingIdByNotSectionId } from "@/shared/Layout/utils/filterProducts";
-import { catalogue } from "@/shared/Layout/utils/catalogue";
 import { useCartDrawer } from "@/store/useCartDrawer";
 import { OptionsModal } from "./OptionsModal";
+import { selectInfo } from "@/shared/Layout/utils/filterProducts";
 
 interface IBigCard {
   product: IProduct
@@ -50,12 +49,6 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
     console.log("handleShowDetails")
   }
   
-  const products = filterByPackagingIdByNotSectionId(catalogue, 1, 5)
-  const selectInfo = products.map(({ id, title }) => ({
-    value: String(id),
-    label: title.split(" - ")[0]
-  }));
-
   const handleAddToCart = async() => {
     // si tiene opciones
     if(sectionsProduct.length > 1){

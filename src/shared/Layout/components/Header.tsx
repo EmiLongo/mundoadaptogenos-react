@@ -15,7 +15,6 @@ import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
 import logo from '@img/logo.svg';
 import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 
 import { BodyM, BodyS, Heading5 } from '@theme/textStyles';
 import { brownColor, greyColor } from '@theme/theme';
@@ -24,12 +23,14 @@ import { ProductConfirm } from '@shared/cart/ProductConfirm';
 import { useCart } from '@store/useCartStore';
 
 import { FAQButton } from './FAQButton.tsx';
-import { ContactButton } from './ContactButton.tsx';
 import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton.tsx';
 import { useCartDrawer } from '@/store/useCartDrawer.ts';
 import { Marquee } from './Marquee.tsx';
+import { IProductsItems } from '@/types/InfoTypes.ts';
+import { SubproductsMenu } from './SubproductsMenu.tsx';
+import { Closebutton } from '@/shared/components/buttons/Closebutton.tsx';
 
 
 export const Header: React.FC = () => {
@@ -44,7 +45,11 @@ export const Header: React.FC = () => {
   const { pathname } = useLocation();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isOpenSubmenu, setIsOpenSubmenu] = useState<boolean>(false);
 
+  const toogleSubmenu = (item: IProductsItems) => {
+    if(item.hasSubproducts)setIsOpenSubmenu(!isOpenSubmenu)
+  }
   const handleCartButton = () => {
     toggleCartDrawer()
   }
@@ -116,26 +121,21 @@ export const Header: React.FC = () => {
 
   // menu lateral en mobile
   const drawer = (
-    <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px" }}>
+    <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px", gap: "12px" }}>
       {/* logo */}
-      <Box sx={{ display: 'flex', alignItems: 'center', mt: "1rem", mb: "2rem"}}>
+      <Box sx={{ display: 'flex', alignItems: 'center', marginTop: "1rem", marginLeft: "1rem"}}>
         <Box 
           component={"img"} 
-          src={logo} 
+          src={logoTextHorizontal} 
           alt="Logo Mundo Adaptógenos" 
-          width="30px" 
+          height="50px" 
           onClick={handleLogoClick}
           decoding="async"
           loading="lazy"
         />
       </Box>
       {/* boton para cerrar */}
-      <Box
-        sx={{ position: 'absolute', top: "1rem", right: "1rem" }}
-        onClick={handleMenuDrawerToggle}
-      >
-        <CloseIcon />
-      </Box>
+      <Closebutton closeModal={handleMenuDrawerClose} id="bt-close-drawer"/>
       <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {productsItems.map((item) => (
           <Box key={item.text.split(" ").join("_")} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
@@ -199,6 +199,7 @@ export const Header: React.FC = () => {
   return (
     <>
       {!isNavBarTransparent && <Box sx={{ height: isMobile ? navBarMobileHeight : navBarDesktopHeight }} />}
+      {isOpenSubmenu && <SubproductsMenu sx={{position:"absolute", top: navBarDesktopHeight, left: "50%", transform: "translateX(-50%)"}}/>}
       <AppBar 
       id="navbar"
       position="fixed" 
@@ -279,7 +280,6 @@ export const Header: React.FC = () => {
                     gap: '1rem',
                     flex: 1,
                   }}>
-                  <ContactButton />
                   <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                   <FAQButton />
                   <LoginButton />
@@ -301,11 +301,13 @@ export const Header: React.FC = () => {
                     <Box
                       key={item.text}
                       component={"a"}
-                      href={item.path}
+                      href={!item.hasSubproducts ? item.path : undefined}
+                      onClick={() => toogleSubmenu(item)}
                       sx={{
                         display: 'flex',
                         alignItems: "center",
-                        height: "100%", 
+                        height: "100%",
+                        background: pathname.includes(item.path) ? `linear-gradient(to top, #FCEED8 0%, #FCEED8 50%, transparent 50%, transparent 100%)`: "none",
                         borderBottom: pathname.includes(item.path) ? `3px solid ${brownColor[800]}` : "none",
                         "&:hover":{
                           borderBottom: pathname.includes(item.path) ? `3px solid ${brownColor[800]}` : `3px solid ${greyColor[900]}`,

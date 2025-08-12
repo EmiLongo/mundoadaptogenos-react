@@ -23,6 +23,7 @@ const FAQPage = lazy(() => import("@modules/faq/page/FAQPage").then(module => ({
 const ShopPage = lazy(() => import("@modules/shop/page/ShopPage").then(module => ({ default: module.ShopPage })));
 const MushroomTypePage = lazy(() => import("@modules/mushroom-type/page/MushroomTypePage").then(module => ({ default: module.MushroomTypePage })));
 const ProductPage = lazy(() => import("@modules/products/page/ProductPage").then(module => ({ default: module.ProductPage })));
+const ContactPage = lazy(() => import("@modules/contact/page/ContactPage").then(module => ({ default: module.ContactPage })));
 
 export const router = createBrowserRouter([
   {
@@ -34,11 +35,12 @@ export const router = createBrowserRouter([
       { path: "/cart", element: <CartPage /> },
       { path: "/shop", element: <ShopPage /> },
       { path: "/shop/product", element: <ProductPage /> },
-      { path: "/cordyceps-militaris", element: <MushroomTypePage mushroom={infoCordyceps} /> },
-      { path: "/melena-de-leon", element: <MushroomTypePage mushroom={infoMelena} /> },
-      { path: "/cola-de-pavo", element: <MushroomTypePage mushroom={infoColaPavo} /> },
-      { path: "/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
+      { path: "/mushroom/cordyceps-militaris", element: <MushroomTypePage mushroom={infoCordyceps} /> },
+      { path: "/mushroom/melena-de-leon", element: <MushroomTypePage mushroom={infoMelena} /> },
+      { path: "/mushroom/cola-de-pavo", element: <MushroomTypePage mushroom={infoColaPavo} /> },
+      { path: "/mushroom/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
       { path: "/faq", element: <FAQPage /> },
+      { path: "/contact", element: <ContactPage /> },
       {
         path: "/admin",
         element: <AdminLayout />,

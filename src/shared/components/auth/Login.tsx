@@ -53,7 +53,6 @@ export const Login: React.FC<LoginProps> = ({
       if (!formRef.current) return;
       try {
         signIn(values)
-        toast.success('Login exitoso')
         resetForm();
         if (isModal) {
           handleClose();

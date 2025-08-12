@@ -15,7 +15,7 @@ interface IProductConfirm {
   lastAddedProduct: (IProduct & { quantity: number });
   lastAddedAt: string | null | undefined;
 }
-export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen, lastAddedProduct, lastAddedAt }) => {
+export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen, lastAddedProduct }) => {
   const { clearLastAdded } = useCart();
 
   // TODO: hacer lógica de cierre
@@ -23,7 +23,6 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen
     clearLastAdded();
   }
 
-  if(lastAddedAt) console.log(lastAddedAt);
   //TODO: que pasa si hay mas de un producto que se carga en el carrito???
   useEffect(() => {
     if (lastAddedProduct && lastAddedProduct) {

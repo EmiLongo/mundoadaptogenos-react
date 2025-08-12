@@ -24,6 +24,7 @@ const ShopPage = lazy(() => import("@modules/shop/page/ShopPage").then(module =>
 const MushroomTypePage = lazy(() => import("@modules/mushroom-type/page/MushroomTypePage").then(module => ({ default: module.MushroomTypePage })));
 const ProductPage = lazy(() => import("@modules/products/page/ProductPage").then(module => ({ default: module.ProductPage })));
 const ContactPage = lazy(() => import("@modules/contact/page/ContactPage").then(module => ({ default: module.ContactPage })));
+const ShoppingHistoryPage = lazy(() => import("@/modules/shopping-history/page/ShoppingHistoryPage").then(module => ({ default: module.ShoppingHistoryPage })));
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,6 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/register", element: <RegisterPage /> },
-      { path: "/profile", element: <Profile /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/shop", element: <ShopPage /> },
       { path: "/shop/product", element: <ProductPage /> },
@@ -41,6 +41,12 @@ export const router = createBrowserRouter([
       { path: "/mushroom/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/contact", element: <ContactPage /> },
+      
+      // Ruta protegida del cliente  TODO: hacer lógica
+      { path: "/shopping-history", element: <ShoppingHistoryPage /> },
+      { path: "/profile", element: <Profile /> },
+      
+      // Ruta protegida del admin  TODO: hacer lógica
       {
         path: "/admin",
         element: <AdminLayout />,

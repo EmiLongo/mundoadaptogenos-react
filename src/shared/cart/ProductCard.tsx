@@ -1,5 +1,5 @@
 // src/shared/cart/ProductCard.tsx
-import React from "react";
+import React, { useState } from "react";
 import { Box, Card, Link } from "@mui/material";
 import { BodyS, Caption, Heading3, Heading5 } from "@/theme/textStyles";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
@@ -9,6 +9,7 @@ import { IProduct } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { useCart } from "@store/useCartStore";
 import { useNavigate } from "react-router-dom";
+import { KitCardOptionsModal } from "./KitCardOptionsModal";
 
 interface IProductCard {
   product: IProduct;
@@ -17,10 +18,15 @@ interface IProductCard {
 
 export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
   const navigate = useNavigate();
+  const [isOpenOptionsModal, setIsOpenOptionsModal] = useState<boolean>(false);
 
   const { addProduct } = useCart();
   const addToCart = () => {
-    addProduct(product, 1); // cantidad = 1
+    if(product.hasOptions){
+      setIsOpenOptionsModal(true);
+    } else {
+      addProduct(product, 1); // cantidad = 1
+    }
   };
 
   const handleCard = () => {
@@ -130,6 +136,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
           sx={{ borderRadius: "30px", width: "100%", zIndex: 15 }}
         />
       </Box>
+      {product.hasOptions && isOpenOptionsModal && <KitCardOptionsModal isOpen={isOpenOptionsModal} onClose={() => setIsOpenOptionsModal(false)} product={product} />}
     </Card>
   );
 };

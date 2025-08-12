@@ -6,6 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { IContactInfo, IMenuOption, IProductsItems, ISubproductsItems } from "@/types/InfoTypes";
 
 export const navBarLines: number = 2;   //  1
 export const isNavBarTransparent: boolean = false;
@@ -21,15 +22,20 @@ export const heightForModalsMobile: string = "92px";
 
 
 
-export const productsItems = [
-  { text: 'Comprar', path: '/shop'},
-  { text: 'Cordyceps Militaris', path: '/cordyceps-militaris' },
-  { text: 'Melena de León', path: '/melena-de-leon' },
-  { text: 'Cola de Pavo', path: '/cola-de-pavo' },
-  { text: 'Reishi', path: '/reishi' },
+export const productsItems: IProductsItems[] = [
+  { text: 'Comprar', path: '/shop', hasSubproducts: false},
+  { text: 'Saber más de cada hongo', path: '/mushroom', hasSubproducts: true },
+  { text: 'Contacto', path: '/contact', hasSubproducts: false },
 ];
 
-export const menuItems = [
+export const subproductsItems: ISubproductsItems[] = [
+  { text: 'Cordyceps Militaris', path: '/mushroom/cordyceps-militaris' },
+  { text: 'Melena de León', path: '/mushroom/melena-de-leon' },
+  { text: 'Cola de Pavo', path: '/mushroom/cola-de-pavo' },
+  { text: 'Reishi', path: '/mushroom/reishi' },
+];
+
+export const menuItems : IMenuOption[] = [
   // { text: 'Inicio', path: '#home' },
   { text: 'Contacto', path: '/contact', icon: <EmailOutlinedIcon /> },
   { text: 'Preguntas Frecuentes', path: '/faq', icon: <HelpOutlineOutlinedIcon /> },
@@ -37,13 +43,6 @@ export const menuItems = [
   
 ];
 
-export interface IContactInfo {
-  icon: React.ElementType;
-  title: string;
-  text: string;
-  type: string;
-  url: string;
-}
 
 export const contactInfo : IContactInfo[] = [
   { icon: WhatsApp, 

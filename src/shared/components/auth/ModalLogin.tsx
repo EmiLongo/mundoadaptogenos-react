@@ -18,7 +18,7 @@ const fadeInAnimation = keyframes`
   }
 `;
 
-type ModalLoginProps = {
+interface IModalLogin {
   isOpenLogin: boolean;
   handleClose: () => void;
   setIsOpenDrawer?: (isOpen: boolean) => void;
@@ -26,7 +26,7 @@ type ModalLoginProps = {
   setIsOpenForgetPass?: (isOpen: boolean) => void;
 }
 
-export const ModalLogin: React.FC<ModalLoginProps> = ({ 
+export const ModalLogin: React.FC<IModalLogin> = ({ 
   isOpenLogin = false, 
   handleClose = () => {}, 
   setIsOpenDrawer = () => {},

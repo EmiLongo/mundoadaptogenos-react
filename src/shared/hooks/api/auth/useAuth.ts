@@ -69,13 +69,13 @@ export const useAuth = () => {
         const userProfile = await fetchProfile(data.user.id);
         if (userProfile) {
           syncWithStore(data.user, userProfile);
-          toast.success(`¡Bienvenido/a ${userProfile.full_name || 'Usuario'}!`);
+          toast.success('Login exitoso')
           
           // Redirigir según el rol
           if (userProfile.role === 'admin') {
             navigate('/admin/dashboard');
           } else {
-            navigate('/dashboard');
+            navigate('/');
           }
           
           return { success: true, user: data.user, profile: userProfile };
@@ -99,7 +99,7 @@ export const useAuth = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
+          redirectTo: `${window.location.origin}`
         }
       });
       console.log(data, error);
@@ -114,17 +114,22 @@ export const useAuth = () => {
   };
 
   // Función para cerrar sesión
-  const signOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      logout();
-      navigate('/');
-    } catch (error) {
-      console.error('Error signing out:', error);
-      toast.error('Error al cerrar sesión');
-    }
-  };
+const signOut = async () => {
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+    
+    logout();
+    toast.success('Sesión cerrada correctamente');
+    window.location.href = '/';
+    
+    return { success: true };
+  } catch (error) {
+    console.error('Error signing out:', error);
+    toast.error('Error al cerrar sesión');
+    return { success: false, error };
+  }
+};
 
   // FUNCIÓN PARA ACTUALIZAR PERFIL
   const updateProfile = async (updates: Partial<IProfile>) => {

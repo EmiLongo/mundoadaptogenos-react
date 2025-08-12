@@ -1,5 +1,6 @@
 //  src/shared/Layout/utils/filterProducts.ts
 import { IProduct } from "@/types/ProductTypes";
+import { catalogue } from "./catalogue";
 
 
 // Filtra los productos del catálogo por sectionId
@@ -26,3 +27,9 @@ export const filterByPackagingIdByNotSectionId = (catalog: IProduct[], packaging
       !item.sectionId.includes(sectionId) // que NO contenga
   );
 };
+
+  const products = filterByPackagingIdByNotSectionId(catalogue, 1, 5)
+  export const selectInfo = products.map(({ id, title }) => ({
+    value: String(id),
+    label: title.split(" - ")[0]
+  }));

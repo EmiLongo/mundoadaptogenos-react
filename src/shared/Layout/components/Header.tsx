@@ -6,31 +6,30 @@ import {
   Box, 
   IconButton, 
   Drawer, 
-  List,
   useMediaQuery,
   useTheme,
-  Divider,
 } from '@mui/material';
 import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
 import logo from '@img/logo.svg';
-import inpulseLogo from "@img/inpulse_design_logo_negro_color.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { BodyM, BodyS, Heading5 } from '@theme/textStyles';
+
+import { BodyM, Heading5 } from '@theme/textStyles';
 import { brownColor, greyColor } from '@theme/theme';
 import { CartButton } from '@shared/cart/CartButton';
 import { ProductConfirm } from '@shared/cart/ProductConfirm';
 import { useCart } from '@store/useCartStore';
 
 import { FAQButton } from './FAQButton.tsx';
-import { isNavBarTransparent, menuItems, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
+import { isNavBarTransparent, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton.tsx';
 import { useCartDrawer } from '@/store/useCartDrawer.ts';
 import { Marquee } from './Marquee.tsx';
 import { IProductsItems } from '@/types/InfoTypes.ts';
 import { SubproductsMenu } from './SubproductsMenu.tsx';
-import { Closebutton } from '@/shared/components/buttons/Closebutton.tsx';
+import { MenuDrawer } from './MenuDrawer.tsx';
+import { useUserStore } from '@/store/useUserStore.ts';
 
 
 export const Header: React.FC = () => {
@@ -38,11 +37,11 @@ export const Header: React.FC = () => {
   const { lastAddedProduct, lastAddedAt } = useCart();
   const { isOpenCartDrawer, toggleCartDrawer, setCartDrawer } = useCartDrawer();
   const theme = useTheme();
-  const { palette } = theme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isMobileMini = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const isAuthenticated = useUserStore(state => state.isAuthenticated);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isOpenSubmenu, setIsOpenSubmenu] = useState<boolean>(false);
@@ -119,70 +118,6 @@ export const Header: React.FC = () => {
     };
   }, [isOpenCartDrawer, mobileMenuOpen]);
 
-  // menu lateral en mobile
-  const drawer = (
-    <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: 'center', position: 'relative', height: '100%', padding: "12px", gap: "12px" }}>
-      {/* logo */}
-      <Box sx={{ display: 'flex', alignItems: 'center', marginTop: "1rem", marginLeft: "1rem"}}>
-        <Box 
-          component={"img"} 
-          src={logoTextHorizontal} 
-          alt="Logo Mundo Adaptógenos" 
-          height="50px" 
-          onClick={handleLogoClick}
-          decoding="async"
-          loading="lazy"
-        />
-      </Box>
-      {/* boton para cerrar */}
-      <Closebutton closeModal={handleMenuDrawerClose} id="bt-close-drawer"/>
-      <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {productsItems.map((item) => (
-          <Box key={item.text.split(" ").join("_")} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
-            <Heading5 sx={{ "&:hover":{color: palette.text.primary,  }}}>
-              {item.text}
-            </Heading5>
-          </Box>
-        ))}
-        <Divider />
-        {menuItems.filter(item => item.path !== '/complaints-book').map((item) => (
-          <Box key={item.text.split(" ").join("_")} component={"a"} href={item.path} sx={{display: 'flex', gap: "8px", paddingX: "12px"}}>
-            {item.icon}
-            <Heading5 sx={{ "&:hover":{color: palette.text.primary, }}}>
-              {item.text}
-            </Heading5>
-          </Box>
-        ))}
-      </List>
-      <Box
-        component={"a"}
-        href="https://inpulse.com.ar"
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.25rem",
-          position: 'absolute', bottom: "1rem" 
-        }}
-      >
-        <Box
-          component={"img"}
-          src={inpulseLogo}
-          alt="Logo Inpulse Design"
-          width={100}
-          decoding="async"
-          loading="lazy"
-        />
-        <BodyS sx={{ color: "inherit",textAlign: "center" }}>
-          Desarrollado por
-        </BodyS>
-      </Box>
-    </Box>
-  );
-
   // se inicializa el carrito
   useEffect(() => {
     // Inicializar con sessionId único para usuarios no logueados
@@ -243,7 +178,7 @@ export const Header: React.FC = () => {
                     />
                   </Box>
                   <Box sx={{display: "flex", gap: "20px"}}>
-                    <LoginButton />
+                    {!isAuthenticated && <LoginButton />}
                     <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
                   </Box>
                 </Box>
@@ -357,7 +292,7 @@ export const Header: React.FC = () => {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 350, backgroundColor: greyColor[50] },
           }}
         >
-          {drawer}
+          <MenuDrawer handleMenuDrawerClose={handleMenuDrawerClose} />
         </Drawer>
         {lastAddedProduct && <ProductConfirm 
           handleCartDrawerOpen={handleCartDrawerOpen}

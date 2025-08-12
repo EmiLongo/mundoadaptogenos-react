@@ -199,7 +199,6 @@ export const Header: React.FC = () => {
   return (
     <>
       {!isNavBarTransparent && <Box sx={{ height: isMobile ? navBarMobileHeight : navBarDesktopHeight }} />}
-      {isOpenSubmenu && <SubproductsMenu sx={{position:"absolute", top: navBarDesktopHeight, left: "50%", transform: "translateX(-50%)"}}/>}
       <AppBar 
       id="navbar"
       position="fixed" 
@@ -299,10 +298,11 @@ export const Header: React.FC = () => {
                 }}>
                   {productsItems.map((item) => (
                     <Box
-                      key={item.text}
+                      key={`submenu-item-${item.text.split(" ").join("-")}`}
                       component={"a"}
                       href={!item.hasSubproducts ? item.path : undefined}
-                      onClick={() => toogleSubmenu(item)}
+                      onMouseEnter={() => toogleSubmenu(item)}
+                      onMouseLeave={() => toogleSubmenu(item)}
                       sx={{
                         display: 'flex',
                         alignItems: "center",
@@ -323,6 +323,7 @@ export const Header: React.FC = () => {
                       }}>
                         {item.text}
                       </Heading5>
+                      {item.hasSubproducts && isOpenSubmenu && <SubproductsMenu sx={{position:"absolute", top: navBar2DesktopHeight, left: "50%", transform: "translateX(-50%)"}}/>}
                     </Box>
                   ))}
                   {/* {menuItems.map((item) => (

@@ -7,6 +7,7 @@ import { redColor } from "@/theme/theme";
 import { BodyM, InputError } from "@/theme/textStyles";
 import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
+import { supabase } from "@/api/apiClient";
 
 
 
@@ -38,19 +39,24 @@ export const ForgetPass: React.FC<IForgetPassProps> = ({
       email: '',
     },
     validationSchema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       if (!formRef.current) return;
       console.log(values);
-      try {        
-        toast.success('Login exitoso')
+      try {
+        const { data, error } = await supabase.auth.resetPasswordForEmail(values.email, {
+        redirectTo: 'https://example.com/update-password',
+        })
+        if (error) throw error;
+        console.log(data)
+        toast.success('Mail enviado con exito')
         resetForm();
         if (isModal) {
           setIsOpenDrawer(false);
           handleClose();
         }
       } catch (error) {
-        toast.error('Error al iniciar sesión')
-        console.log('Error al iniciar sesión', error);
+        toast.error('Error al enviar el email')
+        console.log('Error al enviar el email', error);
       } finally {
         setSubmitting(false);
       }

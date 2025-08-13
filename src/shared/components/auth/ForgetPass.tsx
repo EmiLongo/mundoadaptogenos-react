@@ -8,8 +8,7 @@ import { BodyM, InputError } from "@/theme/textStyles";
 import { ColorButton } from "../buttons/ColorButton";
 import { OnlyTextButton } from "../buttons/OnlyTextButton";
 import { supabase } from "@/api/apiClient";
-
-
+import { frontendUrl } from "@/api/utils";
 
 const validationSchema: Yup.ObjectSchema<{email: string}> = Yup.object({
   email: Yup.string().email('Correo inválido').required('Requerido'),
@@ -44,7 +43,7 @@ export const ForgetPass: React.FC<IForgetPassProps> = ({
       console.log(values);
       try {
         const { data, error } = await supabase.auth.resetPasswordForEmail(values.email, {
-        redirectTo: 'https://example.com/update-password',
+        redirectTo: `${frontendUrl}/recovery`,
         })
         if (error) throw error;
         console.log(data)

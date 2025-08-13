@@ -5,13 +5,7 @@ import { lazy } from "react";
 //import Loading from "@/shared/components/Loading";
 import { Layout } from "@shared/Layout/page/Layout";
 import { HomePage } from "@modules/home/page/HomePage";
-import { RegisterPage } from "@modules/register/page/RegisterPage";
-import { Profile } from "@shared/components/user/Profile";
 import { AdminLayout } from "@modules/admin/layout/Layout";
-import { infoReishi } from "@modules/mushroom-type/utils/Reishi";
-import { infoColaPavo } from "@modules/mushroom-type/utils/ColaPavo";
-import { infoMelena } from "@modules/mushroom-type/utils/Melena";
-import { infoCordyceps } from "@modules/mushroom-type/utils/Cordyceps";
 
 const ManageSectionsPage = lazy(() => import("@modules/admin/page/ManageSectionsPage").then(module => ({ default: module.ManageSectionsPage })));
 const ManageProductsPage = lazy(() => import("@modules/admin/page/ManageProductsPage").then(module => ({ default: module.ManageProductsPage })));
@@ -24,7 +18,16 @@ const ShopPage = lazy(() => import("@modules/shop/page/ShopPage").then(module =>
 const MushroomTypePage = lazy(() => import("@modules/mushroom-type/page/MushroomTypePage").then(module => ({ default: module.MushroomTypePage })));
 const ProductPage = lazy(() => import("@modules/products/page/ProductPage").then(module => ({ default: module.ProductPage })));
 const ContactPage = lazy(() => import("@modules/contact/page/ContactPage").then(module => ({ default: module.ContactPage })));
-const ShoppingHistoryPage = lazy(() => import("@/modules/shopping-history/page/ShoppingHistoryPage").then(module => ({ default: module.ShoppingHistoryPage })));
+const ShoppingHistoryPage = lazy(() => import("@modules/shopping-history/page/ShoppingHistoryPage").then(module => ({ default: module.ShoppingHistoryPage })));
+const RegisterPage = lazy(() => import("@modules/auth/page/RegisterPage").then(module => ({ default: module.RegisterPage })));
+const RecoveryPass = lazy(() => import("@modules/auth/page/RecoveryPass").then(module => ({ default: module.RecoveryPass })));
+const Profile = lazy(() => import("@shared/components/user/Profile").then(module => ({ default: module.Profile })));
+
+// utils
+import { infoReishi } from "@modules/mushroom-type/utils/Reishi";
+import { infoColaPavo } from "@modules/mushroom-type/utils/ColaPavo";
+import { infoMelena } from "@modules/mushroom-type/utils/Melena";
+import { infoCordyceps } from "@modules/mushroom-type/utils/Cordyceps";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +44,7 @@ export const router = createBrowserRouter([
       { path: "/mushroom/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/recovery", element: <RecoveryPass /> },
       
       // Ruta protegida del cliente  TODO: hacer lógica
       { path: "/shopping-history", element: <ShoppingHistoryPage /> },

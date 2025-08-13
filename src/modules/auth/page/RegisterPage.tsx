@@ -19,7 +19,7 @@ export const RegisterPage: React.FC = () => {
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
-      height: {xs: "80vh", md:"70vh"},
+      height: {xs: "90vh", md:"70vh"},
       width: "100%",
       gap: {md: "16px", xl: "32px"},
       ...paddingPage

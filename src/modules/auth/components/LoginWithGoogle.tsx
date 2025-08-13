@@ -7,7 +7,10 @@ import floatingMushroomPng from "@img/home/hero/floating_mushroom.png";
 import shadowMushroomWebp from "@img/home/hero/sombra.webp";
 import shadowMushroomPng from "@img/home/hero/sombra.png";
 
-export const LoginWithGoogle: React.FC = () => {
+interface ILoginWithGoogle {
+  isRecovery?: boolean
+}
+export const LoginWithGoogle: React.FC<ILoginWithGoogle> = ({isRecovery = false}) => {
   return (
     <>
     <Box sx={{
@@ -18,7 +21,7 @@ export const LoginWithGoogle: React.FC = () => {
     }}>
       <Box
         component="picture"
-        sx={{ width: "206px", transform: "translateY(-30px)"}}
+        sx={{ width: "206px", transform: {xs: "translateY(0px)", md: isRecovery ? "translateY(-100px)" : "translateY(-30px)"}}}
       >
         <source srcSet={floatingMushroomWebp} type="image/webp" />
         <Box
@@ -32,7 +35,7 @@ export const LoginWithGoogle: React.FC = () => {
       </Box>
       <Box
         component="picture"
-        sx={{ width: "206px", transform: "translateY(-30px)"}}
+        sx={{ width: "206px", transform: {xs: "translateY(0px)", md: isRecovery ? "translateY(-100px)" : "translateY(-30px)"}}}
       >
         <source srcSet={shadowMushroomWebp} type="image/webp" />
         <Box
@@ -44,7 +47,7 @@ export const LoginWithGoogle: React.FC = () => {
           width="206px"
         />
       </Box>
-      <GoogleLoginButton />
+      {!isRecovery &&<GoogleLoginButton />}
     </Box>
     </>
   )

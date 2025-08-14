@@ -1,10 +1,11 @@
 // src/modules/admin/utils/info.tsx
 // import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
-import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
-import ManageHistoryOutlinedIcon from '@mui/icons-material/ManageHistoryOutlined';
+// import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
+// import ManageHistoryOutlinedIcon from '@mui/icons-material/ManageHistoryOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import PriceChangeOutlinedIcon from '@mui/icons-material/PriceChangeOutlined';
+// import PriceChangeOutlinedIcon from '@mui/icons-material/PriceChangeOutlined';
+import PercentIcon from '@mui/icons-material/Percent';
 
 export interface IMenuOption {
   title: string;
@@ -13,11 +14,11 @@ export interface IMenuOption {
 }
 
 export const MenuOptionsTop = [
-  {
-    title: 'Secciones',
-    icon: <WidgetsOutlinedIcon />,
-    to: '/admin/sections'
-  },
+  // {
+  //   title: 'Secciones',
+  //   icon: <WidgetsOutlinedIcon />,
+  //   to: '/admin/sections'
+  // },
   {
     title: 'Productos',
     icon: <Inventory2OutlinedIcon />,
@@ -25,14 +26,14 @@ export const MenuOptionsTop = [
   },
   {
     title: 'Descuentos',
-    icon: <PriceChangeOutlinedIcon />,
+    icon: <PercentIcon />,
     to: '/admin/discounts'
   },
-  {
-    title: 'Historial',
-    icon: <ManageHistoryOutlinedIcon />,
-    to: '/admin/history'
-  },
+  // {
+  //   title: 'Historial',
+  //   icon: <ManageHistoryOutlinedIcon />,
+  //   to: '/admin/history'
+  // },
   // {
   //     title: 'Paquetes',
   //     icon: <CardTravel />,

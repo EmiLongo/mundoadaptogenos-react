@@ -41,6 +41,7 @@ export const MenuAdmin = () => {
     <Box sx={{ 
       height: {xs: open ? drawerHeightOpen : drawerHeightClosed, md: "100%"}, 
       width: {xs: "100%", md: open ? drawerWidthOpen : drawerWidthClosed},
+      minWidth: {xs: "100%", md: open ? drawerWidthOpen : drawerWidthClosed},
       transition: "all 0.3s ease-in-out",
     }}/>
     <Box

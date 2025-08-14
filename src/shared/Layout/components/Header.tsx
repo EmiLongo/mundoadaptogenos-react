@@ -21,7 +21,7 @@ import { ProductConfirm } from '@shared/cart/ProductConfirm';
 import { useCart } from '@store/useCartStore';
 
 import { FAQButton } from './FAQButton.tsx';
-import { isNavBarTransparent, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
+import { heightForModalsMobile, isNavBarTransparent, navBar12DesktopHeight, navBar1DesktopHeight, navBar2DesktopHeight, navBarDesktopHeight, navBarDesktopInfoHeight, navBarMobileHeight, productsItems } from '../utils/info.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton.tsx';
 import { useCartDrawer } from '@/store/useCartDrawer.ts';
@@ -133,7 +133,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {!isNavBarTransparent && <Box sx={{ height: isMobile ? navBarMobileHeight : navBarDesktopHeight }} />}
+      {!isNavBarTransparent && <Box sx={{ height: isMobile ? heightForModalsMobile : navBarDesktopHeight }} />}
       <AppBar 
       id="navbar"
       position="fixed" 

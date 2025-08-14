@@ -5,6 +5,7 @@ import React from "react"
 import { ProductCard } from "../components/ProductCard"
 import { HeadingPage } from "@/shared/components/HeadingPage"
 import { Heading3, Heading4 } from "@/theme/textStyles"
+import { ProductCardNew } from "../components/ProductCardNew"
 
 export const ManageProductsPage: React.FC = () => {
   const theme = useTheme();
@@ -14,6 +15,7 @@ export const ManageProductsPage: React.FC = () => {
       paddingRight: {xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"},
       paddingLeft: {xs: "1rem", sm:"2rem", xl:"3rem"},
       paddingTop: {xs: "24px", md:"48px"},
+      paddingBottom: {xs: "3rem", md:"3rem"},
     }}>
       <HeadingPage text="Menu Administrador para gestión de Productos" />
       {isMoble 
@@ -23,12 +25,14 @@ export const ManageProductsPage: React.FC = () => {
       <Box sx={{
         display: "flex", 
         flexWrap: "wrap", 
-        gap: {xs: "8px", md: "16px"},
+        columnGap: {xs: "8px", md: "16px"},
+        rowGap: "24px",    // gap vertical
         justifyContent: "center",
       }}>
-      {catalogue.map((product) => (
-        <ProductCard key={product.id} product={product} index={product.id} />
-      ))}
+        <ProductCardNew />
+        {catalogue.map((product) => (
+          <ProductCard key={product.id} product={product} index={product.id} />
+        ))}
 
       </Box>
 

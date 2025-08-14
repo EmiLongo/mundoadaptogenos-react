@@ -7,7 +7,7 @@ import {
 
 import inpulseLogo from "@img/inpulse_design_logo_blanco.svg";
 import logoContraste from "@img/logo-nombre-vertical-claro.svg";
-import { menuItems, productsItems } from "../utils/info";
+import { menuItems, subproductsItems } from "../utils/info";
 import {
   BodyS,
   CaptionAlt,
@@ -106,7 +106,7 @@ export const Footer: React.FC = () => {
                 // flexWrap: {xs: "wrap", md: "nowrap"}, 
                 gap:"8px"
               }}>
-                {productsItems.map((item) => (
+                {subproductsItems.map((item) => (
                   <Box key={item.text.replace(" ","-")} component={"a"} href={item.path}>
                     <BodyS sx={{ width: {xs: "37vw", sm: "160px", lg:"unset"}, color: greyColor[300], "&:hover":{color: brownColor[400]}}}>
                       {item.text}

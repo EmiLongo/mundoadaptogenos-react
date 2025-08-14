@@ -3,7 +3,7 @@ import { greyColor, brownColor } from "@/theme/theme";
 import { Box, ListItem, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IMenuOption } from "../utils/info";
-import { Heading3 } from "@/theme/textStyles";
+import { Heading5 } from "@/theme/textStyles";
 import React from "react";
 
 export interface IMenuListItemProps {
@@ -19,15 +19,17 @@ export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, curren
     <ListItem
       key={`menu-item-${index}-${item.to}`}
       sx={{
-        display: "block",
-        backgroundColor: currentPath === item.to.split("/")[2] ? brownColor[600] : "transparent",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: open ? "flex-start" : "center",
+        backgroundColor: currentPath === item.to.split("/")[2] ? brownColor[800] : "transparent",
         color: currentPath === item.to.split("/")[2] ? greyColor[50] : greyColor[950],
+        transition: "all 0.3s ease-in-out",
         "&:hover": {
-          backgroundColor: brownColor[400],
-          color: greyColor[950],
+          backgroundColor: currentPath === item.to.split("/")[2] ? brownColor[800] : brownColor[200],
+          color: currentPath === item.to.split("/")[2] ? greyColor[50] : greyColor[950],
           fontWeight: 600,
           cursor: "pointer",
-          transition: "all 0.3s ease-in-out",
         },
       }}
     >
@@ -57,7 +59,7 @@ export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, curren
             {item.icon}
           </Box>
         </Tooltip>
-        <Heading3
+        <Heading5
           sx={{ 
             fontWeight: 400, 
             whiteSpace: "nowrap",
@@ -70,7 +72,7 @@ export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, curren
           }}
         >
           {item.title}
-        </Heading3>
+        </Heading5>
       </Link>
     </ListItem>
   )

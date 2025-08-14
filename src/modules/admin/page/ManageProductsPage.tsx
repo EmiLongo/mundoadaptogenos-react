@@ -24,16 +24,19 @@ export const ManageProductsPage: React.FC = () => {
       }
       <Box sx={{
         display: "flex", 
-        flexWrap: "wrap", 
-        columnGap: {xs: "8px", md: "16px"},
-        rowGap: "24px",    // gap vertical
         justifyContent: "center",
       }}>
-        <ProductCardNew />
-        {catalogue.map((product) => (
-          <ProductCard key={product.id} product={product} index={product.id} />
-        ))}
-
+        <Box sx={{
+          display: "flex", 
+          flexWrap: "wrap", 
+          columnGap: {xs: "8px", md: "16px"},
+          rowGap: "24px",    // gap vertical
+        }}>
+          <ProductCardNew />
+          {catalogue.map((product) => (
+            <ProductCard key={product.id} product={product} index={product.id} />
+          ))}
+        </Box>
       </Box>
 
     </Box>

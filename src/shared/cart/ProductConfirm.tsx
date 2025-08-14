@@ -8,7 +8,7 @@ import { brownColor, greyColor } from "@theme/theme";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from "@/store/useCartStore";
 import { IProduct } from "@/types/ProductTypes";
-import { heightForModals, navBarMobileHeight } from "../Layout/utils/info";
+import { heightForModals, heightForModalsMobile } from "../Layout/utils/info";
 
 interface IProductConfirm {
   handleCartDrawerOpen: ()=>void;
@@ -47,7 +47,7 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen
       borderRadius: "8px",
       position: "fixed",
       right:{xs: "1rem", sm: "2rem", md: "4rem", lg:"5rem", xl:"8rem"},
-      top: {xs: navBarMobileHeight, md: heightForModals},
+      top: {xs: heightForModalsMobile, md: heightForModals},
       zIndex: 1200,
     }}>
       {/* Foto y detalle */}
@@ -55,8 +55,6 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen
       sx={{
         width: "100%",
         display: "flex", 
-        // alignItems: "center", 
-        // justifyContent: "start", 
         gap: "8px", 
         marginBottom: "16px",
         position: "relative",

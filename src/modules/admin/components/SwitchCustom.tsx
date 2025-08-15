@@ -1,20 +1,19 @@
 // src/modules/admin/components/SwitchCustom.tsx
-import { greenColor } from "@/theme/theme";
+import { greenColor, greyColor } from "@/theme/theme";
 import { styled, Switch, SwitchProps } from "@mui/material";
 
 export const SwitchCustom = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
-  width: 42,
-  height: 26,
+  width: 52,
+  height: 32,
   padding: 0,
   '& .MuiSwitch-switchBase': {
     padding: 0,
     margin: 2,
     transitionDuration: '300ms',
     '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
+      transform: 'translate(14px, -4px)',
       '& + .MuiSwitch-track': {
         backgroundColor: greenColor[900],
         opacity: 1,
@@ -23,26 +22,35 @@ export const SwitchCustom = styled((props: SwitchProps) => (
       '&.Mui-disabled + .MuiSwitch-track': {
         opacity: 0.5,
       },
+      '& .MuiSwitch-thumb': {
+        backgroundColor: greyColor[50],
+        boxSizing: 'border-box',
+        width: 24,
+        height: 24,
+      },
     },
     '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: greenColor[900],
-      border: '6px solid #fff',
+      backgroundColor: greyColor[800],
+      border: `6px solid ${greyColor[800]}`,
     },
     '&.Mui-disabled .MuiSwitch-thumb': {
-      color: theme.palette.grey[100],
+      backgroundColor: greyColor[200],
     },
     '&.Mui-disabled + .MuiSwitch-track': {
       opacity: 0.7,
     },
   },
   '& .MuiSwitch-thumb': {
+    backgroundColor: greyColor[800],
     boxSizing: 'border-box',
-    width: 22,
-    height: 22,
+    width: 16,
+    height: 16,
+    transform: 'translate(7px, 6px)',
   },
   '& .MuiSwitch-track': {
-    borderRadius: 26 / 2,
-    backgroundColor: '#E9E9EA',
+    borderRadius: 30,
+    border: `2px solid ${greyColor[800]}`,
+    backgroundColor: greyColor[50],
     opacity: 1,
     transition: theme.transitions.create(['background-color'], {
       duration: 500,

@@ -73,7 +73,7 @@ export const useAuth = () => {
           
           // Redirigir según el rol
           if (userProfile.role === 'admin') {
-            navigate('/admin/dashboard');
+            navigate('/admin');
           } else {
             navigate('/');
           }

@@ -18,7 +18,6 @@ export const LoginButton: React.FC = () => {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenForgetPass, setIsOpenForgetPass] = useState(false);
   const user = useUserStore(state => state.user);
-  console.log("user", user);
 
   const handleCloseLogin = () => {
     setIsOpenLogin(false);

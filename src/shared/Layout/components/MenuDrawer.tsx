@@ -80,7 +80,7 @@ export const MenuDrawer: React.FC<IMenuDrawer> = ({handleMenuDrawerClose}) => {
             </Box>
             <Collapse in={isUserDropdown}>
               {user.role === Role.ADMIN 
-              ? <Box component={"a"} href={"./shopping-history"} sx={{display: 'flex', gap: "8px", paddingLeft: "36px", alignItems: "center", height: "42px"}}>
+              ? <Box component={"a"} href={"./admin"} sx={{display: 'flex', gap: "8px", paddingLeft: "36px", alignItems: "center", height: "42px"}}>
                 <DashboardCustomizeOutlinedIcon />
                 <Heading5 sx={{ "&:hover":{color: greyColor[950],  }}}>
                   Panel de Administrador

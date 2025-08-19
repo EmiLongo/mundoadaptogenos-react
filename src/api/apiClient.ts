@@ -20,8 +20,3 @@ export const supabase = createClient(
     },
   }
 );
-
-// Event listener defensivo
-supabase.auth.onAuthStateChange((event, session) => {
-  console.log(`🔐 Auth event: ${event}`, session?.user?.email || 'No user');
-});

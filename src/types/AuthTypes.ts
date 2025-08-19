@@ -19,10 +19,10 @@ export interface IProfile {
 export interface IUser {
   id: string;
   name: string | null;
-  email: string;
+  email: string | undefined;
   role: Role;
-  avatar_url: string | null;
-  created_at: string;
+  avatar_url?: string | null;
+  created_at?: string;
   // Datos adicionales de Supabase si los necesitas
   email_confirmed_at?: string | null;
   phone?: string | null;
@@ -48,7 +48,6 @@ export interface ISupabaseAuthResponse {
 
 export interface IAuthState {
   user: IUser | null;
-  profile: IProfile | null;
   loading: boolean;
   isAuthenticated: boolean;
 }

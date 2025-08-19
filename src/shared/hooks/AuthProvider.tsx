@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       async (event, session) => {
         console.log(`Event: ${event}`);
         if (session?.user) {
-        console.log("user", session?.user);
         const userData: IUser = {
           id: session?.user.id,
           name: session?.user.user_metadata.full_name,

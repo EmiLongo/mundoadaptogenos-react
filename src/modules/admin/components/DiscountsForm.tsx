@@ -122,7 +122,7 @@ export const DiscountsForm: React.FC = () => {
                 id="bankTransfer"
                 name="bankTransfer"
                 type="number"
-                value={formik.values.taxDiscount}
+                value={formik.values.bankTransfer}
                 onChange={(e) => formik.setFieldValue("bankTransfer", e.target.value)}
               />
               <SwitchCustom checked={formik.values.activeBankTransfer} onChange={(e) => formik.setFieldValue("activeBankTransfer", e.target.checked)} />
@@ -138,7 +138,7 @@ export const DiscountsForm: React.FC = () => {
                 id="eventualDiscount1"
                 name="eventualDiscount1"
                 type="number"
-                value={formik.values.taxDiscount}
+                value={formik.values.eventualDiscount1}
                 onChange={(e) => formik.setFieldValue("eventualDiscount1", e.target.value)}
               />
               <SwitchCustom checked={formik.values.activeEventual1} onChange={(e) => formik.setFieldValue("activeEventual1", e.target.checked)} />
@@ -155,7 +155,7 @@ export const DiscountsForm: React.FC = () => {
                 id="eventualDiscount2"
                 name="eventualDiscount2"
                 type="number"
-                value={formik.values.taxDiscount}
+                value={formik.values.eventualDiscount2}
                 onChange={(e) => formik.setFieldValue("eventualDiscount2", e.target.value)}
               />
               <SwitchCustom checked={formik.values.activeEventual2} onChange={(e) => formik.setFieldValue("activeEventual2", e.target.checked)} />
@@ -171,7 +171,7 @@ export const DiscountsForm: React.FC = () => {
                 id="eventualDiscount3"
                 name="eventualDiscount3"
                 type="number"
-                value={formik.values.taxDiscount}
+                value={formik.values.eventualDiscount3}
                 onChange={(e) => formik.setFieldValue("eventualDiscount3", e.target.value)}
               />
               <SwitchCustom checked={formik.values.activeEventual3} onChange={(e) => formik.setFieldValue("activeEventual3", e.target.checked)} />

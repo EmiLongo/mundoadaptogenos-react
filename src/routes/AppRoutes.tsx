@@ -21,7 +21,7 @@ const ContactPage = lazy(() => import("@modules/contact/page/ContactPage").then(
 const ShoppingHistoryPage = lazy(() => import("@modules/shopping-history/page/ShoppingHistoryPage").then(module => ({ default: module.ShoppingHistoryPage })));
 const RegisterPage = lazy(() => import("@modules/auth/page/RegisterPage").then(module => ({ default: module.RegisterPage })));
 const RecoveryPass = lazy(() => import("@modules/auth/page/RecoveryPass").then(module => ({ default: module.RecoveryPass })));
-const Profile = lazy(() => import("@shared/components/user/Profile").then(module => ({ default: module.Profile })));
+const Profile = lazy(() => import("@/modules/user/page/Profile").then(module => ({ default: module.Profile })));
 
 // utils
 import { infoReishi } from "@modules/mushroom-type/utils/Reishi";

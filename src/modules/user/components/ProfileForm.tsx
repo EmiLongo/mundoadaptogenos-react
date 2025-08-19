@@ -123,8 +123,8 @@ export const ProfileForm: React.FC = () => {
             sx={{width: "100%", maxWidth: "383px", marginX: "auto"}}
           />
         </Box>
-        {openModalEmail && <ModalChangeEmail isOpen={openModalEmail} onClose={() => setOpenModalEmail(false)} email={user?.email || ''}/>}
-        {openModalPassword && <ModalChangePassword isOpen={openModalPassword} onClose={() => setOpenModalPassword(false)}/>}
+        {openModalEmail && <ModalChangeEmail isOpen={openModalEmail} onClose={() => setOpenModalEmail(false)} email={user?.email || ''} />}
+        {openModalPassword && <ModalChangePassword isOpen={openModalPassword} onClose={() => setOpenModalPassword(false)} email={user?.email || ''} />}
       </Box>
   )
 }

@@ -1,7 +1,7 @@
 // src/modules/admin/components/DiscountsForm.tsx
 import { Box, FormControl, OutlinedInput } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { SwitchCustom } from "./SwitchCustom";
@@ -24,6 +24,7 @@ const validationSchema = Yup.object({
 
 export const DiscountsForm: React.FC = () => {
 
+  const [loading, setLoading] = useState(true);
   const formik = useFormik({
     initialValues: {
       taxDiscount: 0,
@@ -63,8 +64,6 @@ export const DiscountsForm: React.FC = () => {
           .select('*')
           .limit(1); 
 
-        console.log("Respuesta completa:", { data: discounts, error });
-
         if (error) {
           throw error;
         }
@@ -85,6 +84,8 @@ export const DiscountsForm: React.FC = () => {
         }
       } catch (error) {
         console.error('Error al obtener los descuentos:', error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchDiscounts();
@@ -187,7 +188,7 @@ export const DiscountsForm: React.FC = () => {
             onClick={() => formik.submitForm()}
             text="Guardar Cambios"
             isFetching={formik.isSubmitting}
-            disabled={formik.isSubmitting}
+            disabled={formik.isSubmitting || loading}
             sx={{width: "100%", maxWidth: "383px", marginX: "auto"}}
           />
         </Box>

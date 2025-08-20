@@ -3,16 +3,15 @@ import React from "react";
 import { Box, Card, Divider } from "@mui/material";
 import { BodyMEmph, BodyS, Caption } from "@/theme/textStyles";
 import { greyColor } from "@/theme/theme";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SwitchCustom } from "./SwitchCustom";
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 
 
 export const ProductCardNew: React.FC = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleCard = () => {
-    // navigate("/shop/product", { state: { product } });
-    console.log("click");
+    navigate("/admin/create-products", { state: { product: null } });
   };
 
   return (

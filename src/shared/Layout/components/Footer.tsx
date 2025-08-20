@@ -174,9 +174,32 @@ export const Footer: React.FC = () => {
               width: {xs: "unset",sm: "210px", lg:"unset"},
               gap: "8px", 
             }}>
-            <Box component={"img"} src={WhatsAppIcon} width="24px" sx={{color: "primary.main"}} />
-            <Box component={"img"} src={InstagramIcon} width="24px" sx={{color: "primary.main"}} />
-            <Box component={"img"} src={FacebookIcon} width="24px" sx={{color: "primary.main"}} />
+              <Box
+                component="a"
+                href="https://wa.me/5493412667096?text=🍄%20Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20hongos%20adaptógenos."
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Box component="img" src={WhatsAppIcon} width="24px" sx={{ color: "primary.main" }} />
+              </Box>
+
+              <Box
+                component="a"
+                href="https://www.instagram.com/mundoadaptogenos/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Box component="img" src={InstagramIcon} width="24px" sx={{ color: "primary.main" }} />
+              </Box>
+
+              <Box
+                component="a"
+                href="https://www.facebook.com/mundoadaptogenos"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Box component="img" src={FacebookIcon} width="24px" sx={{ color: "primary.main" }} />
+              </Box>
             </Box>
           </Box>
 

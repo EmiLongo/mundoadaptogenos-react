@@ -17,7 +17,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
   console.log(index)
   const navigate = useNavigate();
   const handleCard = () => {
-    navigate("/shop/product", { state: { product } });
+    navigate("/admin/products-details", { state: { product } });
   };
 
   const [checked, setChecked] = React.useState(true);

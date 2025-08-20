@@ -3,10 +3,12 @@ import React from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { HeadingPage } from "@/shared/components/HeadingPage";
 import { Heading3, Heading4 } from "@/theme/textStyles";
+import { ProductDetailsForm } from "../components/ProductDetailsForm";
 
 export const ProductDetailsPage: React.FC = () => {
   const theme = useTheme();
   const isMoble = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box sx={{
       paddingRight: {xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"},
@@ -19,6 +21,7 @@ export const ProductDetailsPage: React.FC = () => {
         ? <Heading4 sx={{textAlign: "center", marginBottom: "16px"}}>PRODUCTO</Heading4>
         : <Heading3 sx={{textAlign: "center", marginBottom: "16px"}}>PRODUCTO</Heading3>
       }
+      <ProductDetailsForm />
     </Box>
   )
 }

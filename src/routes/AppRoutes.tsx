@@ -22,6 +22,7 @@ const ShoppingHistoryPage = lazy(() => import("@modules/shopping-history/page/Sh
 const RegisterPage = lazy(() => import("@modules/auth/page/RegisterPage").then(module => ({ default: module.RegisterPage })));
 const RecoveryPass = lazy(() => import("@modules/auth/page/RecoveryPass").then(module => ({ default: module.RecoveryPass })));
 const Profile = lazy(() => import("@/modules/user/page/Profile").then(module => ({ default: module.Profile })));
+const ProductDetailsPage = lazy(() => import("@/modules/admin/page/ProductDetailsPage").then(module => ({ default: module.ProductDetailsPage })));
 
 // utils
 import { infoReishi } from "@modules/mushroom-type/utils/Reishi";
@@ -58,6 +59,8 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="products" replace /> },
           { path: "sections", element: <ManageSectionsPage /> },
           { path: "products", element: <ManageProductsPage /> },
+          { path: "create-products", element: <ProductDetailsPage /> },
+          { path: "products-details", element: <ProductDetailsPage /> },
           { path: "discounts", element: <ManageDiscountsPage /> },
           { path: "history", element: <ManageHistoryPage /> },
           { path: "set-admins", element: <ManageAdminsPage /> },

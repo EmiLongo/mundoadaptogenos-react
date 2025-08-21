@@ -3,13 +3,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconButton, useMediaQuery } from "@mui/material";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { ModalLogin } from "@shared/components/auth/ModalLogin";
 import { WhiteButton } from "@shared/components/buttons/WhiteButton";
 import { useUserStore } from "@store/useUserStore";
 import { useTheme } from "@mui/material";
 import { OnlyTextButton } from "@/shared/components/buttons/OnlyTextButton";
-import { Role } from "@/types/AuthTypes";
 
 export const LoginButton: React.FC = () => {
   const theme = useTheme();
@@ -27,19 +25,12 @@ export const LoginButton: React.FC = () => {
   return (
     <>
     {(!!user && !isMobile) 
-    ? user.role === Role.ADMIN
-      ? <IconButton
-          id="bti-menu-profile"
-          onClick={() => navigate("/admin/")}
-        >
-          <AdminPanelSettingsOutlinedIcon />
-        </IconButton>
-      : <IconButton
-          id="bti-menu-profile"
-          onClick={() => navigate("/profile")}
-        >
-          <PersonOutlineOutlinedIcon />
-        </IconButton>
+    ? <IconButton
+        id="bti-menu-profile"
+        onClick={() => navigate("/profile")}
+      >
+        <PersonOutlineOutlinedIcon />
+      </IconButton>
     :
     <>
     {isMobile 

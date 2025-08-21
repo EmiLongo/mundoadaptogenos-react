@@ -4,17 +4,13 @@ import { Navigate } from 'react-router-dom';
 
 
 export function UserAdminPrivateRoutes({ children }: { children: React.ReactNode }) {
-
 	const { isAuthenticated, isAdmin } = useUserStore();
+	if ( !isAuthenticated ) {
+			return <Navigate to="/" replace />;
+	}
+	if ( !isAdmin() ) {
+			return <Navigate to="/" replace />;
+	}
 
-    if ( !isAuthenticated ) {
-        return <Navigate to="/login" replace />;
-    }
-
-    if ( !isAdmin() ) {
-        return <Navigate to="/" replace />;
-    }
-
-    return children;
-
+	return children;
 }

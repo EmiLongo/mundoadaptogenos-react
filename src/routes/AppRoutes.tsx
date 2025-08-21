@@ -6,6 +6,8 @@ import { lazy } from "react";
 import { Layout } from "@shared/Layout/page/Layout";
 import { HomePage } from "@modules/home/page/HomePage";
 import { AdminLayout } from "@modules/admin/layout/Layout";
+import { UserAdminPrivateRoutes } from "./UserAdminPrivateRoutes";
+import { UserAuthenticatedPrivateRoutes } from "./UserAuthenticatedPrivateRoutes";
 
 const ManageSectionsPage = lazy(() => import("@modules/admin/page/ManageSectionsPage").then(module => ({ default: module.ManageSectionsPage })));
 const ManageProductsPage = lazy(() => import("@modules/admin/page/ManageProductsPage").then(module => ({ default: module.ManageProductsPage })));
@@ -51,13 +53,21 @@ export const router = createBrowserRouter([
 
       
       // Ruta protegida del cliente  TODO: hacer lógica
-      { path: "/shopping-history", element: <ShoppingHistoryPage /> },
-      { path: "/profile", element: <Profile /> },
+      { path: "/shopping-history", element:
+      <UserAuthenticatedPrivateRoutes>
+        <ShoppingHistoryPage /> 
+      </UserAuthenticatedPrivateRoutes>
+      },
+      { path: "/profile", element: 
+      <UserAuthenticatedPrivateRoutes>
+        <Profile /> 
+      </UserAuthenticatedPrivateRoutes>
+      },
       
       // Ruta protegida del admin  TODO: hacer lógica
       {
         path: "/admin",
-        element: <AdminLayout />,
+        element: <UserAdminPrivateRoutes><AdminLayout /></UserAdminPrivateRoutes>,
         children: [
           { index: true, element: <Navigate to="products" replace /> },
           { path: "sections", element: <ManageSectionsPage /> },

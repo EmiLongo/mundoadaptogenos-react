@@ -12,7 +12,7 @@ import {
 import logoTextHorizontal from '@img/logo-nombre-horizontal.svg';
 import logo from '@img/logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 
 import { BodyM, Heading5 } from '@theme/textStyles';
 import { brownColor, greyColor } from '@theme/theme';
@@ -29,7 +29,7 @@ import { Marquee } from './Marquee.tsx';
 import { IProductsItems } from '@/types/InfoTypes.ts';
 import { SubproductsMenu } from './SubproductsMenu.tsx';
 import { MenuDrawer } from './MenuDrawer.tsx';
-import { useUserStore } from '@/store/useUserStore.ts';
+import { useUserStore } from '@store/useUserStore.ts';
 
 
 export const Header: React.FC = () => {
@@ -42,6 +42,7 @@ export const Header: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isAuthenticated = useUserStore(state => state.isAuthenticated);
+  const isAdmin = useUserStore(state => state.isAdmin);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isOpenSubmenu, setIsOpenSubmenu] = useState<boolean>(false);
@@ -179,7 +180,14 @@ export const Header: React.FC = () => {
                   </Box>
                   <Box sx={{display: "flex", gap: "20px"}}>
                     {!isAuthenticated && <LoginButton />}
-                    <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
+                    {isAdmin()
+                    ? <IconButton
+                        id="bti-menu-admin"
+                        onClick={() => navigate("/admin/")}
+                      >
+                        <AdminPanelSettingsOutlinedIcon />
+                      </IconButton>
+                    :  <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />}
                   </Box>
                 </Box>
               </Toolbar>
@@ -214,9 +222,16 @@ export const Header: React.FC = () => {
                     gap: '1rem',
                     flex: 1,
                   }}>
-                  <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />
-                  <FAQButton />
                   <LoginButton />
+                  {isAdmin()
+                  ? <IconButton
+                      id="bti-menu-admin"
+                      onClick={() => navigate("/admin/")}
+                    >
+                      <AdminPanelSettingsOutlinedIcon />
+                    </IconButton>
+                  : <CartButton openCartDrawer={isOpenCartDrawer} closeCartDrawer={handleCartDrawerClose} handleCartButton={handleCartButton} />}
+                  {!isAdmin() && <FAQButton />}
                   </Box>
                 </Box>
               </Toolbar>

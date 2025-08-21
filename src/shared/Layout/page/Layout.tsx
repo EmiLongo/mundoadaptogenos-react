@@ -5,12 +5,15 @@ import { Box } from "@mui/material";
 import { WhatsApp } from "../components/WhatsApp";
 import { Bounce, ToastContainer } from "react-toastify";
 import { ScrollToTop } from "@/routes/ScrollToTop";
+import { useUserStore } from "@/store/useUserStore";
 const Footer = lazy(() => import("../components/Footer").then(module => ({ default: module.Footer })));
 const Header = lazy(() => import("../components/Header").then(module => ({ default: module.Header })));
 
 export const Layout: React.FC = () => {
   const { pathname } = useLocation();
-  const isAdmin = pathname.includes("/admin/");
+  const isAdminRoute = pathname.includes("/admin/");
+  const isAdmin = useUserStore(state => state.isAdmin);
+  
   return (
     <>
       <Header />
@@ -20,8 +23,8 @@ export const Layout: React.FC = () => {
       >
         <Outlet />
       </Box>
-      {!isAdmin && <Footer />}
-      {!isAdmin && <WhatsApp />}
+      {!isAdminRoute && <Footer />}
+      {!isAdmin() && <WhatsApp />}
       <ToastContainer
         position="bottom-right"
         autoClose={4000}

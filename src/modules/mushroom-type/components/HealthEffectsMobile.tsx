@@ -50,7 +50,7 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
         {mushroom.healthEffects.map((effect, index) => (
           <>
           <Box 
-          key={`effect-${effect.title.split(" ").concat("_")}`} 
+          key={`effect-${index}-${effect.title.split(" ").join("_")}`} 
           sx={{
             paddingRight: "16px",
             width: "100%",
@@ -112,8 +112,8 @@ export const HealthEffectsMobile: React.FC<IHealthEffectsComponent> = ({
             >
             {effect.subtitle}
             </Heading5>}
-            {effect.description.map( effect => (
-              <BodyM sx={{animation: `1s ${fadeInAnimation} ease-out`}}>{effect}</BodyM>))
+            {effect.description.map(( effect, index )=> (
+              <BodyM key={`effect-description-${index}`} sx={{animation: `1s ${fadeInAnimation} ease-out`}}>{effect}</BodyM>))
             }
           </Box>
         </Collapse>

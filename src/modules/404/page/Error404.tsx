@@ -1,7 +1,6 @@
 // src/modules/404/page/Error404.tsx
 import { Box, useMediaQuery, useTheme } from "@mui/material"
 import React from "react"
-import { greyColor, paddingPage } from "@theme/theme"
 import { HeadingPage } from "@shared/components/HeadingPage"
 import { BodyL, BodyM, BodyS, Heading3, Heading4 } from "@theme/textStyles"
 import webp404 from "@img/404/404.webp"

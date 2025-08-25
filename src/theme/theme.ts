@@ -197,7 +197,7 @@ export const theme = createTheme({
           fontFamily: defaultFonts.family.textos,
           color: greyColor[950],
           // height: "40px",
-          borderRadius: "40px",
+          borderRadius: "20px",
           '&:not(.MuiInputBase-multiline)': { height: '40px' },
           // Estado por defecto (enabled)
           "& .MuiOutlinedInput-notchedOutline": {

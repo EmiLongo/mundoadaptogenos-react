@@ -5,6 +5,7 @@ export const frontendUrl = import.meta.env.VITE_FRONTEND_URL;
 export const cloudinaryCloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 export const cloudinaryPresetName = import.meta.env.VITE_CLOUDINARY_PRESET_NAME;
 
-export const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-export const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
-export const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+export const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+export const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+export const emailJsTemplateIdContact = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CONTACT;
+export const emailJsTemplateIdSuggestions = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_SUGGESTIONS;

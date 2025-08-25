@@ -26,6 +26,7 @@ const RecoveryPass = lazy(() => import("@modules/auth/page/RecoveryPass").then(m
 const Profile = lazy(() => import("@/modules/user/page/Profile").then(module => ({ default: module.Profile })));
 const ProductDetailsPage = lazy(() => import("@/modules/admin/page/ProductDetailsPage").then(module => ({ default: module.ProductDetailsPage })));
 const Error404 = lazy(() => import("@/modules/404/page/Error404").then(module => ({ default: module.Error404 })));
+const BookSuggestionPage = lazy(() => import("@/modules/bookSuggestion/page/BookSuggestionPage").then(module => ({ default: module.BookSuggestionPage })));
 
 // utils
 import { infoReishi } from "@modules/mushroom-type/utils/Reishi";
@@ -48,6 +49,7 @@ export const router = createBrowserRouter([
       { path: "/mushroom/reishi", element: <MushroomTypePage mushroom={infoReishi} /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/suggestions", element: <BookSuggestionPage /> },
       { path: "/recovery", element: <RecoveryPass /> },
       { path: "/404", element: <Error404 /> },
 

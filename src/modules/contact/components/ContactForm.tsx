@@ -9,7 +9,7 @@ import { ColorButton } from "@/shared/components/buttons/ColorButton";
 import {
   emailJsPublicKey,
   emailJsServiceId,
-  emailJsTemplateId,
+  emailJsTemplateIdContact,
 } from "@/api/utils";
 import emailjs from "@emailjs/browser";
 import { supabase } from "@/api/apiClient";
@@ -44,7 +44,7 @@ export const ContactForm: React.FC = () => {
       emailjs
         .sendForm(
           emailJsServiceId,
-          emailJsTemplateId,
+          emailJsTemplateIdContact,
           formRef.current,
           emailJsPublicKey
         )
@@ -75,7 +75,7 @@ export const ContactForm: React.FC = () => {
         backgroundImage: `url(${contactImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        padding: {xs:"32px", md:"48px"},
+        padding: {xs:"32px", md:"48px 64px"},
       }}
     >
       <Box

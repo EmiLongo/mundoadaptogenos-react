@@ -15,6 +15,7 @@ export const BookSuggestionPage: React.FC = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100%",
+        marginBotton: {xs: "5rem", sm:"3rem"},
         ...paddingPage,
       }}
     >
@@ -31,7 +32,7 @@ export const BookSuggestionPage: React.FC = () => {
           color: greyColor[950],
         }}
       >
-        <Heading2>LIBRO DE QUEJAS, SUGERENCIAS Y RECLAMOS</Heading2>
+        <Heading2 sx={{textAlign: "center"}}>LIBRO DE QUEJAS, SUGERENCIAS Y RECLAMOS</Heading2>
         <BookSuggestionsForm />
       </Box>
     </Box>

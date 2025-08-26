@@ -1,3 +1,4 @@
+// src/modules/contact/page/ContactPage.tsx
 import React from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Heading3, Heading5 } from "@theme/textStyles";
@@ -124,8 +125,12 @@ export const ContactPage: React.FC = () => {
             // 3 tarjetas
             <>
               <Box
+                component="a"
+                href="https://wa.me/5493412667096?text=🍄%20Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20hongos%20adaptógenos."
+                target="_blank"
+                rel="noreferrer"
                 sx={{
-                  minWidth: "244px",
+                  minWidth: {md: "244px", lg: "274px"},
                   flex: 1,
                   padding: "16px 10px",
                   display: "flex",
@@ -153,8 +158,12 @@ export const ContactPage: React.FC = () => {
                 </Box>
               </Box>
               <Box
+                component="a"
+                href="mailto: mundoadaptogenos@gmail.com"
+                target="_blank"
+                rel="noreferrer"
                 sx={{
-                  minWidth: "244px",
+                  minWidth: "274px",
                   flex: 1,
                   padding: "16px 10px",
                   display: "flex",
@@ -183,7 +192,7 @@ export const ContactPage: React.FC = () => {
               </Box>
               <Box
                 sx={{
-                  minWidth: "244px",
+                  minWidth: {md: "244px", lg: "274px"},
                   flex: 1,
                   padding: "16px 10px",
                   display: "flex",

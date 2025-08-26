@@ -13,7 +13,7 @@ import {
 } from "@/api/utils";
 import emailjs from "@emailjs/browser";
 import { supabase } from "@/api/apiClient";
-import suggestionImage from "@img/book-suggestion/dibujo-cuaderno-libro-quejas.png";
+import suggestionImage from "@img/book-suggestion/dibujo-cuaderno-libro-quejas.webp";
 import { MessageReceivedModal } from "./MessageReceivedModal";
 import { greyColor } from "@/theme/theme";
 
@@ -90,7 +90,7 @@ export const BookSuggestionsForm: React.FC = () => {
         backgroundColor: isMobile ? greyColor[50] : "transparent",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
-        padding: {xs: "16px",sm:"32px", md:"48px 32px 32px 132px"},
+        padding: {xs: "16px",sm:"48px 32px 32px 92px", md:"48px 32px 32px 132px"},
       }}
     >
       <Heading3 sx={{width: "100%"}}>Tus Datos</Heading3>

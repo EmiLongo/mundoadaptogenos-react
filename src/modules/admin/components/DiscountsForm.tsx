@@ -10,40 +10,47 @@ import { InputLabel } from "@theme/textStyles";
 import { supabase } from "@/api/apiClient";
 
 const validationSchema = Yup.object({
-  taxDiscount: Yup.number(),   // tax_discount,
-  bankTransfer: Yup.number(),    // bank_transfer,
-  eventualDiscount1: Yup.number(),    // eventual_discount_1,
-  eventualDiscount2: Yup.number(),    // eventual_discount_2,
-  eventualDiscount3: Yup.number(),    // eventual_discount_3,
-  activeTaxDiscount: Yup.boolean(),    // active_tax_discount,
-  activeBankTransfer: Yup.boolean(),   // active_bank_transfer,
-  activeEventual1: Yup.boolean(),    // active_eventual_1,
-  activeEventual2: Yup.boolean(),    // active_eventual_2,
-  activeEventual3: Yup.boolean()   // active_eventual_3
+  tax_discount: Yup.number(),   // tax_discount,
+  active_tax_discount: Yup.boolean(),    // active_tax_discount,
+  bank_transfer: Yup.number(),    // bank_transfer,
+  active_bank_transfer: Yup.boolean(),   // active_bank_transfer,
+  eventual_discount_1: Yup.number(),    // eventual_discount_1,
+  active_eventual_1: Yup.boolean(),    // active_eventual_1,
+  eventual_discount_2: Yup.number(),    // eventual_discount_2,
+  active_eventual_2: Yup.boolean(),    // active_eventual_2,
+  eventual_discount_3: Yup.number(),    // eventual_discount_3,
+  active_eventual_3: Yup.boolean()   // active_eventual_3
 });
 
 export const DiscountsForm: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
+  const [discountId, setDiscountId] = useState<string | null>(null);
   const formik = useFormik({
     initialValues: {
-      taxDiscount: 0,
-      activeTaxDiscount: false,
-      bankTransfer: 0,
-      activeBankTransfer: false,
-      eventualDiscount1: 0,
-      activeEventual1: false,
-      eventualDiscount2: 0,
-      activeEventual2: false,
-      eventualDiscount3: 0,
-      activeEventual3: false
+      tax_discount: 0,
+      active_tax_discount: false,
+      bank_transfer: 0,
+      active_bank_transfer: false,
+      eventual_discount_1: 0,
+      active_eventual_1: false,
+      eventual_discount_2: 0,
+      active_eventual_2: false,
+      eventual_discount_3: 0,
+      active_eventual_3: false
     },
     validationSchema,
-    onSubmit: (values, { resetForm, setSubmitting}) => {
-      console.log(values);
-      try {        
+    onSubmit: async (values, { setSubmitting}) => {
+        try {
+        const { error } = await supabase
+          .from("discount_settings")
+          .update({
+            ...values
+          })
+          .eq("id", discountId) // la única fila
+
+        if (error) throw error;
         toast.success('Se guardaron los cambios con éxito')
-        resetForm();
         // TODO: hacer la logica para el registro
       } catch (error) {
         toast.error('Error al registrar los cambios')
@@ -57,8 +64,6 @@ export const DiscountsForm: React.FC = () => {
   useEffect(() => {
     const fetchDiscounts = async () => {
       try {
-        console.log("useEffect ejecutándose");
-        
         const { data: discounts, error } = await supabase
           .from('discount_settings')
           .select('*')
@@ -67,20 +72,24 @@ export const DiscountsForm: React.FC = () => {
         if (error) {
           throw error;
         }
-        if (discounts) {
-          console.log("discounts", discounts);
-          formik.setValues({
-            taxDiscount: discounts[0].tax_discount,
-            activeTaxDiscount: discounts[0].active_tax_discount,
-            bankTransfer: discounts[0].bank_transfer,
-            activeBankTransfer: discounts[0].active_bank_transfer,
-            eventualDiscount1: discounts[0].eventual_discount_1,
-            activeEventual1: discounts[0].active_eventual_1,
-            eventualDiscount2: discounts[0].eventual_discount_2,
-            activeEventual2: discounts[0].active_eventual_2,
-            eventualDiscount3: discounts[0].eventual_discount_3,
-            activeEventual3: discounts[0].active_eventual_3
-          });
+        if (discounts && discounts[0]) {
+          const newValues = {
+            tax_discount: discounts[0].tax_discount,
+            active_tax_discount: discounts[0].active_tax_discount,
+            bank_transfer: discounts[0].bank_transfer,
+            active_bank_transfer: discounts[0].active_bank_transfer,
+            eventual_discount_1: discounts[0].eventual_discount_1,
+            active_eventual_1: discounts[0].active_eventual_1,
+            eventual_discount_2: discounts[0].eventual_discount_2,
+            active_eventual_2: discounts[0].active_eventual_2,
+            eventual_discount_3: discounts[0].eventual_discount_3,
+            active_eventual_3: discounts[0].active_eventual_3
+          };
+          
+          // Usa resetForm en lugar de setValues para establecer los valores iniciales
+          formik.resetForm({ values: newValues });
+
+          setDiscountId(discounts[0].id);
         }
       } catch (error) {
         console.error('Error al obtener los descuentos:', error);
@@ -100,82 +109,82 @@ export const DiscountsForm: React.FC = () => {
         <Box sx={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%" }}>
           {/* Opción 1 */}
           <FormControl fullWidth>
-            <InputLabel id="label-taxDiscount" sx={{marginBottom: "4px"}}>Sin impuestos</InputLabel>
+            <InputLabel id="label-tax_discount" sx={{marginBottom: "4px"}}>Sin impuestos</InputLabel>
             <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
               <OutlinedInput
                 fullWidth
-                id="taxDiscount"
-                name="taxDiscount"
+                id="tax_discount"
+                name="tax_discount"
                 type="number"
-                value={formik.values.taxDiscount}
-                onChange={(e) => formik.setFieldValue("taxDiscount", e.target.value)}
+                value={formik.values.tax_discount}
+                onChange={(e) => formik.setFieldValue("tax_discount", e.target.value)}
               />
-              <SwitchCustom checked={formik.values.activeTaxDiscount} onChange={(e) => formik.setFieldValue("activeTaxDiscount", e.target.checked)} />
+              <SwitchCustom checked={formik.values.active_tax_discount} onChange={(e) => formik.setFieldValue("active_tax_discount", e.target.checked)} />
             </Box>
           </FormControl>
 
           {/* Opción 2 */}
           <FormControl fullWidth>
-            <InputLabel id="label-bankTransfer" sx={{marginBottom: "4px"}}>Por transferencia o depósito</InputLabel>
+            <InputLabel id="label-bank_transfer" sx={{marginBottom: "4px"}}>Por transferencia o depósito</InputLabel>
             <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
               <OutlinedInput
                 fullWidth
-                id="bankTransfer"
-                name="bankTransfer"
+                id="bank_transfer"
+                name="bank_transfer"
                 type="number"
-                value={formik.values.bankTransfer}
-                onChange={(e) => formik.setFieldValue("bankTransfer", e.target.value)}
+                value={formik.values.bank_transfer}
+                onChange={(e) => formik.setFieldValue("bank_transfer", e.target.value)}
               />
-              <SwitchCustom checked={formik.values.activeBankTransfer} onChange={(e) => formik.setFieldValue("activeBankTransfer", e.target.checked)} />
+              <SwitchCustom checked={formik.values.active_bank_transfer} onChange={(e) => formik.setFieldValue("active_bank_transfer", e.target.checked)} />
             </Box>
           </FormControl>
 
           {/* Opción 3 */}
           <FormControl fullWidth>
-            <InputLabel id="label-eventualDiscount1" sx={{marginBottom: "4px"}}>Descuento eventual 1</InputLabel>
+            <InputLabel id="label-eventual_discount_1" sx={{marginBottom: "4px"}}>Descuento eventual 1</InputLabel>
             <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
               <OutlinedInput
                 fullWidth
-                id="eventualDiscount1"
-                name="eventualDiscount1"
+                id="eventual_discount_1"
+                name="eventual_discount_1"
                 type="number"
-                value={formik.values.eventualDiscount1}
-                onChange={(e) => formik.setFieldValue("eventualDiscount1", e.target.value)}
+                value={formik.values.eventual_discount_1}
+                onChange={(e) => formik.setFieldValue("eventual_discount_1", e.target.value)}
               />
-              <SwitchCustom checked={formik.values.activeEventual1} onChange={(e) => formik.setFieldValue("activeEventual1", e.target.checked)} />
+              <SwitchCustom checked={formik.values.active_eventual_1} onChange={(e) => formik.setFieldValue("active_eventual_1", e.target.checked)} />
             </Box>
           </FormControl>
 
 
           {/* Opción 4 */}
           <FormControl fullWidth>
-            <InputLabel id="label-eventualDiscount2" sx={{marginBottom: "4px"}}>Descuento eventual 2</InputLabel>
+            <InputLabel id="label-eventual_discount_2" sx={{marginBottom: "4px"}}>Descuento eventual 2</InputLabel>
             <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
               <OutlinedInput
                 fullWidth
-                id="eventualDiscount2"
-                name="eventualDiscount2"
+                id="eventual_discount_2"
+                name="eventual_discount_2"
                 type="number"
-                value={formik.values.eventualDiscount2}
-                onChange={(e) => formik.setFieldValue("eventualDiscount2", e.target.value)}
+                value={formik.values.eventual_discount_2}
+                onChange={(e) => formik.setFieldValue("eventual_discount_2", e.target.value)}
               />
-              <SwitchCustom checked={formik.values.activeEventual2} onChange={(e) => formik.setFieldValue("activeEventual2", e.target.checked)} />
+              <SwitchCustom checked={formik.values.active_eventual_2} onChange={(e) => formik.setFieldValue("active_eventual_2", e.target.checked)} />
             </Box>
           </FormControl>
 
           {/* Opción 5 */}
           <FormControl fullWidth>
-            <InputLabel id="label-eventualDiscount3" sx={{marginBottom: "4px"}}>Descuento eventual 3</InputLabel>
+            <InputLabel id="label-eventual_discount_3" sx={{marginBottom: "4px"}}>Descuento eventual 3</InputLabel>
             <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
               <OutlinedInput
                 fullWidth
-                id="eventualDiscount3"
-                name="eventualDiscount3"
+                id="eventual_discount_3"
+                name="eventual_discount_3"
                 type="number"
-                value={formik.values.eventualDiscount3}
-                onChange={(e) => formik.setFieldValue("eventualDiscount3", e.target.value)}
+                value={formik.values.eventual_discount_3}
+                onChange={(e) => formik.setFieldValue("eventual_discount_3", e.target.value)}
               />
-              <SwitchCustom checked={formik.values.activeEventual3} onChange={(e) => formik.setFieldValue("activeEventual3", e.target.checked)} />
+              <SwitchCustom checked={formik.values.active_eventual_3} onChange={(e) => formik.setFieldValue("active_eventual_3", e.target.checked)} />
             </Box>
           </FormControl>
         </Box>
@@ -188,7 +197,7 @@ export const DiscountsForm: React.FC = () => {
             onClick={() => formik.submitForm()}
             text="Guardar Cambios"
             isFetching={formik.isSubmitting}
-            disabled={formik.isSubmitting || loading}
+            disabled={formik.isSubmitting || loading || !formik.dirty}
             sx={{width: "100%", maxWidth: "383px", marginX: "auto"}}
           />
         </Box>

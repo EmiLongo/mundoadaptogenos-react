@@ -1,17 +1,16 @@
 // src/modules/admin/components/ProductDetailsForm.tsx
+import React, { useEffect, useState } from "react"
 import { BodyM, BodyMEmph, BodyS, Heading5 } from "@/theme/textStyles"
 import { greyColor } from "@/theme/theme"
-import { Box, Checkbox, FormControl, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
-import React, { useEffect, useState } from "react"
+import { Box, Checkbox, FormControl, MenuItem, OutlinedInput, Select, TextField, ListItemText, Button, FormHelperText } from "@mui/material"
 import { SwitchCustom } from "./SwitchCustom"
-import { ListItemText } from "@mui/material"
 import { SelectChangeEvent } from "node_modules/@mui/material"
 import * as Yup from "yup";
 import { useFormik } from "formik"
 import { useSections } from "@/shared/hooks/api/useSections"
 import { useDiscounts } from "@/shared/hooks/api/useDiscounts"
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { Button } from "@mui/material"
+import ReplayIcon from '@mui/icons-material/Replay';
 import { ColorButton } from "@/shared/components/buttons/ColorButton"
 import { useCloudinaryUpload } from "@/shared/hooks/api/useCloudinaryUpload"
 import { useCloudinaryMultiUpload } from "@/shared/hooks/api/useCloudinaryMultipleUploads"
@@ -30,10 +29,10 @@ const validationSchema = Yup.object({
   price_discount: Yup.number(),
   price_transfer: Yup.number(),
   plan: Yup.string(),
-  discount: Yup.number().min(0).max(100),
+  discount: Yup.number().min(0).max(100).required("Seleccioná al menos un descuento"),
   packaging_id: Yup.number().required("Requerido"),
   sectionIds: Yup.array().of(Yup.number()).min(1, "Seleccioná al menos una sección"),
-  img_secure_url: Yup.string().required("Subí la portada"),
+  img_secure_url: Yup.string().required("Sube la portada"),
   img_public_id: Yup.string().required("Falta el publicId de la portada"),
   gallery_public_ids: Yup.array().of(Yup.string()),
   is_valid: Yup.boolean().required(),
@@ -200,15 +199,19 @@ export const ProductDetailsForm: React.FC = () => {
           flexDirection: "column",
           justifyContent: "space-between",
         }}>
-          <FormControl sx={{ width: "100%", minWidth: "240px", flex: {xs: 1, md: 0} }}>
+          <FormControl
+            error={formik.touched.sectionIds && Boolean(formik.errors.sectionIds)}
+            sx={{ width: "100%", minWidth: "240px", flex: {xs: 1, md: 0} }}
+          >
             <Heading5 marginBottom={"4px"}>Sección del producto</Heading5>
 
             <Select
-              id="sectionId"
-              name="sectionId"
+              id="sectionIds"
+              name="sectionIds"
               multiple
               value={selectedSections}
               displayEmpty
+              onBlur={formik.handleBlur}
               onChange={(event: SelectChangeEvent<number[]>) => {
                 const {
                   target: { value },
@@ -258,6 +261,9 @@ export const ProductDetailsForm: React.FC = () => {
                 </MenuItem>
               ))}
             </Select>
+            {formik.touched.sectionIds && formik.errors.sectionIds && (
+              <FormHelperText>{formik.errors.sectionIds}</FormHelperText>
+            )}
           </FormControl>
 
           <FormControl sx={{width: "100%", minWidth: "180px", flex: {xs: 1, md: 0}}}>
@@ -267,6 +273,9 @@ export const ProductDetailsForm: React.FC = () => {
               value={formik.values.internal_code} 
               onChange={formik.handleChange}
               placeholder="Ej. ABC1011"
+              onBlur={formik.handleBlur}
+              error={formik.touched.internal_code && Boolean(formik.errors.internal_code)}
+              helperText={formik.touched.internal_code && formik.errors.internal_code} 
               sx={{"& .MuiOutlinedInput-root": { backgroundColor: greyColor[50] }}}
             />
           </FormControl>
@@ -280,6 +289,7 @@ export const ProductDetailsForm: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          position: "relative",
         }}>
           <Heading5 marginBottom={"4px"}>Portada del producto</Heading5>
           <Box
@@ -294,6 +304,10 @@ export const ProductDetailsForm: React.FC = () => {
                 if (result) {
                   formik.setFieldValue("img_secure_url", result.secure_url);
                   formik.setFieldValue("img_public_id", result.public_id);
+                } else {
+                  // 👇 si cancelan, lo marcamos como touched
+                  formik.setFieldTouched("img_secure_url", true);
+                  formik.setFieldTouched("img_public_id", true);
                 }
               }
             }}
@@ -320,40 +334,83 @@ export const ProductDetailsForm: React.FC = () => {
               margin: 0,
             }}>
             {formik.values.img_secure_url ? (
+            <>
               <img
                 src={formik.values.img_secure_url}
                 alt="cover"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
+              <Box sx={{ 
+                position: "absolute", 
+                bottom: "8px", 
+                right: "8px", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                width: "32px", 
+                height: "32px", 
+                backgroundColor: greyColor[200], 
+                borderRadius: "4px",
+                opacity: 0.5,
+                zIndex: 10
+              }}>
+                <ReplayIcon />
+              </Box>
+            </>
             ) : (
               <>
                 <AddBoxOutlinedIcon sx={{ fontSize: "40px" }} />
-                <BodyS sx={{ textAlign: "center" }}>Agregar Portada</BodyS>
+                <BodyS sx={{ textAlign: "center" }}>Agregar Portada (máx. 10MB)</BodyS>
               </>
             )}
             </Button>
           </label>
+          {formik.touched.img_secure_url && formik.errors.img_secure_url && (
+            <FormHelperText error>{formik.errors.img_secure_url}</FormHelperText>
+          )}
         </Box>
 
       </Box>
       {/* TITULO */}
       <FormControl sx={{ width: "100%"}}>
         <Heading5 marginBottom={"4px"}>Título / Nombre del producto</Heading5>
-        <TextField name="title" value={formik.values.title} onChange={formik.handleChange} placeholder="Ej: Reishi - Doble Extracto 30ml"/>
+        <TextField
+          id="title"
+          name="title" 
+          value={formik.values.title} 
+          onChange={formik.handleChange} 
+          placeholder="Ej: Reishi - Doble Extracto 30ml"
+          onBlur={formik.handleBlur}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.touched.title && formik.errors.title} 
+        />
       </FormControl>
       {/* PRECIOS */}
       <Box sx={{ display: "flex", gap: "32px" }}>
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: "16px"}}>
           <FormControl sx={{ flex: 1 }}>
             <Heading5 marginBottom={"4px"}>Precio del producto</Heading5>
-            <TextField name="price" value={formik.values.price} onChange={formik.handleChange} placeholder="Ej: 30000" />
+            <TextField 
+              id="price"
+              name="price" 
+              value={formik.values.price} 
+              onChange={formik.handleChange} 
+              placeholder="Ej: 30000"
+              onBlur={formik.handleBlur}
+              error={formik.touched.price && Boolean(formik.errors.price)}
+              helperText={formik.touched.price && formik.errors.price}  
+            />
           </FormControl>
-          <FormControl sx={{ flex: 1 }}>
+          <FormControl
+            error={formik.touched.discount && Boolean(formik.errors.discount)}
+            sx={{ flex: 1 }}
+          >
             <Heading5 marginBottom={"4px"}>Descuento ocasional</Heading5>
             <Select 
               name="discount" 
               value={formik.values.discount} 
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               renderValue={(selected) => {
                 if (!selected) {
                   return 'Seleccionar descuento'
@@ -373,7 +430,9 @@ export const ProductDetailsForm: React.FC = () => {
                 <ListItemText primary={`Eventual ${discounts.eventualDiscount3} %`} />
               </MenuItem>}
             </Select>
-
+            {formik.touched.discount && formik.errors.discount && (
+              <FormHelperText>{formik.errors.discount}</FormHelperText>
+            )}
           </FormControl>
         </Box>
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between"}}>

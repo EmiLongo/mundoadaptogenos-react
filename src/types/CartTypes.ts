@@ -1,4 +1,4 @@
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 
 // Modelo para Items del Carrito
 // model CartItem {
@@ -22,7 +22,7 @@ export interface ICartItem {
   productId: number;
   quantity: number;
   addedAt: string;
-  product: IProduct;
+  product: IProductWithSections;
   options?: string[]
 }
 
@@ -55,7 +55,7 @@ export interface ICart {
   createdAt: string;
   updatedAt: string;
   lastActivity: string;
-  lastAddedProduct: (IProduct & { quantity: number }) | null;
+  lastAddedProduct: (IProductWithSections & { quantity: number }) | null;
   lastAddedAt: string | null;
   abandonedAt?: string;
   emailSent: boolean;

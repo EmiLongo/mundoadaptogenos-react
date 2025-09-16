@@ -6,29 +6,29 @@ import { infoReishi } from "./Reishi";
 
 interface IMushroomByBenefits {
   title: string;
-  productSection: number[];
+  productSectionSlug: string;
   benefits: IBenefit[];
 }
 
 export const MushroomByBenefits: IMushroomByBenefits[] = [
   {
     title: infoColaPavo.title,
-    productSection: infoColaPavo.productSection,
+    productSectionSlug: infoColaPavo.productSectionSlug,
     benefits: infoColaPavo.benefits,
   },
   {
     title: infoCordyceps.title,
-    productSection: infoCordyceps.productSection,
+    productSectionSlug: infoCordyceps.productSectionSlug,
     benefits: infoCordyceps.benefits,
   },
   {
     title: infoMelena.title,
-    productSection: infoMelena.productSection,
+    productSectionSlug: infoMelena.productSectionSlug,
     benefits: infoMelena.benefits,
   },
   {
     title: infoReishi.title,
-    productSection: infoReishi.productSection,
+    productSectionSlug: infoReishi.productSectionSlug,
     benefits: infoReishi.benefits,
   },
 ]

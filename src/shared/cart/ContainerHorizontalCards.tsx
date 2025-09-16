@@ -1,10 +1,10 @@
 import React from "react";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 import { ProductCardHorizontal } from "./ProductCardHorizontal";
 import { Box } from "@mui/material";
 
 interface IContainerHorizontalCards {
-  catalogue: IProduct[]
+  catalogue: IProductWithSections[]
 }
 export const ContainerHorizontalCards: React.FC<IContainerHorizontalCards> = ({catalogue}) => {
   return (

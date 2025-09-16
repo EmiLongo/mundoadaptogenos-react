@@ -12,6 +12,8 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import { greyColor, redColor } from "@/theme/theme";
 import { KitOptionsModal } from "@/modules/products/components/KitOptionsModal";
 import { ClickFrom } from "@/modules/products/components/BigCard";
+import { hasSectionWithOptions } from "../utils/productHasOptions";
+import { ThumbnailImage } from "../components/cloudinary/ThumbnailImage";
 
 interface ICartDrawerItem {
   cartItem: ICartItem;
@@ -107,7 +109,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
 
         }}
       >
-        <Box component="img" width="100px" height="120px"
+        {/* <Box component="img" width="100px" height="120px"
         alt={`Foto del Producto ${index} del Carrito`}
         src={cartItem.product.urlThumbnail}
         sx={{
@@ -117,7 +119,18 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           position: "absolute",
           zIndex:2,
         }}
-        />
+        /> */}
+        <Box sx={{
+          width: "100px",
+          height: "120px",
+          borderTopRightRadius: "18px", 
+          borderBottomRightRadius: "18px", 
+          transform: "scaleX(-1)",
+          position: "absolute",
+          zIndex:2,
+        }}>
+          <ThumbnailImage imgPublicId={cartItem.product.img_public_id} />
+        </Box>
         <Box 
           onClick={handleDeleteCartItem}
           sx={{
@@ -142,7 +155,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           <DeleteForeverOutlinedIcon width="24px" />
         </Box>
       </Box>
-      <Box component="img" width={120} height={120}
+      {/* <Box component="img" width={120} height={120}
       alt={`Foto del Producto ${index} del Carrito`}
       src={cartItem.product.urlThumbnail}
       sx={{
@@ -152,11 +165,22 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
         borderBottomLeftRadius: showDeleteBt ? 0 : "8px",
         marginRight: "16px"
       }}
-      />
+      /> */}
+      <Box sx={{
+        width: "120px",
+        height: "120px",
+        border: "none",
+        borderRadius: "8px",
+        borderTopLeftRadius: showDeleteBt ? 0 : "8px",
+        borderBottomLeftRadius: showDeleteBt ? 0 : "8px",
+        marginRight: "16px"
+      }}>
+        <ThumbnailImage imgPublicId={cartItem.product.img_public_id} />
+      </Box>
       <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
         <BodyS sx={{height: "2.5em"}}>{cartItem.product.title}</BodyS>
         <BodyMEmph>{numberToPrice(cartItem.product.price * counter)}</BodyMEmph>
-        {cartItem.product.hasOptions && (
+        {hasSectionWithOptions(cartItem.product.sections) && (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "3px"}}>
             {(cartItem.options || ["", "", ""])
               .filter(option => option !== "")
@@ -184,7 +208,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           />
         : <>
   
-          {cartItem.product.hasOptions
+          {hasSectionWithOptions(cartItem.product.sections)
           ? <WhiteButton
               id="bt-drawer-edit-options"
               onClick = {handleOpenOptionsModal}

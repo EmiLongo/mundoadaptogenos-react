@@ -1,14 +1,23 @@
-import React from "react"
-import { Box, Divider, useMediaQuery } from "@mui/material"
-import { Heading2, Heading3 } from "@/theme/textStyles"
+import React, { useEffect } from "react"
+import { Box, CircularProgress, Divider, useMediaQuery } from "@mui/material"
+import { Heading2, Heading3, Heading4 } from "@/theme/textStyles"
 import { greyColor, paddingPage } from "@/theme/theme"
 import { useTheme } from "@mui/material"
 import { Carousel } from "@/modules/home/components/Carousel"
-import { catalogue } from "@/shared/Layout/utils/catalogue"
+import { useProductsStore } from "@/store/useProductsStore"
 
 export const CarouselContainer: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+  const { products, isLoading, error, fetchProducts } = useProductsStore();
+
+  useEffect(() => {
+    if (products.length === 0) fetchProducts();
+  }, [products, fetchProducts]);
+  
+  if (isLoading) return <CircularProgress />;
+  if (error) return <Heading4>Error: Recargue la página</Heading4>;
+
   return (
     <>
     <Box sx={{marginY: "3rem", ...paddingPage}}>  
@@ -17,7 +26,7 @@ export const CarouselContainer: React.FC = () => {
           ? <Heading3>Más productos</Heading3>
           : <Heading2>Más productos</Heading2>}
     </Box>
-    <Carousel catalogue={catalogue} sx={{marginBottom: "3rem",}}/>
+    <Carousel catalogue={products} sx={{marginBottom: "3rem",}}/>
     </>
   )
 }

@@ -7,12 +7,13 @@ import { BodyMEmph, BodyS } from "@theme/textStyles";
 import { brownColor, greyColor } from "@theme/theme";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from "@/store/useCartStore";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 import { heightForModals, heightForModalsMobile } from "../Layout/utils/info";
+import { ThumbnailImage } from "../components/cloudinary/ThumbnailImage";
 
 interface IProductConfirm {
   handleCartDrawerOpen: ()=>void;
-  lastAddedProduct: (IProduct & { quantity: number });
+  lastAddedProduct: (IProductWithSections & { quantity: number });
   lastAddedAt: string | null | undefined;
 }
 export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen, lastAddedProduct }) => {
@@ -67,11 +68,14 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen
         >
           <CloseIcon sx={{width: "24px", color: greyColor[950]}} />
         </IconButton>
-        <Box component="img" width={50} height={50}
+        {/* <Box component="img" width={50} height={50}
         alt={`Foto del Producto ${lastAddedProduct?.title}`}
-        src={lastAddedProduct?.urlThumbnail}
+        src={lastAddedProduct?.img_secure_url}
         sx={{borderRadius: "8px"}}
-        />
+        /> */}
+        <Box sx={{width:"50px", height:"50px"}}>
+          <ThumbnailImage imgPublicId={lastAddedProduct?.img_public_id} />
+        </Box>
         <Box sx={{
           width: "145px",
           display: "flex", 

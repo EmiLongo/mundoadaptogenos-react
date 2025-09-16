@@ -1,13 +1,23 @@
 // src/modules/home/components/Highlights.tsx
-import { Box } from "@mui/material"
-import React from "react"
-import { SectionHeading } from "@theme/textStyles"
+import { Box, CircularProgress } from "@mui/material"
+import React, { useEffect } from "react"
+import { Heading4, SectionHeading } from "@theme/textStyles"
 import { Carousel } from "./Carousel"
-import { catalogue } from "@shared/Layout/utils/catalogue";
+import { useProductsStore } from "@store/useProductsStore";
 
 
 
 export const Highlights: React.FC = () => {
+  const { products, isLoading, error, fetchProducts } = useProductsStore();
+
+  
+  useEffect(() => {
+    if (products.length === 0) fetchProducts();
+  }, [products, fetchProducts]);
+  
+  if (isLoading) return <CircularProgress />;
+  if (error) return <Heading4>Error: Recargue la página</Heading4>;
+
   return (
     <Box sx={{
       marginY: "6rem",
@@ -22,7 +32,7 @@ export const Highlights: React.FC = () => {
       >
         PRODUCTOS
       </SectionHeading>
-      <Carousel catalogue={catalogue} />
+      <Carousel catalogue={products} />
     </Box>
   )
 }

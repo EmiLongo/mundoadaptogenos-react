@@ -1,7 +1,9 @@
+// src/store/cartStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { IProduct } from '@/types/ProductTypes';
+import { IProductWithSections } from '@/types/ProductTypes';
 import { ICart, ICartItem } from '@/types/CartTypes';
+import { hasSectionWithOptions } from '@/shared/utils/productHasOptions';
 
 // Tipos específicos para el store
 export interface CartState {
@@ -13,7 +15,7 @@ export interface CartState {
 export interface CartActions {
   // Acciones básicas del carrito
   initializeCart: (userId?: number, sessionId?: string) => void;
-  addToCart: (product: IProduct, quantity?: number, options?: string[]) => void;
+  addToCart: (product: IProductWithSections, quantity?: number, options?: string[]) => void;
   removeFromCart: (productId: number) => void;
   removeFromCartByCartItemId: (cartItemId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
@@ -61,7 +63,7 @@ const createEmptyCart = (userId?: number, sessionId?: string): ICart => {
 };
 
 // Función para crear un item del carrito
-const createCartItem = (product: IProduct, quantity: number, cartId: number, options?: string[]): ICartItem => {
+const createCartItem = (product: IProductWithSections, quantity: number, cartId: number, options?: string[]): ICartItem => {
   return {
     id: generateTempId(),
     cartId,
@@ -102,7 +104,7 @@ export const useCartStore = create<CartStore>()(
       },
 
       // Agregar producto al carrito
-      addToCart: (product: IProduct, quantity = 1, options = []) => {
+      addToCart: (product: IProductWithSections, quantity = 1, options = []) => {
         const { cart } = get();
         let updatedCart: ICart;
 
@@ -120,7 +122,7 @@ export const useCartStore = create<CartStore>()(
 
         if (existingItemIndex >= 0) {
           // Si no tiene opciones, Actualizar cantidad si ya existe
-          if (!product.hasOptions) {
+          if (!hasSectionWithOptions(product.sections)) {
           updatedCart.cartItems[existingItemIndex] = {
             ...updatedCart.cartItems[existingItemIndex],
             quantity: updatedCart.cartItems[existingItemIndex].quantity + quantity}
@@ -234,7 +236,7 @@ export const useCartStore = create<CartStore>()(
         
         return cart.cartItems.reduce((total, item) => {
           const price = item.product.discount > 0 
-            ? item.product.priceDiscount 
+            ? item.product.price_discount 
             : item.product.price;
           return total + (price * item.quantity);
         }, 0);

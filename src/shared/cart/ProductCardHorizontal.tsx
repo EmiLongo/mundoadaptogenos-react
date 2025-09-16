@@ -5,14 +5,15 @@ import { BodyS, Caption, Heading3, Heading5 } from "@/theme/textStyles"
 import { WhiteButton } from "@shared/components/buttons/WhiteButton"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { brownColor, greyColor, greenColor } from "@/theme/theme";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { useCart } from "@store/useCartStore";
 import { useNavigate } from "react-router-dom";
 import { KitCardOptionsModal } from "./KitCardOptionsModal";
+import { hasSectionWithOptions } from "../utils/productHasOptions";
 
 interface IProductCard {
-  product: IProduct;
+  product: IProductWithSections;
   index: number;
 }
 
@@ -23,7 +24,7 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
 
   const [isOpenOptionsModal, setIsOpenOptionsModal] = useState<boolean>(false);
   const addToCart = () => {
-    if(product.hasOptions){
+  if(hasSectionWithOptions(product.sections)){
       setIsOpenOptionsModal(true);
     } else {
       addProduct(product, 1); // cantidad = 1
@@ -73,7 +74,7 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
       >
         <Box 
         component="img" 
-        src={product.urlPhoto} 
+        src={product.img_secure_url} 
         width='250px'
         sx={{ width: '100%', height: '100%' }}
         alt={`Foto descriptiva de ${product.title}`}
@@ -102,12 +103,12 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
           <Heading5 sx={{ height: "4.5em", width: "100%", textAlign: "left" }}>{product.title}</Heading5>
         </Link>
         <Box sx={{display: "flex", alignItems: "center", gap: "16px"}}>
-          <Heading3>{numberToPrice(product.priceDiscount)}</Heading3>
+          <Heading3>{numberToPrice(product.price_discount)}</Heading3>
           <BodyS sx={{color: greyColor[700], textDecoration: "line-through"}}>{numberToPrice(product.price)}</BodyS>
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", gap: "5px"}}>
           <Box sx={{display: "flex", alignItems: "center", gap: "8px"}}>
-            <BodyS sx={{color: brownColor[700]}}>{numberToPrice(product.priceTransfer)}</BodyS>
+            <BodyS sx={{color: brownColor[700]}}>{numberToPrice(product.price_transfer)}</BodyS>
             <BodyS sx={{color: greyColor[700]}}>Transf./ Depósito</BodyS>
           </Box>
           <BodyS sx={{color: brownColor[700]}}>{product.plan}</BodyS>
@@ -123,7 +124,7 @@ export const ProductCardHorizontal: React.FC<IProductCard> = ({ product, index }
           sx={{borderRadius: "30px", width: "100%"}}
         />
       </Box>
-      {product.hasOptions && isOpenOptionsModal && <KitCardOptionsModal isOpen={isOpenOptionsModal} onClose={() => setIsOpenOptionsModal(false)} product={product} />}
+      {isOpenOptionsModal && <KitCardOptionsModal isOpen={isOpenOptionsModal} onClose={() => setIsOpenOptionsModal(false)} product={product} />}
     </Card>
   )
 }

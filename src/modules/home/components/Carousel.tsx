@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { greyColor } from "@theme/theme";
 import { ProductCard } from "@shared/cart/ProductCard";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 
 interface ICarousel {
-  catalogue: IProduct[];
+  catalogue: IProductWithSections[];
   sx?: object;
 }
 export const Carousel: React.FC<ICarousel> = ({ catalogue, sx = {} }) => {

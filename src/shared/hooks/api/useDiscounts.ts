@@ -24,8 +24,12 @@ export const useDiscounts = () => {
           eventualDiscount2: discounts[0].active_eventual_2 ? discounts[0].eventual_discount_2 : null,
           eventualDiscount3: discounts[0].active_eventual_3 ? discounts[0].eventual_discount_3 : null,
         });
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error");
+        }
       } finally {
         setIsLoading(false);
       }

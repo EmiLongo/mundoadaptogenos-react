@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Caption, Heading2, Heading3 } from "@theme/textStyles";
 import { greenColor, greyColor, paddingPage } from "@theme/theme";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
@@ -21,9 +21,10 @@ import { KitOptionsModal } from "./KitOptionsModal";
 import { useCartDrawer } from "@/store/useCartDrawer";
 import { OptionsModal } from "./OptionsModal";
 import { selectInfo } from "@/shared/Layout/utils/filterProducts";
+import { hasSectionWithOptions } from "@/shared/utils/productHasOptions";
 
 interface IBigCard {
-  product: IProduct
+  product: IProductWithSections
 }
 export enum ClickFrom {
   ADD_TO_CART = "addToCart",
@@ -37,7 +38,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const { toggleCartDrawer } = useCartDrawer();
 
-  const sectionsProduct = product.sectionId;
+  const productHasOptions = hasSectionWithOptions(product.sections);
   const [counter, setCounter] = useState<number>(1);
   const [isKitOptionsModalOpen, setIsKitOptionsModalOpen] = useState<string | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(["","",""]);
@@ -51,7 +52,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
   
   const handleAddToCart = async() => {
     // si tiene opciones
-    if(sectionsProduct.length > 1){
+    if(productHasOptions){
       // se fija que esten todos completos sino abre modal
       if(selectedOptions.some((option) => option === "")){
         if(isLargeScreen){
@@ -162,7 +163,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
           </Box>
           <Box
             component="img"
-            src={product.urlPhoto}
+            src={product.img_secure_url}
             width="100%"
             sx={{ width: "100%", height: "100%", borderRadius: "10px" }}
             alt={`Foto descriptiva de ${product.title}`}
@@ -185,7 +186,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             : <Heading2 >{product.title}</Heading2>}
           <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
             <Box sx={{ display: "flex", alignItems: "center", gap: {xs: "16px", sm: "32px"} }}>
-              <Heading3 sx={{ color: greenColor[900],}}>{numberToPrice(product.priceDiscount)}</Heading3>
+              <Heading3 sx={{ color: greenColor[900],}}>{numberToPrice(product.price_discount)}</Heading3>
               <BodyS sx={{ color: greyColor[700], textDecoration: "line-through" }}>
                 {numberToPrice(product.price)}
               </BodyS>
@@ -198,7 +199,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
               <PaymentsOutlinedIcon />
               <BodyS sx={{textWrap: "wrap"}}>
-                {numberToPrice(product.priceTransfer)} con Transferencia o Depósito 
+                {numberToPrice(product.price_transfer)} con Transferencia o Depósito 
               </BodyS>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px",}}>
@@ -216,7 +217,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               disabled={false}
               />
           </Box>
-          {isLargeScreen && sectionsProduct.length > 1 && 
+          {isLargeScreen && productHasOptions && 
           <OptionsModal 
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
@@ -232,10 +233,10 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
           <Box sx={{
             width: {xs: "100%", sm: "265px", lg: "350px"},
             display: "flex",
-            flexDirection: sectionsProduct.length > 1 ? "column" : "row",
+            flexDirection: productHasOptions ? "column" : "row",
             gap: "12px"
           }}>
-            {sectionsProduct.length > 1 &&
+            {productHasOptions &&
               <Box>
                 {selectedOptions[0] !== "" && 
                   (() => {
@@ -259,7 +260,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
             }
             <Box sx={{display: "flex", gap: "8px"}}>
               <>
-              {sectionsProduct.length === 1 &&
+              {productHasOptions &&
               <ProductCounter 
               index={999999}
               counter={counter} 
@@ -268,7 +269,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               isDelete={false}
               type="primary"
               />}
-              {sectionsProduct.length > 1 && !isLargeScreen &&
+              {productHasOptions && !isLargeScreen &&
               <WhiteButton
               id="bt-shop-edit-options"
               onClick = {handleOpenOptionsModal}
@@ -277,7 +278,7 @@ export const BigCard: React.FC<IBigCard> = ({ product }) => {
               fetchingText = ""
               isFetching = {false}
               disabled = {false}
-              sx={(sectionsProduct.length > 1 ? {flex: 1} : {})}
+              sx={(productHasOptions ? {flex: 1} : {})}
               />}
               </>
             </Box>

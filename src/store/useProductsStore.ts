@@ -12,7 +12,7 @@ interface ProductsState {
   fetchProducts: () => Promise<void>;
   getProductById: (id: number) => IProductWithSections | undefined;
   getProductByCode: (code: string) => IProductWithSections | undefined;
-  filterBySection: (sectionId: number) => IProductWithSections[];
+  filterBySectionSlug: (sectionSlug: string) => IProductWithSections[];
 }
 
 export const useProductsStore = create<ProductsState>((set, get) => ({
@@ -50,9 +50,9 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
   },
 
   // Filtrar productos por sección
-  filterBySection: (sectionId: number) => {
+  filterBySectionSlug: (sectionSlug: string) => {
     return get().products.filter((p) =>
-      p.sections.some((s) => s.id === sectionId)
+      p.sections.some((s) => s.slug === sectionSlug)
     );
   },
 }));

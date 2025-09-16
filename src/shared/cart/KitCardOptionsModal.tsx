@@ -11,7 +11,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { selectInfo } from "../Layout/utils/filterProducts";
 import { useCart } from "@/store/useCartStore";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 
 // Esquema de validación con Yup
 const validationSchema = Yup.object({
@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
 interface IKitOptionsModal {
   isOpen: boolean;
   onClose: () => void;
-  product: IProduct;
+  product: IProductWithSections;
 }
 
 export const KitCardOptionsModal: React.FC<IKitOptionsModal> = ({ 

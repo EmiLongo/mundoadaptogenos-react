@@ -1,8 +1,9 @@
 // src/store/useCartStore.ts
 import { toast } from 'react-toastify';
 import { useCartStore } from './cartStore';
-import { IProduct } from '@/types/ProductTypes';
+import { IProductWithSections } from '@/types/ProductTypes';
 import { ICartItem } from '@/types/CartTypes';
+import { hasSectionWithOptions } from '@/shared/utils/productHasOptions';
 
 export const useCart = () => {
   const {
@@ -30,7 +31,7 @@ export const useCart = () => {
 
   // Funciones auxiliares con validaciones adicionales
   const addProduct = async (
-    product: IProduct,
+    product: IProductWithSections,
     quantity: number = 1,
     options: string[] = []
   ) => {
@@ -39,7 +40,7 @@ export const useCart = () => {
       return false;
     }
   
-    if (!product.isValid) {
+    if (!product.is_valid) {
       setError('Este producto no está disponible');
       return false;
     }
@@ -114,7 +115,7 @@ export const useCart = () => {
 
   const addSingleOptionToCartItem = (cartItem: ICartItem, option: string) => {
     setLoading(true);
-    if(!cartItem.product.hasOptions){
+    if(!hasSectionWithOptions(cartItem.product.sections)){
       setError("El producto no permite opciones")
     }
     try{
@@ -129,7 +130,7 @@ export const useCart = () => {
 
   const removeSingleOptionFromCartItem = (cartItem: ICartItem, option: string) =>{
     setLoading(true);
-    if(!cartItem.product.hasOptions){
+    if(!hasSectionWithOptions(cartItem.product.sections)){
       setError("El producto no permite opciones")
     }
     try{
@@ -144,7 +145,7 @@ export const useCart = () => {
 
   const updateCartItemMultipleOptions = (cartItem: ICartItem, options: string[]) =>{
     setLoading(true);
-    if(!cartItem.product.hasOptions){
+    if(!hasSectionWithOptions(cartItem.product.sections)){
       setError("El producto no permite opciones")
     }
     try{
@@ -159,7 +160,7 @@ export const useCart = () => {
 
   const clearCartItemOptionsByProduct = (cartItem: ICartItem) =>{
     setLoading(true);
-    if(!cartItem.product.hasOptions){
+    if(!hasSectionWithOptions(cartItem.product.sections)){
       setError("El producto no permite opciones")
     }
     try{
@@ -201,7 +202,7 @@ export const useCart = () => {
     
     return cart.cartItems.reduce((total, item) => {
       const price = item.product.discount > 0 
-        ? item.product.priceDiscount 
+        ? item.product.price_discount 
         : item.product.price;
       return total + (price * item.quantity);
     }, 0);

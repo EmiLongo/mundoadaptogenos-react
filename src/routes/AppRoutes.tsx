@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <RegisterPage /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/shop", element: <ShopPage /> },
-      { path: "/shop/product", element: <ProductPage /> },
+      { path: "/shop/product/:code", element: <ProductPage /> },
       { path: "/mushroom/cordyceps-militaris", element: <MushroomTypePage mushroom={infoCordyceps} /> },
       { path: "/mushroom/melena-de-leon", element: <MushroomTypePage mushroom={infoMelena} /> },
       { path: "/mushroom/cola-de-pavo", element: <MushroomTypePage mushroom={infoColaPavo} /> },

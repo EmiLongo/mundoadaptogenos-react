@@ -1,6 +1,6 @@
 // src/modules/mushroom-type/page/MushroomTypePage.tsx
-import { Box, useMediaQuery, useTheme } from "@mui/material"
-import React from "react"
+import { Box, CircularProgress, useMediaQuery, useTheme } from "@mui/material"
+import React, { useEffect } from "react"
 import { IMushroomDetails } from "@/types/MushroomTypes"
 import { Benefits } from "../components/Benefits";
 import { Bioactive } from "../components/Bioactive";
@@ -21,9 +21,16 @@ export const MushroomTypePage: React.FC<IMushroomTypePage> = ({ mushroom }) => {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
   // filtrar los productos que pertenezcan a las secciones del hongo
-  const { filterBySectionSlug } = useProductsStore();
+  const { products, isLoading, fetchProducts, filterBySectionSlug } = useProductsStore();
   const filteredCatalogue = filterBySectionSlug(mushroom.productSectionSlug);
-  
+
+  // Cargar productos al montar el componente
+  useEffect(() => {
+    if (products.length === 0) {
+      fetchProducts();
+    }
+  }, [products.length, fetchProducts]);
+
   return (
     <Box component="main" sx={{width: "100%"}}>
       <Box component="h1" sx={{color:"transparent", position:"absolute", zIndex: -1}}>Encontrá la información de tu hongo adaptógeno favorito. Melena de León, Reishi, Cordyceps Militaris, Cola de Pavo</Box>
@@ -35,9 +42,11 @@ export const MushroomTypePage: React.FC<IMushroomTypePage> = ({ mushroom }) => {
 
       {/* Productos */}
       <Box sx={{paddingY: "40px"}}>
-      {isMobile
-        ? <Carousel catalogue={filteredCatalogue} />
-        : <ContainerHorizontalCards catalogue={filteredCatalogue} />
+      {isLoading 
+      ? <CircularProgress />
+      : isMobile
+          ? <Carousel catalogue={filteredCatalogue} />
+          : <ContainerHorizontalCards catalogue={filteredCatalogue} />
       }
       </Box>
 

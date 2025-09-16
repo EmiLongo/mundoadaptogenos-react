@@ -5,6 +5,7 @@ import { brownColor, greyColor, paddingPage, shadow } from "@theme/theme"
 import { BodyM, ButtonM, Heading3, Heading4 } from "@theme/textStyles"
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import { MushroomByBenefits } from "@modules/mushroom-type/utils/MushroomByBenefits";
+import { ISection } from "@/types/ProductTypes";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -19,13 +20,18 @@ const StyledBox = styled(Box)({
 })
 
 interface IBenefitsComponent {
-  sectionsID: number[];
+  sections: ISection[];
 }
 
-export const ProductsBenefitMobile: React.FC<IBenefitsComponent> = ({ sectionsID }) => {
+export const ProductsBenefitMobile: React.FC<IBenefitsComponent> = ({ sections }) => {
   const [collapseBenefits, setCollapseBenefits] = useState<boolean>(false)
+
+  const activeSectionSlugs = sections
+    .filter(section => section.is_active)
+    .map(section => section.slug);
+  
   const allMushrooms = MushroomByBenefits.filter(mushroom => 
-    mushroom.productSection.some(section => sectionsID.includes(section))
+    activeSectionSlugs.includes(mushroom.productSectionSlug)
   );
 
   const toogleCollapse = () => {

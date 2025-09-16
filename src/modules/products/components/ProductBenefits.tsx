@@ -4,6 +4,7 @@ import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
 import { BodyM, BodyS, Heading2, Heading3, Heading4 } from "@theme/textStyles";
 import { greyColor, paddingPage, shadow } from "@theme/theme";
 import { MushroomByBenefits } from "@modules/mushroom-type/utils/MushroomByBenefits";
+import { ISection } from "@/types/ProductTypes";
 
 
 const StyledBox = styled(Box)({
@@ -19,18 +20,23 @@ const StyledBox = styled(Box)({
 })
 
 interface IBenefitsComponent {
-  sectionsID: number[];
+  sections: ISection[];
 
 }
 
 export const ProductBenefits: React.FC<IBenefitsComponent> = ({
-  sectionsID
+  sections
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+  const activeSectionSlugs = sections
+    .filter(section => section.is_active)
+    .map(section => section.slug);
+  
   const allMushrooms = MushroomByBenefits.filter(mushroom => 
-    mushroom.productSection.some(section => sectionsID.includes(section))
+    activeSectionSlugs.includes(mushroom.productSectionSlug)
   );
+  
   return (
     <Box
       component="article"

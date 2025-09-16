@@ -32,7 +32,7 @@ export const infoReishi: IMushroomDetails = {
       description: "Combate la Ansiedad y Depresión",
     },
   ],
-  productSection: [3],
+  productSectionSlug: "reishi",
   bioactive: ["TERPENOS","17 AMINOÁCIDOS","BETA-GLUCANOS","ERGOSTEROL","MINERALES Y VITAMINAS","GLPS"],
   healthEffects: [
     {

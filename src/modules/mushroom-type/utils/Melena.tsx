@@ -31,7 +31,7 @@ export const infoMelena: IMushroomDetails = {
       description: "Regula el sistema inmunológico",
     },
   ],
-  productSection: [1],
+  productSectionSlug: "melena-leon",
   bioactive: ["HERICENONAS", "ERINACINAS", "BETA-GLUCANOS", "VITAMINAS B", "VITAMINAS D", "MINERALES"],
   healthEffects: [
     {

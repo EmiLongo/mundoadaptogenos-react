@@ -32,7 +32,7 @@ export const infoCordyceps: IMushroomDetails = {
       description: "Protector renal y hepático",
     },
   ],
-  productSection: [2],
+  productSectionSlug: "cordyceps-militaris",
   bioactive: ["Ác A-LINOLÉNICO y LINOLÉNICO","ERGOSTEROL","BETA-GLUCANOS","ADENOSINA","CORDICEPINA","ÁCIDO CORDICÉPTICO"],
   healthEffects: [
     {

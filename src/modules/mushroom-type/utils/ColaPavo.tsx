@@ -32,7 +32,7 @@ export const infoColaPavo: IMushroomDetails = {
       description: "Antioxidante y protector de la salud de la piel",
     },
   ],
-  productSection: [4],
+  productSectionSlug: "cola-pavo",
   bioactive: ["MUSARIN","TRIPTERPENOS","BETA-GLUCANOS","PSK","ESTEROLES","PSP"],
   healthEffects: [
     {

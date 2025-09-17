@@ -1,30 +1,39 @@
 // src/modules/admin/components/ProductCard.tsx
-import React from "react";
-import { Box, Card, Divider, Link } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Card, CircularProgress, Divider, Link } from "@mui/material";
 import { BodyMEmph, BodyS, Caption } from "@/theme/textStyles";
 import { brownColor, greyColor, greenColor } from "@/theme/theme";
-import { IProduct } from "@/types/ProductTypes";
+import { IProductWithSections } from "@/types/ProductTypes";
 import { numberToPrice } from "@shared/utils/convertNumberToPrice";
 import { useNavigate } from "react-router-dom";
 import { SwitchCustom } from "./SwitchCustom";
+import { ThumbnailImage } from "@/shared/components/cloudinary/ThumbnailImage";
+import { useProducts } from "@/shared/hooks/api/useProducts";
 
 interface IProductCard {
-  product: IProduct;
-  index: number;
+  product: IProductWithSections;
 }
 
-export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
-  console.log(index)
+export const ProductCard: React.FC<IProductCard> = ({ product }) => {
   const navigate = useNavigate();
+  const { isLoading, updateProductValidity } = useProducts();
+
   const handleCard = () => {
     navigate("/admin/products-details", { state: { product } });
   };
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(product.is_valid);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
+
+    const success = await updateProductValidity(product.id, event.target.checked);
+    if (!success) {
+      // revertir si falló
+      setChecked(!event.target.checked);
+    }
   };
+
   return (
     <Card
       elevation={3}
@@ -74,13 +83,14 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
         }}
         onClick={handleCard}
       >
-        <Box
+        {/* <Box
           component="img"
           src={product.urlPhoto}
           width="250px"
           sx={{ width: "100%", height: "100%" }}
           alt={`Foto descriptiva de ${product.title}`}
-        />
+        /> */}
+        <ThumbnailImage imgPublicId={product.img_public_id} />
       </Box>
       {/* parte de abajo */}
       <Box
@@ -119,21 +129,24 @@ export const ProductCard: React.FC<IProductCard> = ({ product, index }) => {
             {product.title}
           </BodyS>
         </Link>
-        <BodyMEmph>{numberToPrice(product.priceDiscount)}</BodyMEmph>
+        <BodyMEmph>{numberToPrice(product.price_discount)}</BodyMEmph>
         <Divider color={greyColor[400]}/>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", flex: 1, gap:"8px"}}>
             <Caption>Código</Caption>
             {/* en el futuro tendra que ser product.code */}
-            <BodyS>{product.id}</BodyS> 
+            <BodyS>{product.internal_code}</BodyS> 
           </Box>
           <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", flex: 1, gap:"8px"}}>
             <Caption>Activo</Caption>
-            <SwitchCustom
-              checked={checked}
-              onChange={handleChange}
-              slotProps={{ input: { 'aria-label': 'controlled' } }}
-            />      
+            {isLoading 
+              ? <CircularProgress /> 
+              : <SwitchCustom
+                checked={checked}
+                onChange={handleChange}
+                slotProps={{ input: { 'aria-label': 'controlled' } }}
+              /> 
+            }    
           </Box>
         </Box>
       </Box>

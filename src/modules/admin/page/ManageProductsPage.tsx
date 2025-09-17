@@ -1,15 +1,21 @@
 // src/modules/admin/page/ManageProductsPage.tsx
-import { catalogue } from "@/shared/Layout/utils/catalogue"
-import { Box, useMediaQuery, useTheme } from "@mui/material"
 import React from "react"
+import { Box, CircularProgress, useMediaQuery, useTheme } from "@mui/material"
 import { ProductCard } from "../components/ProductCard"
 import { HeadingPage } from "@/shared/components/HeadingPage"
 import { Heading3, Heading4 } from "@/theme/textStyles"
 import { ProductCardNew } from "../components/ProductCardNew"
+import { useProducts } from "@/shared/hooks/api/useProducts"
 
 export const ManageProductsPage: React.FC = () => {
   const theme = useTheme();
   const isMoble = useMediaQuery(theme.breakpoints.down("md"));
+
+  const { products, isLoading, error } = useProducts();
+  
+  if(isLoading) return <CircularProgress />;
+  if(error) return <Heading4>Error: Recargue la página</Heading4>;
+
   return (
     <Box sx={{
       paddingRight: {xs: "1rem", sm:"2rem", md:"4rem", lg:"5rem", xl:"8rem"},
@@ -33,8 +39,8 @@ export const ManageProductsPage: React.FC = () => {
           rowGap: "24px",    // gap vertical
         }}>
           <ProductCardNew />
-          {catalogue.map((product) => (
-            <ProductCard key={product.id} product={product} index={product.id} />
+          {products && products.map((product) => (
+            <ProductCard key={`product-card-${product.id}`} product={product} />
           ))}
         </Box>
       </Box>

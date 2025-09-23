@@ -19,7 +19,7 @@ export const ProductCard: React.FC<IProductCard> = ({ product }) => {
   const { isLoading, updateProductValidity } = useProducts();
 
   const handleCard = () => {
-    navigate("/admin/products-details", { state: { product } });
+    navigate(`/admin/products-details/${product.id}/edit`);
   };
 
   const [checked, setChecked] = useState(product.is_valid);

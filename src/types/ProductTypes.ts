@@ -68,3 +68,27 @@ export interface IPackage {
   weight: number;
   capacity: number;
 }
+
+export interface IProductFormValues {
+  id?: number
+  title: string
+  description: string
+  internal_code: string
+  price: number
+  price_discount: number
+  price_transfer: number
+  price_without_tax: number
+  plan: string
+  discount: number | ""
+  packaging_id: number
+  sectionIds?: number[]
+  img_secure_url: string
+  img_public_id: string
+  gallery_public_ids: string[]
+  is_valid: boolean
+}
+
+export enum EProductFormMode {
+  CREATE = "create",
+  EDIT = "edit"
+}

@@ -15,10 +15,9 @@ import { ColorButton } from "@/shared/components/buttons/ColorButton"
 import { useCloudinaryUpload } from "@/shared/hooks/api/useCloudinaryUpload"
 import { useCloudinaryMultiUpload } from "@/shared/hooks/api/useCloudinaryMultipleUploads"
 import { ThumbnailImage } from "@/shared/components/cloudinary/ThumbnailImage"
-import { supabase } from "@/api/apiClient"
-import { toast } from "react-toastify"
 import { numberToPrice } from "@/shared/utils/convertNumberToPrice"
 import { roundToThousands } from "@/shared/utils/roundPrices"
+import { IProductFormValues, EProductFormMode } from "@/types/ProductTypes"
 
 const validationSchema = Yup.object({
   title: Yup.string().required("Requerido"),
@@ -38,9 +37,18 @@ const validationSchema = Yup.object({
   is_valid: Yup.boolean().required(),
 });
 
-export const ProductDetailsForm: React.FC = () => {
+interface IProductDetailsForm {
+  mode: EProductFormMode
+  initialValues: IProductFormValues
+  onSubmit: (values: IProductFormValues) => Promise<void>
+}
+export const ProductDetailsForm: React.FC<IProductDetailsForm> = ({
+  mode,
+  initialValues,
+  onSubmit,
+}) => {
 
-  const [selectedSections, setSelectedSections] = useState<number[]>([]);
+  const [selectedSections, setSelectedSections] = useState<number[]>(mode === EProductFormMode.CREATE ? [] : initialValues.sectionIds || []);
   const { 
     sections, 
     isLoading: isLoadingSections, 
@@ -59,68 +67,17 @@ export const ProductDetailsForm: React.FC = () => {
 
 
   const formik = useFormik({
-    initialValues: {
-      title: "",
-      description: "",
-      internal_code: "",
-      price: 0,
-      price_discount: 0,
-      price_transfer: 0,
-      price_without_tax: 0,
-      plan: "",
-      discount: "",
-      packaging_id: 0,
-      sectionIds: [] as number[],
-      img_secure_url: "",
-      img_public_id: "",
-      gallery_public_ids: [] as string[],
-      is_valid: true,
-    },
+    initialValues: initialValues,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize: true,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        setSubmitting(true);
-
-            const { sectionIds, ...productData } = values;
-
-        // insertar producto (primera llamada - sin sectionIds)
-        const { data: product, error: productError } = await supabase
-          .from("products")
-          .insert([
-            {
-              ...productData,
-              //si en el futuro se necesita, agregar FormControl para traer Packaging
-              packaging_id: 1,
-            },
-          ])
-          .select("id")
-          .single();
-
-        if (productError) throw productError;
-
-        // insertar relaciones en product_sections
-        if (sectionIds.length > 0) {
-          const sectionRows = sectionIds.map((sectionId) => ({
-            product_id: product.id,
-            section_id: sectionId,
-          }));
-
-          const { error: sectionError } = await supabase
-            .from("product_sections")
-            .insert(sectionRows);
-
-          if (sectionError) throw sectionError;
+        await onSubmit(values);
+        if (mode === EProductFormMode.CREATE) {
+          resetForm();
+          setSelectedSections([]);
         }
-
-        console.log("✅ Producto creado con éxito:", product.id);
-        resetForm();
-        setSelectedSections([]);
-        toast.success("Producto creado con éxito");
-
-      } catch (err) {
-        toast.error("Error creando producto");
-        console.error("Error creando producto:", err);
       } finally {
         setSubmitting(false);
       }
@@ -178,7 +135,7 @@ export const ProductDetailsForm: React.FC = () => {
         }}>
           <Heading5>Estado del producto</Heading5>
           <Box sx={{ display: "flex", alignItems: "center", columnGap: "8px" }}>
-            <SwitchCustom name="isActive" checked={formik.values.is_valid} onChange={formik.handleChange} />
+            <SwitchCustom name="is_valid" checked={formik.values.is_valid} onChange={formik.handleChange} />
             <BodyS>{formik.values.is_valid ? "Activo" : "Inactivo"}</BodyS>
           </Box>
         </Box>

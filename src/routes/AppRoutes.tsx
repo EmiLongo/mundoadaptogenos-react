@@ -23,10 +23,11 @@ const ContactPage = lazy(() => import("@modules/contact/page/ContactPage").then(
 const ShoppingHistoryPage = lazy(() => import("@modules/shopping-history/page/ShoppingHistoryPage").then(module => ({ default: module.ShoppingHistoryPage })));
 const RegisterPage = lazy(() => import("@modules/auth/page/RegisterPage").then(module => ({ default: module.RegisterPage })));
 const RecoveryPass = lazy(() => import("@modules/auth/page/RecoveryPass").then(module => ({ default: module.RecoveryPass })));
-const Profile = lazy(() => import("@/modules/user/page/Profile").then(module => ({ default: module.Profile })));
-const ProductDetailsPage = lazy(() => import("@/modules/admin/page/ProductDetailsPage").then(module => ({ default: module.ProductDetailsPage })));
-const Error404 = lazy(() => import("@/modules/404/page/Error404").then(module => ({ default: module.Error404 })));
-const BookSuggestionPage = lazy(() => import("@/modules/bookSuggestion/page/BookSuggestionPage").then(module => ({ default: module.BookSuggestionPage })));
+const Profile = lazy(() => import("@modules/user/page/Profile").then(module => ({ default: module.Profile })));
+const ProductDetailsPage = lazy(() => import("@modules/admin/page/ProductDetailsPage").then(module => ({ default: module.ProductDetailsPage })));
+const NewProductDetailsPage = lazy(() => import("@modules/admin/page/NewProductDetailsPage").then(module => ({ default: module.NewProductDetailsPage })));
+const Error404 = lazy(() => import("@modules/404/page/Error404").then(module => ({ default: module.Error404 })));
+const BookSuggestionPage = lazy(() => import("@modules/bookSuggestion/page/BookSuggestionPage").then(module => ({ default: module.BookSuggestionPage })));
 
 // utils
 import { infoReishi } from "@modules/mushroom-type/utils/Reishi";
@@ -74,8 +75,8 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="products" replace /> },
           { path: "sections", element: <ManageSectionsPage /> },
           { path: "products", element: <ManageProductsPage /> },
-          { path: "create-products", element: <ProductDetailsPage /> },
-          { path: "products-details", element: <ProductDetailsPage /> },
+          { path: "create-products", element: <NewProductDetailsPage /> },
+          { path: "products-details/:id/edit", element: <ProductDetailsPage /> },
           { path: "discounts", element: <ManageDiscountsPage /> },
           { path: "history", element: <ManageHistoryPage /> },
           { path: "set-admins", element: <ManageAdminsPage /> },

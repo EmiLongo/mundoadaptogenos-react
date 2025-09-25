@@ -96,7 +96,7 @@ export const MenuAdmin = () => {
           paddingY: {xs: "0px", md: "unset"},
         }}>
           {MenuOptionsTop.length > 0 && MenuOptionsTop.map((item, index) => (
-            <MenuListItem key={index} item={item} index={index} currentPath={currentPath} open={open} setOpen={setOpen} />
+            <MenuListItem key={index} item={item} index={index} currentPath={currentPath} open={open} />
           ))}
           {/* {(isSuperAdmin && MenuOptionsBottom.length > 0) && MenuOptionsBottom.map((item, index) => (
             <MenuListItem key={index} item={item} index={index} currentPath={currentPath} open={open} setOpen={setOpen} />

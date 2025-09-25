@@ -11,10 +11,11 @@ export interface IMenuListItemProps {
   index: number;
   currentPath: string;
   open: boolean;
-  setOpen: (open: boolean) => void;
+  // setOpen: (open: boolean) => void;
 }
 
-export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, currentPath, open, setOpen }) => {
+export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, currentPath, open }) => {
+  const pathComparison = currentPath ? currentPath.includes(item.to.split("/")[2]) : false;
   return (
     <ListItem
       key={`menu-item-${index}-${item.to}`}
@@ -22,12 +23,12 @@ export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, curren
         display: "flex",
         alignItems: "center",
         justifyContent: open ? "flex-start" : "center",
-        backgroundColor: currentPath.includes(item.to.split("/")[2]) ? brownColor[800] : "transparent",
-        color: currentPath.includes(item.to.split("/")[2]) ? greyColor[50] : greyColor[950],
+        backgroundColor: pathComparison ? brownColor[800] : "transparent",
+        color: pathComparison ? greyColor[50] : greyColor[950],
         transition: "all 0.3s ease-in-out",
         "&:hover": {
-          backgroundColor: currentPath.includes(item.to.split("/")[2]) ? brownColor[800] : brownColor[200],
-          color: currentPath.includes(item.to.split("/")[2]) ? greyColor[50] : greyColor[950],
+          backgroundColor: pathComparison ? brownColor[800] : brownColor[200],
+          color: pathComparison ? greyColor[50] : greyColor[950],
           fontWeight: 600,
           cursor: "pointer",
         },
@@ -41,7 +42,6 @@ export const MenuListItem: React.FC<IMenuListItemProps> = ({ item, index, curren
           alignItems: "center",
           color: "inherit",
         }}
-        onClick={() => setOpen(false)}
       >
         <Tooltip title={item.title} placement="right">
           <Box

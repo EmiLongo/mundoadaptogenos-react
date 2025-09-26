@@ -92,10 +92,11 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
       display: "flex", 
       alignItems: "center", 
       marginBottom: "16px", 
-      overflowX: "hidden",
+      overflow: "hidden",
       gap: 0,
     }}
     > 
+      {/* caja de boton de borrar */}
       <Box 
         sx={{
           display: "flex",
@@ -106,20 +107,8 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           opacity: showDeleteBt ? 1 : 0,
           position: "relative",
           transition: "all 0.3s ease-in-out",
-
         }}
       >
-        {/* <Box component="img" width="100px" height="120px"
-        alt={`Foto del Producto ${index} del Carrito`}
-        src={cartItem.product.urlThumbnail}
-        sx={{
-          borderTopRightRadius: "18px", 
-          borderBottomRightRadius: "18px", 
-          transform: "scaleX(-1)",
-          position: "absolute",
-          zIndex:2,
-        }}
-        /> */}
         <Box sx={{
           width: "100px",
           height: "120px",
@@ -127,6 +116,7 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           borderBottomRightRadius: "18px", 
           transform: "scaleX(-1)",
           position: "absolute",
+          overflow: "hidden",
           zIndex:2,
         }}>
           <ThumbnailImage imgPublicId={cartItem.product.img_public_id} />
@@ -155,28 +145,23 @@ export const CartDrawerItem: React.FC<ICartDrawerItem> = ({cartItem, index, clos
           <DeleteForeverOutlinedIcon width="24px" />
         </Box>
       </Box>
-      {/* <Box component="img" width={120} height={120}
-      alt={`Foto del Producto ${index} del Carrito`}
-      src={cartItem.product.urlThumbnail}
-      sx={{
-        border: "none",
-        borderRadius: "8px",
-        borderTopLeftRadius: showDeleteBt ? 0 : "8px",
-        borderBottomLeftRadius: showDeleteBt ? 0 : "8px",
-        marginRight: "16px"
-      }}
-      /> */}
+
+      {/* imagen */}
       <Box sx={{
-        width: "120px",
         height: "120px",
+        aspectRatio: "1/1",
         border: "none",
         borderRadius: "8px",
         borderTopLeftRadius: showDeleteBt ? 0 : "8px",
         borderBottomLeftRadius: showDeleteBt ? 0 : "8px",
-        marginRight: "16px"
+        marginRight: "16px",
+        flexShrink: 0,
+        overflow: "hidden",
       }}>
         <ThumbnailImage imgPublicId={cartItem.product.img_public_id} />
       </Box>
+
+      {/* informacion */}
       <Box sx={{display: "flex", flexDirection: "column", gap: "8px"}}>
         <BodyS sx={{height: "2.5em"}}>{cartItem.product.title}</BodyS>
         <BodyMEmph>{numberToPrice(cartItem.product.price * counter)}</BodyMEmph>

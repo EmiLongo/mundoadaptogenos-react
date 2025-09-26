@@ -73,7 +73,7 @@ export const ProductConfirm: React.FC<IProductConfirm> = ({ handleCartDrawerOpen
         src={lastAddedProduct?.img_secure_url}
         sx={{borderRadius: "8px"}}
         /> */}
-        <Box sx={{width:"50px", height:"50px"}}>
+        <Box sx={{width:"50px", height:"50px",  borderRadius: "8px", overflow: "hidden"}}>
           <ThumbnailImage imgPublicId={lastAddedProduct?.img_public_id} />
         </Box>
         <Box sx={{

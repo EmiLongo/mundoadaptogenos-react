@@ -8,6 +8,7 @@ import { CarouselContainer } from "../components/CarouselContainer";
 import { ProductsBenefitMobile } from "../components/ProductsBenefitMobile";
 import { useProductsStore } from "@/store/useProductsStore";
 import { hasSectionWithOptions } from "@/shared/utils/productHasOptions";
+import { HeadingPage } from "@/shared/components/HeadingPage";
 
 export const ProductPage: React.FC = () => {
   const { code } = useParams<{ code: string }>();
@@ -52,6 +53,7 @@ export const ProductPage: React.FC = () => {
         flexDirection="column"
         gap={2}
       >
+        <HeadingPage text="Páginas de el producto seleccionado" />
         <CircularProgress />
         <Typography variant="body2" color="text.secondary">
           Cargando producto...

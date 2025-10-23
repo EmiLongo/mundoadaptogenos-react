@@ -1,5 +1,5 @@
 // src/shared/components/buttons/WhiteButton.tsx
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress, SxProps, Theme } from "@mui/material";
 import React from "react";
 import { brownColor, greyColor, redColor } from "@/theme/theme";
 import { ButtonM } from "@/theme/textStyles";
@@ -11,7 +11,7 @@ interface IWhiteButtonProps {
   fetchingText?: string;
   isFetching: boolean;
   disabled: boolean;
-  sx?: object;
+  sx?: SxProps<Theme>;
   icon?: React.ReactNode;
   type?: "grey" | "brown" | "red";
 }

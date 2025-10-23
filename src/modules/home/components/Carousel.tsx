@@ -1,5 +1,5 @@
 // src/modules/home/components/Carousel.tsx
-import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { Box, IconButton, SxProps, Theme, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { greyColor } from "@theme/theme";
@@ -8,7 +8,7 @@ import { IProductWithSections } from "@/types/ProductTypes";
 
 interface ICarousel {
   catalogue: IProductWithSections[];
-  sx?: object;
+  sx?: SxProps<Theme>;
 }
 export const Carousel: React.FC<ICarousel> = ({ catalogue, sx = {} }) => {
   const theme = useTheme();

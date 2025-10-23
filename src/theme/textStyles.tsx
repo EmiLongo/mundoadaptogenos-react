@@ -1,5 +1,5 @@
 // src/theme/textStyles.tsx
-import { styled, Theme, Typography, TypographyProps } from '@mui/material';
+import { styled, Theme, Typography, TypographyProps, SxProps } from '@mui/material';
 import { greyColor } from './theme';
 
 export const defaultFonts = {
@@ -323,7 +323,7 @@ import React from "react";
 
 interface Props {
   children: React.ReactNode
-  sx?: object
+  sx?: SxProps<Theme>
   id: string
 }
 export const SectionHeading: React.FC<Props> = ({ children, sx, id }) => {

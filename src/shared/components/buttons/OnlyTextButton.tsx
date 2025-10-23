@@ -3,9 +3,11 @@ import {
   Box,
   Button,
   CircularProgress,
+  SxProps,
 } from "@mui/material";
 import { greyColor, brownColor } from "@theme/theme";
 import { ButtonL, ButtonM, ButtonS } from "@theme/textStyles";
+import { Theme } from "@mui/material";
 
 type OnlyTextButtonProps = {
   id: string;
@@ -19,7 +21,7 @@ type OnlyTextButtonProps = {
   isLowerCase?: boolean;
   isUnderline?: boolean;
   disabled: boolean;
-  sx?: object;
+  sx?: SxProps<Theme>;
 };
 
 export const OnlyTextButton: React.FC<OnlyTextButtonProps> = ({

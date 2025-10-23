@@ -1,7 +1,8 @@
 // src/shared/components/ColorButton.jsx
 import React from "react";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, SxProps } from "@mui/material";
 import { greyColor, brownColor, greenColor, redColor } from "@theme/theme";
+import { Theme } from "@mui/material";
 
 type ColorButtonProps = {
   id: string
@@ -11,7 +12,7 @@ type ColorButtonProps = {
   fetchingText?: string;
   isFetching: boolean;
   disabled: boolean;
-  sx?: object;
+  sx?: SxProps<Theme>;
 };
 
 export const ColorButton: React.FC<ColorButtonProps> = ({

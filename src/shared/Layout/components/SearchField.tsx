@@ -1,8 +1,8 @@
-import { Box, InputAdornment, OutlinedInput } from "@mui/material";
+import { Box, InputAdornment, OutlinedInput, SxProps, Theme } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface ISearchFieldProps {
-  sx?: object;
+  sx?: SxProps<Theme>;
 }
 
 export const SearchField: React.FC<ISearchFieldProps> = ({sx}) => {

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, SxProps, TextField, Theme } from "@mui/material";
 import * as Yup from 'yup';
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
@@ -21,7 +21,7 @@ type LoginProps = {
   handleClose?: () => void;
   setIsOpenDrawer?: (isOpen: boolean) => void;
   setIsOpenForgetPass?: (isOpen: boolean) => void;
-  sx?: object
+  sx?: SxProps<Theme>
 }
 
 

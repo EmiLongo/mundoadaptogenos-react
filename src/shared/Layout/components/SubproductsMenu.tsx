@@ -1,13 +1,13 @@
 // src\shared\Layout\components\SubproductsMenu.tsx
 import React from "react"
-import { Box } from "@mui/material"
+import { Box, SxProps, Theme } from "@mui/material"
 import { Heading5 } from "@theme/textStyles"
 import { brownColor, greyColor } from "@theme/theme"
 import { subproductsItems } from "../utils/info"
 import { useLocation } from "react-router-dom"
 
 interface ISubproductsMenu {
-  sx?: object;
+  sx?: SxProps<Theme>;
 }
 export const SubproductsMenu: React.FC<ISubproductsMenu> = ({sx = {}}) => {
   const { pathname } = useLocation();
